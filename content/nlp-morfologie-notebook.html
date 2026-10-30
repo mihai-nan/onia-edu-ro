@@ -1,0 +1,99 @@
+<meta charset="utf-8"><div class="onia-nlp"><header class="nlp-hero"><span class="eyebrow">ONIA · NOTEBOOK PRACTIC</span><h2>Exemple independente pentru preprocesare lexicală</h2><p>Descarcă notebookul pentru a rula și modifica toate cele 15 exemple Python.</p></header><section class="nlp-topic"><h2>Exemplul 1. Exemplul 1 — Stopwords cu păstrarea negațiilor</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nu este bun produsul&quot;</span><span class="p">,</span> <span class="s2">&quot;Este bun produsul&quot;</span><span class="p">]</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;este&quot;</span><span class="p">,</span> <span class="s2">&quot;produsul&quot;</span><span class="p">,</span> <span class="s2">&quot;și&quot;</span><span class="p">,</span> <span class="s2">&quot;la&quot;</span><span class="p">}</span>
+<span class="n">negatii</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="s2">&quot;nici&quot;</span><span class="p">,</span> <span class="s2">&quot;fără&quot;</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+    <span class="n">tokeni</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">filtrati</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokeni</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span> <span class="ow">or</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">negatii</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">filtrati</span><span class="p">)</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 2. Exemplul 2 — Frecvența documentelor, calculată manual</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">documente</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;elevii rezolvă probleme și scriu cod&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;profesorii explică probleme de cod&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elevii învață limbajul python&quot;</span>
+<span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documente</span><span class="p">:</span>
+    <span class="n">termeni_distincti</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">termeni_distincti</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">termen</span><span class="p">,</span> <span class="n">numar</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">termen</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2"> apare în </span><span class="si">{</span><span class="n">numar</span><span class="si">}</span><span class="s2"> document(e)&quot;</span><span class="p">)</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 3. Exemplul 3 — Vectorizare cu și fără stopwords</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">documente</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;nu este bun acest produs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;este bun acest produs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nu este recomandat acest produs&quot;</span>
+<span class="p">]</span>
+
+<span class="n">stop</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;este&quot;</span><span class="p">,</span> <span class="s2">&quot;acest&quot;</span><span class="p">]</span>
+<span class="n">fara_filtru</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">cu_filtru</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="n">stop</span><span class="p">)</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="n">fara_filtru</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documente</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">cu_filtru</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documente</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vocabular inițial:&quot;</span><span class="p">,</span> <span class="n">fara_filtru</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;După filtrare:&quot;</span><span class="p">,</span> <span class="n">cu_filtru</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimensiuni:&quot;</span><span class="p">,</span> <span class="n">X0</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 4. Exemplul 4 — Filtrare prin document frequency</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;tenis sport meci&quot;</span><span class="p">,</span> <span class="s2">&quot;sport fotbal stadion&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sport înot bazin&quot;</span><span class="p">,</span> <span class="s2">&quot;sport tenis turneu&quot;</span>
+<span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_df</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 5. Exemplul 5 — Demonstrație cu matricea document–termen</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;nu îmi place&quot;</span><span class="p">,</span> <span class="s2">&quot;îmi place&quot;</span><span class="p">]</span>
+
+<span class="n">v1</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;(?u)\b\w+\b&quot;</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span>
+    <span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;(?u)\b\w+\b&quot;</span><span class="p">,</span>
+    <span class="n">stop_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="s2">&quot;îmi&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v2</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 6. Exemplul 6 — SnowballStemmer pentru română</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="c1"># Instalare: pip install nltk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.stem.snowball</span><span class="w"> </span><span class="kn">import</span> <span class="n">SnowballStemmer</span>
+
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">SnowballStemmer</span><span class="p">(</span><span class="s2">&quot;romanian&quot;</span><span class="p">)</span>
+<span class="n">cuvinte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;copil&quot;</span><span class="p">,</span> <span class="s2">&quot;copilului&quot;</span><span class="p">,</span> <span class="s2">&quot;copiii&quot;</span><span class="p">,</span> <span class="s2">&quot;cărțile&quot;</span><span class="p">,</span> <span class="s2">&quot;cărților&quot;</span><span class="p">,</span> <span class="s2">&quot;frumoase&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">cuvant</span> <span class="ow">in</span> <span class="n">cuvinte</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cuvant</span><span class="si">:</span><span class="s2">14s</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">cuvant</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 7. Exemplul 7 — Comparăm vocabularul înainte și după stemming</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.stem.snowball</span><span class="w"> </span><span class="kn">import</span> <span class="n">SnowballStemmer</span>
+
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;elevii citesc cărți&quot;</span><span class="p">,</span> <span class="s2">&quot;elevului îi plac cărțile&quot;</span><span class="p">,</span> <span class="s2">&quot;elevii învață&quot;</span><span class="p">]</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">SnowballStemmer</span><span class="p">(</span><span class="s2">&quot;romanian&quot;</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+<span class="n">vocab_initial</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">document</span><span class="p">)</span>
+<span class="n">vocab_stem</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">document</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inițial:&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_initial</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stemming:&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_stem</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimensiuni:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab_initial</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab_stem</span><span class="p">))</span>
+</pre></div>
+</div></section><section class="nlp-topic"><h2>Exemplul 8. Exemplul 8 — Lematizare cu spaCy</h2><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · exemplu executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="c1"># Instalare în terminal:</span>
+<span class="c1"># pip install spacy</span>
+<span class="c1"># python -m spacy download ro_core_news_sm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">spacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;ro_core_news_sm&quot;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Copiii citeau cărți interesante și mergeau spre bibliotecă.&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tok</span><span class="o">.</span><span class="n">is_space</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tok</span><span class="o">.</span><span class="n">text</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tok</span><span class="o">.</span><span class="n">pos_</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tok</span><span class="o">.</span><span class="n">lemma_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div></section></div>

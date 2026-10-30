@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ONIA · Laborator interactiv — L1, L2 și generalizare</title>
+<style>
+:root{--ink:#172c4d;--muted:#526985;--edge:#d8e4f2;--blue:#2563b9;--red:#da5c65;--teal:#0c928c;--cream:#f7b94a;--paper:#f4f7fc}
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;margin:0;background:var(--paper);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(115deg,#071d42,#1c4882);color:#fff;padding:24px max(20px,calc((100vw - 1260px)/2));border-top:5px solid #3173d8}
+header small{color:#a9ccf9;font-weight:800;letter-spacing:.12em}h1{font-size:clamp(24px,3vw,34px);margin:5px 0}header p{max-width:900px;color:#dbeafe;margin:4px 0 0}.stripe{display:flex;width:84px;height:5px;gap:0;margin-bottom:12px;border-radius:4px;overflow:hidden}.stripe i{flex:1}.stripe i:nth-child(1){background:#2b69c8}.stripe i:nth-child(2){background:#f4c64e}.stripe i:nth-child(3){background:#e95462}
+main{max-width:1260px;margin:auto;padding:22px 18px 54px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.tab{padding:10px 16px;border-radius:10px;border:1px solid #b7c9e2;background:white;color:#285284;font-weight:800;cursor:pointer}.tab[aria-selected=true]{background:#2563b9;color:white;border-color:#2563b9}.view{display:none}.view.active{display:block}
+.panel{border:1px solid var(--edge);background:white;border-radius:16px;padding:20px;box-shadow:0 2px 12px #1747780a}.columns{display:grid;grid-template-columns:minmax(250px,310px) minmax(0,1fr);gap:17px}.controls{display:grid;gap:18px}.field label{display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:8px}.field input[type=range]{width:100%;accent-color:var(--blue)}.field small{display:block;font-size:11px;color:var(--muted)}.radio{display:flex;gap:5px;flex-wrap:wrap}.choice{font-weight:700;padding:8px 12px;border-radius:9px;background:#f2f6fc;border:1px solid #cfdcee;cursor:pointer;color:var(--ink)}.choice[aria-pressed=true]{background:#e4f0ff;border-color:var(--blue);color:#1255a6}
+button{font:inherit}.action{border:0;border-radius:9px;background:var(--blue);padding:10px 14px;color:white;font-weight:750;cursor:pointer}.action.secondary{background:#e8f1fc;color:#1c569a}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}.metric{border:1px solid var(--edge);background:#f9fbff;border-radius:10px;padding:10px}.metric span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;font-weight:800}.metric b{font-size:21px;color:var(--ink)}.plot{border:1px solid #dce5f0;border-radius:11px;overflow:hidden;background:#fff}.plot svg{display:block;width:100%;height:auto}.two{display:grid;grid-template-columns:1.1fr 1fr;gap:15px}.explain{margin-top:14px;background:#edf5ff;border-left:3px solid var(--blue);padding:11px 14px;border-radius:0 10px 10px 0;color:#244769;font-size:13px}
+h2{font-size:19px;margin:0 0 8px}p{margin:7px 0 14px;color:#475f7d}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:7px 0}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}.badge{display:inline-block;padding:3px 8px;background:#ecf3ff;border-radius:15px;font-size:11px;color:#25599c;font-weight:700}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px;border-bottom:1px solid #e2e9f2;text-align:left}.table th{font-size:11px;color:#59718e;text-transform:uppercase}.table td{font-size:13px}.hidden-result{filter:blur(7px);user-select:none}.chooser{margin:12px 0}.chooser button{margin:4px}.chooser button[aria-pressed=true]{background:#dceaff;border-color:var(--blue)}.good{color:#0f8278;font-weight:800}.warning{color:#bc4754;font-weight:800}
+@media(max-width:820px){.columns,.two{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}main{padding:14px 10px}.panel{padding:14px}}@media(max-width:480px){.metric b{font-size:17px}}
+</style><style id="onia-return-style">.onia-back-bar{position:relative;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;color:#18345b;border:1px solid #d6e5f5;border-radius:13px;margin:12px auto;padding:10px 15px;max-width:1180px;box-shadow:0 3px 15px #1539650b;font:600 14px/1.4 system-ui,sans-serif}.onia-back-bar a{color:#17569e;text-decoration:none;font-weight:700}.onia-back-bar a:first-child{background:#eef5ff;border-radius:9px;padding:9px 12px}.onia-back-bar a:hover{background:#dcecff}.onia-back-bar .onia-back-title{font-weight:600;color:#5b7391;font-size:13px}@media(max-width:600px){.onia-back-bar{margin:8px;padding:8px}.onia-back-title{display:none}}</style></head>
+<body><div class="onia-back-bar"><a href="../index.html#/invatare-supervizata/sectiunea-2-3" aria-label="Înapoi la lecție">← Înapoi la lecție</a><span class="onia-back-title">Regularizarea L1 și L2</span><a href="../cursuri.html">Cursuri recomandate</a></div><header><div class="stripe"><i></i><i></i><i></i></div><small>ONIA · LABORATOR INTERACTIV · 2.3</small><h1>Underfitting, overfitting și regularizare L1/L2</h1><pNone>Schimbă modelul, urmărește cum variază erorile și testează diferența dintre scorul public și cel final.</p></header>
+<main>
+<nav class="tabs" role="tablist"><button class="tab" role="tab" data-tab="fit" aria-selected="true">01 · Regresie și L1/L2</button><button class="tab" role="tab" data-tab="class" aria-selected="false">02 · Clasificare</button><button class="tab" role="tab" data-tab="leader" aria-selected="false">03 · Public / privat</button></nav>
+<section id="fit" class="view active"><div class="columns"><div class="panel controls">
+<div><h2>Construiește modelul</h2><p>Polinomul este antrenat pe punctele albastre. Punctele aurii sunt păstrate pentru validare.</p></div>
+<div class="field"><label for="degree">Gradul polinomului <output id="degree-v">5</output></label><input id="degree" type="range" min="1" max="12" value="5"><small>Grad mic → model rigid; grad foarte mare → model flexibil.</small></div>
+<div class="field"><label>Tipul regularizării</label><div class="radio"><button class="choice" data-reg="none" aria-pressed="false">Fără</button><button class="choice" data-reg="l1" aria-pressed="false">L1 · Lasso</button><button class="choice" data-reg="l2" aria-pressed="true">L2 · Ridge</button></div></div>
+<div class="field"><label for="lambda">Forța penalizării λ <output id="lambda-v">0,010</output></label><input id="lambda" type="range" min="-4" max="0.3" step="0.1" value="-2"><small>Scala este logaritmică. λ = 0 când alegi «Fără».</small></div>
+<div class="field"><label for="noise">Zgomotul din date <output id="noise-v">0,15</output></label><input id="noise" type="range" min="0" max="0.45" step="0.03" value="0.15"></div>
+<div><button id="dataset" class="action">Generează alte puncte</button> <button id="reset" class="action secondary">Resetează</button></div></div>
+<div class="panel"><div class="metrics"><div class="metric"><span>MSE · antrenare</span><b id="mtr">—</b></div><div class="metric"><span>MSE · validare</span><b id="mva">—</b></div><div class="metric"><span>Coeficienți aproape zero</span><b id="zero">—</b></div></div>
+<div class="plot" id="fit-plot" aria-label="Grafic cu puncte de train, validare și predicție"></div><div class="legend"><span><i class="dot" style="background:#2563b9"></i>Antrenare</span><span><i class="dot" style="background:#e2aa41"></i>Validare</span><span><i class="dot" style="background:#de5963"></i>Model</span><span><i class="dot" style="background:#11998f"></i>Regulă reală</span></div>
+<div class="two"><div><h2>Coeficienții învățați</h2><div class="plot" id="weights-plot"></div></div><div><h2>Interpretare</h2><p id="fit-note"></p><p><span class="badge">De reținut</span> Valoarea optimă a regularizării nu este aceeași pentru toate seturile de date.</p></div></div>
+</div></div><div class="explain">Modelul optimizează <strong>½ × MSE + λ × penalizare</strong>; pentru L2 folosim λ/2 × ∑w², iar pentru L1 folosim λ × ∑|w|. Interceptul nu este penalizat. Algoritmul din laborator este un exemplu numeric, nu o implementare Python.</div></section>
+<section id="class" class="view"><div class="columns"><div class="panel controls"><h2>Clasificare: probabilități și regularizare</h2><p>Un clasificator logistic cu o singură caracteristică (x) este ajustat prin gradient descent. Observă cum L2 influențează panta sigmoidului și separarea claselor.</p>
+<div class="field"><label for="cl-lambda">L2 · λ <output id="cl-lambda-v">0,10</output></label><input id="cl-lambda" type="range" min="0" max="2" step="0.05" value=".1"></div>
+<div class="field"><label for="threshold">Prag de clasificare <output id="threshold-v">0,50</output></label><input id="threshold" type="range" min=".1" max=".9" step=".05" value=".5"></div>
+<button id="cl-data" class="action">Regenerare date</button>
+<div class="explain">L2 poate reduce coeficienții modelului logistic, dar alegerea pragului schimbă precizia și recall-ul fără să reantreneze modelul.</div>
+</div><div class="panel"><div class="metrics"><div class="metric"><span>Accuracy</span><b id="cl-acc">—</b></div><div class="metric"><span>Precision</span><b id="cl-prec">—</b></div><div class="metric"><span>Recall</span><b id="cl-rec">—</b></div></div><div class="plot" id="class-plot"></div><p id="class-note"></p></div></div></section>
+<section id="leader" class="view"><div class="panel"><h2>Experiență de competiție: alegi după public?</h2><p>Patru configurații au scoruri publice vizibile. Alege una pentru evaluarea finală, apoi dezvăluie scorurile private. Acesta este un <strong>scenariu pedagogic inventat</strong>, nu scorurile unei ediții reale ONIA.</p><div class="chooser"><button class="choice" data-model="0" aria-pressed="false">Aleg A</button><button class="choice" data-model="1" aria-pressed="false">Aleg B</button><button class="choice" data-model="2" aria-pressed="false">Aleg C</button><button class="choice" data-model="3" aria-pressed="false">Aleg D</button></div><table class="table"><thead><tr><th>Model</th><th>Scor public</th><th>Scor privat</th></tr></thead><tbody id="scores"></tbody></table><button class="action" id="reveal">Dezvăluie scorurile finale</button><p class="explain" id="leader-note">Privește scorurile publice și alege o configurație. Scorurile private sunt ascunse până la apăsarea butonului.</p></div><div class="explain">Într-o competiție reală, folosirea repetată a scorului public pentru selecția hiperparametrilor poate duce la adaptarea indirectă la subsetul public. Validarea proprie și repetabilă este mai importantă decât o diferență marginală pe leaderboard.</div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], round=(x,n=3)=>Number(x).toFixed(n), clip=(x,a,b)=>Math.max(a,Math.min(b,x));
+$$('[data-tab]').forEach(b=>b.addEventListener('click',()=>{$$('[data-tab]').forEach(t=>t.setAttribute('aria-selected',String(t===b)));$$('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.tab));}));
+let degree=5,reg='l2',lambda=.01,noise=.15,seed=2,train=[],valid=[];
+function rand(){seed=(1664525*seed+1013904223)>>>0;return seed/4294967296}
+function normal(){return (rand()+rand()+rand()+rand()+rand()+rand()-3)*1.41}
+function truth(x){return .6*x*x+.22*Math.sin(3*x)-.1}
+function buildData(){train=Array.from({length:21},()=>{let x=-1.05+2.1*rand();return [x,truth(x)+noise*normal()]});valid=Array.from({length:44},()=>{let x=-1.05+2.1*rand();return [x,truth(x)+noise*normal()]});renderFit()}
+function feats(x){let a=[],p=x;for(let j=0;j<degree;j++){a.push(p);p*=x}return a}
+function trainReg(){
+ let w=Array(degree).fill(0),b=0,rate=.18;
+ for(let it=0;it<3600;it++){
+  let g=Array(degree).fill(0),gb=0;
+  for(let [x,y] of train){let v=feats(x),err=b+w.reduce((s,wi,j)=>s+wi*v[j],0)-y;gb+=err/train.length;for(let j=0;j<degree;j++)g[j]+=err*v[j]/train.length}
+  b-=rate*gb;
+  for(let j=0;j<degree;j++){let u=w[j]-rate*(g[j]+(reg==='l2'?lambda*w[j]:0));w[j]=reg==='l1'?(u>rate*lambda?u-rate*lambda:u< -rate*lambda?u+rate*lambda:0):u}
+ }
+ return {w,b}
+}
+function predict(m,x){let v=feats(x);return m.b+m.w.reduce((s,a,j)=>s+a*v[j],0)}
+function mse(data,m){return data.reduce((s,[x,y])=>s+(predict(m,x)-y)**2,0)/data.length}
+function chartSVG(lines,points,ylim=[-1.15,1.55]){
+ let W=750,H=355,l=52,r=20,t=21,b=37,ylo=ylim[0],yhi=ylim[1];let X=x=>l+(x+1.1)/2.2*(W-l-r),Y=y=>t+(yhi-y)/(yhi-ylo)*(H-t-b);
+ const path=fn=>Array.from({length:175},(_,i)=>{let x=-1.1+i*2.2/174;return `${i?'L':'M'}${X(x).toFixed(1)},${Y(clip(fn(x),ylo-.5,yhi+.5)).toFixed(1)}`}).join(' ');
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Puncte și predicții"><rect width="${W}" height="${H}" fill="white"/>`;
+ for(let i=0;i<=5;i++){let yy=ylo+(yhi-ylo)*i/5;s+=`<line x1="${l}" y1="${Y(yy)}" x2="${W-r}" y2="${Y(yy)}" stroke="#edf2f8"/><text x="${l-8}" y="${Y(yy)+4}" text-anchor="end" font-size="11" fill="#71829b">${yy.toFixed(1)}</text>`}
+ for(let i=-1;i<=1;i+=.5)s+=`<text x="${X(i)}" y="${H-10}" font-size="11" text-anchor="middle" fill="#71829b">${i}</text>`;
+ for(let line of lines)s+=`<path fill="none" stroke="${line.color}" stroke-width="${line.width||2.8}" ${line.dash?'stroke-dasharray="6 6"':''} d="${path(line.f)}"/>`;
+ for(let p of points)s+=p.data.map(([x,y])=>`<circle cx="${X(x)}" cy="${Y(y)}" r="${p.radius||4}" fill="${p.color}" stroke="white" stroke-width=".8" opacity=".94"/>`).join('');
+ return s+'</svg>'
+}
+function barsSVG(w){let W=490,H=240,base=122,max=Math.max(1,...w.map(x=>Math.abs(x)));let s=`<svg viewBox="0 0 ${W} ${H}" aria-label="Coeficienți"><rect width="${W}" height="${H}" fill="white"/><line x1="15" y1="${base}" x2="${W-6}" y2="${base}" stroke="#879bb3"/>`;
+ w.forEach((v,j)=>{let step=(W-28)/w.length,x=17+j*step+step*.12,bh=Math.abs(v)/max*96;s+=`<rect x="${x}" y="${v>=0?base-bh:base}" width="${step*.72}" height="${bh}" rx="2" fill="${v>=0?'#2563b9':'#da5c65'}"/><text x="${x+step*.36}" y="${H-16}" font-size="11" text-anchor="middle" fill="#627996">${j+1}</text>`});
+ return s+'</svg>'}
+function renderFit(){let model=trainReg();$('#mtr').textContent=round(mse(train,model),4);$('#mva').textContent=round(mse(valid,model),4);$('#zero').textContent=model.w.filter(w=>Math.abs(w)<1e-7).length+' / '+degree;$('#degree-v').textContent=degree;$('#lambda-v').textContent=reg==='none'?'0':round(lambda,4).replace('.',',');$('#noise-v').textContent=round(noise,2).replace('.',',');
+ $('#fit-plot').innerHTML=chartSVG([{f:truth,color:'#11998f',width:2.1,dash:true},{f:x=>predict(model,x),color:'#da5c65',width:3.1}],[{data:train,color:'#2563b9',radius:4.8},{data:valid,color:'#dfae47',radius:3.0}]);
+ $('#weights-plot').innerHTML=barsSVG(model.w);let a=mse(train,model),v=mse(valid,model);$('#fit-note').textContent=v>1.9*a&&v>a+.035?'Diferența train/validare este mare: verifică supraînvățarea sau variația datelor.':a>.16&&v>.16?'Erorile sunt ridicate: modelul poate fi prea simplu sau prea regularizat.':'În acest experiment, modelul are erori apropiate pe antrenare și validare. Compară și alte seturi înainte de a trage concluzii.';
+}
+$('#degree').oninput=e=>{degree=+e.target.value;renderFit()};$('#lambda').oninput=e=>{lambda=Math.pow(10,+e.target.value);renderFit()};$('#noise').oninput=e=>{noise=+e.target.value;buildData()};$('#dataset').onclick=buildData;$('#reset').onclick=()=>{degree=5;lambda=.01;noise=.15;reg='l2';$('#degree').value=5;$('#lambda').value=-2;$('#noise').value=.15;$$('[data-reg]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.reg==='l2')));buildData()};
+$$('[data-reg]').forEach(b=>b.onclick=()=>{reg=b.dataset.reg;$$('[data-reg]').forEach(a=>a.setAttribute('aria-pressed',String(a===b)));renderFit()});
+let logisticData=[];
+function sigmoid(z){return z>=0?1/(1+Math.exp(-z)):Math.exp(z)/(1+Math.exp(z))}
+function newClass(){logisticData=Array.from({length:80},()=>{let x=-2+4*rand();let p=sigmoid(2*x-.15);return [x,rand()<p?1:0]});renderClass()}
+function renderClass(){let lam=+$('#cl-lambda').value,thr=+$('#threshold').value;$('#cl-lambda-v').textContent=lam.toFixed(2).replace('.',',');$('#threshold-v').textContent=thr.toFixed(2).replace('.',',');
+ let w=0,b=0;for(let i=0;i<2000;i++){let gw=0,gb=0;for(let [x,y] of logisticData){let err=sigmoid(w*x+b)-y;gw+=err*x/logisticData.length;gb+=err/logisticData.length}w-=.25*(gw+lam*w);b-=.25*gb;}
+ let tp=0,tn=0,fp=0,fn=0;for(let [x,y] of logisticData){let cls=sigmoid(w*x+b)>=thr?1:0;if(cls&&y)tp++;else if(cls&&!y)fp++;else if(!cls&&y)fn++;else tn++}
+ let pp=tp+fp?tp/(tp+fp):0,rr=tp+fn?tp/(tp+fn):0;
+ $('#cl-acc').textContent=round((tp+tn)/logisticData.length,3);$('#cl-prec').textContent=round(pp,3);$('#cl-rec').textContent=round(rr,3);
+ let xy=logisticData.map(([x,y])=>[x/2,y?1.0:.05]);$('#class-plot').innerHTML=chartSVG([{f:x=>sigmoid(w*x*2+b),color:'#da5c65',width:3},{f:x=>thr,color:'#0c928c',dash:true}],[{data:xy.filter((p,i)=>logisticData[i][1]===1),color:'#2563b9'},{data:xy.filter((p,i)=>logisticData[i][1]===0),color:'#dfae47'}],[-.15,1.25]);$('#class-note').textContent=`w = ${round(w)}, b = ${round(b)}. O valoare mare pentru λ micșorează panta și aduce probabilitățile mai aproape de 0,5; pragul schimbă predicțiile, nu coeficienții.`;
+}
+$('#cl-lambda').oninput=renderClass;$('#threshold').oninput=renderClass;$('#cl-data').onclick=newClass;
+let chosen=null,revealed=false;const scores=[['A',.81,.82],['B',.86,.87],['C',.91,.85],['D',.94,.76]];
+function renderScores(){$('#scores').innerHTML=scores.map(([n,p,q],i)=>`<tr><td>${n}${chosen===i?' · ales':''}</td><td>${p.toFixed(2)}</td><td class="${revealed?'':'hidden-result'}">${revealed?q.toFixed(2):'••••'}</td></tr>`).join('');$$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.model===chosen)))}
+$$('[data-model]').forEach(b=>b.onclick=()=>{chosen=+b.dataset.model;renderScores()});$('#reveal').onclick=()=>{revealed=true;renderScores();$('#leader-note').innerHTML=`${chosen===null?'Nu ai ales niciun model.':'Ai ales '+scores[chosen][0]+'. '}Cea mai mare valoare privată în exemplul nostru este pentru modelul B, nu pentru D. <strong>Scorul public nu este o garanție.</strong>`};buildData();newClass();renderScores();
+</script></body></html>

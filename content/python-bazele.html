@@ -1,0 +1,562 @@
+<div class="onia-python">
+  <div class="py-intro">
+    <div class="py-intro-meta"><span>01 / FUNDAMENTE DE PROGRAMARE</span><span>FIȘĂ DE SINTEZĂ + EXEMPLE</span></div>
+    <h2>Python pentru pregătirea ONIA</h2>
+    <p>Limbajul Python este instrumentul prin care vom prelucra date, implementa algoritmi și experimenta cu modele de inteligență artificială. Această lecție oferă o bază practică, de la expresii și funcții până la colecții și fișiere.</p>
+    <div class="py-progress-track" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="py-focus"><strong>Parcurs recomandat</strong><span>Înțelege conceptele → urmărește exemplele → modifică valorile → rezolvă exercițiile.</span></div>
+  </div>
+
+<section class="py-topic" id="py-pornire"><div class="py-topic-head"><span class="py-topic-index">01</span><h2>1. Primii pași: variabile, tipuri și indentare</h2></div><p class="py-lead">În Python, tipul este asociat valorii la momentul execuției. Nu declarăm în prealabil tipul fiecărei variabile, iar blocurile de instrucțiuni sunt delimitate prin indentare.</p>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Tip</th><th>Exemplu</th><th>Ce reprezintă</th></tr></thead><tbody><tr><td><code>int</code></td><td><code>42</code></td><td>Întreg (precizie arbitrară, în limita memoriei)</td></tr><tr><td><code>float</code></td><td><code>0.25</code></td><td>Număr în virgulă mobilă, aproximativ</td></tr><tr><td><code>bool</code></td><td><code>True</code>, <code>False</code></td><td>Valoare logică</td></tr><tr><td><code>str</code></td><td><code>"ONIA"</code></td><td>Șir Unicode de caractere</td></tr><tr><td><code>NoneType</code></td><td><code>None</code></td><td>Absența unei valori</td></tr><tr><td><code>list</code>, <code>tuple</code></td><td><code>[1,2]</code>, <code>(1,2)</code></td><td>Secvențe ordonate</td></tr><tr><td><code>dict</code>, <code>set</code></td><td><code>{"x":1}</code>, <code>{1,2}</code></td><td>Asociere cheie-valoare / valori distincte</td></tr></tbody></table></div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Valori, tipuri și indentare</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">nume</span> <span class="o">=</span> <span class="s2">&quot;Ana&quot;</span>
+<span class="n">varsta</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">scor</span> <span class="o">=</span> <span class="mf">87.5</span>
+<span class="n">admis</span> <span class="o">=</span> <span class="n">scor</span> <span class="o">&gt;=</span> <span class="mi">60</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">scor</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">admis</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">admis</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nume</span><span class="si">}</span><span class="s2"> a trecut pragul de calificare.&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>float bool
+Ana a trecut pragul de calificare.</pre></div>
+
+</div>
+
+<p>Operatorul <code>=</code> realizează atribuirea, nu compararea. Un nume poate fi asociat ulterior unei valori de alt tip; adnotările precum <code>varsta: int = 16</code> exprimă intenția și sunt utile instrumentelor de analiză statică, dar nu impun singure verificarea tipurilor la execuție.</p>
+
+<div class="py-tip note"><strong>De reținut</strong><div><code>True</code> și <code>False</code> încep cu literă mare. <code>None</code> este diferit de <code>0</code> și de șirul vid. Folosește nume explicite, de regulă în stilul <code>snake_case</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-operatori"><div class="py-topic-head"><span class="py-topic-index">02</span><h2>2. Operatori și evaluarea expresiilor</h2></div><p class="py-lead">Operatorii determină ce calcule sau teste facem asupra valorilor. Pentru rezultate corecte contează atât semnificația lor, cât și prioritatea.</p>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Categorie</th><th>Operatori</th><th>Exemplu / observație</th></tr></thead><tbody><tr><td>Aritmetici</td><td><code>+ - * / // % **</code></td><td><code>17 // 5 == 3</code>; <code>2 ** 3 == 8</code></td></tr><tr><td>Comparare</td><td><code>== != &lt; &lt;= &gt; &gt;=</code></td><td><code>5 &lt; 9</code> → <code>True</code></td></tr><tr><td>Logici</td><td><code>not</code>, <code>and</code>, <code>or</code></td><td><code>not False</code> → <code>True</code></td></tr><tr><td>Apartenență</td><td><code>in</code>, <code>not in</code></td><td><code>"AI" in "ONIA"</code> → <code>True</code></td></tr><tr><td>Identitate</td><td><code>is</code>, <code>is not</code></td><td>Pentru identitate de obiect; <code>x is None</code></td></tr><tr><td>Atribuire compusă</td><td><code>+= -= *= //=</code> etc.</td><td><code>x += 2</code></td></tr></tbody></table></div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Operatori esențiali</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>    <span class="c1"># împărțire reală</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># cât întreg (rotunjire în jos)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>    <span class="c1"># rest</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>   <span class="c1"># putere</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>3.4
+3
+2
+8
+True
+True</pre></div>
+
+</div>
+
+<p>Ordinea uzuală a priorității: paranteze → <code>**</code> → operatori unari → <code>* / // %</code> → <code>+ -</code> → comparații → <code>not</code> → <code>and</code> → <code>or</code>. Folosește paranteze când expresia devine greu de urmărit. Operatorii <code>and</code> și <code>or</code> evaluează în scurtcircuit și, în general, returnează unul dintre operanzi, nu neapărat un <code>bool</code>.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Capcane frecvente</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># asociativitate la dreapta</span>
+<span class="nb">print</span><span class="p">([]</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>    <span class="c1"># primul operand „adevărat”</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">0</span> <span class="ow">and</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># nu se evaluează al doilea operand</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>-3 2
+512
+[4, 5]
+0</pre></div>
+
+</div>
+
+<div class="py-tip warning"><strong>Atenție la Python</strong><div><code>//</code> aplică funcția <em>floor</em> (pentru valori negative rezultatul poate diferi de trunchierea spre zero). <code>**</code> reprezintă ridicarea la putere; <code>^</code> este XOR pe biți. Folosește <code>==</code> pentru egalitate, nu <code>is</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-citire"><div class="py-topic-head"><span class="py-topic-index">03</span><h2>3. Citirea de la tastatură și conversii</h2></div><p class="py-lead">Funcția <code>input()</code> întoarce întotdeauna un șir de caractere. Pentru calcule, transformăm explicit datele în tipul așteptat.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Citire pe linii și valori separate prin spații</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;n = &quot;</span><span class="p">))</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;a b = &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">valori</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Valori: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">valori</span><span class="p">))</span>
+</pre></div>
+
+
+</div>
+
+<p>Metoda <code>split()</code>, fără argument, separă după secvențe de caractere albe (spații, taburi, linii noi). Pentru fișiere sau input amplu, putem citi întregul flux și să îl despărțim în tokenuri.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Citire rapidă a întregii intrări</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">tokenuri</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">numere</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tokenuri</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numere</span><span class="p">))</span>
+</pre></div>
+
+
+</div>
+
+<div class="py-tip note"><strong>Exemplu de conversie</strong><div><code>int("15")</code> produce <code>15</code>, însă <code>int("15.2")</code> produce <code>ValueError</code>. Pentru valori reale scrise cu punct, folosește <code>float()</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-afisare"><div class="py-topic-head"><span class="py-topic-index">04</span><h2>4. Afișarea cu print(), sep, end și f-string</h2></div><p class="py-lead"><code>print()</code> convertește argumentele în text și le trimite implicit către consolă. Parametrii <code>sep</code> și <code>end</code> controlează caracterele dintre valori și de la sfârșit.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Cum funcționează sep și end</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IA&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">2026</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IA&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">2026</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; | &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IA&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>IA Python 2026
+IA | Python | 2026
+ONIA
+3, 5, 8</pre></div>
+
+</div>
+
+<p>Valorile implicite sunt <code>sep=" "</code> (un spațiu) și <code>end="\n"</code> (trecere la linia următoare). Prin <code>print(*lista)</code>, elementele listei devin argumente separate.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>f-string și formatare</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">nume</span> <span class="o">=</span> <span class="s2">&quot;Ana&quot;</span>
+<span class="n">punctaj</span> <span class="o">=</span> <span class="mf">87.456</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elev: </span><span class="si">{</span><span class="n">nume</span><span class="si">}</span><span class="s2"> | scor: </span><span class="si">{</span><span class="n">punctaj</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Procent: </span><span class="si">{</span><span class="mf">0.875</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Număr în binar: </span><span class="si">{</span><span class="mi">13</span><span class="si">:</span><span class="s2">b</span><span class="si">}</span><span class="s2">, hexazecimal: </span><span class="si">{</span><span class="mi">13</span><span class="si">:</span><span class="s2">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;model&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="mf">0.932</span><span class="si">:</span><span class="s2">&gt;7.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>Elev: Ana | scor: 87.46
+Procent: 87.5%
+Număr în binar: 1101, hexazecimal: d
+model        |  93.20%</pre></div>
+
+</div>
+
+<p>Un <em>f-string</em> este un șir precedat de <code>f</code> în care expresiile din acolade sunt evaluate înaintea afișării. <code>:.2f</code> cere două zecimale, <code>:.1%</code> afișează un procent, iar <code>:&lt;12</code> aliniază la stânga într-un câmp de lățime 12.</p>
+
+<div class="py-tip note"><strong>Jupyter vs. consolă</strong><div>În Jupyter, ultima expresie dintr-o celulă poate fi afișată automat. Într-un fișier <code>.py</code>, pentru a vedea rezultatul trebuie de regulă să folosești explicit <code>print()</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-control"><div class="py-topic-head"><span class="py-topic-index">05</span><h2>5. Condiții, bucle și iterare</h2></div><p class="py-lead">Instrucțiunile <code>if</code>, <code>for</code> și <code>while</code> sunt indispensabile pentru prelucrarea seturilor de date. Indentarea indică apartenența la bloc.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Filtrare și range()</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">scoruri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">66</span><span class="p">]</span>
+<span class="n">prag</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">promovati</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">scor</span> <span class="ow">in</span> <span class="n">scoruri</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scor</span> <span class="o">&gt;=</span> <span class="n">prag</span><span class="p">:</span>
+        <span class="n">promovati</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Peste prag: </span><span class="si">{</span><span class="n">promovati</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">scoruri</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>Peste prag: 3/5
+2 4 6 </pre></div>
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>while, continue și testarea condiției</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">pas</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">//=</span> <span class="mi">2</span>
+    <span class="n">pas</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pas</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">30</span> <span class="o">//</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>5 3
+10
+6</pre></div>
+
+</div>
+
+<p><code>range(start, stop, step)</code> include <code>start</code> și exclude <code>stop</code>. <code>break</code> întrerupe bucla, iar <code>continue</code> trece la iterația următoare. Funcția <code>enumerate()</code> produce perechi <code>(index, valoare)</code>, utile la parcurgerea listelor.</p>
+
+</section>
+
+<section class="py-topic" id="py-functii"><div class="py-topic-head"><span class="py-topic-index">06</span><h2>6. Definirea subprogramelor și modalități de apel</h2></div><p class="py-lead">În Python, subprogramele sunt implementate prin funcții definite cu <code>def</code>. Ele pot primi argumente, returna rezultate și pot fi reutilizate în aplicații mai mari.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Parametri, return, apel pozițional și nominal</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">acuratete</span><span class="p">(</span><span class="n">corecte</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">corecte</span> <span class="o">/</span> <span class="n">total</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">acuratete</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>          <span class="c1"># pozițional</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acuratete</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">corecte</span><span class="o">=</span><span class="mi">18</span><span class="p">))</span>  <span class="c1"># nominal</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>0.9
+0.9</pre></div>
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Valoare implicită, returnarea unui tuplu</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">statistici</span><span class="p">(</span><span class="n">valori</span><span class="p">,</span> <span class="n">precizie</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">valori</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">minim</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">valori</span><span class="p">)</span>
+    <span class="n">maxim</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">valori</span><span class="p">)</span>
+    <span class="n">medie</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">valori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">valori</span><span class="p">),</span> <span class="n">precizie</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">minim</span><span class="p">,</span> <span class="n">maxim</span><span class="p">,</span> <span class="n">medie</span>
+
+<span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">avg</span> <span class="o">=</span> <span class="n">statistici</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">precizie</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">avg</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>4 9 7.0</pre></div>
+
+</div>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Mod de apel</th><th>Sintaxă</th><th>Observație</th></tr></thead><tbody><tr><td>Pozițional</td><td><code>f(3, 5)</code></td><td>Argumentele corespund pozițiilor parametrilor</td></tr><tr><td>Nominal</td><td><code>f(b=5, a=3)</code></td><td>Asociere explicită după nume</td></tr><tr><td>Implicit</td><td><code>f(3)</code></td><td>Parametrii omiși folosesc valorile implicite</td></tr><tr><td>Despachetare</td><td><code>f(*pereche)</code></td><td>Argumentele provin dintr-o secvență</td></tr><tr><td>Despachetare nominală</td><td><code>f(**date)</code></td><td>Argumentele provin dintr-un dicționar</td></tr></tbody></table></div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Despachetarea argumentelor</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">combina</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">pereche</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">argumente</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combina</span><span class="p">(</span><span class="o">*</span><span class="n">pereche</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combina</span><span class="p">(</span><span class="o">**</span><span class="n">argumente</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>47
+47</pre></div>
+
+</div>
+
+<div class="py-tip warning"><strong>Greșeală de evitat</strong><div>Nu folosi o listă mutabilă ca valoare implicită dacă intenționezi una nouă la fiecare apel: preferă <code>def f(a=None):</code>, apoi <code>a = [] if a is None else a</code>. O funcție fără <code>return</code> explicit returnează <code>None</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-liste"><div class="py-topic-head"><span class="py-topic-index">07</span><h2>7. Liste: indexare, slicing și metode</h2></div><p class="py-lead">O listă este o secvență ordonată și mutabilă. Se folosește pentru șiruri de date, caracteristici, predicții, etichete și multe alte structuri intermediare.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Indexare și felii</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">scoruri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scoruri</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scoruri</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scoruri</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scoruri</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">scoruri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">scoruri</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scoruri</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>12 15
+[7, 18, 7]
+[15, 7, 18, 7, 12]
+[12, 9, 18, 7, 15, 20]</pre></div>
+
+</div>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Operație</th><th>Efect</th></tr></thead><tbody><tr><td><code>append(x)</code></td><td>Adaugă un singur element la final</td></tr><tr><td><code>extend(iterabil)</code></td><td>Adaugă elementele unui iterabil</td></tr><tr><td><code>insert(i, x)</code></td><td>Inserează înainte de poziția i</td></tr><tr><td><code>pop(i)</code></td><td>Șterge și returnează elementul de la indexul i; implicit ultimul</td></tr><tr><td><code>remove(x)</code></td><td>Elimină prima apariție a valorii x</td></tr><tr><td><code>count(x)</code>, <code>index(x)</code></td><td>Numără / găsește prima poziție</td></tr><tr><td><code>sort()</code>, <code>reverse()</code></td><td>Modifică lista în loc; returnează <code>None</code></td></tr><tr><td><code>sorted(lista)</code></td><td>Creează o listă nouă sortată</td></tr></tbody></table></div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>List comprehension și enumerate</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">numere</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">patrate_pare</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numere</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">patrate_pare</span><span class="p">)</span>
+
+<span class="n">perechi</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">numere</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">perechi</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>[4, 16, 36]
+[(1, 2), (2, 3), (3, 4)]</pre></div>
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Aliasing și copii</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>            <span class="c1"># alias, aceeași listă</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>     <span class="c1"># copie superficială</span>
+<span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>[1, 2, 3] [1, 2]</pre></div>
+
+</div>
+
+<div class="py-tip warning"><strong>Atenție</strong><div>Pentru liste imbricate, <code>copy()</code> creează doar o copie superficială. La nevoie, folosește <code>copy.deepcopy()</code>. Evită expresia <code>[[0] * 3] * 4</code> când vei modifica rândurile: reutilizează aceeași listă interioară.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-tupluri"><div class="py-topic-head"><span class="py-topic-index">08</span><h2>8. Tupluri: secvențe nemodificabile</h2></div><p class="py-lead">Tuplurile păstrează ordinea, permit indexare și slicing, dar nu permit înlocuirea unui element. Sunt potrivite pentru coordonate, perechi și rezultate multiple.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Tupluri și despachetare</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">punct</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">punct</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">scoruri</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">73</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scoruri</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">unu</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)</span>        <span class="c1"># tuplu cu un singur element</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">unu</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>11
+(92, 73)
+tuple</pre></div>
+
+</div>
+
+<p>Imutabilitatea este o proprietate a tuplului ca structură: dacă un element din tuplu este, la rândul lui, o listă, acea listă poate fi modificată. Un tuplu poate fi cheie într-un dicționar numai dacă toate elementele sale sunt hashable.</p>
+
+</section>
+
+<section class="py-topic" id="py-dictionare"><div class="py-topic-head"><span class="py-topic-index">09</span><h2>9. Dicționare: asocierea dintre chei și valori</h2></div><p class="py-lead">Un dicționar permite accesul la valori prin chei, nu prin poziții. Este foarte util pentru etichete, configurații, numărarea frecvențelor și agregarea datelor.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Numărarea frecvențelor</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">etichete</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;câine&quot;</span><span class="p">,</span> <span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;pasăre&quot;</span><span class="p">]</span>
+<span class="n">frecvente</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">eticheta</span> <span class="ow">in</span> <span class="n">etichete</span><span class="p">:</span>
+    <span class="n">frecvente</span><span class="p">[</span><span class="n">eticheta</span><span class="p">]</span> <span class="o">=</span> <span class="n">frecvente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">eticheta</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">frecvente</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">frecvente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vulpe&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>{&#x27;pisică&#x27;: 2, &#x27;câine&#x27;: 1, &#x27;pasăre&#x27;: 1}
+0</pre></div>
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Inserare, eliminare și parcurgere</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">rezultate</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Ana&quot;</span><span class="p">:</span> <span class="mi">93</span><span class="p">,</span> <span class="s2">&quot;Mara&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">}</span>
+<span class="n">rezultate</span><span class="p">[</span><span class="s2">&quot;Ioana&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="n">eliminat</span> <span class="o">=</span> <span class="n">rezultate</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Mara&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nume</span><span class="p">,</span> <span class="n">punctaj</span> <span class="ow">in</span> <span class="n">rezultate</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nume</span><span class="p">,</span> <span class="n">punctaj</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eliminat</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>Ana 93
+Ioana 95
+88</pre></div>
+
+</div>
+
+<p><code>dict.keys()</code> oferă cheile, <code>dict.values()</code> valorile, iar <code>dict.items()</code> perechile. În Python modern, un dicționar păstrează ordinea inserării cheilor, dar nu este sortat automat. Accesul <code>d[cheie]</code> pentru o cheie absentă generează <code>KeyError</code>; <code>get()</code> poate evita această eroare.</p>
+
+</section>
+
+<section class="py-topic" id="py-multimi"><div class="py-topic-head"><span class="py-topic-index">10</span><h2>10. Mulțimi (set): elemente distincte</h2></div><p class="py-lead">Un <code>set</code> conține elemente hashable distincte și nu este o secvență indexabilă. Este potrivit pentru eliminarea duplicatelor și verificarea apartenenței.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Operații pe mulțimi</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">))</span>   <span class="c1"># reuniune</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">))</span>   <span class="c1"># intersecție</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>   <span class="c1"># diferență</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">))</span>   <span class="c1"># diferență simetrică</span>
+
+<span class="n">identificatori</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">identificatori</span><span class="p">)))</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>[1, 2, 3, 4, 5]
+[3, 4]
+[1, 2]
+[1, 2, 5]
+3</pre></div>
+
+</div>
+
+<p>Mulțimea vidă se creează cu <code>set()</code>, nu cu <code>{}</code> (care creează un dicționar). Metode uzuale: <code>add()</code>, <code>discard()</code>, <code>remove()</code>. <code>discard(x)</code> nu produce eroare dacă <code>x</code> lipsește; <code>remove(x)</code> produce <code>KeyError</code>.</p>
+
+</section>
+
+<section class="py-topic" id="py-siruri"><div class="py-topic-head"><span class="py-topic-index">11</span><h2>11. Șiruri de caractere: manipulare și prelucrare</h2></div><p class="py-lead">Un șir <code>str</code> este o secvență Unicode imutabilă. Prelucrările pe text sunt folosite la curățarea datelor și, ulterior, la sarcini de NLP.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>strip, lower, split, join și replace</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;  IA, Python, Date  &quot;</span>
+<span class="n">curat</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">cuvinte</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">curat</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cuvinte</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cuvinte</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">curat</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;ml&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>[&#x27;ia&#x27;, &#x27;python&#x27;, &#x27;date&#x27;]
+ia | python | date
+ia, python, ml</pre></div>
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Indexare și căutare</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">mesaj</span> <span class="o">=</span> <span class="s2">&quot;ONIA 2026&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mesaj</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">mesaj</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mesaj</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nia&quot;</span> <span class="ow">in</span> <span class="n">mesaj</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>ONIA 2026
+True
+True
+65 A</pre></div>
+
+</div>
+
+<div class="py-tip note"><strong>Text și encodare</strong><div>Pentru fișiere text în română, indică explicit <code>encoding="utf-8"</code>. Metodele pentru șiruri întorc valori noi: <code>text.replace(...)</code> nu modifică șirul inițial.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-fisiere"><div class="py-topic-head"><span class="py-topic-index">12</span><h2>12. Fișiere text: citire, scriere, CSV și JSON</h2></div><p class="py-lead">Pentru sarcini de IA este esențial să poți importa, curăța și exporta date. Folosim <code>with open(...)</code> pentru închiderea sigură a fișierelor.</p>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Mod</th><th>Semnificație</th></tr></thead><tbody><tr><td><code>"r"</code></td><td>Citire (fișierul trebuie să existe)</td></tr><tr><td><code>"w"</code></td><td>Scriere: creează sau suprascrie un fișier</td></tr><tr><td><code>"a"</code></td><td>Adaugă la sfârșitul fișierului</td></tr><tr><td><code>"x"</code></td><td>Creare exclusivă: eroare dacă fișierul există</td></tr></tbody></table></div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Date de intrare și ieșire din fișier</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="c1"># date.in (exemplu):</span>
+<span class="c1"># 4</span>
+<span class="c1"># 7 12 9 5</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;date.in&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+    <span class="n">valori</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;rezultat.out&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">valori</span><span class="p">[:</span><span class="n">n</span><span class="p">]),</span> <span class="n">file</span><span class="o">=</span><span class="n">fout</span><span class="p">)</span>
+</pre></div>
+
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Parcurgerea tuturor liniilor</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="c1"># O valoare numerică pe linie, număr necunoscut de linii</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;scoruri.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">scoruri</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">linie</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">for</span> <span class="n">linie</span> <span class="ow">in</span> <span class="n">fin</span>
+              <span class="k">if</span> <span class="n">linie</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;rezumat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+    <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Număr de scoruri: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">scoruri</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+</div>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Format CSV cu antet</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="c1"># CSV: id,eticheta,scor</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;predictii.csv&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">cititor</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+    <span class="n">randuri</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cititor</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;predictii_filtrate.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+    <span class="n">scriitor</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;eticheta&quot;</span><span class="p">,</span> <span class="s2">&quot;scor&quot;</span><span class="p">])</span>
+    <span class="n">scriitor</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">rand</span> <span class="ow">in</span> <span class="n">randuri</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mf">0.75</span><span class="p">:</span>
+            <span class="n">scriitor</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">rand</span><span class="p">)</span>
+</pre></div>
+
+
+</div>
+
+<p>CSV poate conține virgule în interiorul câmpurilor și caractere citate; evită <code>split(",")</code> pentru un CSV general. Dacă separatorul este punct și virgulă, specifică <code>delimiter=";"</code> în <code>csv.reader</code>/<code>csv.DictReader</code> și la scriere.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Format JSON</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">configuratie</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;KNN&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;metrici&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">]}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">configuratie</span><span class="p">,</span> <span class="n">fout</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">config_citita</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config_citita</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>5</pre></div>
+
+</div>
+
+<div class="py-tip note"><strong>Diferențe de reținut</strong><div><code>read()</code> citește tot fișierul într-un șir; <code>readline()</code> citește o linie, iar <code>for linie in fin</code> parcurge progresiv liniile. <code>write()</code> așteaptă un șir de caractere și nu adaugă singur <code>\n</code>.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-aplicatii"><div class="py-topic-head"><span class="py-topic-index">13</span><h2>13. Exemple rezolvate cu aplicații în inteligența artificială</h2></div><p class="py-lead">Combinăm elementele învățate în probleme apropiate de procesarea datelor și evaluarea modelelor.</p>
+
+<h3>Exemplul 1 — Acuratețea unui clasificator</h3>
+
+<p>Avem două liste de etichete: cele reale și cele prezise. Determinăm numărul de predicții corecte și acuratețea. Verificăm și dacă listele au aceeași lungime.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Soluție rezolvată</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluare_clasificare</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">prezise</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Listele trebuie să aibă aceeași lungime&quot;</span><span class="p">)</span>
+    <span class="n">corecte</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">corecte</span><span class="p">,</span> <span class="n">corecte</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span> <span class="k">if</span> <span class="n">reale</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+<span class="n">reale</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;câine&quot;</span><span class="p">,</span> <span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;pasăre&quot;</span><span class="p">,</span> <span class="s2">&quot;câine&quot;</span><span class="p">]</span>
+<span class="n">prezise</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;pisică&quot;</span><span class="p">,</span> <span class="s2">&quot;pasăre&quot;</span><span class="p">,</span> <span class="s2">&quot;câine&quot;</span><span class="p">]</span>
+<span class="n">corecte</span><span class="p">,</span> <span class="n">scor</span> <span class="o">=</span> <span class="n">evaluare_clasificare</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicții corecte: </span><span class="si">{</span><span class="n">corecte</span><span class="si">}</span><span class="s2">; acuratețe: </span><span class="si">{</span><span class="n">scor</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>Predicții corecte: 4; acuratețe: 80.0%</pre></div>
+
+</div>
+
+<p>Funcția <code>zip()</code> grupează elementele corespunzătoare din două iterabile. <code>sum()</code> poate însuma valori logice deoarece <code>True</code> se comportă numeric ca <code>1</code>, iar <code>False</code> ca <code>0</code>. Dacă nu am verifica dimensiunile, <code>zip()</code> s-ar opri la lista mai scurtă.</p>
+
+<h3>Exemplul 2 — Vocabularul și frecvențele unui text</h3>
+
+<p>Pornind de la o propoziție, normalizăm textul, construim vocabularul de cuvinte distincte și un dicționar de frecvențe.</p>
+
+<div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Soluție rezolvată</span><button class="py-copy" type="button" data-copy-code aria-label="Copiază codul">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;AI învață din date. AI folosește date!&quot;</span>
+<span class="k">for</span> <span class="n">semn</span> <span class="ow">in</span> <span class="s2">&quot;.,!?:;&quot;</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">semn</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="n">cuvinte</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">vocabular</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cuvinte</span><span class="p">))</span>
+<span class="n">frecvente</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">cuvant</span> <span class="ow">in</span> <span class="n">cuvinte</span><span class="p">:</span>
+    <span class="n">frecvente</span><span class="p">[</span><span class="n">cuvant</span><span class="p">]</span> <span class="o">=</span> <span class="n">frecvente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cuvant</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vocabular</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">frecvente</span><span class="p">[</span><span class="s2">&quot;ai&quot;</span><span class="p">],</span> <span class="n">frecvente</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="py-code-output"><span>Rezultat</span><pre>[&#x27;ai&#x27;, &#x27;date&#x27;, &#x27;din&#x27;, &#x27;folosește&#x27;, &#x27;învață&#x27;]
+2 2</pre></div>
+
+</div>
+
+<p>Exemplul ilustrează o preprocesare elementară; în aplicații NLP complexe trebuie tratate mai atent semnele de punctuație, cuvintele compuse și formele lexicale.</p>
+
+</section>
+
+<section class="py-topic" id="py-recap"><div class="py-topic-head"><span class="py-topic-index">14</span><h2>14. Sinteză și erori de evitat</h2></div><p class="py-lead">O recapitulare a diferențelor care generează frecvent erori în problemele de programare.</p>
+
+<div class="py-table-wrap"><table class="py-table"><thead><tr><th>Confuzie</th><th>Varianta corectă</th></tr></thead><tbody><tr><td><code>input()</code> întoarce numere</td><td><code>input()</code> întoarce <code>str</code>; conversia este explicită</td></tr><tr><td><code>=</code> înseamnă egalitate</td><td><code>=</code> atribuie; <code>==</code> compară</td></tr><tr><td><code>list.sort()</code> întoarce lista sortată</td><td>Sortează pe loc și întoarce <code>None</code></td></tr><tr><td><code>"a" in d</code> caută în valori</td><td>Verifică apartenența la cheile dicționarului</td></tr><tr><td><code>{}</code> este mulțimea vidă</td><td>Este dicționarul vid; mulțimea vidă este <code>set()</code></td></tr><tr><td><code>is</code> compară valori</td><td>Compară identitatea obiectelor; pentru valori, de regulă <code>==</code></td></tr><tr><td><code>set</code> are ordonare și indexare</td><td>Nu garantează ordine și nu se indexează</td></tr><tr><td><code>"w"</code> adaugă la un fișier</td><td>Suprascrie; folosește <code>"a"</code> pentru adăugare</td></tr></tbody></table></div>
+
+<div class="py-tip note"><strong>Legătură cu capitolele următoare</strong><div>În lecția 1.2, listele și dicționarele vor face loc matricilor NumPy și tabelelor Pandas. Tiparele de citire a datelor, prelucrare, organizare și afișare rămân aceleași.</div></div>
+
+</section>
+
+<section class="py-topic" id="py-referinte"><div class="py-topic-head"><span class="py-topic-index">15</span><h2>15. Aprofundare și bibliografie</h2></div><p class="py-lead">Pentru explicații mai ample, modele de implementare și exerciții gradate, consultă sursele utilizate la pregătirea acestei sinteze.</p>
+
+<div class="py-source"><span class="py-source-mark">IX</span><div><strong>Informatică, clasa a IX-a — Editura Intuitext (2026)</strong><p>Emanuela Cerchez · Mihai Nan · Dana Lica. Manual școlar aprobat prin OMEC nr. 5779/09.10.2026. Recomandări de lectură: <strong>Unitatea 2, pag. 30–54</strong> (baze Python), <strong>Unitatea 4, pag. 74–90</strong> (subprograme), <strong>Unitatea 5, pag. 92–98</strong> (fișiere text), <strong>Unitatea 6, pag. 99–129</strong> (liste).</p><small>Manualul este o resursă de aprofundare; conținutul manualului nu este reprodus în această platformă.</small></div></div>
+<div class="py-source"><span class="py-source-mark purple">NB</span><div><strong>Laboratorul „Introducere în Python” — notebook de curs</strong><p>Folosit ca reper pentru secvențe, dicționare, tupluri, funcții, formatarea rezultatelor și exemple de lucru în Jupyter. Materialul de pe această pagină este redactat independent și adaptat pregătirii ONIA.</p></div></div>
+
+<p>Subiecte precum <strong>tupluri, dicționare, mulțimi, CSV și JSON</strong> completează aici noțiunile aprofundate în manual, fiind utile pentru viitoarele aplicații de învățare automată.</p>
+
+</section>
+
+</div>
+
+<script>
+/* Folosește varianta cu stiluri când fragmentul este deschis ca pagină proprie. */
+if (document.querySelector('body > .onia-python') && !document.querySelector('.native-lesson')) {
+  location.replace('python-bazele-standalone.html');
+}
+</script>

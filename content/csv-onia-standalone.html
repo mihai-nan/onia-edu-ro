@@ -1,0 +1,493 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSV · ONIA</title><style>:root{color-scheme:light;--bg:#f6f8fc;--panel:#fff;--panel-alt:#f8faff;--text:#19243d;--sub:#66738c;--line:#e8edf5;--main:#554ce6;--primary:#554ce6;--primary-soft:#f0eeff;--sidebar:#101a32;--sidebar2:#142140;--shadow:0 8px 30px rgba(30,45,92,.045);--radius:18px}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101724;--panel:#182234;--panel-alt:#1c2940;--text:#edf2ff;--sub:#a5b1c8;--line:#2b3a53;--main:#ada6ff;--primary:#847af5;--primary-soft:#28264a;--sidebar:#0b1120;--sidebar2:#111c33;--shadow:0 8px 30px rgba(0,0,0,.16)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:105px}body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.55}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #8d85ff;outline-offset:3px}p,h1,h2,h3{margin-top:0}h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.2;letter-spacing:-.035em}::selection{background:#a5a0ff65}.svg-icon{vertical-align:middle;flex:none}.app-shell{min-height:100vh}.sidebar{position:fixed;z-index:30;inset:0 auto 0 0;width:286px;background:var(--sidebar);color:#d8e2f5;display:flex;flex-direction:column;box-shadow:5px 0 30px rgba(9,20,45,.05)}.brand{height:93px;display:flex;align-items:center;gap:12px;padding:0 23px;border-bottom:1px solid #ffffff14}.brand-mark{width:48px;height:48px;display:grid;place-items:center;background:linear-gradient(145deg,#464ebf,#36bdc2);border-radius:13px;color:#f1ffff;box-shadow:0 10px 20px #0d123d70;flex:none}.brand-mark svg{width:34px;height:34px}.brand-words{display:flex;flex-direction:column;gap:2px;min-width:0}.brand-words strong{font-family:'Space Grotesk',sans-serif;font-size:16.2px;color:#fff;letter-spacing:-.045em;white-space:nowrap}.brand-words small{color:#8493b3;font-size:8.8px;letter-spacing:.19em;font-weight:800}.sidebar-scroll{flex:1;overflow:auto;padding:26px 13px 30px;scrollbar-width:thin;scrollbar-color:#33445d transparent}.sidebar-section-label{font-size:10px;letter-spacing:.135em;font-weight:800;color:#7889a9;padding:0 12px;margin:0 0 14px}.chapter-label{display:flex;justify-content:space-between;margin-top:29px;margin-bottom:12px}.chapter-label span{color:#9ba9c0}.sidebar-home{display:flex;align-items:center;gap:12px;min-height:43px;border-radius:10px;padding:0 12px;font-weight:700;color:#b9c7e0;transition:.16s}.sidebar-home:hover,.sidebar-home.active{color:#fff;background:#263557}.sidebar-home.active{background:#343a75}.side-home-arrow{margin-left:auto;opacity:.6}.nav-chapter{margin-bottom:5px}.nav-chapter-main{display:flex;align-items:center;border-radius:11px}.nav-chapter.is-active>.nav-chapter-main{background:#202d4c}.nav-chapter-main:hover{background:#1b2843}.nav-chapter-link{display:flex;align-items:center;min-width:0;flex:1;gap:10px;padding:9px 4px 9px 9px}.side-ch-icon{height:34px;width:34px;border-radius:10px;display:grid;place-items:center;flex:none}.side-ch-icon.c-violet{background:#40386e;color:#b9afff}.side-ch-icon.c-blue{background:#183c61;color:#76c5ff}.side-ch-icon.c-mint{background:#1b494b;color:#72e3ca}.side-ch-icon.c-orange{background:#594029;color:#ffba79}.nav-ch-title{font-size:11.9px;font-weight:800;line-height:1.35;white-space:normal;color:#e9eefb}.nav-ch-title small{display:block;font-size:10px;color:#7f91b0;margin-top:3px;font-weight:600}.nav-expand{border:0;background:transparent;color:#8394b3;padding:8px 10px 8px 3px;transition:transform .2s}.nav-chapter.expanded .nav-expand svg{transform:rotate(180deg)}.nav-lessons{margin:5px 0 12px 25px;border-left:1px solid #35425c;padding-left:8px}.nav-lesson{display:flex;align-items:flex-start;gap:10px;padding:8px 6px 8px 8px;border-radius:8px;color:#9caac4;font-size:11.55px;line-height:1.5;font-weight:600;transition:.15s}.nav-lesson:hover{color:white;background:#1b2844}.nav-lesson.active{color:#f7f7ff;background:#394077}.nav-lesson-num{min-width:17px;font-size:10px;letter-spacing:.01em;color:#7b8db2;padding-top:2px}.nav-lesson.active .nav-lesson-num{color:#b9f0ed}.sidebar-bottom{margin-top:35px;padding:0 4px}.sidebar-tiny-card{background:linear-gradient(150deg,#242d56,#182943);border:1px solid #ffffff12;border-radius:13px;padding:16px;color:#fff}.sidebar-tiny-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#ffffff16;color:#8cf1e4;margin-bottom:11px}.sidebar-tiny-card strong{display:block;font-size:12px}.sidebar-tiny-card p{margin:6px 0 0;color:#a5b4cf;line-height:1.6;font-size:11px}.sidebar-footer{height:58px;flex:none;display:flex;align-items:center;gap:8px;border-top:1px solid #ffffff14;padding:0 21px;color:#8fa0bc;font-size:10.5px}.online-dot{width:7px;height:7px;border-radius:50%;background:#4de0b5;box-shadow:0 0 0 4px #4de0b515}.footer-v{margin-left:auto;color:#667998}.sidebar-scrim{display:none}.page-area{margin-left:286px;min-height:100vh;display:flex;flex-direction:column;min-width:0}.topbar{height:76px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 42px;gap:20px;position:sticky;top:0;z-index:20}.topbar-left,.topbar-right{display:flex;align-items:center;gap:12px;min-width:0}.crumbs{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.crumbs a:hover{color:var(--primary)}.crumb-current{color:var(--text);font-weight:800;overflow:hidden;text-overflow:ellipsis}.crumb-divider{color:#aebbd0}.search-trigger{display:flex;align-items:center;gap:11px;height:38px;min-width:223px;border:1px solid var(--line);background:var(--panel-alt);border-radius:9px;padding:0 10px;color:var(--sub);text-align:left;font-size:11.5px}.search-trigger kbd{margin-left:auto;padding:3px 5px;background:var(--panel);border:1px solid var(--line);border-radius:5px;color:#8793a8;font-family:inherit;font-size:10px}.icon-btn{height:38px;width:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text)}.icon-btn:hover,.search-trigger:hover{border-color:#b5b2f3}.mobile-menu{display:none}.main-content{flex:1;padding:35px 45px 65px;max-width:1670px;width:100%;margin:0 auto}.site-footer{padding:21px 45px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:var(--sub);font-size:10.7px}.site-footer>span:first-child{color:var(--text);font-weight:800}
+/* HOME */
+.hero{min-height:340px;border-radius:22px;background:radial-gradient(circle at 78% 28%,#344c93 0,#233766 25%,transparent 50%),linear-gradient(112deg,#162542 0%,#1a3159 55%,#233a72 100%);position:relative;display:flex;align-items:center;overflow:hidden;color:#fff;padding:47px 52px;box-shadow:0 16px 35px #203e691a}.hero:before{content:'';position:absolute;inset:0;background-image:radial-gradient(#ffffff4d 0.7px,transparent .8px);background-size:24px 24px;mask-image:linear-gradient(90deg,transparent,black);opacity:.21;pointer-events:none}.hero-content{position:relative;z-index:2;max-width:650px}.hero-eyebrow{display:flex;align-items:center;gap:9px;color:#a3eade;font-size:10px;font-weight:800;letter-spacing:.135em;margin-bottom:23px}.pulse-dot{width:6px;height:6px;background:#8cf8d6;border-radius:50%;box-shadow:0 0 0 5px #77ead420}.hero h1{font-size:clamp(30px,3.25vw,47px);line-height:1.12;letter-spacing:-.05em;margin:0 0 17px;max-width:680px}.hero p{color:#c2cfe6;font-size:13px;line-height:1.8;max-width:590px;margin-bottom:25px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.btn{min-height:41px;padding:9px 16px;border-radius:9px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;font-size:11.7px;text-align:center;transition:transform .14s,background .14s}.btn:hover{transform:translateY(-1px)}.btn-white{background:#fff;color:#1e2d4c;box-shadow:0 6px 16px #0002}.btn-ghost{border-color:#a6bce54d;background:#ffffff0a;color:#eef5ff}.btn-primary{background:var(--primary);color:#fff}.btn-success{background:#d8f9eb;color:#14775d;border-color:#b6eed6}.btn-small{min-height:35px;padding:8px 13px;font-size:11px}.hero-art{pointer-events:none;position:absolute;width:430px;height:380px;right:0;top:-11px;opacity:.82}.art-ring{position:absolute;left:35px;top:13px;width:355px;height:355px;border:1px solid #8de2ec1b;border-radius:50%}.art-ring-2{width:282px;height:282px;left:71px;top:49px}.art-ring-3{width:205px;height:205px;left:109px;top:88px}.hero-network{position:absolute;inset:5px 0 0 20px;width:370px;height:330px;filter:drop-shadow(0 0 8px #8bdce640)}.art-caption{position:absolute;border:1px solid #c9e9ff2c;background:#d0eaff0c;color:#d9e4ff;backdrop-filter:blur(5px);padding:9px 13px;border-radius:9px;font-size:11px;letter-spacing:.1em;font-weight:800}.art-caption-one{top:57px;right:20px}.art-caption-one span{color:#85eadd}.art-caption-two{bottom:24px;left:45px}.overview-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:19px}.overview-stats>div{min-height:99px;border-radius:13px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:19px 20px;display:grid;grid-template-columns:42px auto;grid-template-rows:28px 21px;column-gap:11px;align-items:center}.stat-ico{grid-row:span 2;height:39px;width:39px;display:grid;place-items:center;border-radius:11px;background:var(--primary-soft);color:var(--primary)}.overview-stats strong{font-family:'Space Grotesk',sans-serif;font-size:25px;line-height:1;letter-spacing:-.05em}.overview-stats small{font-size:10.7px;color:var(--sub)}.slash-stat{font-size:16px;color:#8995ac}.section-heading{margin:42px 0 20px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.kicker{display:block;font-weight:800;letter-spacing:.14em;font-size:9.7px;color:var(--primary);margin-bottom:9px}.section-heading h2{font-size:26px;margin:0 0 5px}.section-heading p{margin:0;color:var(--sub);font-size:12.5px}.section-heading-pill{display:inline-flex;background:var(--panel);border:1px solid var(--line);color:var(--sub);border-radius:50px;padding:7px 12px;font-size:10.5px;white-space:nowrap}.chapters-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.chapter-card{min-height:302px;border-radius:17px;background:var(--panel);border:1px solid var(--line);padding:22px 20px 18px;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border .2s}.chapter-card:hover{transform:translateY(-4px);box-shadow:0 15px 38px #132b611a;border-color:#c9c8eb}.chapter-card-top{display:flex;align-items:flex-start;justify-content:space-between}.chapter-icon{width:56px;height:56px;display:grid;place-items:center;border-radius:16px}.c-violet{background:#efedff;color:#655be2}.c-blue{background:#e5f2ff;color:#4082d6}.c-mint{background:#def8f1;color:#198d7f}.c-orange{background:#fff1e3;color:#d6843f}.chapter-no{font-weight:800;letter-spacing:.1em;color:#a3afc1;font-size:9px;margin-top:5px}.chapter-pill{font-size:9px;font-weight:800;color:var(--primary);background:var(--primary-soft);padding:3px 8px;border-radius:4px;align-self:flex-start;margin:21px 0 12px}.chapter-card h3{font-size:17px;line-height:1.32;margin:0 0 10px}.chapter-card p{color:var(--sub);font-size:11.45px;line-height:1.65;flex:1;margin:0 0 16px}.chapter-card-bottom{display:flex;align-items:center;justify-content:space-between;color:var(--sub);font-size:10.5px;font-weight:700;margin-bottom:13px}.chapter-card-bottom>span:first-child{display:flex;align-items:center;gap:6px}.card-arrow{color:var(--primary)}.progress-track{height:5px;border-radius:20px;background:#e8edf6;overflow:hidden}.progress-track span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#5b54e3,#46c4bc);transition:width .2s}.home-lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:23px}.continue-card,.approach-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 29px}.continue-card{background:linear-gradient(140deg,#f0f0ff,#f4fafc);color:#253350}.cont-top{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.1em;color:#5757a2;font-weight:800;margin-bottom:13px}.cont-icon{width:34px;height:34px;border-radius:9px;background:#e2dfff;color:#5a52d7;display:grid;place-items:center}.continue-card h3,.approach-card h3{font-size:20px;margin:0 0 8px}.continue-card p{color:#667593;font-size:12px;max-width:450px}.continue-card a{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:#514cce;font-size:11.5px;margin-top:8px}.approach-card .kicker{margin-bottom:11px}.approach-card h3{margin-bottom:20px}.approach-row{display:flex;gap:11px;align-items:center;margin-top:12px}.approach-row>span{color:var(--primary);background:var(--primary-soft);display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:8px}.approach-row p{font-size:11.5px;color:var(--sub);margin:0}.legal-note{font-size:10px;color:var(--sub);opacity:.8;margin:30px 0 0}
+/* CHAPTER */
+.content-wrap{max-width:1160px;margin:0 auto}.text-back{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;color:var(--sub);margin:3px 0 22px}.text-back:hover{color:var(--primary)}.chapter-hero{position:relative;overflow:hidden;border-radius:20px;padding:43px 46px;background:linear-gradient(120deg,#343274,#6259b4);color:white;min-height:261px}.chapter-hero.ch-blue{background:linear-gradient(120deg,#16406d,#3b7ab0)}.chapter-hero.ch-mint{background:linear-gradient(120deg,#12554e,#268a83)}.chapter-hero.ch-orange{background:linear-gradient(120deg,#69422e,#bd7848)}.chapter-hero-number{position:absolute;font-family:'Space Grotesk';font-size:250px;font-weight:700;line-height:1;right:20px;top:-30px;opacity:.08;letter-spacing:-.1em;pointer-events:none}.chapter-hero-top{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:800;letter-spacing:.11em;color:#ffffffd4;margin-bottom:18px}.chapter-hero-icon{border:1px solid #ffffff33;background:#ffffff1a;display:grid;place-items:center;border-radius:11px;width:51px;height:51px;color:#fff}.chapter-separator{padding:0 5px;opacity:.6}.chapter-hero h1{position:relative;max-width:720px;font-size:36px;margin:0 0 10px}.chapter-hero>p{color:#ffffffc6;max-width:690px;margin:0 0 26px;font-size:13.5px}.chapter-progress{position:relative;display:flex;justify-content:space-between;max-width:505px;color:#e6e9fc;font-size:11px;margin-bottom:8px}.chapter-hero>.progress-track{position:relative;max-width:505px;background:#ffffff42}.chapter-hero>.progress-track span{background:#9ff5e7}.chapter-list-heading{margin-top:37px}.lesson-list{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}.lesson-row{display:flex;align-items:center;gap:20px;padding:22px 24px;border-bottom:1px solid var(--line);transition:background .15s}.lesson-row:last-child{border-bottom:0}.lesson-row:hover{background:var(--panel-alt)}.lesson-index{height:46px;width:46px;display:grid;place-items:center;border-radius:12px;flex:none;font-family:'Space Grotesk';font-size:15px;font-weight:700;color:var(--primary);background:var(--primary-soft)}.lesson-index.completed{color:#118e73;background:#d9faef}.lesson-row-body{min-width:0;flex:1}.lesson-row-body>strong{display:block;font-family:'Space Grotesk';font-size:15.5px;margin-bottom:5px}.lesson-row-body>small{display:block;font-size:11.5px;color:var(--sub);margin-bottom:10px}.lesson-meta{display:flex;align-items:center;gap:6px;color:var(--sub);font-size:10px;font-weight:700;flex-wrap:wrap}.lesson-meta i{width:3px;height:3px;border-radius:50%;background:#aab6c9;margin:0 7px}.lesson-row-chevron{color:var(--primary)}
+/* LESSON */
+.lesson-layout{display:grid;grid-template-columns:minmax(0,1fr) 205px;gap:37px;max-width:1215px}.lesson-article{min-width:0}.lesson-heading{margin:3px 0 29px}.lesson-eyebrow{display:flex;align-items:center;gap:9px;font-size:10px;color:var(--primary);letter-spacing:.08em;font-weight:800;margin-bottom:16px}.eyebrow-dot{width:4px;height:4px;border-radius:50%;background:#b5bdd0}.lesson-heading h1{font-size:clamp(30px,3vw,41px);line-height:1.15;max-width:810px;margin-bottom:12px}.lesson-lead{font-size:13.4px;color:var(--sub);line-height:1.75;max-width:850px;margin-bottom:18px}.lesson-top-meta{display:flex;align-items:center;gap:20px;color:var(--sub);font-size:11px;font-weight:700;flex-wrap:wrap}.lesson-top-meta>span{display:flex;align-items:center;gap:6px}.objectives{border:1px solid #d8e9e7;background:linear-gradient(110deg,#effcf8,#f6fbff);border-radius:13px;padding:19px 22px;margin-bottom:28px;color:#245f5d}.objectives-heading{display:flex;align-items:center;gap:10px;margin-bottom:13px;font-size:12px}.objectives p{display:flex;gap:9px;align-items:flex-start;margin:6px 0 0;color:#4f7774;font-size:11.6px}.objectives p svg{color:#16ab87;margin-top:2px}.learning-block{margin-bottom:26px;scroll-margin-top:105px}.prose-block{padding-bottom:8px}.block-title{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:15px;color:var(--primary)}.block-title h2{color:var(--text);font-size:21px;margin:0}.prose-content{font-size:13.4px;line-height:1.9;color:var(--text)}.prose-content p{margin-bottom:16px}.prose-content strong{font-weight:800}.prose-content em{color:var(--primary)}.concept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}.concept-grid>div{padding:18px 15px;background:var(--panel);border:1px solid var(--line);border-radius:11px}.concept-grid strong{display:block;color:var(--primary);font-size:11.4px;margin-bottom:8px}.concept-grid span{display:block;color:var(--sub);font-size:11.2px;line-height:1.65}.rich-steps{padding-left:24px}.rich-steps li{padding:5px}.formula-display{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:600;text-align:center;border:1px solid var(--line);background:var(--panel);padding:23px 15px;border-radius:12px;margin:18px 0;overflow:auto}.formula-pair{display:flex;gap:9px;flex-wrap:wrap}.formula-pair>div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;flex:1;min-width:110px}.formula-pair small{display:block;color:var(--primary);font-weight:800;letter-spacing:.07em;font-size:10px;margin-bottom:8px}.formula-pair strong{font-family:'Space Grotesk';font-size:14px}.note-box{display:flex;align-items:flex-start;gap:13px;background:#eff5ff;border:1px solid #dbe6fb;color:#2c4c85;border-radius:12px;padding:18px 20px;margin-bottom:28px;scroll-margin-top:110px}.note-box.note-tip{background:#edf9f5;border-color:#d1eee3;color:#236957}.note-box.note-warning{background:#fff8ed;border-color:#f8e5bd;color:#8d622b}.note-box strong{font-size:12.5px}.note-box p{font-size:11.8px;line-height:1.75;margin:6px 0 0}.note-icon{padding-top:1px}.media-block{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:23px;box-shadow:var(--shadow)}.block-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:17px}.block-badge{display:inline-flex;align-items:center;gap:7px;font-size:9.5px;color:var(--primary);font-weight:800;margin-bottom:8px;text-transform:uppercase;letter-spacing:.095em}.block-head h2{font-size:19px;margin:0}.open-new{display:inline-flex;align-items:center;gap:6px;color:var(--sub);font-size:10.5px;font-weight:800;white-space:nowrap;margin-top:4px}.open-new:hover{color:var(--primary)}.embed-frame{background:#edf1f8;border:1px solid var(--line);border-radius:10px;overflow:hidden}.embed-frame iframe{width:100%;display:block;border:0;background:#fff}.pdf-embed{background:#3b465e}.video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#131a2b;border-radius:10px;overflow:hidden}.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.block-caption,.embed-fallback{font-size:10.8px;color:var(--sub);margin:12px 0 0;line-height:1.6}.embed-fallback a{color:var(--primary);text-decoration:underline}.code-display{background:#111b31;color:#dceaff;border-radius:9px;padding:22px;white-space:pre-wrap;overflow:auto;font-size:12px;line-height:1.7}.exercise-section{border-top:1px solid var(--line);padding-top:30px;margin:36px 0 0;scroll-margin-top:110px}.exercise-intro{display:flex;gap:15px;margin-bottom:23px}.exercise-title-icon{width:46px;height:46px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex:none}.exercise-intro h2{font-size:24px;margin:0 0 6px}.exercise-intro p{color:var(--sub);font-size:11.9px;margin:0}.exercise-list{display:grid;gap:13px}.exercise-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:22px 24px}.exercise-head{display:flex;align-items:center;gap:12px;margin-bottom:13px}.exercise-num{font-size:10px;letter-spacing:.07em;font-weight:800;color:var(--primary)}.difficulty{font-size:10px;color:#ad6b1d;background:#fff1de;padding:3px 9px;border-radius:30px;font-weight:800}.difficulty.easy{color:#12856b;background:#e0f8ed}.difficulty.hard{color:#c45369;background:#ffedf0}.exercise-card h3{font-size:15.5px;letter-spacing:-.02em;margin:0 0 8px}.exercise-card>p{font-size:12.3px;color:var(--sub);line-height:1.75;margin-bottom:16px}.exercise-reveals{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;display:flex;flex-direction:column;gap:3px}.exercise-reveals details{border-radius:8px}.exercise-reveals summary{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:11.3px;font-weight:800;color:var(--primary);padding:8px 5px;list-style:none}.exercise-reveals summary::-webkit-details-marker{display:none}.exercise-reveals summary svg:last-child{margin-left:auto;transition:transform .12s}.exercise-reveals details[open] summary svg:last-child{transform:rotate(180deg)}.exercise-reveals details p{padding:8px 11px 13px;font-size:11.7px;background:var(--panel-alt);border-radius:8px;line-height:1.8;margin:0;color:var(--text)}.quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}.quiz-option{border:1px solid var(--line);border-radius:9px;padding:11px 12px;display:flex;align-items:flex-start;gap:9px;font-size:11.5px;cursor:pointer;line-height:1.45}.quiz-option input{position:absolute;opacity:0}.quiz-circle{border:1.5px solid #97a4bc;width:16px;height:16px;border-radius:50%;flex:none;margin-top:1px}.quiz-option:has(input:checked){border-color:var(--primary);background:var(--primary-soft)}.quiz-option:has(input:checked) .quiz-circle{border-color:var(--primary);box-shadow:inset 0 0 0 4px var(--panel);background:var(--primary)}.quiz-feedback{font-size:11.5px;margin-top:10px}.quiz-feedback.is-correct{color:#13936d}.quiz-feedback.is-error{color:#cb5970}.lesson-finish{display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:22px 20px;margin:28px 0}.lesson-finish>div{display:flex;align-items:center;gap:13px}.finish-icon{display:grid;place-items:center;color:var(--primary);background:var(--primary-soft);width:45px;height:45px;border-radius:11px;flex:none}.lesson-finish h3{font-size:14px;margin:0 0 4px}.lesson-finish p{font-size:11px;color:var(--sub);margin:0}.lesson-pagination{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.lesson-pagination a{display:flex;flex-direction:column;gap:8px;padding:17px 18px;border:1px solid var(--line);border-radius:11px;background:var(--panel);min-height:91px}.lesson-pagination a:hover{border-color:#a6a1f2}.lesson-pagination a span{display:flex;gap:6px;align-items:center;color:var(--sub);font-size:9px;font-weight:800;letter-spacing:.1em}.lesson-pagination a strong{font-size:11.7px}.lesson-pagination .pagination-next{text-align:right;align-items:flex-end}.lesson-toc{position:relative}.toc-inner{position:sticky;top:105px;border-left:1px solid var(--line);padding:9px 0 0 17px;margin-top:67px}.toc-title{font-size:9px;font-weight:800;letter-spacing:.15em;color:var(--sub);display:block;margin-bottom:16px}.toc-inner nav{display:flex;flex-direction:column;gap:3px}.toc-link{color:var(--sub);background:transparent;border:0;border-left:2px solid transparent;margin-left:-19px;text-align:left;font-size:11px;padding:10px 10px 10px 17px;line-height:1.5;cursor:pointer}.toc-link:hover,.toc-link.toc-active{color:var(--primary);border-left-color:var(--primary);font-weight:800}.toc-tip{margin-top:28px;padding:14px;border-radius:10px;background:var(--primary-soft);color:var(--primary);display:flex;gap:9px;font-size:10.6px;line-height:1.6}.not-found{text-align:center;padding:100px 20px}.not-found h1{font-size:36px}.not-found p{color:var(--sub)}
+/* SEARCH */
+.search-overlay[hidden]{display:none!important}.search-overlay{position:fixed;z-index:100;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:11vh 20px 20px}.search-backdrop{position:absolute;inset:0;background:#0b1429aa;backdrop-filter:blur(5px)}.search-dialog{position:relative;background:var(--panel);width:min(620px,100%);max-height:77vh;display:flex;flex-direction:column;border-radius:16px;border:1px solid var(--line);box-shadow:0 25px 85px #080e28a0;overflow:hidden}.search-input-row{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding:17px 20px;color:var(--primary)}.search-input-row input{border:0;outline:0;min-width:0;flex:1;font-size:14px;color:var(--text);background:transparent}.search-input-row input:focus-visible{outline:0}.key-close{border:1px solid var(--line);border-radius:6px;background:var(--panel-alt);color:var(--sub);font-size:9px;font-weight:800;padding:5px 7px}.search-results{overflow:auto;padding:11px;scrollbar-width:thin}.search-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px}.search-item.highlight,.search-item:hover{background:var(--primary-soft)}.search-result-icon{width:37px;height:37px;display:grid;place-items:center;background:var(--panel-alt);border:1px solid var(--line);border-radius:9px;color:var(--primary)}.search-item>span:nth-child(2){flex:1;min-width:0}.search-item strong{display:block;font-size:12px}.search-item small{display:block;color:var(--sub);font-size:10.5px;margin-top:1px}.search-item>svg{color:var(--sub)}.search-empty{padding:38px 15px;color:var(--sub);text-align:center}.search-hint{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--sub);font-size:10px;padding:12px 20px}.search-hint kbd{font-family:inherit;border:1px solid var(--line);padding:1px 4px;border-radius:4px}.no-scroll{overflow:hidden}
+/* DARK OVERRIDES */
+[data-theme=dark] .objectives{background:#18352f;color:#aeebd9;border-color:#315b51}[data-theme=dark] .objectives p{color:#a1d3c5}[data-theme=dark] .note-box{background:#1c2a46;border-color:#304467;color:#b6ceff}[data-theme=dark] .note-box.note-tip{background:#1a3530;border-color:#31554a;color:#a4e6c9}[data-theme=dark] .note-box.note-warning{background:#403020;border-color:#634a2f;color:#f4d19e}[data-theme=dark] .continue-card{background:linear-gradient(140deg,#292b50,#1c3446);color:#e2ebff}[data-theme=dark] .continue-card p{color:#abbcdb}[data-theme=dark] .continue-card a{color:#b4acff}[data-theme=dark] .difficulty.easy{background:#17463b;color:#7be0bc}[data-theme=dark] .difficulty.medium{background:#4b3827;color:#f5ca83}[data-theme=dark] .formula-display{background:#17243a}[data-theme=dark] .progress-track{background:#334057}[data-theme=dark] .chapter-hero>.progress-track{background:#ffffff33}
+@media(max-width:1420px){.chapters-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chapter-card{min-height:270px}.main-content{padding:33px 37px 60px}.hero-art{opacity:.45;right:-80px}.hero-content{max-width:700px}.hero h1{max-width:620px}}
+@media(max-width:1150px){.lesson-layout{grid-template-columns:minmax(0,1fr)}.lesson-toc{display:none}.topbar{padding:0 27px}.hero-art{opacity:.28}.hero-content{max-width:630px}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:transform .2s;box-shadow:12px 0 45px #080f2d55}.sidebar-visible .sidebar{transform:translateX(0)}.sidebar-visible .sidebar-scrim{display:block;position:fixed;inset:0;z-index:25;background:#08152c91}.page-area{margin-left:0}.mobile-menu{display:grid}.topbar{padding:0 22px}.main-content{padding:25px 24px 60px}.site-footer{padding:20px 24px}.hero{min-height:322px;padding:40px}.hero h1{font-size:clamp(30px,5vw,43px)}.overview-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.topbar{height:64px;padding:0 15px}.topbar-left{gap:8px}.crumbs{font-size:11px}.crumb-current{max-width:150px}.search-trigger{min-width:38px;width:38px;justify-content:center;padding:0}.search-trigger span,.search-trigger kbd{display:none}.topbar-right{gap:7px}.icon-btn{height:35px;width:35px}.main-content{padding:18px 13px 40px}.hero{min-height:390px;padding:31px 24px;border-radius:15px}.hero h1{font-size:34px}.hero p{font-size:12px}.hero-art{opacity:.17;right:-210px}.hero-eyebrow{font-size:8.3px;letter-spacing:.1em}.hero-actions{gap:9px}.btn{padding:9px 12px}.overview-stats{gap:9px;margin-top:12px}.overview-stats>div{min-height:85px;padding:14px;grid-template-columns:38px auto;gap:8px}.overview-stats strong{font-size:22px}.stat-ico{width:35px;height:35px}.overview-stats small{font-size:9.5px}.section-heading{margin-top:32px;align-items:flex-start}.section-heading h2{font-size:23px}.section-heading-pill{display:none}.chapters-grid{grid-template-columns:1fr;gap:10px}.chapter-card{min-height:250px}.chapter-card h3{font-size:19px}.home-lower{grid-template-columns:1fr}.continue-card,.approach-card{padding:23px}.site-footer{flex-direction:column;gap:5px;text-align:center}.content-wrap{max-width:100%}.chapter-hero{padding:30px 25px}.chapter-hero h1{font-size:29px}.chapter-hero p{font-size:12px}.chapter-hero-number{font-size:180px;top:0}.lesson-row{gap:12px;padding:19px 13px}.lesson-index{width:39px;height:39px;font-size:12px}.lesson-row-body>strong{font-size:13.5px}.lesson-row-body>small{font-size:11px}.lesson-meta{font-size:9px;gap:4px}.lesson-row-chevron{display:none}.lesson-heading h1{font-size:30px}.lesson-top-meta{gap:12px}.concept-grid{grid-template-columns:1fr}.concept-grid>div{padding:14px}.formula-display{font-size:16px}.media-block{padding:14px}.block-head h2{font-size:16px}.open-new span{display:none}.exercise-card{padding:17px}.quiz-options{grid-template-columns:1fr}.lesson-finish{align-items:flex-start;flex-direction:column}.lesson-finish .btn{width:100%}.lesson-pagination{gap:8px}.lesson-pagination a{padding:13px}.lesson-pagination a strong{font-size:10.8px}.search-hint{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+
+/* Exerciții ONIA: enunțurile și soluțiile folosesc blocuri de cod reale, nu text într-un <p>. */
+.exercise-description { line-height:1.8; }
+.exercise-code-card { margin:14px 0 18px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--panel-alt); }
+.exercise-code-head { background:#172c4f; color:#e8f2ff; display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 14px; font-weight:750; font-size:11px; }
+.exercise-code-head>span{display:flex;align-items:center;gap:8px}
+.exercise-code-head .py-copy{padding:5px 10px;border-radius:6px;font:700 11px inherit;color:#eaf2ff;background:#ffffff15;border:1px solid #ffffff3c;cursor:pointer}
+.exercise-code-head .py-copy:hover{background:#ffffff30}
+.exercise-code { overflow-x:auto; background:#f4f7fc; padding:15px 18px; }
+.exercise-code .codehilite { margin:0; background:transparent; }
+.exercise-code .codehilite pre { display:block; margin:0; font:12.5px/1.75 'SFMono-Regular',Consolas,'Liberation Mono',monospace; white-space:pre!important; white-space-collapse:preserve!important; tab-size:4!important; overflow-wrap:normal!important; word-break:normal!important; font-variant-ligatures:none; letter-spacing:normal; min-width:max-content; color:#25354e; }
+.exercise-code .codehilite pre span { white-space:inherit; }
+.exercise-code .codehilite .k, .exercise-code .codehilite .kd, .exercise-code .codehilite .kn, .exercise-code .codehilite .ow { color:#9b42af;font-weight:700; }
+.exercise-code .codehilite .n,.exercise-code .codehilite .p { color:#29364b; }
+.exercise-code .codehilite .nf,.exercise-code .codehilite .nb {color:#1c65b3}
+.exercise-code .codehilite .m,.exercise-code .codehilite .mi,.exercise-code .codehilite .mf {color:#be6817}
+.exercise-code .codehilite .s,.exercise-code .codehilite .s1,.exercise-code .codehilite .s2,.exercise-code .codehilite .sa {color:#237858}
+.exercise-code .codehilite .c,.exercise-code .codehilite .c1 { color:#768395;font-style:italic; }
+.exercise-code .codehilite .o {color:#7d4a9c}
+.exercise-reveal-content { margin-top:9px; }
+.exercise-reveal-content .exercise-code-card { margin-top:10px; }
+.exercise-reveal-content p {line-height:1.82; margin:10px 0 4px;}
+[data-theme=dark] .exercise-code {background:#18253a}
+[data-theme=dark] .exercise-code .codehilite pre,[data-theme=dark] .exercise-code .codehilite .n,[data-theme=dark] .exercise-code .codehilite .p {color:#dce7fa}
+[data-theme=dark] .exercise-code .codehilite .k,[data-theme=dark] .exercise-code .codehilite .kd,[data-theme=dark] .exercise-code .codehilite .kn {color:#c678dd}
+[data-theme=dark] .exercise-code .codehilite .s,[data-theme=dark] .exercise-code .codehilite .s1,[data-theme=dark] .exercise-code .codehilite .s2 {color:#99d0a3}
+[data-theme=dark] .exercise-code .codehilite .nf,[data-theme=dark] .exercise-code .codehilite .nb {color:#79b7fd}
+[data-theme=dark] .exercise-code .codehilite .c,[data-theme=dark] .exercise-code .codehilite .c1 {color:#9badc6}
+@media(max-width:600px){.exercise-code{padding:12px 10px}.exercise-code .codehilite pre{font-size:11.3px}.exercise-code-head{padding:8px 10px}}
+
+/* Romanian academic identity, curriculum stages, content placeholders */
+:root { --main:#17469b; --primary:#225bb7; --primary-soft:#eaf2ff; --ro-blue:#16418d; --ro-yellow:#facb48; --ro-red:#d8474e; }
+:root[data-theme=dark] { --main:#81b3ff; --primary:#8ab6ff; --primary-soft:#243552; }
+.brand{position:relative}
+.brand:after{content:"";position:absolute;bottom:-1px;left:22px;width:70px;height:2px;background:linear-gradient(90deg,#2657ad 0 33%,#ffd64a 33% 66%,#de4444 66% 100%);opacity:.75}
+.brand-words small{letter-spacing:.13em}
+.sidebar-ro-card{margin:12px 9px 3px;padding:13px 14px;border-radius:12px;border:1px solid #ffffff18;background:#ffffff08;color:#d4e5ff}
+.sidebar-ro-card strong{display:block;font-size:11px;font-weight:800;margin-bottom:5px}
+.sidebar-ro-card p{font-size:10.5px;margin:0;color:#aabedc;line-height:1.65}
+.sidebar-ro-card span{color:#fff}
+.ro-flag{display:inline-flex;width:22px;height:14px;overflow:hidden;border-radius:2px;border:1px solid #ffffff80;flex:none;box-shadow:0 1px 4px #0002}
+.ro-flag i{flex:1;background:#134e9c}.ro-flag i:nth-child(2){background:#f8cf4d}.ro-flag i:nth-child(3){background:#cf424b}
+.romanian-stripe{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;height:4px}
+.romanian-stripe i{width:33.333%;background:#1251b2}.romanian-stripe i:nth-child(2){background:#ffcd46}.romanian-stripe i:nth-child(3){background:#ce3945}
+.hero{background:radial-gradient(circle at 79% 16%,#265a9b 0,#173b74 28%,transparent 58%),linear-gradient(112deg,#102446 0%,#173b70 68%,#1b5a82 100%);padding-top:52px}
+.hero h1{max-width:675px}.hero-content{max-width:680px}.hero-eyebrow{line-height:1.5}
+.hero-inline-meta{display:flex;gap:19px;align-items:center;flex-wrap:wrap;margin-top:27px;color:#b1cbe9;font-size:10px;font-weight:700}
+.hero-inline-meta span{display:flex;gap:7px;align-items:center}
+.partner-section{margin-top:31px;border:1px solid var(--line);border-radius:18px;padding:27px 30px 30px;background:var(--panel)}
+.partner-section-head h2{font-size:23px;margin:8px 0 10px}.partner-section-head p{font-size:12.2px;color:var(--sub);max-width:900px;line-height:1.75;margin:0 0 23px}.partner-section-head strong{color:var(--text);font-weight:700}
+.partner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.partner-card{min-height:94px;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--panel-alt);display:flex;align-items:center;gap:11px;transition:border-color .2s,transform .2s;min-width:0}
+.partner-card:hover{border-color:#8baadd;transform:translateY(-2px)}
+.partner-card>.svg-icon{align-self:flex-start;margin-left:auto;color:var(--sub)}
+.partner-logo{display:block;object-fit:contain;flex:none;max-width:66px;max-height:64px}
+.poli-logo{width:62px;height:62px}
+.hria-logo{width:76px;max-width:76px;height:55px;object-fit:contain}
+.partner-logo-ac{height:58px;width:58px;display:grid;place-items:center;border-radius:14px;flex:none;background:linear-gradient(140deg,#134787,#42b5b6);color:white;font-size:21px;font-weight:800;letter-spacing:-.06em}
+.partner-logo-ac span{color:#fbd34b}
+.partner-info{display:flex;flex-direction:column;min-width:0;gap:3px}.partner-info small{font-size:8px;font-weight:800;color:var(--primary);letter-spacing:.12em}.partner-info strong{font-size:12px;line-height:1.4}.partner-info span{font-size:10px;color:var(--sub);line-height:1.35}
+.program-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:25px 0 31px}
+.program-stage{display:flex;gap:14px;align-items:flex-start;border:1px solid #dce6f2;border-radius:14px;background:#f3f7fd;padding:21px}
+.program-stage.advanced{background:#fdf8ee;border-color:#f5e5ca}
+:root[data-theme=dark] .program-stage{background:#1a2d47;border-color:#375276}:root[data-theme=dark] .program-stage.advanced{background:#332e23;border-color:#4c4634}
+.stage-ico{display:grid;place-items:center;flex:none;font-family:'Space Grotesk';font-size:13px;font-weight:800;color:#224f93;background:white;border-radius:9px;width:35px;height:35px}
+.advanced .stage-ico{color:#99620c}
+.program-stage>div{flex:1;min-width:0}.program-stage>div>strong{font-size:12.6px;font-weight:800}.program-stage p{color:var(--sub);font-size:11px;line-height:1.65;margin:6px 0 0}
+.program-stage .stage-number{font-size:10px;white-space:nowrap;color:var(--text);padding:6px 9px;border-radius:99px;background:#ffffffad}
+:root[data-theme=dark] .stage-number{background:#ffffff18}
+.chapter-card{min-height:280px}.chapter-pill{letter-spacing:.09em}.stage-pill-national{color:#a25f22!important;background:#fff5de!important}
+.card-stage-detail{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px;font-size:10px;color:var(--sub);font-weight:700}
+.card-stage-detail span{padding:3px 7px;background:var(--panel-alt);border:1px solid var(--line);border-radius:5px}
+.card-stage-detail .nat-dot{background:#fff7e8;border-color:#f2e3ca;color:#a76b21}
+.nav-stage-label{margin:13px 0 7px 45px;font-size:8px;color:#8194b6;letter-spacing:.13em;font-weight:800}
+.nav-stage-label.national-label{color:#ffcf87;margin-top:17px}
+.nav-lesson-num{font-size:9px!important;min-width:26px;width:29px;text-align:center}
+.nav-lessons .nav-lesson{padding-top:8px;padding-bottom:8px}
+.chapter-stage-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}
+.chapter-stage-pills span{display:flex;align-items:center;gap:7px;font-size:10.5px;padding:7px 12px;border:1px solid #ffffff4d;background:#ffffff12;border-radius:100px;font-weight:700}
+.chapter-stage-group{margin:15px 0 36px}.chapter-stage-group .lesson-list{margin:0}
+.stage-group-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}
+.stage-group-header>div{display:grid;grid-template-columns:30px 1fr;column-gap:10px;align-items:center}
+.stage-indicator{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:12px;grid-row:span 2}
+.stage-indicator.national{background:#fff1d8;color:#a26119}
+.stage-group-header h2{font-size:19px;margin:0}.stage-group-header p{font-size:11px;color:var(--sub);margin:3px 0 0;grid-column:2}
+.stage-group-header>span{font-size:10px;white-space:nowrap;font-weight:700;color:var(--sub)}
+.lesson-index{font-size:12px;font-weight:800;min-width:43px}.lesson-index.national-index{background:#fff4df;color:#a26b27;border-color:#f4e1bd}
+.lesson-status{display:flex!important;align-items:center;gap:6px;margin-top:7px!important;font-size:10px!important}
+.lesson-stage-tag{display:inline-flex;gap:7px;align-items:center;background:var(--primary-soft);color:var(--primary);font-size:10px;letter-spacing:.08em;font-weight:800;padding:7px 10px;border-radius:7px;margin:2px 0 16px}
+.lesson-stage-tag.national{background:#fff0d6;color:#9b631b}
+:root[data-theme=dark] .lesson-stage-tag.national,:root[data-theme=dark] .stage-indicator.national{background:#4a3a21;color:#ffd497}
+.lesson-number{color:var(--primary);font-weight:600;white-space:nowrap;margin-right:5px}
+.pending-materials{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:27px;margin:0 0 25px}
+.pending-heading{display:flex;align-items:flex-start;gap:16px}.pending-icon{border-radius:12px;background:var(--primary-soft);color:var(--primary);padding:12px;flex:none}
+.pending-heading h2{font-size:20px;margin:7px 0 10px}.pending-heading p{max-width:690px;color:var(--sub);font-size:12px;line-height:1.8;margin:0}
+.pending-formats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px}
+.pending-formats span{display:flex;align-items:center;gap:7px;border:1px dashed var(--line);background:var(--panel-alt);padding:14px 11px;border-radius:9px;color:var(--sub);font-size:10px;line-height:1.5;font-weight:700}
+.pending-exercises{border:1px dashed #c6d2e3;background:var(--panel);border-radius:14px;padding:24px 26px;margin:15px 0 22px}
+.pending-exercises-title{display:flex;align-items:center;gap:10px;color:var(--text)}.pending-exercises-title .svg-icon{color:var(--primary)}.pending-exercises h2{font-size:19px;margin:0}.pending-exercises p{color:var(--sub);font-size:11.7px;margin:11px 0 0;line-height:1.7}
+.status-soon{font-size:9px;padding:5px 9px;border-radius:50px;background:var(--panel-alt);border:1px solid var(--line);color:var(--sub);font-weight:800;margin-left:auto;white-space:nowrap}
+.toc-pending{font-size:11px;color:var(--sub);display:block;padding:6px 0 15px}
+.site-footer{gap:12px;flex-wrap:wrap}.footer-country{display:flex;align-items:center;gap:7px;color:var(--sub)}
+@media(max-width:1240px){.partner-grid{grid-template-columns:1fr}.partner-card{min-height:75px}.partner-section-head p{max-width:100%}.partner-logo{max-height:51px}.poli-logo{height:47px;width:47px}.partner-logo-ac{height:47px;width:47px}.program-stages{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding:33px 24px}.hero h1{font-size:31px}.hero-inline-meta{margin-top:18px;gap:11px}.partner-section{padding:20px 17px;margin-top:16px}.partner-section-head h2{font-size:19px}.partner-card{padding:13px}.program-stage{padding:16px;flex-wrap:wrap}.program-stage .stage-number{margin-left:49px}.stage-group-header{align-items:flex-start}.stage-group-header h2{font-size:16px}.stage-group-header p{font-size:10px}.stage-group-header>span{font-size:9px}.pending-materials{padding:19px}.pending-formats{grid-template-columns:repeat(2,minmax(0,1fr))}.pending-heading{gap:12px}.pending-heading h2{font-size:18px}.pending-exercises{padding:18px}.status-soon{display:none}.site-footer{gap:8px}.chapter-card{min-height:270px}}
+
+/* Visible local fallback if remotely hosted institutional images cannot load. */
+.partner-logo-fallback{display:none;place-items:center;flex:none;width:57px;height:57px;border-radius:12px;background:#e3eefb;color:#214473;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.05em}
+.partner-logo-fallback.hria-fallback{background:#e6f6fb;color:#386caa;font-size:19px}
+.lesson-row-body>strong{font-family:'DM Sans',system-ui,sans-serif;font-size:13.4px;letter-spacing:-.01em}
+
+
+/* ONIA · identitate grafică România × inteligență artificială */
+.brand{height:97px;gap:13px}
+.brand-mark{background:linear-gradient(145deg,#143b77,#1b659e);border:1px solid #ffffff26;box-shadow:0 10px 25px #0002}
+.brand-mark svg{width:39px;height:39px}
+.brand-words strong{font-size:26px;letter-spacing:.018em;line-height:1.04;font-weight:800}
+.brand-words small{color:#c6d7ef;font-size:10px;font-weight:600;letter-spacing:.012em;line-height:1.4}
+.brand:after{left:21px;bottom:0;width:112px;height:3px;opacity:1}
+.sidebar{background:linear-gradient(160deg,#091a36 0%,#0d203e 58%,#122748 100%)}
+.sidebar-footer{font-size:10.8px;color:#d0ddf2;gap:11px}
+.sidebar-footer .ro-flag{width:21px;height:13px}
+.sidebar-home.active{background:#20447e}
+.nav-lesson.active{background:#1e4779}
+.sidebar-ro-card{background:linear-gradient(130deg,#19376380,#24486e45);border:1px solid #7bafe32e}
+.sidebar-ro-card strong{color:#fff}
+.onia-hero{min-height:400px;padding:49px 52px;background:radial-gradient(circle at 91% 18%,#235ba4 0,#173d77 27%,transparent 58%),linear-gradient(105deg,#0b1c3b 0%,#103065 64%,#164779 100%)}
+.onia-hero:before{background-image:linear-gradient(#75bbff11 1px,transparent 1px),linear-gradient(90deg,#75bbff11 1px,transparent 1px);background-size:33px 33px;opacity:.55;mask-image:linear-gradient(90deg,transparent 20%,black)}
+.onia-hero .hero-content{max-width:670px}
+.onia-hero .hero-eyebrow{margin-bottom:16px;font-size:9.5px;color:#c0dfff;letter-spacing:.14em}
+.onia-hero h1{font-size:clamp(67px,6.2vw,105px);line-height:.98;letter-spacing:.008em;font-weight:700;margin:0;color:#fff;text-shadow:0 6px 28px #0000001f}
+.onia-hero .hero-subtitle{font-family:'Space Grotesk',sans-serif;font-size:clamp(23px,2.5vw,36px);font-weight:600;letter-spacing:-.035em;color:#ffd45e;margin:8px 0 17px}
+.onia-hero p{max-width:590px;margin:0 0 23px;font-size:12.8px;line-height:1.75;color:#ccdcf4}
+.onia-hero .hero-inline-meta{margin-top:25px;color:#afc8e8}
+.onia-hero .hero-art{top:-6px;right:4px;width:465px;height:390px;opacity:.96;z-index:1}
+.onia-hero .hero-network{position:absolute;top:0;left:0;width:100%;height:100%;inset:auto;filter:drop-shadow(0 0 16px #427dbb26)}
+.onia-hero .art-caption{font-size:9px;letter-spacing:.12em;border-color:#a6d0ff3b;background:#163f6a9a;box-shadow:0 7px 20px #09142d22}
+.onia-hero .art-caption-one{top:28px;right:20px;color:#fff}
+.onia-hero .art-caption-two{bottom:26px;left:45px;color:#ccdef8}
+.flag-pips{display:inline-flex;gap:3px;vertical-align:middle;margin-right:7px}.flag-pips i{width:5px;height:11px;background:#287ce4}.flag-pips i:nth-child(2){background:#ffcf4d}.flag-pips i:nth-child(3){background:#e4525f}
+.caption-divider{color:#ffd55d;padding:0 5px}
+.onia-hero .romanian-stripe{height:5px;z-index:5}
+.onia-hero .romanian-stripe i:first-child{background:#3275db}.onia-hero .romanian-stripe i:nth-child(2){background:#ffd451}.onia-hero .romanian-stripe i:nth-child(3){background:#ee5260}
+.partner-section{position:relative;overflow:hidden}
+.partner-section:before{content:'';position:absolute;top:0;left:0;height:4px;width:95px;background:linear-gradient(90deg,#286cd9 0 33.333%,#ffd24a 33.333% 66.666%,#e44b59 66.666%)}
+.partner-section-head .kicker{letter-spacing:.13em}
+.chapters-grid .chapter-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.chapters-grid .chapter-card:hover{transform:translateY(-3px);box-shadow:0 13px 30px #142f5d12;border-color:#b8cae9}
+:root[data-theme=dark] .chapters-grid .chapter-card:hover{border-color:#5073a3}
+.site-footer{justify-content:space-between;gap:15px 30px;align-items:center}
+.footer-identity{display:flex;gap:8px;align-items:baseline;white-space:nowrap}
+.footer-identity strong{font-family:'Space Grotesk';font-size:13px;letter-spacing:.01em;color:var(--text)}
+.footer-identity>span{font-size:10px;color:var(--sub)}
+.footer-institutions{font-size:10.5px;line-height:1.6;text-align:center;max-width:560px}
+.footer-institutions a:hover{color:var(--primary);text-decoration:underline}
+.footer-credit{display:flex;align-items:center;gap:5px;white-space:nowrap;color:var(--sub);font-size:10.5px}
+.footer-credit strong{color:var(--text);font-weight:800}
+.footer-credit .ro-flag{margin-left:6px}
+@media(min-width:1280px){.onia-hero .hero-content{max-width:61%}.onia-hero .hero-art{right:2.3%}}
+@media(max-width:1040px){.onia-hero .hero-art{right:-94px;opacity:.39}.onia-hero .hero-content{max-width:100%}.onia-hero{min-height:390px}.footer-institutions{order:3;width:100%;max-width:none;text-align:left}}
+@media(max-width:650px){.brand{height:84px}.onia-hero{min-height:365px;padding:34px 25px 29px}.onia-hero h1{font-size:64px}.onia-hero .hero-subtitle{font-size:25px;margin:5px 0 17px}.onia-hero .hero-art{width:390px;height:345px;right:-195px;top:18px;opacity:.22}.onia-hero .hero-eyebrow{font-size:8.5px;letter-spacing:.08em;line-height:1.55}.onia-hero p{font-size:12px;line-height:1.6}.onia-hero .hero-actions{gap:8px}.onia-hero .hero-inline-meta{font-size:9.5px;gap:10px;margin-top:19px}.site-footer{padding:19px 23px;justify-content:flex-start;gap:9px 16px}.footer-institutions{font-size:9.7px;order:3}.footer-identity{font-size:10px}.footer-credit{margin-left:auto}.footer-credit .ro-flag{margin-left:2px}}
+
+/* Sigla ACS, inclusă local în proiect */
+.partner-card .acs-logo{width:62px;height:62px;max-height:none;object-fit:contain;border-radius:10px;background:#fff;padding:4px;border:1px solid #e9eef5;flex:none}
+.lesson-native-block{margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+.lesson-native-block .native-lesson{min-width:0}
+
+
+/* Lecție nativă Python · aspect academic ONIA · răspunde temei paginii */
+.onia-python{--py-bg:var(--panel);--py-border:var(--line);--py-fg:var(--text);--py-muted:var(--sub);font-size:14px;color:var(--py-fg);line-height:1.78;min-width:0}
+.onia-python .py-intro{border:1px solid var(--line);background:linear-gradient(135deg,#eef5ff,#fffefa);border-radius:16px;padding:27px 30px;margin-bottom:36px;position:relative;overflow:hidden}
+:root[data-theme=dark] .onia-python .py-intro{background:linear-gradient(135deg,#192e4d,#1a2438)}
+.onia-python .py-intro:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1d62c3 0 33.3%,#f7c948 33.3% 66.6%,#e44a58 66.6%)}
+.onia-python .py-intro-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--primary);font-size:10px;letter-spacing:.12em;font-weight:800}
+.onia-python .py-intro h2{font:700 clamp(23px,2.1vw,31px)/1.23 'Space Grotesk',sans-serif;letter-spacing:-.04em;margin:18px 0 11px}
+.onia-python .py-intro p{color:var(--sub);margin:0 0 20px;line-height:1.75}
+.onia-python .py-progress-track{display:flex;gap:6px;margin-bottom:21px}.onia-python .py-progress-track span{height:4px;border-radius:4px;flex:1;background:#286fd2}.onia-python .py-progress-track span:nth-child(2){background:#efc649}.onia-python .py-progress-track span:nth-child(3){background:#dd5263}
+.onia-python .py-focus{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;font-size:12px;color:var(--sub)}.onia-python .py-focus strong{color:var(--text)}
+.onia-python .py-topic{scroll-margin-top:105px;margin:0 0 41px}.onia-python .py-topic-head{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:0 0 14px;margin:0 0 19px}
+.onia-python .py-topic-index{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:9px;background:var(--primary-soft);color:var(--primary);font:800 12px 'Space Grotesk',sans-serif}
+.onia-python .py-topic h2{font:700 clamp(18px,2vw,22px)/1.3 'Space Grotesk',sans-serif;letter-spacing:-.025em;margin:0}
+.onia-python .py-topic h3{font-size:16px;letter-spacing:-.01em;margin:22px 0 8px}
+.onia-python p{margin:11px 0 15px;line-height:1.83;color:var(--text)}.onia-python .py-lead{color:var(--sub);font-size:14px}
+.onia-python p code,.onia-python td code,.onia-python li code,.onia-python .py-tip code{font-family:'SFMono-Regular',Consolas,monospace;font-size:.89em;padding:2px 5px;background:var(--panel-alt);color:var(--primary);border-radius:5px;word-break:break-word}
+.onia-python .py-table-wrap{overflow:auto;margin:18px 0 23px;border:1px solid var(--line);border-radius:11px}.onia-python .py-table{border-collapse:collapse;width:100%;min-width:500px;font-size:12.4px;text-align:left}
+.onia-python .py-table th{background:var(--panel-alt);font-size:11px;letter-spacing:.02em;color:var(--sub);padding:11px 13px;font-weight:800;white-space:nowrap}
+.onia-python .py-table td{vertical-align:top;border-top:1px solid var(--line);padding:10px 13px;line-height:1.64}.onia-python .py-table tbody tr:hover{background:var(--panel-alt)}
+.onia-python .py-code-card{overflow:hidden;border:1px solid var(--line);border-radius:12px;margin:18px 0 23px;background:#f5f8fe}
+.onia-python .py-code-top{background:#172c4f;display:flex;justify-content:space-between;align-items:center;padding:9px 13px;color:#d9e8ff;gap:8px;font-size:11px;font-weight:700}
+.onia-python .py-code-top>span{display:flex;align-items:center;gap:8px}.onia-python .py-code-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f4ca4b;box-shadow:10px 0 #f86c7a,20px 0 #4898eb;margin-right:21px}
+.onia-python .py-copy{background:#fff1;color:#eaf2ff;border:1px solid #fff3;padding:5px 9px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:800}.onia-python .py-copy:hover{background:#fff3}
+.onia-python .codehilite{background:#f5f8fe!important;padding:18px 20px;overflow:auto;margin:0;max-height:none;tab-size:4}.onia-python .codehilite pre{margin:0;font:12.6px/1.8 'SFMono-Regular',Consolas,'Liberation Mono',monospace;white-space:pre;tab-size:4;min-width:max-content}
+.onia-python .py-code-output{border-top:1px solid #dce5f0;background:#eaf0f8;padding:10px 18px}.onia-python .py-code-output>span{font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:#4d6281}.onia-python .py-code-output pre{font:12px/1.7 'SFMono-Regular',Consolas,monospace;white-space:pre-wrap;margin:5px 0 1px;color:#22324c}
+:root[data-theme=dark] .onia-python .py-code-card{background:#18253a}:root[data-theme=dark] .onia-python .codehilite{background:#1e293b!important}:root[data-theme=dark] .onia-python .py-code-output{background:#23314a;border-top-color:#394962}:root[data-theme=dark] .onia-python .py-code-output pre{color:#dfebff}:root[data-theme=dark] .onia-python .py-code-output>span{color:#a4b6d2}
+.onia-python .py-tip{padding:15px 18px 15px 20px;margin:17px 0 22px;border:1px solid #bcd4f5;border-left:4px solid #2778df;background:var(--panel-alt);border-radius:9px;font-size:12.4px;line-height:1.78}
+.onia-python .py-tip strong{display:block;color:var(--primary);margin-bottom:3px}.onia-python .py-tip.warning{border-left-color:#e09c30;border-color:#f1d7a2}.onia-python .py-tip.warning strong{color:#bc7917}
+.onia-python .py-list{padding-left:25px}.onia-python .py-list li{margin-bottom:6px}
+.onia-python .py-source{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px;display:flex;gap:14px;margin:14px 0}.onia-python .py-source-mark{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:10px;background:#e0edf9;color:#1e5da5;font-weight:800;font-size:16px}.onia-python .py-source-mark.purple{background:#ebe8ff;color:#5951b5}
+.onia-python .py-source strong{font-size:13px}.onia-python .py-source p{font-size:12px;color:var(--sub);margin:6px 0}.onia-python .py-source small{color:var(--sub);font-size:10px}
+.native-lesson-loading{padding:35px 22px;background:var(--panel-alt);border:1px solid var(--line);border-radius:12px;color:var(--sub)}
+.py-lab-description{font-size:13px;color:var(--sub);margin:0 0 13px}.py-lab-embed iframe{height:600px!important}.lesson-toc .toc-inner nav{max-height:calc(100vh - 245px);overflow-y:auto;scrollbar-width:thin}
+@media(max-width:720px){.onia-python{font-size:13.5px}.onia-python .py-intro{padding:23px 18px}.onia-python .py-intro-meta{font-size:9px}.onia-python .py-topic-head{gap:8px}.onia-python .py-topic h2{font-size:18px}.onia-python .codehilite{padding:13px 12px}.onia-python .codehilite pre{font-size:11.5px}.onia-python .py-table{min-width:440px}}
+
+pre { line-height: 125%; }
+td.linenos .normal { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.onia-python .codehilite .hll { background-color: #ffffcc }
+.onia-python .codehilite { background: #f0f0f0; }
+.onia-python .codehilite .c { color: #60A0B0; font-style: italic } /* Comment */
+.onia-python .codehilite .err { border: 1px solid #F00 } /* Error */
+.onia-python .codehilite .k { color: #007020; font-weight: bold } /* Keyword */
+.onia-python .codehilite .o { color: #666 } /* Operator */
+.onia-python .codehilite .ch { color: #60A0B0; font-style: italic } /* Comment.Hashbang */
+.onia-python .codehilite .cm { color: #60A0B0; font-style: italic } /* Comment.Multiline */
+.onia-python .codehilite .cp { color: #007020 } /* Comment.Preproc */
+.onia-python .codehilite .cpf { color: #60A0B0; font-style: italic } /* Comment.PreprocFile */
+.onia-python .codehilite .c1 { color: #60A0B0; font-style: italic } /* Comment.Single */
+.onia-python .codehilite .cs { color: #60A0B0; background-color: #FFF0F0 } /* Comment.Special */
+.onia-python .codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.onia-python .codehilite .ge { font-style: italic } /* Generic.Emph */
+.onia-python .codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.onia-python .codehilite .gr { color: #F00 } /* Generic.Error */
+.onia-python .codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.onia-python .codehilite .gi { color: #00A000 } /* Generic.Inserted */
+.onia-python .codehilite .go { color: #888 } /* Generic.Output */
+.onia-python .codehilite .gp { color: #C65D09; font-weight: bold } /* Generic.Prompt */
+.onia-python .codehilite .gs { font-weight: bold } /* Generic.Strong */
+.onia-python .codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.onia-python .codehilite .gt { color: #04D } /* Generic.Traceback */
+.onia-python .codehilite .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.onia-python .codehilite .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.onia-python .codehilite .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.onia-python .codehilite .kp { color: #007020 } /* Keyword.Pseudo */
+.onia-python .codehilite .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.onia-python .codehilite .kt { color: #902000 } /* Keyword.Type */
+.onia-python .codehilite .m { color: #40A070 } /* Literal.Number */
+.onia-python .codehilite .s { color: #4070A0 } /* Literal.String */
+.onia-python .codehilite .na { color: #4070A0 } /* Name.Attribute */
+.onia-python .codehilite .nb { color: #007020 } /* Name.Builtin */
+.onia-python .codehilite .nc { color: #0E84B5; font-weight: bold } /* Name.Class */
+.onia-python .codehilite .no { color: #60ADD5 } /* Name.Constant */
+.onia-python .codehilite .nd { color: #555; font-weight: bold } /* Name.Decorator */
+.onia-python .codehilite .ni { color: #D55537; font-weight: bold } /* Name.Entity */
+.onia-python .codehilite .ne { color: #007020 } /* Name.Exception */
+.onia-python .codehilite .nf { color: #06287E } /* Name.Function */
+.onia-python .codehilite .nl { color: #002070; font-weight: bold } /* Name.Label */
+.onia-python .codehilite .nn { color: #0E84B5; font-weight: bold } /* Name.Namespace */
+.onia-python .codehilite .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.onia-python .codehilite .nv { color: #BB60D5 } /* Name.Variable */
+.onia-python .codehilite .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.onia-python .codehilite .w { color: #BBB } /* Text.Whitespace */
+.onia-python .codehilite .mb { color: #40A070 } /* Literal.Number.Bin */
+.onia-python .codehilite .mf { color: #40A070 } /* Literal.Number.Float */
+.onia-python .codehilite .mh { color: #40A070 } /* Literal.Number.Hex */
+.onia-python .codehilite .mi { color: #40A070 } /* Literal.Number.Integer */
+.onia-python .codehilite .mo { color: #40A070 } /* Literal.Number.Oct */
+.onia-python .codehilite .sa { color: #4070A0 } /* Literal.String.Affix */
+.onia-python .codehilite .sb { color: #4070A0 } /* Literal.String.Backtick */
+.onia-python .codehilite .sc { color: #4070A0 } /* Literal.String.Char */
+.onia-python .codehilite .dl { color: #4070A0 } /* Literal.String.Delimiter */
+.onia-python .codehilite .sd { color: #4070A0; font-style: italic } /* Literal.String.Doc */
+.onia-python .codehilite .s2 { color: #4070A0 } /* Literal.String.Double */
+.onia-python .codehilite .se { color: #4070A0; font-weight: bold } /* Literal.String.Escape */
+.onia-python .codehilite .sh { color: #4070A0 } /* Literal.String.Heredoc */
+.onia-python .codehilite .si { color: #70A0D0; font-style: italic } /* Literal.String.Interpol */
+.onia-python .codehilite .sx { color: #C65D09 } /* Literal.String.Other */
+.onia-python .codehilite .sr { color: #235388 } /* Literal.String.Regex */
+.onia-python .codehilite .s1 { color: #4070A0 } /* Literal.String.Single */
+.onia-python .codehilite .ss { color: #517918 } /* Literal.String.Symbol */
+.onia-python .codehilite .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.onia-python .codehilite .fm { color: #06287E } /* Name.Function.Magic */
+.onia-python .codehilite .vc { color: #BB60D5 } /* Name.Variable.Class */
+.onia-python .codehilite .vg { color: #BB60D5 } /* Name.Variable.Global */
+.onia-python .codehilite .vi { color: #BB60D5 } /* Name.Variable.Instance */
+.onia-python .codehilite .vm { color: #BB60D5 } /* Name.Variable.Magic */
+.onia-python .codehilite .il { color: #40A070 } /* Literal.Number.Integer.Long */
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+:root[data-theme=dark] .onia-python .codehilite .hll { background-color: #ffffcc }
+:root[data-theme=dark] .onia-python .codehilite { background: #282C34; color: #ABB2BF }
+:root[data-theme=dark] .onia-python .codehilite .c { color: #7F848E } /* Comment */
+:root[data-theme=dark] .onia-python .codehilite .err { color: #ABB2BF } /* Error */
+:root[data-theme=dark] .onia-python .codehilite .esc { color: #ABB2BF } /* Escape */
+:root[data-theme=dark] .onia-python .codehilite .g { color: #ABB2BF } /* Generic */
+:root[data-theme=dark] .onia-python .codehilite .k { color: #C678DD } /* Keyword */
+:root[data-theme=dark] .onia-python .codehilite .l { color: #ABB2BF } /* Literal */
+:root[data-theme=dark] .onia-python .codehilite .n { color: #E06C75 } /* Name */
+:root[data-theme=dark] .onia-python .codehilite .o { color: #56B6C2 } /* Operator */
+:root[data-theme=dark] .onia-python .codehilite .x { color: #ABB2BF } /* Other */
+:root[data-theme=dark] .onia-python .codehilite .p { color: #ABB2BF } /* Punctuation */
+:root[data-theme=dark] .onia-python .codehilite .ch { color: #7F848E } /* Comment.Hashbang */
+:root[data-theme=dark] .onia-python .codehilite .cm { color: #7F848E } /* Comment.Multiline */
+:root[data-theme=dark] .onia-python .codehilite .cp { color: #7F848E } /* Comment.Preproc */
+:root[data-theme=dark] .onia-python .codehilite .cpf { color: #7F848E } /* Comment.PreprocFile */
+:root[data-theme=dark] .onia-python .codehilite .c1 { color: #7F848E } /* Comment.Single */
+:root[data-theme=dark] .onia-python .codehilite .cs { color: #7F848E } /* Comment.Special */
+:root[data-theme=dark] .onia-python .codehilite .gd { color: #E06C75 } /* Generic.Deleted */
+:root[data-theme=dark] .onia-python .codehilite .ge { color: #ABB2BF; font-style: italic } /* Generic.Emph */
+:root[data-theme=dark] .onia-python .codehilite .ges { color: #ABB2BF } /* Generic.EmphStrong */
+:root[data-theme=dark] .onia-python .codehilite .gr { color: #E06C75 } /* Generic.Error */
+:root[data-theme=dark] .onia-python .codehilite .gh { color: #ABB2BF; font-weight: bold } /* Generic.Heading */
+:root[data-theme=dark] .onia-python .codehilite .gi { color: #98C379 } /* Generic.Inserted */
+:root[data-theme=dark] .onia-python .codehilite .go { color: #E06C75 } /* Generic.Output */
+:root[data-theme=dark] .onia-python .codehilite .gp { color: #ABB2BF } /* Generic.Prompt */
+:root[data-theme=dark] .onia-python .codehilite .gs { color: #ABB2BF; font-weight: bold } /* Generic.Strong */
+:root[data-theme=dark] .onia-python .codehilite .gu { color: #ABB2BF; font-weight: bold } /* Generic.Subheading */
+:root[data-theme=dark] .onia-python .codehilite .gt { color: #E06C75 } /* Generic.Traceback */
+:root[data-theme=dark] .onia-python .codehilite .kc { color: #E5C07B } /* Keyword.Constant */
+:root[data-theme=dark] .onia-python .codehilite .kd { color: #C678DD } /* Keyword.Declaration */
+:root[data-theme=dark] .onia-python .codehilite .kn { color: #C678DD } /* Keyword.Namespace */
+:root[data-theme=dark] .onia-python .codehilite .kp { color: #C678DD } /* Keyword.Pseudo */
+:root[data-theme=dark] .onia-python .codehilite .kr { color: #C678DD } /* Keyword.Reserved */
+:root[data-theme=dark] .onia-python .codehilite .kt { color: #E5C07B } /* Keyword.Type */
+:root[data-theme=dark] .onia-python .codehilite .ld { color: #ABB2BF } /* Literal.Date */
+:root[data-theme=dark] .onia-python .codehilite .m { color: #D19A66 } /* Literal.Number */
+:root[data-theme=dark] .onia-python .codehilite .s { color: #98C379 } /* Literal.String */
+:root[data-theme=dark] .onia-python .codehilite .na { color: #E06C75 } /* Name.Attribute */
+:root[data-theme=dark] .onia-python .codehilite .nb { color: #E5C07B } /* Name.Builtin */
+:root[data-theme=dark] .onia-python .codehilite .nc { color: #E5C07B } /* Name.Class */
+:root[data-theme=dark] .onia-python .codehilite .no { color: #E06C75 } /* Name.Constant */
+:root[data-theme=dark] .onia-python .codehilite .nd { color: #61AFEF } /* Name.Decorator */
+:root[data-theme=dark] .onia-python .codehilite .ni { color: #E06C75 } /* Name.Entity */
+:root[data-theme=dark] .onia-python .codehilite .ne { color: #E06C75 } /* Name.Exception */
+:root[data-theme=dark] .onia-python .codehilite .nf { color: #61AFEF; font-weight: bold } /* Name.Function */
+:root[data-theme=dark] .onia-python .codehilite .nl { color: #E06C75 } /* Name.Label */
+:root[data-theme=dark] .onia-python .codehilite .nn { color: #E06C75 } /* Name.Namespace */
+:root[data-theme=dark] .onia-python .codehilite .nx { color: #E06C75 } /* Name.Other */
+:root[data-theme=dark] .onia-python .codehilite .py { color: #E06C75 } /* Name.Property */
+:root[data-theme=dark] .onia-python .codehilite .nt { color: #E06C75 } /* Name.Tag */
+:root[data-theme=dark] .onia-python .codehilite .nv { color: #E06C75 } /* Name.Variable */
+:root[data-theme=dark] .onia-python .codehilite .ow { color: #56B6C2 } /* Operator.Word */
+:root[data-theme=dark] .onia-python .codehilite .pm { color: #ABB2BF } /* Punctuation.Marker */
+:root[data-theme=dark] .onia-python .codehilite .w { color: #ABB2BF } /* Text.Whitespace */
+:root[data-theme=dark] .onia-python .codehilite .mb { color: #D19A66 } /* Literal.Number.Bin */
+:root[data-theme=dark] .onia-python .codehilite .mf { color: #D19A66 } /* Literal.Number.Float */
+:root[data-theme=dark] .onia-python .codehilite .mh { color: #D19A66 } /* Literal.Number.Hex */
+:root[data-theme=dark] .onia-python .codehilite .mi { color: #D19A66 } /* Literal.Number.Integer */
+:root[data-theme=dark] .onia-python .codehilite .mo { color: #D19A66 } /* Literal.Number.Oct */
+:root[data-theme=dark] .onia-python .codehilite .sa { color: #98C379 } /* Literal.String.Affix */
+:root[data-theme=dark] .onia-python .codehilite .sb { color: #98C379 } /* Literal.String.Backtick */
+:root[data-theme=dark] .onia-python .codehilite .sc { color: #98C379 } /* Literal.String.Char */
+:root[data-theme=dark] .onia-python .codehilite .dl { color: #98C379 } /* Literal.String.Delimiter */
+:root[data-theme=dark] .onia-python .codehilite .sd { color: #98C379 } /* Literal.String.Doc */
+:root[data-theme=dark] .onia-python .codehilite .s2 { color: #98C379 } /* Literal.String.Double */
+:root[data-theme=dark] .onia-python .codehilite .se { color: #98C379 } /* Literal.String.Escape */
+:root[data-theme=dark] .onia-python .codehilite .sh { color: #98C379 } /* Literal.String.Heredoc */
+:root[data-theme=dark] .onia-python .codehilite .si { color: #98C379 } /* Literal.String.Interpol */
+:root[data-theme=dark] .onia-python .codehilite .sx { color: #98C379 } /* Literal.String.Other */
+:root[data-theme=dark] .onia-python .codehilite .sr { color: #98C379 } /* Literal.String.Regex */
+:root[data-theme=dark] .onia-python .codehilite .s1 { color: #98C379 } /* Literal.String.Single */
+:root[data-theme=dark] .onia-python .codehilite .ss { color: #98C379 } /* Literal.String.Symbol */
+:root[data-theme=dark] .onia-python .codehilite .bp { color: #E5C07B } /* Name.Builtin.Pseudo */
+:root[data-theme=dark] .onia-python .codehilite .fm { color: #56B6C2; font-weight: bold } /* Name.Function.Magic */
+:root[data-theme=dark] .onia-python .codehilite .vc { color: #E06C75 } /* Name.Variable.Class */
+:root[data-theme=dark] .onia-python .codehilite .vg { color: #E06C75 } /* Name.Variable.Global */
+:root[data-theme=dark] .onia-python .codehilite .vi { color: #E06C75 } /* Name.Variable.Instance */
+:root[data-theme=dark] .onia-python .codehilite .vm { color: #E06C75 } /* Name.Variable.Magic */
+:root[data-theme=dark] .onia-python .codehilite .il { color: #D19A66 } /* Literal.Number.Integer.Long */
+
+/* Indentarea Python este semnificativă: păstrează exact spațiile, inclusiv
+   în lecțiile incluse prin JavaScript, la zoom și pe ecrane mici. */
+.onia-python .py-code-card .codehilite pre {
+  display: block;
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: normal;
+  white-space: pre !important;
+  white-space-collapse: preserve !important;
+  tab-size: 4 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  font-variant-ligatures: none;
+  letter-spacing: normal;
+}
+.onia-python .py-code-card .codehilite pre span {
+  display: inline;
+  white-space: inherit;
+}
+.onia-python .py-code-card .codehilite { overflow-x: auto; }
+
+
+/* ONIA · NumPy/Pandas/CSV, imagini incluse local */
+.onia-data-lesson .onia-figure{margin:22px 0 26px;border:1px solid var(--line);background:var(--panel-alt);border-radius:14px;padding:12px;overflow:hidden}
+.onia-data-lesson .onia-figure img{display:block;max-width:100%;height:auto;margin:auto;border-radius:7px;max-height:440px;object-fit:contain}
+.onia-data-lesson .onia-figure figcaption{text-align:center;font-size:11px;color:var(--sub);line-height:1.6;padding:10px 4px 2px}
+.onia-data-lesson .onia-author{font-size:12px;margin-top:14px;color:var(--text);border-top:1px solid var(--line);padding-top:11px}
+.onia-data-lesson .py-topic p,.onia-data-lesson .py-topic li{font-size:13px}
+.onia-data-lesson .lesson-link{display:inline-flex;margin:10px 8px 8px 0;border:1px solid var(--line);background:var(--panel-alt);border-radius:8px;padding:10px 12px;color:var(--primary);font-weight:800;font-size:12px}
+.onia-data-lesson .lesson-link:hover{border-color:var(--primary)}
+.onia-data-lesson .py-note-list{padding-left:20px;line-height:1.9}
+.onia-data-lesson .source-caption{font-size:11px!important;color:var(--sub)!important}
+.onia-data-lesson .codehilite pre{white-space:pre;tab-size:4}
+.standalone-onia{max-width:1000px;margin:auto;padding:40px 28px 60px}
+@media(max-width:700px){.standalone-onia{padding:14px 11px 40px}}
+
+/* ONIA · NumPy/Pandas/CSV, imagini incluse local */
+.onia-data-lesson .onia-figure{margin:22px 0 26px;border:1px solid var(--line);background:var(--panel-alt);border-radius:14px;padding:12px;overflow:hidden}
+.onia-data-lesson .onia-figure img{display:block;max-width:100%;height:auto;margin:auto;border-radius:7px;max-height:440px;object-fit:contain}
+.onia-data-lesson .onia-figure figcaption{text-align:center;font-size:11px;color:var(--sub);line-height:1.6;padding:10px 4px 2px}
+.onia-data-lesson .onia-author{font-size:12px;margin-top:14px;color:var(--text);border-top:1px solid var(--line);padding-top:11px}
+.onia-data-lesson .py-topic p,.onia-data-lesson .py-topic li{font-size:13px}
+.onia-data-lesson .lesson-link{display:inline-flex;margin:10px 8px 8px 0;border:1px solid var(--line);background:var(--panel-alt);border-radius:8px;padding:10px 12px;color:var(--primary);font-weight:800;font-size:12px}
+.onia-data-lesson .lesson-link:hover{border-color:var(--primary)}
+.onia-data-lesson .py-note-list{padding-left:20px;line-height:1.9}
+.onia-data-lesson .source-caption{font-size:11px!important;color:var(--sub)!important}
+.onia-data-lesson .codehilite pre{white-space:pre;tab-size:4}
+.standalone-onia{max-width:1000px;margin:auto;padding:40px 28px 60px}
+@media(max-width:700px){.standalone-onia{padding:14px 11px 40px}}
+
+.exercise-reveal-content code.exercise-inline-code{font-family:Consolas,'SFMono-Regular',monospace;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:2px 5px;color:var(--primary);font-size:.93em;white-space:nowrap}
+.exercise-reveal-content .exercise-code-card{margin-top:12px;max-width:100%}
+.exercise-reveal-content .codehilite pre{white-space:pre!important;tab-size:4!important}
+.native-lesson-actions span{line-height:1.4}
+</style><style id="onia-return-style">.onia-back-bar{position:relative;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;color:#18345b;border:1px solid #d6e5f5;border-radius:13px;margin:12px auto;padding:10px 15px;max-width:1180px;box-shadow:0 3px 15px #1539650b;font:600 14px/1.4 system-ui,sans-serif}.onia-back-bar a{color:#17569e;text-decoration:none;font-weight:700}.onia-back-bar a:first-child{background:#eef5ff;border-radius:9px;padding:9px 12px}.onia-back-bar a:hover{background:#dcecff}.onia-back-bar .onia-back-title{font-weight:600;color:#5b7391;font-size:13px}@media(max-width:600px){.onia-back-bar{margin:8px;padding:8px}.onia-back-title{display:none}}</style></head><body><div class="onia-back-bar"><a href="../index.html#/">← Înapoi la ONIA</a><span class="onia-back-title">Resurse educaționale</span><a href="../cursuri.html">Cursuri recomandate</a></div><main class="standalone-onia"><div class="onia-python onia-data-lesson" data-lesson="CSV"><div class="py-intro"><div class="py-intro-meta"><span>ONIA · FORMATE DE DATE</span><span>LECȚIE · 1.2</span></div><h2>Fișiere CSV — citire, scriere și prelucrare</h2><p>Un ghid de la structura fișierelor CSV până la import și export cu biblioteca standard <code>csv</code> și Pandas, folosind datele din notebookul Pandas furnizat.</p><div class="py-progress-track"><span></span><span></span><span></span></div><div class="py-focus"><strong>Conținut:</strong> delimiter · antet · reader · DictReader · read_csv · to_csv</div></div><section class="py-topic" id="csv-onia-format"><div class="py-topic-head"><span class="py-topic-index">01</span><h2>1. Cum este organizat un fișier CSV?</h2></div><p class="py-lead">CSV înseamnă Comma-Separated Values: un format text pentru date tabelare. Delimitatorul poate fi virgula, punct și virgulă sau alt caracter, conform convenției fișierului.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Structura unui fișier, prezentată drept comentarii</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="c1"># Exemplu de conținut CSV (scoruri.csv)</span>
+<span class="c1"># elev,scor,oras</span>
+<span class="c1"># Ana,91,Bucuresti</span>
+<span class="c1"># Radu,87,Cluj</span>
+<span class="c1"># &quot;Maria, Elena&quot;,95,Iasi</span>
+</pre></div>
+</div><p>Prima linie poate reprezenta antetul. Valorile care conțin separatorul, ghilimele sau linii noi se încadrează în ghilimele conform regulilor CSV. De aceea, separarea manuală folosind <code>split(",")</code> nu este corectă pentru toate fișierele CSV.</p><div class="py-tip note"><strong>De reținut</strong><div>CSV nu specifică automat tipuri de date: numerele, datele calendaristice și valorile booleene trebuie interpretate după citire.</div></div></section><section class="py-topic" id="csv-onia-reader"><div class="py-topic-head"><span class="py-topic-index">02</span><h2>2. Citirea cu modulul standard csv</h2></div><p class="py-lead">Modulul <code>csv</code> este inclus în Python și permite control precis asupra delimitatorilor și câmpurilor.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Citire cu csv.reader</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;datasets/scoruri.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">cititor</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+    <span class="n">antet</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">cititor</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rand</span> <span class="ow">in</span> <span class="n">cititor</span><span class="p">:</span>
+        <span class="n">nume</span> <span class="o">=</span> <span class="n">rand</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">scor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">nume</span><span class="p">,</span> <span class="n">scor</span><span class="p">)</span>
+</pre></div>
+</div><p>Parametrul <code>newline=""</code> este recomandat în documentația modulului CSV pentru tratarea corectă a terminatorilor de rând. <code>next()</code> poate consuma prima linie, iar în corpul buclei conversia la <code>float</code> transformă textul numeric.</p></section><section class="py-topic" id="csv-onia-dict"><div class="py-topic-head"><span class="py-topic-index">03</span><h2>3. Citirea câmpurilor după nume cu DictReader</h2></div><p class="py-lead">Pentru un tabel cu antet, <code>DictReader</code> reprezintă fiecare rând ca dicționar: numele coloanelor devin chei.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Media dintr-un CSV</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="n">suma</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">numar</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;datasets/scoruri.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">rand</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">):</span>
+        <span class="n">suma</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">])</span>
+        <span class="n">numar</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="n">numar</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Media: </span><span class="si">{</span><span class="n">suma</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">numar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div class="py-tip note"><strong>De reținut</strong><div>Dacă un câmp lipsește sau conține text neconvertibil, apar erori. În aplicații reale, verifică explicit conținutul și tratează <code>ValueError</code> și eventualele valori goale.</div></div></section><section class="py-topic" id="csv-onia-write"><div class="py-topic-head"><span class="py-topic-index">04</span><h2>4. Scrierea unui CSV</h2></div><p class="py-lead">Folosește <code>csv.writer</code> pentru rânduri de liste și <code>csv.DictWriter</code> pentru rânduri reprezentate prin dicționare.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Scriere cu antet și câmpuri nominale</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="n">rezultate</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;elev&quot;</span><span class="p">:</span> <span class="s2">&quot;Ana&quot;</span><span class="p">,</span> <span class="s2">&quot;scor&quot;</span><span class="p">:</span> <span class="mi">92</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;elev&quot;</span><span class="p">:</span> <span class="s2">&quot;Radu&quot;</span><span class="p">,</span> <span class="s2">&quot;scor&quot;</span><span class="p">:</span> <span class="mi">85</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;rezultate.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;elev&quot;</span><span class="p">,</span> <span class="s2">&quot;scor&quot;</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rezultate</span><span class="p">)</span>
+</pre></div>
+</div><p>Pentru fișierele despărțite prin <code>;</code>, adaugă <code>delimiter=";"</code> atât la citire, cât și la scriere. Pentru anumite foi de calcul pot fi necesare și setări explicite de codificare.</p></section><section class="py-topic" id="csv-onia-pandas"><div class="py-topic-head"><span class="py-topic-index">05</span><h2>5. CSV în Pandas: read_csv și to_csv</h2></div><p class="py-lead">În analiza de date, Pandas poate încărca direct CSV într-un DataFrame; rezultatul poate fi filtrat, agregat și exportat.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Exemplu complet de import și export</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Date reale din notebookul Pandas</span>
+<span class="n">avocado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/avocado.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">medii</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s2">&quot;AveragePrice&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">medii</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;preturi_medii_regiuni.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div><p><code>read_csv</code> suportă parametri precum <code>sep</code> (separator), <code>encoding</code> (codificare), <code>usecols</code> (coloane selectate), <code>nrows</code> (număr de rânduri) și <code>parse_dates</code> (interpretarea datelor calendaristice).</p><div class="py-table-wrap"><table class="py-table"><thead><tr><th>Argument</th><th>Rol</th></tr></thead><tbody><tr><td><code>index_col=0</code></td><td>Prima coloană devine index</td></tr><tr><td><code>index=False</code> la <code>to_csv</code></td><td>Nu exportă indexul intern</td></tr><tr><td><code>sep=";"</code></td><td>Citește un CSV cu separator punct și virgulă</td></tr><tr><td><code>usecols=[...]</code></td><td>Importă doar anumite coloane</td></tr><tr><td><code>parse_dates=["Date"]</code></td><td>Interpretează o coloană drept dată calendaristică</td></tr></tbody></table></div></section><section class="py-topic" id="csv-onia-robust"><div class="py-topic-head"><span class="py-topic-index">06</span><h2>6. Import robust și verificarea rezultatelor</h2></div><p class="py-lead">Prelucrările pentru competițiile de IA trebuie să rămână reproductibile și să trateze explicit valorile invalide.</p><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Conversie sigură și tratarea valorilor invalide</span><button class="py-copy" type="button" data-copy-code>Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/scoruri.csv&quot;</span><span class="p">)</span>
+<span class="n">date</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="s2">&quot;scor&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div><p>Nu elimina automat rândurile cu probleme fără a evalua impactul. În aplicații de învățare automată, o preprocesare incorectă poate distorsiona datele și performanța modelului.</p><p><a class="lesson-link" href="../datasets/avocado.csv" download>Descarcă setul CSV de lucru</a><a class="lesson-link" href="../notebooks/Pandas-Dan-Novischi.ipynb" download>Notebook Pandas — Dan Novischi</a></p><p><span class="source-caption">Ghid redactat în română pornind de la secțiunea „Reading and Writing Data” din notebookul Pandas furnizat, completat cu exemple explicative pentru modulul standard csv.</span></p></section></div></main><script>document.addEventListener('click',function(e){let b=e.target.closest('[data-copy-code]');if(!b)return;let p=b.closest('.py-code-card').querySelector('pre');if(p&&navigator.clipboard)navigator.clipboard.writeText(p.textContent).then(()=>b.textContent='Copiat!')});</script></body></html>

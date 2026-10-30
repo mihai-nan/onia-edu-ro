@@ -1,0 +1,7 @@
+
+/* Secțiunea 1.4 — scikit-learn */
+.onia-sklearn-lesson .onia-figure{margin:24px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel-alt);overflow:hidden}
+.onia-sklearn-lesson .onia-figure img{display:block;max-width:100%;height:auto;margin:auto;border-radius:8px}
+.onia-sklearn-lesson .onia-figure figcaption{font-size:13px;color:var(--muted);padding:9px 4px 0;line-height:1.55}
+.onia-sklearn-lesson .sklearn-download{display:inline-flex;padding:11px 16px;border:1px solid #c3d4f2;border-radius:10px;background:#ebf3ff;color:#2153a4;font-weight:700;text-decoration:none}
+.onia-sklearn-lesson .py-code-card pre{white-space:pre!important;tab-size:4!important}

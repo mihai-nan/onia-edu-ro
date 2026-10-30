@@ -1,0 +1,25 @@
+id,text,eticheta,sursa
+101,Meci de tenis decis în trei seturi,sport,redactie-A
+102,Echipa câștigă finala de fotbal,sport,redactie-B
+103,Rezultate din campionatul de înot,sport,redactie-A
+104,Sportivii se pregătesc pentru maraton,sport,redactie-C
+105,Baschet: un meci foarte disputat,sport,redactie-B
+106,Turneul de tenis începe mâine,sport,redactie-C
+107,Un nou record la alergare,sport,redactie-A
+108,Python este folosit la analiza datelor,tehnologie,redactie-A
+109,Un algoritm clasifică documente,tehnologie,redactie-B
+110,Laptopurile au procesoare noi,tehnologie,redactie-C
+111,Programarea ajută în inteligența artificială,tehnologie,redactie-B
+112,Datele sunt salvate în fișiere CSV,tehnologie,redactie-A
+113,Se dezvoltă aplicații cu Python,tehnologie,redactie-C
+114,Noi experimente de învățare automată,tehnologie,redactie-B
+115,Elevii rezolvă probleme la matematică,educatie,redactie-C
+116,Manualul prezintă noțiuni de informatică,educatie,redactie-A
+117,Profesorii explică exerciții la clasă,educatie,redactie-B
+118,Elevii învață să scrie programe,educatie,redactie-C
+119,O lecție practică despre algoritmi,educatie,redactie-A
+120,Examenul include exerciții de logică,educatie,redactie-B
+121,Biblioteca școlii primește cărți noi,educatie,redactie-C
+122,  MECI de tenis decis în trei seturi  ,sport,redactie-A
+123,,tehnologie,redactie-A
+124,Manualul prezintă noțiuni de informatică,sport,redactie-B

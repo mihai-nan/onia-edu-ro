@@ -1,0 +1,971 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notebook original: Pandas — Dan Novischi · ONIA</title><style>
+:root{--bg:#f6f8fc;--panel:#fff;--text:#1d2c49;--line:#e4ebf5;--sub:#637893;--accent:#225bb7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+.nb-page{max-width:980px;margin:0 auto;padding:28px 22px 60px}.nb-hero{background:linear-gradient(120deg,#eaf3ff,#fff);border:1px solid var(--line);padding:24px;border-radius:16px;margin-bottom:24px;position:relative}.nb-hero:before{content:"";height:5px;background:linear-gradient(90deg,#17469b 0 33.3%,#f3ca4b 33.3% 66.6%,#da4355 66.6%);position:absolute;top:0;left:0;right:0;border-radius:16px 16px 0 0}.nb-hero small{color:var(--accent);font-weight:800;letter-spacing:.08em}.nb-hero h1{font-size:26px;margin:8px 0}.nb-hero p{color:var(--sub);font-size:13px}.nb-button{background:var(--accent);color:white;text-decoration:none;border-radius:8px;padding:10px 15px;display:inline-block;font-weight:700}
+.nb-code,.nb-markdown{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:20px;margin-bottom:14px;overflow:auto}.nb-code{padding:0}.nb-code-header{background:#1a3159;color:#fff;padding:8px 14px;display:flex;justify-content:space-between;font-size:11px;font-weight:700}.highlight{padding:16px 19px;overflow-x:auto;background:#f4f7fc}.highlight pre{white-space:pre;font:12px/1.72 "SFMono-Regular",Consolas,monospace;min-width:max-content;margin:0}.nb-markdown h2,.nb-markdown h3{scroll-margin-top:20px;color:#1f4c93}.nb-markdown img{max-width:100%}.nb-markdown code{color:#165baa;background:#e8f1fd;padding:2px 5px;border-radius:4px}.nb-markdown pre{overflow:auto;background:#edf3fb;padding:14px}.nb-outputs{padding:13px 17px 15px;border-top:1px solid var(--line)}.nb-outputs>span{color:var(--sub);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.nb-outputs pre{white-space:pre-wrap;overflow:auto;font:12px/1.5 Consolas,monospace;max-height:450px}.nb-outputs img{max-width:100%;display:block;margin:12px auto;border-radius:6px}.nb-error{color:#cc4455}blockquote{background:#ecf3ff;border-left:3px solid var(--accent);margin:12px 0;padding:10px 15px}blockquote p{margin:0}table{border-collapse:collapse;width:100%;max-width:100%}th,td{border:1px solid #e2e7f0;padding:5px 9px} .highlight .k,.highlight .kn{color:#06733b;font-weight:bold}.highlight .c1{color:#648b96}.highlight .s,.highlight .s2{color:#1b68a3}.highlight .mi,.highlight .mf{color:#9a4a1c}
+@media(max-width:600px){.nb-page{padding:12px 9px 40px}.nb-markdown{padding:14px}.nb-hero{padding:18px}.nb-hero h1{font-size:22px}}
+</style></head><body><main class="nb-page"><header class="nb-hero"><small>ONIA · NOTEBOOK ORIGINAL</small><h1>Notebook original: Pandas — Dan Novischi</h1><p>Previzualizare statică a codului, notelor și rezultatelor existente în notebookul furnizat. Textul din această anexă rămâne în limba originală; explicațiile în română sunt în materialul de curs de mai sus.</p><a class="nb-button" href="../notebooks/Pandas-Dan-Novischi.ipynb" download>Descarcă notebookul Jupyter</a></header><section class="nb-markdown"><h2>Pandas - A Quick Introduction</h2>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 2</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="c1"># needed to plot correctly in jupyter notebook</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</section><section class="nb-markdown"><p>Pandas is a powerful open source python package used for data analysis. It's <a href="https://pandas.pydata.org/docs/reference/index.html">API</a> provides functionalities that not only allows us to import or export data in various formats (ex: cvs, html, json, etc.) but also to manipulate data in ways commonly required in the preprocessing step for Machine Learning (ex: detect missing data, compute statistics, dealing with time series, hashing, indexing and much more).</p>
+<p>The primary two components of pandas are the <code>Series</code> and <code>DataFrame</code>. A <code>Series</code> is essentially a 1-d array commonly thought of as a column vector, while <code>DataFrame</code> is a table that aggregates many different <code>Series</code>.</p>
+</section><section class="nb-markdown"><h2>Importing</h2>
+<p>The standard way of importing pandas into python is via:</p>
+<pre><code class="language-Python">import pandas as pd
+</code></pre>
+<p>where <code>pd</code> is the standard convention designator for the library.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 5</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</section><section class="nb-markdown"><h2>Reading and Writing Data</h2>
+<p>Pandas supports many different file formats and encodings through various <code>read</code> methods built-in in its <a href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">io</a> module. For example, to read in a csv file one can use <code>read_csv()</code> function, whereas writing a csv file is accomplished through the <code>to_csv</code> method. The former returns a populated DataFrame with the contents of the file, whereas the latter writes a DataFrame in csv format to disk.</p>
+<p>For example, we can use pandas to import an avocado prices/sales in US dataset and than save it in another location:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 7</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/avocado.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/tmp/avocado.cvs&#39;</span><span class="p">)</span>
+</pre></div>
+</section><section class="nb-markdown"><p>Similar methods for importing from json, html, excel, SQL and so on, are consistently provided by the same <em>io</em> module.</p>
+<p>Also, note that the <code>index_col</code> argument to the <code>read_csv</code> call specifies which column should be used as an index of each entry (in our case column zero). If it's not specified, then pandas will automatically create one. This is to be avoided because this index is written to the file upon calling <code>to_csv</code>. Hence, loading and saving multiple times will create many redundant columns that have no special meaning.</p>
+</section><section class="nb-markdown"><h2>Viewing Data</h2>
+<p>We can view the data frame, i.e. <code>print(df)</code> to see how the data frame looks like. However, using <code>print</code> will output all data. More commonly is to print just a few entries via <code>head()</code> and <code>tail()</code> methods, which output the first and the last rows of the DataFrame, respectively. Both methods have a default argument of 5 rows, however you can supply any integer number of rows you would like to visualize.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 10</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>         Date  AveragePrice  Total Volume     4046       4225    4770  \
+0  2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+1  2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2  2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+3  2015-12-06          1.08      78992.15  1132.00   71976.41   72.58   
+4  2015-11-29          1.28      51039.60   941.48   43838.39   75.78   
+
+   Total Bags  Small Bags  Large Bags  XLarge Bags          type  year  region  
+0     8696.87     8603.62       93.25          0.0  conventional  2015  Albany  
+1     9505.56     9408.07       97.49          0.0  conventional  2015  Albany  
+2     8145.35     8042.21      103.14          0.0  conventional  2015  Albany  
+3     5811.16     5677.40      133.76          0.0  conventional  2015  Albany  
+4     6183.95     5986.26      197.69          0.0  conventional  2015  Albany  </pre></div></section><section class="nb-code"><div class="nb-code-header"><span>Celula 11</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>          Date  AveragePrice  Total Volume     4046     4225    4770  \
+9   2018-01-21          1.87      13766.76  1191.92  2452.79  727.94   
+10  2018-01-14          1.93      16205.22  1527.63  2981.04  727.01   
+11  2018-01-07          1.62      17489.58  2894.77  2356.13  224.53   
+
+    Total Bags  Small Bags  Large Bags  XLarge Bags     type  year  \
+9      9394.11     9351.80       42.31          0.0  organic  2018   
+10    10969.54    10919.54       50.00          0.0  organic  2018   
+11    12014.15    11988.14       26.01          0.0  organic  2018   
+
+              region  
+9   WestTexNewMexico  
+10  WestTexNewMexico  
+11  WestTexNewMexico  </pre></div></section><section class="nb-markdown"><h3>DataFrame Makeup</h3>
+<p>One of the first things you may one to look at, is the makeup of a DataFrame, namely: the number of entries, the label of each column, how many objects are null, what data types are in each column and so forth. This is where the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html"><code>.info()</code></a> method comes in. It prints a concise summary of the DataFrame.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 13</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+Index: 18249 entries, 0 to 11
+Data columns (total 13 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   Date          18249 non-null  object 
+ 1   AveragePrice  18249 non-null  float64
+ 2   Total Volume  18249 non-null  float64
+ 3   4046          18249 non-null  float64
+ 4   4225          18249 non-null  float64
+ 5   4770          18249 non-null  float64
+ 6   Total Bags    18249 non-null  float64
+ 7   Small Bags    18249 non-null  float64
+ 8   Large Bags    18249 non-null  float64
+ 9   XLarge Bags   18249 non-null  float64
+ 10  type          18249 non-null  object 
+ 11  year          18249 non-null  int64  
+ 12  region        18249 non-null  object 
+dtypes: float64(9), int64(1), object(3)
+memory usage: 1.9+ MB
+</pre></div></section><section class="nb-markdown"><p>Moreover, for numerical data we can easily get the summary statistics for each column of our DataFrame via the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html"><code>describe()</code></a> method.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 15</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>       AveragePrice  Total Volume          4046          4225          4770  \
+count  18249.000000  1.824900e+04  1.824900e+04  1.824900e+04  1.824900e+04   
+mean       1.405978  8.506440e+05  2.930084e+05  2.951546e+05  2.283974e+04   
+std        0.402677  3.453545e+06  1.264989e+06  1.204120e+06  1.074641e+05   
+min        0.440000  8.456000e+01  0.000000e+00  0.000000e+00  0.000000e+00   
+25%        1.100000  1.083858e+04  8.540700e+02  3.008780e+03  0.000000e+00   
+50%        1.370000  1.073768e+05  8.645300e+03  2.906102e+04  1.849900e+02   
+75%        1.660000  4.329623e+05  1.110202e+05  1.502069e+05  6.243420e+03   
+max        3.250000  6.250565e+07  2.274362e+07  2.047057e+07  2.546439e+06   
+
+         Total Bags    Small Bags    Large Bags    XLarge Bags          year  
+count  1.824900e+04  1.824900e+04  1.824900e+04   18249.000000  18249.000000  
+mean   2.396392e+05  1.821947e+05  5.433809e+04    3106.426507   2016.147899  
+std    9.862424e+05  7.461785e+05  2.439660e+05   17692.894652      0.939938  
+min    0.000000e+00  0.000000e+00  0.000000e+00       0.000000   2015.000000  
+25%    5.088640e+03  2.849420e+03  1.274700e+02       0.000000   2015.000000  
+50%    3.974383e+04  2.636282e+04  2.647710e+03       0.000000   2016.000000  
+75%    1.107834e+05  8.333767e+04  2.202925e+04     132.500000   2017.000000  
+max    1.937313e+07  1.338459e+07  5.719097e+06  551693.650000   2018.000000  </pre></div></section><section class="nb-markdown"><h2>Indexing &amp; Slicing</h2>
+<p>DataFrame's provide dictionary like indexing support. So to reference a specific column we can use our <code>df</code> object with a key that represents the name of the column we want. For example referencing the <em>&quot;AveragePrice&quot;</em> column we can do the following:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 17</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>0     1.33
+1     1.35
+2     0.93
+3     1.08
+4     1.28
+      ... 
+7     1.63
+8     1.71
+9     1.87
+10    1.93
+11    1.62
+Name: AveragePrice, Length: 18249, dtype: float64</pre></div></section><section class="nb-markdown"><p>We can, of course, use the <code>head()</code> and <code>tail()</code> methods as before:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 19</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>0    1.33
+1    1.35
+2    0.93
+Name: AveragePrice, dtype: float64</pre></div></section><section class="nb-markdown"><p>Actually indexes are objects themselves, namely <code>RangeIndex</code> objects. In the context of the DataFrame these objects describe how rows are formated. We can obtain or view this object for our DataFrame via the <code>index</code> attribute:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 21</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>Index([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
+       ...
+        2,  3,  4,  5,  6,  7,  8,  9, 10, 11],
+      dtype=&#x27;int64&#x27;, length=18249)</pre></div></section><section class="nb-markdown"><p>Moreover, we can index a DataFrame by a hybrid approach where we first index a specific column based on the key and then an integer number corresponding to the i'th row entry we are interested in:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 23</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>0     1.33
+1     1.35
+2     0.93
+3     1.08
+4     1.28
+      ... 
+7     1.63
+8     1.71
+9     1.87
+10    1.93
+11    1.62
+Name: AveragePrice, Length: 18249, dtype: float64</pre></div></section><section class="nb-markdown"><p>We can also use either <code>loc</code> or <code>iloc</code> attributes of a DataFrame to reference entries in a more traditional manner. That is, <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.loc.html#pandas-dataframe-loc">loc</a> provides referencing by label, whereas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iloc.html">iloc</a> provides purely integer based indexing by position. Both attributes allow slicing in the same manner as lists or numpy arrays.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 25</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>0    1.33
+0    0.99
+0    1.17
+0    0.97
+0    1.13
+     ... 
+0    1.04
+0    1.41
+0    1.55
+0    1.60
+0    1.62
+Name: AveragePrice, Length: 432, dtype: float64</pre></div></section><section class="nb-markdown"><p>Note that the <em>0</em> in the <code>df.loc[0]['AveragePrice']</code> expression is treaded as a label and not as an integer.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 27</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>/tmp/ipykernel_175222/2309508539.py:1: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  df.iloc[0][1]
+</pre><pre>1.33</pre></div></section><section class="nb-markdown"><p>While in the <code>df.iloc[0][1]</code> the indexes <em>0</em> and <em>1</em> are actual integers.</p>
+</section><section class="nb-markdown"><h3>Conditional Selection</h3>
+<p>Combining indexing together with conditional expressions we can create new DataFrame's that contain only specific parts of our data. For example, we can select all data within our DataFrame that is associated with the Atlanta region.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 30</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">new_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">]</span>
+</pre></div>
+</section><section class="nb-markdown"><p>Note that this is possible due to the conditional form of indexing. Reading through the creation of the new frame we:</p>
+<ul>
+<li>first, reference the <em>region</em> column,</li>
+<li>then, out of all the labels in this column we select only those that have the label <em>Atlanta</em> ,</li>
+<li>and finally, we use the result to index the original data frame such that we select all data for which the condition is true.</li>
+</ul>
+<p>Printing the head of <code>new_df</code> yields:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 32</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>         Date  AveragePrice  Total Volume       4046      4225    4770  \
+0  2015-12-27          0.99     386100.49  292097.36  27350.92  297.90   
+1  2015-12-20          1.08     331377.53  251774.15  20702.45  103.06   
+2  2015-12-13          0.96     417772.47  324932.28  31019.08  275.80   
+
+   Total Bags  Small Bags  Large Bags  XLarge Bags          type  year  \
+0    66354.31    48605.95    17748.36         0.00  conventional  2015   
+1    58797.87    46930.26    11867.61         0.00  conventional  2015   
+2    61545.31    38903.57    22628.21        13.53  conventional  2015   
+
+    region  
+0  Atlanta  
+1  Atlanta  
+2  Atlanta  </pre></div></section><section class="nb-markdown"><h3>Multiple Selection / Filtering</h3>
+<p>Above, we selected parts of our data frames based on single labels of columns and conditions. However, pandas DataFrame's also support more advanced selection/filtering techniques that are based on slicing and multiple condition concatenation.</p>
+<p>First, we can select multiple columns of our data by indexing with a list of column names. For example, we may use to select the <code>AveragePrice</code> and <code>Total Volume</code> of the avocado dataset.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 34</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">multiple_slection_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Volume&#39;</span><span class="p">]]</span>
+<span class="n">multiple_slection_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>   AveragePrice  Total Volume
+0          1.33      64236.62
+1          1.35      54876.98
+2          0.93     118220.22
+3          1.08      78992.15
+4          1.28      51039.60</pre></div></section><section class="nb-markdown"><p>Secondly, we can conditionally select multiple entries (rows) of our data by concatenating different conditions. For example, to select all the <code>organic</code> type avocados that have an average price bellow $1.024 we can do the following:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 36</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">multiple_slection_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;organic&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.02</span><span class="p">)]</span>
+<span class="n">multiple_slection_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>          Date  AveragePrice  Total Volume    4046     4225  4770  Total Bags  \
+0   2015-12-27          0.91       2272.26   15.53   508.49  0.00     1748.24   
+2   2015-12-13          0.87       4054.49   26.21   738.96  2.58     3286.74   
+24  2015-07-12          1.01       6269.43  409.42  2453.22  0.00     3406.79   
+
+    Small Bags  Large Bags  XLarge Bags     type  year    region  
+0      1008.20      740.04          0.0  organic  2015     Boise  
+2      1147.38     2139.36          0.0  organic  2015     Boise  
+24       80.00     3326.79          0.0  organic  2015  Columbus  </pre></div></section><section class="nb-markdown"><p>When dealing with multiple text based labels that we want to select, concatenating individual condition may become cumbersome. A better approach is to use the <code>.isin()</code> method. For example, to select avocados that come from Atlanta, Columbus and SouthCentral <code>region</code> we can do the following:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 38</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">selection_condition</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Atlanta&#39;</span><span class="p">,</span> <span class="s1">&#39;Columbus&#39;</span><span class="p">,</span> <span class="s1">&#39;SouthCentral&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="n">selection_condition</span><span class="p">]</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>          Date  AveragePrice  Total Volume       4046      4225    4770  \
+0   2015-12-27          0.99     386100.49  292097.36  27350.92  297.90   
+1   2015-12-20          1.08     331377.53  251774.15  20702.45  103.06   
+2   2015-12-13          0.96     417772.47  324932.28  31019.08  275.80   
+3   2015-12-06          1.07     357636.82  283024.01  23740.85  181.92   
+4   2015-11-29          0.99     333280.79  250288.65  28889.63  307.83   
+..         ...           ...           ...        ...       ...     ...   
+7   2018-02-04          1.41     135996.73   29097.18   3815.01    0.00   
+8   2018-01-28          1.42     137453.79   29301.71   4418.91    0.00   
+9   2018-01-21          1.44     138349.93   22596.66   3200.09    0.00   
+10  2018-01-14          1.50     146720.73   31829.24   4472.99    0.00   
+11  2018-01-07          1.41     126323.33   25296.77   3848.62    3.00   
+
+    Total Bags  Small Bags  Large Bags  XLarge Bags          type  year  \
+0     66354.31    48605.95    17748.36         0.00  conventional  2015   
+1     58797.87    46930.26    11867.61         0.00  conventional  2015   
+2     61545.31    38903.57    22628.21        13.53  conventional  2015   
+3     50690.04    37032.67    13654.66         2.71  conventional  2015   
+4     53794.68    33031.72    20738.55        24.41  conventional  2015   
+..         ...         ...         ...          ...           ...   ...   
+7    103084.54    96116.60     6967.94         0.00       organic  2018   
+8    103733.17    98629.14     5104.03         0.00       organic  2018   
+9    112553.18   105354.48     7198.70         0.00       organic  2018   
+10   110418.50   102266.31     8152.19         0.00       organic  2018   
+11    97174.94    90151.57     7023.37         0.00       organic  2018   
+
+          region  
+0        Atlanta  
+1        Atlanta  
+2        Atlanta  
+3        Atlanta  
+4        Atlanta  
+..           ...  
+7   SouthCentral  
+8   SouthCentral  
+9   SouthCentral  
+10  SouthCentral  
+11  SouthCentral  
+
+[1014 rows x 13 columns]</pre></div></section><section class="nb-markdown"><h3>Setting (Re-Setting) the Index</h3>
+<p>By now you may have noticed that when we imported our data, the indexes of each entry were automatically set by pandas to increasing integer numbers displayed in bold on the left most column. However, for the avocado data the <em>Date</em> column seems a more appropriate index.</p>
+<p>We can set the index to the appropriate column by using the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.set_index.html"><code>set_index</code></a> method either to create a new DataFrame object or modifying the existing DataFrame <em>in place</em>.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 40</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">new_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+</pre></div>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 41</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046       4225    4770  \
+Date                                                                 
+2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2015-12-27     8696.87     8603.62       93.25          0.0  conventional   
+2015-12-20     9505.56     9408.07       97.49          0.0  conventional   
+2015-12-13     8145.35     8042.21      103.14          0.0  conventional   
+
+            year  region  
+Date                      
+2015-12-27  2015  Albany  
+2015-12-20  2015  Albany  
+2015-12-13  2015  Albany  </pre></div></section><section class="nb-code"><div class="nb-code-header"><span>Celula 42</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 43</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046       4225    4770  \
+Date                                                                 
+2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2015-12-27     8696.87     8603.62       93.25          0.0  conventional   
+2015-12-20     9505.56     9408.07       97.49          0.0  conventional   
+2015-12-13     8145.35     8042.21      103.14          0.0  conventional   
+
+            year  region  
+Date                      
+2015-12-27  2015  Albany  
+2015-12-20  2015  Albany  
+2015-12-13  2015  Albany  </pre></div></section><section class="nb-markdown"><p>One thing to note here, is that the <em>Date</em> column is not directly recognized by pandas, since the cvs file does not contain any format information. However, we can easily get around this problem by using pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html"><code>to_datetime()</code></a> method. This, of course must be done before setting the index.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 45</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/avocado.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046       4225    4770  \
+Date                                                                 
+2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2015-12-27     8696.87     8603.62       93.25          0.0  conventional   
+2015-12-20     9505.56     9408.07       97.49          0.0  conventional   
+2015-12-13     8145.35     8042.21      103.14          0.0  conventional   
+
+            year  region  
+Date                      
+2015-12-27  2015  Albany  
+2015-12-20  2015  Albany  
+2015-12-13  2015  Albany  </pre></div></section><section class="nb-markdown"><p>Reverting back to the original DataFrame is straight forward via the <code>.reset_index()</code> method. When called with no arguments pandas simply attaches increasing integer indexes to the DataFrame and keeps the previous index as column of our data:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 47</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>        Date  AveragePrice  Total Volume     4046       4225    4770  \
+0 2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+1 2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2 2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+
+   Total Bags  Small Bags  Large Bags  XLarge Bags          type  year  region  
+0     8696.87     8603.62       93.25          0.0  conventional  2015  Albany  
+1     9505.56     9408.07       97.49          0.0  conventional  2015  Albany  
+2     8145.35     8042.21      103.14          0.0  conventional  2015  Albany  </pre></div></section><section class="nb-markdown"><p>However, sometimes we may wish to discard the previous index column altogether. This can be accomplished by setting the <code>drop</code> argument of <code>.reset_index()</code> method to <code>True.</code>:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 49</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>   AveragePrice  Total Volume     4046       4225    4770  Total Bags  \
+0          1.33      64236.62  1036.74   54454.85   48.16     8696.87   
+1          1.35      54876.98   674.28   44638.81   58.33     9505.56   
+2          0.93     118220.22   794.70  109149.67  130.50     8145.35   
+
+   Small Bags  Large Bags  XLarge Bags          type  year  region  
+0     8603.62       93.25          0.0  conventional  2015  Albany  
+1     9408.07       97.49          0.0  conventional  2015  Albany  
+2     8042.21      103.14          0.0  conventional  2015  Albany  </pre></div></section><section class="nb-markdown"><h2>Sorting</h2>
+<p>You may have noticed that our data frame does not contain entries in exact chronological order:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 51</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/avocado.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046       4225    4770  \
+Date                                                                 
+2015-12-27          1.33      64236.62  1036.74   54454.85   48.16   
+2015-12-20          1.35      54876.98   674.28   44638.81   58.33   
+2015-12-13          0.93     118220.22   794.70  109149.67  130.50   
+2015-12-06          1.08      78992.15  1132.00   71976.41   72.58   
+2015-11-29          1.28      51039.60   941.48   43838.39   75.78   
+...                  ...           ...      ...        ...     ...   
+2018-02-04          1.63      17074.83  2046.96    1529.20    0.00   
+2018-01-28          1.71      13888.04  1191.70    3431.50    0.00   
+2018-01-21          1.87      13766.76  1191.92    2452.79  727.94   
+2018-01-14          1.93      16205.22  1527.63    2981.04  727.01   
+2018-01-07          1.62      17489.58  2894.77    2356.13  224.53   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2015-12-27     8696.87     8603.62       93.25          0.0  conventional   
+2015-12-20     9505.56     9408.07       97.49          0.0  conventional   
+2015-12-13     8145.35     8042.21      103.14          0.0  conventional   
+2015-12-06     5811.16     5677.40      133.76          0.0  conventional   
+2015-11-29     6183.95     5986.26      197.69          0.0  conventional   
+...                ...         ...         ...          ...           ...   
+2018-02-04    13498.67    13066.82      431.85          0.0       organic   
+2018-01-28     9264.84     8940.04      324.80          0.0       organic   
+2018-01-21     9394.11     9351.80       42.31          0.0       organic   
+2018-01-14    10969.54    10919.54       50.00          0.0       organic   
+2018-01-07    12014.15    11988.14       26.01          0.0       organic   
+
+            year            region  
+Date                                
+2015-12-27  2015            Albany  
+2015-12-20  2015            Albany  
+2015-12-13  2015            Albany  
+2015-12-06  2015            Albany  
+2015-11-29  2015            Albany  
+...          ...               ...  
+2018-02-04  2018  WestTexNewMexico  
+2018-01-28  2018  WestTexNewMexico  
+2018-01-21  2018  WestTexNewMexico  
+2018-01-14  2018  WestTexNewMexico  
+2018-01-07  2018  WestTexNewMexico  
+
+[18249 rows x 12 columns]</pre></div></section><section class="nb-markdown"><p>To fix this, we can sort the <code>Date</code> indexes by calling the <code>.sort_index()</code> method:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 53</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume        4046       4225       4770  \
+Date                                                                       
+2015-01-04          1.75      27365.89     9307.34    3844.81     615.28   
+2015-01-04          1.49      17723.17     1189.35   15628.27       0.00   
+2015-01-04          1.68       2896.72      161.68     206.96       0.00   
+2015-01-04          1.52      54956.80     3013.04   35456.88    1561.70   
+2015-01-04          1.64       1505.12        1.27    1129.50       0.00   
+...                  ...           ...         ...        ...        ...   
+2018-03-25          1.36     908202.13   142681.06  463136.28  174975.75   
+2018-03-25          0.70    9010588.32  3999735.71  966589.50   30130.82   
+2018-03-25          1.42     163496.70    29253.30    5080.04       0.00   
+2018-03-25          1.70     190257.38    29644.09   70982.10       0.00   
+2018-03-25          1.34    1774776.77    63905.98  908653.71     843.45   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2015-01-04    13598.46    13061.10      537.36         0.00       organic   
+2015-01-04      905.55      905.55        0.00         0.00       organic   
+2015-01-04     2528.08     2528.08        0.00         0.00       organic   
+2015-01-04    14925.18    11264.80     3660.38         0.00  conventional   
+2015-01-04      374.35      186.67      187.68         0.00       organic   
+...                ...         ...         ...          ...           ...   
+2018-03-25   127409.04   103579.41    22467.04      1362.59  conventional   
+2018-03-25  4014132.29  3398569.92   546409.74     69152.63  conventional   
+2018-03-25   129163.36   109052.26    20111.10         0.00       organic   
+2018-03-25    89631.19    89424.11      207.08         0.00       organic   
+2018-03-25   801373.63   774634.09    23833.93      2905.61  conventional   
+
+            year              region  
+Date                                  
+2015-01-04  2015           Southeast  
+2015-01-04  2015             Chicago  
+2015-01-04  2015  HarrisburgScranton  
+2015-01-04  2015          Pittsburgh  
+2015-01-04  2015               Boise  
+...          ...                 ...  
+2018-03-25  2018             Chicago  
+2018-03-25  2018        SouthCentral  
+2018-03-25  2018        SouthCentral  
+2018-03-25  2018          California  
+2018-03-25  2018             NewYork  
+
+[18249 rows x 12 columns]</pre></div></section><section class="nb-markdown"><p>Now if we would like the data in descending order we can supply to <code>sort_index()</code> method the argument <code>ascending=Flase</code>:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 55</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046       4225     4770  \
+Date                                                                    
+2018-03-25          1.34    1774776.77   63905.98  908653.71   843.45   
+2018-03-25          1.31      11125.08     533.97    1113.33     0.00   
+2018-03-25          1.52      15372.80    2399.71    3164.80     0.00   
+2018-03-25          1.21     330371.24   87782.44  137599.47   131.89   
+2018-03-25          1.60     271723.08   26996.28   77861.39   117.56   
+...                  ...           ...        ...        ...      ...   
+2015-01-04          0.99     668086.00  117454.09  429518.41  5553.60   
+2015-01-04          1.70       1885.48     748.62      30.19     0.00   
+2015-01-04          1.46     612910.15  233286.13  216611.20  4370.99   
+2015-01-04          1.40     116253.44    3267.97   55693.04   109.55   
+2015-01-04          1.75      27365.89    9307.34    3844.81   615.28   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2018-03-25   801373.63   774634.09    23833.93      2905.61  conventional   
+2018-03-25     9477.78     7760.23     1717.55         0.00       organic   
+2018-03-25     9808.29     9789.70       18.59         0.00       organic   
+2018-03-25   104857.44    95210.59     7089.08      2557.77  conventional   
+2018-03-25   166747.85    87108.00    79495.39       144.46       organic   
+...                ...         ...         ...          ...           ...   
+2015-01-04   115559.90    67894.33    47661.52         4.05  conventional   
+2015-01-04     1106.67     1106.67        0.00         0.00       organic   
+2015-01-04   158641.83   115068.71    43573.12         0.00       organic   
+2015-01-04    57182.88    57182.88        0.00         0.00  conventional   
+2015-01-04    13598.46    13061.10      537.36         0.00       organic   
+
+            year              region  
+Date                                  
+2018-03-25  2018             NewYork  
+2018-03-25  2018            Columbus  
+2018-03-25  2018       PhoenixTucson  
+2018-03-25  2018  HarrisburgScranton  
+2018-03-25  2018                West  
+...          ...                 ...  
+2015-01-04  2015              Denver  
+2015-01-04  2015               Tampa  
+2015-01-04  2015             TotalUS  
+2015-01-04  2015    BuffaloRochester  
+2015-01-04  2015           Southeast  
+
+[18249 rows x 12 columns]</pre></div></section><section class="nb-markdown"><p>Aside from sorting the index, pandas provides <code>.sort_values()</code> method through which we can sort one or multiple columns in both ascending and descending order. For example, sorting by the <code>AveragePrice</code> in descending order and then the <code>region</code> in ascending order can be done as follows:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 57</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume        4046       4225      4770  \
+Date                                                                      
+2016-10-30          3.25      16700.94     2325.93   11142.85      0.00   
+2017-04-16          3.17       3018.56     1255.55      82.31      0.00   
+2016-11-06          3.12      19043.80     5898.49   10039.34      0.00   
+2017-03-12          3.05       2068.26     1043.83      77.36      0.00   
+2017-08-27          3.04      12656.32      419.06    4851.90    145.09   
+...                  ...           ...         ...        ...       ...   
+2017-02-26          0.49      44024.03      252.79    4472.68      0.00   
+2015-12-27          0.49    1137707.43   738314.80  286858.37  11642.46   
+2017-03-05          0.48      50890.73      717.57    4138.84      0.00   
+2017-02-05          0.46    2200550.27  1200632.86  531226.65  18324.93   
+2017-03-05          0.44      64057.04      223.84    4748.88      0.00   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2016-10-30     3232.16     3232.16        0.00         0.00       organic   
+2017-04-16     1680.70     1542.22      138.48         0.00       organic   
+2016-11-06     3105.97     3079.30       26.67         0.00       organic   
+2017-03-12      947.07      926.67       20.40         0.00       organic   
+2017-08-27     7240.27     6960.97      279.30         0.00       organic   
+...                ...         ...         ...          ...           ...   
+2017-02-26    39298.56      600.00    38698.56         0.00       organic   
+2015-12-27   100891.80    70749.02    30142.78         0.00  conventional   
+2017-03-05    46034.32     1385.06    44649.26         0.00       organic   
+2017-02-05   450365.83   113752.17   330583.10      6030.56  conventional   
+2017-03-05    59084.32      638.68    58445.64         0.00       organic   
+
+            year             region  
+Date                                 
+2016-10-30  2016       SanFrancisco  
+2017-04-16  2017              Tampa  
+2016-11-06  2016       SanFrancisco  
+2017-03-12  2017  MiamiFtLauderdale  
+2017-08-27  2017  RaleighGreensboro  
+...          ...                ...  
+2017-02-26  2017   CincinnatiDayton  
+2015-12-27  2015      PhoenixTucson  
+2017-03-05  2017            Detroit  
+2017-02-05  2017      PhoenixTucson  
+2017-03-05  2017   CincinnatiDayton  
+
+[18249 rows x 12 columns]</pre></div></section><section class="nb-markdown"><h2>Adding/Dropping Columns</h2>
+<p>We can create new DataFrame columns from scratch, but it is also common to derive them from other columns, i.e. by adding columns together, by changing their units and so on. For example, we might be interested in the <code>Total Volume</code> of units sold in units of thousand avocados sold. To do this, we can use any arithmetic operation applied to a column:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 59</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total Volume 1000 Unit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046      4225    4770  Total Bags  \
+Date                                                                            
+2015-01-04          1.75      27365.89  9307.34   3844.81  615.28    13598.46   
+2015-01-04          1.49      17723.17  1189.35  15628.27    0.00      905.55   
+2015-01-04          1.68       2896.72   161.68    206.96    0.00     2528.08   
+
+            Small Bags  Large Bags  XLarge Bags     type  year  \
+Date                                                             
+2015-01-04    13061.10      537.36          0.0  organic  2015   
+2015-01-04      905.55        0.00          0.0  organic  2015   
+2015-01-04     2528.08        0.00          0.0  organic  2015   
+
+                        region  Total Volume 1000 Unit  
+Date                                                    
+2015-01-04           Southeast                27.36589  
+2015-01-04             Chicago                17.72317  
+2015-01-04  HarrisburgScranton                 2.89672  </pre></div></section><section class="nb-markdown"><p>We can drop a column by using the <code>.drop()</code> method together with the column name (or index) we want to erase and the appropriate axis (0 - for rows, 1 - for columns).</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 61</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Total Volume 1000 Unit&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume     4046      4225    4770  Total Bags  \
+Date                                                                            
+2015-01-04          1.75      27365.89  9307.34   3844.81  615.28    13598.46   
+2015-01-04          1.49      17723.17  1189.35  15628.27    0.00      905.55   
+2015-01-04          1.68       2896.72   161.68    206.96    0.00     2528.08   
+
+            Small Bags  Large Bags  XLarge Bags     type  year  \
+Date                                                             
+2015-01-04    13061.10      537.36          0.0  organic  2015   
+2015-01-04      905.55        0.00          0.0  organic  2015   
+2015-01-04     2528.08        0.00          0.0  organic  2015   
+
+                        region  
+Date                            
+2015-01-04           Southeast  
+2015-01-04             Chicago  
+2015-01-04  HarrisburgScranton  </pre></div></section><section class="nb-markdown"><h2>Summary statistics</h2>
+<p>Aside from global summary statistics through <code>.describe()</code> method, pandas provides functionality to summarize specific parts of a DataFrame. Most common methods are the <code>.mean()</code>, <code>.median()</code>, <code>.mode()</code>, <code>.min()</code>, <code>.max()</code>, <code>.var()</code>, <code>.std()</code>, <code>.sum()</code> and <code>.quantile()</code>.</p>
+<p>For example, combing slicing techniques with the <code>.mean()</code> method we can easily compute the average volume of sold avocados for the Atlanta region in 2018:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 63</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_2018_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2018</span><span class="p">)]</span>
+<span class="n">atlanta_2018_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046      4225     4770  \
+Date                                                                   
+2018-01-07          1.53      15714.11     405.37   4195.19     0.00   
+2018-01-07          0.98     713915.80  364463.12  47869.41  1459.65   
+2018-01-14          1.10     670766.04  298975.97  60229.21  1604.90   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2018-01-07    11113.55     7883.61     3229.94         0.00       organic   
+2018-01-07   300123.62   217644.43    78287.66      4191.53  conventional   
+2018-01-14   309955.96   171508.47   134436.39      4011.10  conventional   
+
+            year   region  
+Date                       
+2018-01-07  2018  Atlanta  
+2018-01-07  2018  Atlanta  
+2018-01-14  2018  Atlanta  </pre></div></section><section class="nb-code"><div class="nb-code-header"><span>Celula 64</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_2018_df</span><span class="p">[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>342975.9354166667</pre></div></section><section class="nb-markdown"><p>We can also compute a summary statistic on multiple columns. The median for the <code>AveragePrice</code> and <code>Total Volume</code> can be computed as follows:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 66</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_2018_df</span><span class="p">[[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;AveragePrice&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>Total Volume    342975.935417
+AveragePrice         1.288750
+dtype: float64</pre></div></section><section class="nb-markdown"><p>Moreover, we can compute multiple statistics via the <code>.agg()</code> method which takes as input a list of functions and applies each function on the specified columns. To illustrate we'll use functions provided by numpy with pandas <code>.agg()</code> to get the min, max and median values of the <code>Total Volume</code>:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 68</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">atlanta_2018_df</span><span class="p">[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>/tmp/ipykernel_175222/3661235333.py:2: FutureWarning: The provided callable &lt;function min at 0x7fcfd831f5e0&gt; is currently using Series.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
+  atlanta_2018_df[&#x27;Total Volume&#x27;].agg([np.min, np.max, np.median])
+/tmp/ipykernel_175222/3661235333.py:2: FutureWarning: The provided callable &lt;function max at 0x7fcfd831f4c0&gt; is currently using Series.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  atlanta_2018_df[&#x27;Total Volume&#x27;].agg([np.min, np.max, np.median])
+/tmp/ipykernel_175222/3661235333.py:2: FutureWarning: The provided callable &lt;function median at 0x7fcfd8185af0&gt; is currently using Series.median. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;median&quot; instead.
+  atlanta_2018_df[&#x27;Total Volume&#x27;].agg([np.min, np.max, np.median])
+</pre><pre>min        11165.57
+max       957792.07
+median    280745.50
+Name: Total Volume, dtype: float64</pre></div></section><section class="nb-markdown"><p>And by combining slicing with <code>.agg()</code> we can get multiple statistics on multiple columns:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 70</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_2018_df</span><span class="p">[[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Volume&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>/tmp/ipykernel_175222/2515133910.py:1: FutureWarning: The provided callable &lt;function min at 0x7fcfd831f5e0&gt; is currently using Series.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
+  atlanta_2018_df[[&#x27;AveragePrice&#x27;, &#x27;Total Volume&#x27;]].agg([np.min, np.max, np.median, np.mean])
+/tmp/ipykernel_175222/2515133910.py:1: FutureWarning: The provided callable &lt;function max at 0x7fcfd831f4c0&gt; is currently using Series.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  atlanta_2018_df[[&#x27;AveragePrice&#x27;, &#x27;Total Volume&#x27;]].agg([np.min, np.max, np.median, np.mean])
+/tmp/ipykernel_175222/2515133910.py:1: FutureWarning: The provided callable &lt;function median at 0x7fcfd8185af0&gt; is currently using Series.median. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;median&quot; instead.
+  atlanta_2018_df[[&#x27;AveragePrice&#x27;, &#x27;Total Volume&#x27;]].agg([np.min, np.max, np.median, np.mean])
+/tmp/ipykernel_175222/2515133910.py:1: FutureWarning: The provided callable &lt;function mean at 0x7fcfd831fdc0&gt; is currently using Series.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  atlanta_2018_df[[&#x27;AveragePrice&#x27;, &#x27;Total Volume&#x27;]].agg([np.min, np.max, np.median, np.mean])
+</pre><pre>        AveragePrice   Total Volume
+min          0.86000   11165.570000
+max          1.67000  957792.070000
+median       1.26500  280745.500000
+mean         1.28875  342975.935417</pre></div></section><section class="nb-markdown"><h3>Cumulative Statistics</h3>
+<p>Pandas also includes counter part methods to compute cumulative statistics namely: <code>.cumsum()</code>, <code>.cummax()</code>, <code>cummin()</code> and <code>.cumprod()</code>.</p>
+<p>Say we wanted to add a column that contains the cumulative <code>Total Volume</code> up to the current date:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 72</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_2018_df</span> <span class="o">=</span> <span class="n">atlanta_2018_df</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># needed to get rid of a nasty warnning</span>
+<span class="n">atlanta_2018_df</span><span class="p">[</span><span class="s1">&#39;Cumultative Total Volume&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">atlanta_2018_df</span><span class="p">[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">atlanta_2018_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046      4225     4770  \
+Date                                                                   
+2018-01-07          1.53      15714.11     405.37   4195.19     0.00   
+2018-01-07          0.98     713915.80  364463.12  47869.41  1459.65   
+2018-01-14          1.10     670766.04  298975.97  60229.21  1604.90   
+2018-01-14          1.56      16151.70     291.55   3583.40     0.00   
+2018-01-21          1.10     639421.29  288131.95  56731.74  1612.56   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  \
+Date                                                                        
+2018-01-07    11113.55     7883.61     3229.94         0.00       organic   
+2018-01-07   300123.62   217644.43    78287.66      4191.53  conventional   
+2018-01-14   309955.96   171508.47   134436.39      4011.10  conventional   
+2018-01-14    12276.75     7227.80     5048.95         0.00       organic   
+2018-01-21   292945.04   158655.80   128969.24      5320.00  conventional   
+
+            year   region  Cumultative Total Volume  
+Date                                                 
+2018-01-07  2018  Atlanta                  15714.11  
+2018-01-07  2018  Atlanta                 729629.91  
+2018-01-14  2018  Atlanta                1400395.95  
+2018-01-14  2018  Atlanta                1416547.65  
+2018-01-21  2018  Atlanta                2055968.94  </pre></div></section><section class="nb-markdown"><h3>Grouped Summaries</h3>
+<p>While we can slice our data any way we want, sometimes it becomes very inefficient (or even insurmountable) to write down every selection we need. For example, we may want to obtain the totals quantities for both <code>convetional</code> and <code>organic</code> type avocados for each date index. This is where the <code>.groupby()</code> method comes into play. The <code>.groupby()</code> method allows us to group our data based on any of the column labels, select specific columns and compute needed statistics, all in one go.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 74</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">quatities_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;4046&#39;</span><span class="p">,</span> <span class="s1">&#39;4225&#39;</span><span class="p">,</span> <span class="s1">&#39;4770&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Bags&#39;</span><span class="p">,</span> <span class="s1">&#39;Small Bags&#39;</span><span class="p">,</span> <span class="s1">&#39;Large Bags&#39;</span><span class="p">,</span> <span class="s1">&#39;XLarge Bags&#39;</span><span class="p">]</span>
+
+<span class="n">totals_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">totals_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])[</span><span class="n">quatities_list</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>                             Total Volume       4046       4225      4770  \
+region           Date                                                       
+Albany           2015-01-04      42247.23    2876.92   28441.30     49.90   
+                 2015-01-11      42377.64    1041.85   31945.46    127.12   
+                 2015-01-18      45629.75     922.16   31719.10    135.77   
+                 2015-01-25      46263.39     956.25   33344.88    164.14   
+                 2015-02-01      72102.11    1387.02   60116.56    179.32   
+...                                   ...        ...        ...       ...   
+WestTexNewMexico 2018-02-25     914092.79  433191.27  174015.44  10590.75   
+                 2018-03-04     953327.40  456101.67  166762.14   9907.85   
+                 2018-03-11     919735.54  469664.22  157324.88  11389.19   
+                 2018-03-18     871147.55  459691.14  139096.59   8422.08   
+                 2018-03-25     980488.46  440851.42  201757.56  11017.42   
+
+                             Total Bags  Small Bags  Large Bags  XLarge Bags  
+region           Date                                                         
+Albany           2015-01-04    10879.11    10349.58      529.53         0.00  
+                 2015-01-11     9263.21     8874.48      388.73         0.00  
+                 2015-01-18    12852.72    12582.76      269.96         0.00  
+                 2015-01-25    11798.12    11055.65      742.47         0.00  
+                 2015-02-01    10419.21    10266.85      152.36         0.00  
+...                                 ...         ...         ...          ...  
+WestTexNewMexico 2018-02-25   296295.33   139671.58   147306.32      9317.43  
+                 2018-03-04   320555.74   178367.28   138653.24      3535.22  
+                 2018-03-11   281357.25   168890.92   110574.41      1891.92  
+                 2018-03-18   263937.74   163306.66    98762.27      1868.81  
+                 2018-03-25   326862.06   163579.69   161235.74      2046.63  
+
+[9126 rows x 8 columns]</pre></div></section><section class="nb-code"><div class="nb-code-header"><span>Celula 75</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">totals_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])[</span><span class="n">quatities_list</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>/tmp/ipykernel_175222/3086156435.py:1: FutureWarning: The provided callable &lt;function median at 0x7fcfd8185af0&gt; is currently using SeriesGroupBy.median. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;median&quot; instead.
+  totals_df.groupby([&#x27;region&#x27;, &#x27;Date&#x27;])[quatities_list].agg([np.median, np.mean])
+/tmp/ipykernel_175222/3086156435.py:1: FutureWarning: The provided callable &lt;function mean at 0x7fcfd831fdc0&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+  totals_df.groupby([&#x27;region&#x27;, &#x27;Date&#x27;])[quatities_list].agg([np.median, np.mean])
+/tmp/ipykernel_175222/3086156435.py:1: FutureWarning: The provided callable &lt;function median at 0x7fcfd8185af0&gt; is currently using SeriesGroupBy.median. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;median&quot; instead.
+  totals_df.groupby([&#x27;region&#x27;, &#x27;Date&#x27;])[quatities_list].agg([np.median, np.mean])
+</pre><pre>                            Total Volume                    4046              \
+                                  median        mean      median        mean   
+region           Date                                                          
+Albany           2015-01-04    21123.615   21123.615    1438.460    1438.460   
+                 2015-01-11    21188.820   21188.820     520.925     520.925   
+                 2015-01-18    22814.875   22814.875     461.080     461.080   
+                 2015-01-25    23131.695   23131.695     478.125     478.125   
+                 2015-02-01    36051.055   36051.055     693.510     693.510   
+...                                  ...         ...         ...         ...   
+WestTexNewMexico 2018-02-25   457046.395  457046.395  216595.635  216595.635   
+                 2018-03-04   476663.700  476663.700  228050.835  228050.835   
+                 2018-03-11   459867.770  459867.770  234832.110  234832.110   
+                 2018-03-18   435573.775  435573.775  229845.570  229845.570   
+                 2018-03-25   490244.230  490244.230  220425.710  220425.710   
+
+                                   4225                  4770            \
+                                 median        mean    median      mean   
+region           Date                                                     
+Albany           2015-01-04   14220.650   14220.650    24.950    24.950   
+                 2015-01-11   15972.730   15972.730    63.560    63.560   
+                 2015-01-18   15859.550   15859.550    67.885    67.885   
+                 2015-01-25   16672.440   16672.440    82.070    82.070   
+                 2015-02-01   30058.280   30058.280    89.660    89.660   
+...                                 ...         ...       ...       ...   
+WestTexNewMexico 2018-02-25   87007.720   87007.720  5295.375  5295.375   
+                 2018-03-04   83381.070   83381.070  4953.925  4953.925   
+                 2018-03-11   78662.440   78662.440  5694.595  5694.595   
+                 2018-03-18   69548.295   69548.295  4211.040  4211.040   
+                 2018-03-25  100878.780  100878.780  5508.710  5508.710   
+
+                             Total Bags             Small Bags             \
+                                 median        mean     median       mean   
+region           Date                                                       
+Albany           2015-01-04    5439.555    5439.555   5174.790   5174.790   
+                 2015-01-11    4631.605    4631.605   4437.240   4437.240   
+                 2015-01-18    6426.360    6426.360   6291.380   6291.380   
+                 2015-01-25    5899.060    5899.060   5527.825   5527.825   
+                 2015-02-01    5209.605    5209.605   5133.425   5133.425   
+...                                 ...         ...        ...        ...   
+WestTexNewMexico 2018-02-25  148147.665  148147.665  69835.790  69835.790   
+                 2018-03-04  160277.870  160277.870  89183.640  89183.640   
+                 2018-03-11  140678.625  140678.625  84445.460  84445.460   
+                 2018-03-18  131968.870  131968.870  81653.330  81653.330   
+                 2018-03-25  163431.030  163431.030  81789.845  81789.845   
+
+                            Large Bags            XLarge Bags            
+                                median       mean      median      mean  
+region           Date                                                    
+Albany           2015-01-04    264.765    264.765       0.000     0.000  
+                 2015-01-11    194.365    194.365       0.000     0.000  
+                 2015-01-18    134.980    134.980       0.000     0.000  
+                 2015-01-25    371.235    371.235       0.000     0.000  
+                 2015-02-01     76.180     76.180       0.000     0.000  
+...                                ...        ...         ...       ...  
+WestTexNewMexico 2018-02-25  73653.160  73653.160    4658.715  4658.715  
+                 2018-03-04  69326.620  69326.620    1767.610  1767.610  
+                 2018-03-11  55287.205  55287.205     945.960   945.960  
+                 2018-03-18  49381.135  49381.135     934.405   934.405  
+                 2018-03-25  80617.870  80617.870    1023.315  1023.315  
+
+[9126 rows x 16 columns]</pre></div></section><section class="nb-markdown"><h2>Visualization</h2>
+<p>We are now ready to graph our data in order to gain some insights. Pandas nicely wraps matplotlib functionalities to support many types of data graphs, including: bar plots, line plots, scatter plots and histograms.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 77</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</section><section class="nb-markdown"><h3>Bar plots</h3>
+<p>Bar plots are great for revealing relationships between categorical (ex: <code>region</code>) and numeric (<code>Total Volume</code> sold) variables. However, we often have to manipulate your data first in order to get the numbers you need for plotting.</p>
+<p>For example we can get</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 79</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">volume_by_type_df</span> <span class="o">=</span> <span class="n">totals_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;region&#39;</span><span class="p">)[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">volume_by_type_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;region&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-078-1.webp" alt="Grafic original din celula 79"></div></section><section class="nb-markdown"><h3>Line plots</h3>
+<p>Line plots are used to grasp the relation between numeric variables, especially in the context of a time series. For example to see how the <code>Total Volume</code> of avocados changed over time we can do the following:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 81</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">total_by_date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)[</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_by_date</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;Date&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-080-1.webp" alt="Grafic original din celula 81"></div></section><section class="nb-markdown"><p>We can write our own annotation for the x and y axes, provide a title, rotate the x axis labels a number of degrees and so on:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 83</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">total_by_date</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total volume&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;Date&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-082-1.webp" alt="Grafic original din celula 83"></div></section><section class="nb-markdown"><h3>Scatter Plots</h3>
+<p>These plots are designed to visualize a more general relationship between variables (not necessarily a time series). For example, we can use scatter plot to see if there is a relationship between the <code>Total Volume</code> sold and the average price of avocados:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 85</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Total Volume&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sold avocados vs. average price&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: title={&#x27;center&#x27;: &#x27;Sold avocados vs. average price&#x27;}, xlabel=&#x27;Total Volume&#x27;, ylabel=&#x27;AveragePrice&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-084-1.webp" alt="Grafic original din celula 85"></div></section><section class="nb-markdown"><h3>Histograms</h3>
+<p>Histograms are very useful to visualize the distribution of a variable. For example, we might be interested in the distributions of the <code>AveragePrice</code> relative to each type of avocados:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 87</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;conventional&#39;</span><span class="p">][</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;organic&#39;</span><span class="p">][</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;conventional&#39;</span><span class="p">,</span> <span class="s1">&#39;organic&#39;</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;matplotlib.legend.Legend at 0x7fcf9c0e47c0&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-086-1.webp" alt="Grafic original din celula 87"></div></section><section class="nb-markdown"><p>Here, <code>alpha</code> is the histogram transparency parameter which ranges from zero (invisible) to one (opaque). More over we can get a more fine grained histogram by setting the number of <code>bins</code>.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 89</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;conventional&#39;</span><span class="p">][</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;organic&#39;</span><span class="p">][</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;conventional&#39;</span><span class="p">,</span> <span class="s1">&#39;organic&#39;</span><span class="p">])</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;matplotlib.legend.Legend at 0x7fcf9c108340&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-088-1.webp" alt="Grafic original din celula 89"></div></section><section class="nb-markdown"><h3>More Visualization</h3>
+<p>Now, say we wanted to visualize the evolution of the <code>AvaragePrice</code> price column for the Atlanta region for conventional type avocados. We can simply do:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 91</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;conventional&#39;</span><span class="p">)]</span>
+<span class="n">atlanta_df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;Date&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-090-1.webp" alt="Grafic original din celula 91"></div></section><section class="nb-markdown"><p>Looking at the graph, the data seems to be a little cramped up. Hence, this is where statistics like moving averages come at handy. To compute a moving average in pandas we will combine the calls to <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html"><code>rolling()</code></a> and <code>mean()</code> methods. The first sets the moving window size in the number of points, whereas the latter just computes the mean - in our case the mean of the provided window.</p>
+<p>To demonstrate we'll compute the moving average over a window of 14 points and then plot the result.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 93</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">ma14_df</span> <span class="o">=</span> <span class="n">atlanta_df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 94</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">ma14_df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;Date&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-093-1.webp" alt="Grafic original din celula 94"></div></section><section class="nb-markdown"><p>Often times we may want to view several evolutions on the same graph. Say for example we are interested in viewing both <code>organic</code> and <code>convetional</code> type avocados 14 days rolling averages over time. For this we can build a new frame which contains the rolling averages for both types of avocados and then plot the result:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 96</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> <span class="c1"># empty data frame</span>
+<span class="n">tmp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">atlanta_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># select Atlanta</span>
+
+<span class="c1"># iterate through unique types, compute rolling mean averages and add them to the graph</span>
+<span class="k">for</span> <span class="n">avocado_type</span> <span class="ow">in</span> <span class="n">atlanta_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span> 
+    <span class="n">avocado_type_df</span> <span class="o">=</span> <span class="n">atlanta_df</span><span class="p">[</span><span class="n">atlanta_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">avocado_type</span><span class="p">]</span>
+    <span class="n">graph_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">avocado_type</span><span class="si">}</span><span class="s2">_ma14&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">avocado_type_df</span><span class="p">[</span><span class="s1">&#39;AveragePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+<span class="n">graph_df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: xlabel=&#x27;Date&#x27;&gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-095-1.webp" alt="Grafic original din celula 96"></div></section><section class="nb-markdown"><p>Note that the <code>.unique()</code> DataFrame method was used here to create a numpy array of unique values for the type labels, such that we could iterate over each avocado type in turn.</p>
+</section><section class="nb-markdown"><h2>Dealing with Missing Data</h2>
+<p>As one might expect, computing the a moving average for the first $n-1$ points of the window is not possible. The way pandas deals with this problem is to fill these entries <code>NaN</code> as can be seen bellow.</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 99</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            conventional_ma14  organic_ma14
+Date                                       
+2015-01-04                NaN           NaN
+2015-01-11                NaN           NaN
+2015-01-18                NaN           NaN
+2015-01-25                NaN           NaN
+2015-02-01                NaN           NaN
+2015-02-08                NaN           NaN
+2015-02-15                NaN           NaN
+2015-02-22                NaN           NaN
+2015-03-01                NaN           NaN
+2015-03-08                NaN           NaN
+2015-03-15                NaN           NaN
+2015-03-22                NaN           NaN
+2015-03-29                NaN           NaN
+2015-04-05           1.059286         1.555</pre></div></section><section class="nb-markdown"><p>Given that in a general dataset missing values may occur in any given row or column, pandas has a couple of useful methods to detect, remove or fill these values.</p>
+<p>The first method <code>.isna()</code> generates a True/False table for every value in the DataFrame, where False corresponds to non-missing values, while True correspond to <code>NaN</code>'s. In the case of our graph DataFrame example this looks like this:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 101</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            conventional_ma14  organic_ma14
+Date                                       
+2015-01-04               True          True
+2015-01-11               True          True
+2015-01-18               True          True
+2015-01-25               True          True
+2015-02-01               True          True
+...                       ...           ...
+2018-02-25              False         False
+2018-03-04              False         False
+2018-03-11              False         False
+2018-03-18              False         False
+2018-03-25              False         False
+
+[169 rows x 2 columns]</pre></div></section><section class="nb-markdown"><p>Of course, by its self this method is not very helpful in determining which values are missing in the case of a real dataset. However, we can quickly find out in which column contains missing values by additionally applying the <code>.any()</code> method, which returns whether any element is True, potentially over the columns. For example:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 103</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>conventional_ma14    True
+organic_ma14         True
+dtype: bool</pre></div></section><section class="nb-markdown"><p>returns true for both of its columns because both contain <code>NaN</code> values.
+Furthermore, we can combine the output of <code>.isna()</code> with summarizing methods to count the number of missing values in each column, namely:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 105</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>conventional_ma14    13
+organic_ma14         13
+dtype: int64</pre></div></section><section class="nb-markdown"><p>that correctly outputs 13 for both columns, since the first $n-1$ values out of 14 for our rolling 14 day window could't be computed. And since we now know the counts of missing values for each column, we can further visualize the distribution of these counts by simply doing a bar plot of the result:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 107</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>&lt;Axes: &gt;</pre><img loading="lazy" src="../assets/lesson-images/pandas-celula-106-1.webp" alt="Grafic original din celula 107"></div></section><section class="nb-markdown"><p>Upon discovering these values we can either remove or replace them. Removing missing values is accomplished through the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html"><code>dropna()</code></a> method:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 109</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            conventional_ma14  organic_ma14
+Date                                       
+2015-04-05           1.059286      1.555000
+2015-04-12           1.058571      1.557143
+2015-04-19           1.059286      1.542143
+2015-04-26           1.060000      1.552857
+2015-05-03           1.052857      1.564286</pre></div></section><section class="nb-markdown"><p>Whereas replacing them is accomplished through <code>.fillna()</code> method, which replaces <code>NaN</code> with the value supplied as its argument:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 111</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">graph_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            conventional_ma14  organic_ma14
+Date                                       
+2015-01-04                0.0           0.0
+2015-01-11                0.0           0.0
+2015-01-18                0.0           0.0
+2015-01-25                0.0           0.0
+2015-02-01                0.0           0.0</pre></div></section><section class="nb-markdown"><h2>Encoding Categorical Features</h2>
+<p>It is very common to see categorical features in a dataset. However, Machine Learning algorithms can only read numerical values. So, an important part of the data engineering processes is to transform these features into meaningful numeric representations. As it turns out there are two popular techniques for doing so:</p>
+<ul>
+<li><p>Label Encoding -- which transforms the categorical data by assigning unique integers based on alphabetical ordering of the class values.</p>
+</li>
+<li><p>One-Hot Encoding -- which transforms the categorical data by representing it as vectors of zero values and a single one value. For each sample data point, the position of the one value in the one-hot encoded vector representation indicates the category to which it belongs.</p>
+</li>
+</ul>
+<p>Of the two techniques, one-hot encoding is preferred since it does not introduce an artificial ordering of the data by which an Machine Learning algorithm may by &quot;tricked&quot; (see <a href="https://medium.com/@contactsunny/label-encoder-vs-one-hot-encoder-in-machine-learning-3fc273365621">here</a> for an example).</p>
+<p>Luckily, pandas integrates an easy to use one step method to transform our categories into their one-hot encoded counter parts, namely: <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html?highlight=get%20dummies#pandas.get_dummies"><code>.get_dummies()</code></a>. For example, we can encode the type (organic/conventional) of avocados form the Atlanta region as:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 113</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span>
+<span class="n">atlanta_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046      4225     4770  \
+Date                                                                   
+2015-01-04          1.00     435021.49  364302.39  23821.16    82.15   
+2015-01-04          1.76       3846.69    1500.15    938.35     0.00   
+2015-01-11          1.84       3743.82    1613.69   1207.72     0.00   
+2015-01-11          1.11     397542.72  330411.24  18958.22  1135.18   
+2015-01-18          1.86       4294.01    2138.51    989.40     0.00   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags          type  
+Date                                                                       
+2015-01-04    46815.79    16707.15    30108.64          0.0  conventional  
+2015-01-04     1408.19     1071.35      336.84          0.0       organic  
+2015-01-11      922.41      865.00       57.41          0.0       organic  
+2015-01-11    47038.08    21309.61    25728.47          0.0  conventional  
+2015-01-18     1166.10     1019.34      146.76          0.0       organic  </pre></div></section><section class="nb-markdown"><p>Note, that we dropped the <code>region</code> column since all samples are from the same region and the <code>year</code> column since it conveys the same information as the <code>Date</code> index. And getting the the actual encoding is as simple as:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 115</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_one_hot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">atlanta_df</span><span class="p">)</span>
+<span class="n">atlanta_one_hot_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046      4225     4770  \
+Date                                                                   
+2015-01-04          1.00     435021.49  364302.39  23821.16    82.15   
+2015-01-04          1.76       3846.69    1500.15    938.35     0.00   
+2015-01-11          1.84       3743.82    1613.69   1207.72     0.00   
+2015-01-11          1.11     397542.72  330411.24  18958.22  1135.18   
+2015-01-18          1.86       4294.01    2138.51    989.40     0.00   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags  \
+Date                                                          
+2015-01-04    46815.79    16707.15    30108.64          0.0   
+2015-01-04     1408.19     1071.35      336.84          0.0   
+2015-01-11      922.41      865.00       57.41          0.0   
+2015-01-11    47038.08    21309.61    25728.47          0.0   
+2015-01-18     1166.10     1019.34      146.76          0.0   
+
+            type_conventional  type_organic  
+Date                                         
+2015-01-04               True         False  
+2015-01-04              False          True  
+2015-01-11              False          True  
+2015-01-11               True         False  
+2015-01-18              False          True  </pre></div></section><section class="nb-markdown"><p>Also, notice that by default <code>.get_dummies()</code> appends new columns to each sample in each row which are named with the prefix of previous column name ('type' in our case) concatenated with a suffix of the specific class, where the separator is '_'. All these are user configurable, for example we may want to get something like:</p>
+</section><section class="nb-code"><div class="nb-code-header"><span>Celula 117</span><span>Python / Jupyter</span></div><div class="highlight"><pre><span></span><span class="n">atlanta_one_hot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">atlanta_df</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">prefix_sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">atlanta_one_hot_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<div class="nb-outputs"><span>Rezultat salvat</span><pre>            AveragePrice  Total Volume       4046      4225     4770  \
+Date                                                                   
+2015-01-04          1.00     435021.49  364302.39  23821.16    82.15   
+2015-01-04          1.76       3846.69    1500.15    938.35     0.00   
+2015-01-11          1.84       3743.82    1613.69   1207.72     0.00   
+2015-01-11          1.11     397542.72  330411.24  18958.22  1135.18   
+2015-01-18          1.86       4294.01    2138.51    989.40     0.00   
+
+            Total Bags  Small Bags  Large Bags  XLarge Bags  conventional  \
+Date                                                                        
+2015-01-04    46815.79    16707.15    30108.64          0.0          True   
+2015-01-04     1408.19     1071.35      336.84          0.0         False   
+2015-01-11      922.41      865.00       57.41          0.0         False   
+2015-01-11    47038.08    21309.61    25728.47          0.0          True   
+2015-01-18     1166.10     1019.34      146.76          0.0         False   
+
+            organic  
+Date                 
+2015-01-04    False  
+2015-01-04     True  
+2015-01-11     True  
+2015-01-11    False  
+2015-01-18     True  </pre></div></section></main></body></html>

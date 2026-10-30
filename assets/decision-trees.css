@@ -1,0 +1,16 @@
+/* ONIA · Arbori de decizie — 2.5 */
+.onia-dt-lesson{min-width:0;font-size:14px;line-height:1.75}
+.onia-dt-lesson .dt-intro{background:linear-gradient(130deg,#eaf3ff,#fff9e8)}
+.onia-dt-lesson .dt-intro-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.onia-dt-lesson .dt-intro-actions a{background:#235eb9;color:#fff;text-decoration:none;border-radius:8px;padding:10px 16px;font-weight:800;font-size:12px}
+.onia-dt-lesson .dt-intro-actions a+a{background:#edf3fc;color:#205596}
+.onia-dt-lesson .dt-topic{scroll-margin-top:110px}
+.onia-dt-lesson .dt-figure{border:1px solid var(--line,#d8e4f1);background:#fff;border-radius:13px;padding:13px;margin:20px 0 25px}
+.onia-dt-lesson .dt-figure img{max-width:100%;height:auto;display:block;margin:auto;max-height:530px;object-fit:contain}
+.onia-dt-lesson .dt-figure figcaption{font-size:12px;color:#526985;text-align:center;margin:10px 5px 2px}
+.onia-dt-lesson .dt-math{text-align:center;overflow-x:auto;padding:14px 8px;margin:15px 0;border-radius:10px;border:1px solid #d6e5f6;background:#f3f8ff;font:600 18px/1.7 Georgia,'Times New Roman',serif;color:#173a64}
+.onia-dt-lesson .dt-note{border-left:4px solid #2a67bb;background:#edf5ff;padding:14px 18px;margin:16px 0;border-radius:9px;color:#23456a;font-size:13px}
+.onia-dt-lesson .dt-note.warning{border-left-color:#d99d2a;background:#fff8e8}
+.onia-dt-lesson .dt-code-comment{background:#eaf1fb;color:#304a6c;padding:12px;font-size:12px}
+.onia-dt-lesson .dt-steps{padding-left:26px}.onia-dt-lesson .dt-steps li{margin:8px 0}
+@media(max-width:720px){.onia-dt-lesson .dt-math{font-size:15px}.onia-dt-lesson .dt-intro-actions a{width:100%;text-align:center}}

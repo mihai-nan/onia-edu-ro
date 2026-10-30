@@ -1,0 +1,6 @@
+/* ONIA · Ansambluri 2.6 */
+.onia-ens-lesson{font-size:14px;min-width:0}.onia-ens-lesson .ens-intro{background:linear-gradient(135deg,#edf4ff,#fff9eb)}
+.onia-ens-lesson .ens-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.onia-ens-lesson .ens-actions a{background:#205db4;color:#fff;border-radius:9px;padding:10px 15px;text-decoration:none;font-size:12px;font-weight:800}.onia-ens-lesson .ens-actions a+a{background:#e3edfa;color:#1e559d}
+.onia-ens-lesson .ens-topic{scroll-margin-top:100px}.onia-ens-lesson .ens-figure{margin:20px 0 26px;padding:15px;background:#fff;border:1px solid #d7e4f3;border-radius:14px}.onia-ens-lesson .ens-figure img{display:block;width:100%;height:auto;max-height:540px;object-fit:contain}.onia-ens-lesson .ens-figure figcaption{text-align:center;font-size:12px;color:#526983;margin-top:8px}
+.onia-ens-lesson .ens-equation{background:#eef5ff;border:1px solid #d6e7fa;border-radius:11px;padding:15px;margin:16px 0;font-size:17px;font-family:Georgia,serif;text-align:center;line-height:1.8;color:#183a67;overflow-x:auto}.onia-ens-lesson .py-table-wrap{max-width:100%}
+@media(max-width:720px){.onia-ens-lesson .ens-equation{font-size:14px}.onia-ens-lesson .ens-actions a{width:100%;text-align:center}}

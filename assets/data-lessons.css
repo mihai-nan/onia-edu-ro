@@ -1,0 +1,19 @@
+
+/* ONIA · NumPy/Pandas/CSV, imagini incluse local */
+.onia-data-lesson .onia-figure{margin:22px 0 26px;border:1px solid var(--line);background:var(--panel-alt);border-radius:14px;padding:12px;overflow:hidden}
+.onia-data-lesson .onia-figure img{display:block;max-width:100%;height:auto;margin:auto;border-radius:7px;max-height:440px;object-fit:contain}
+.onia-data-lesson .onia-figure figcaption{text-align:center;font-size:11px;color:var(--sub);line-height:1.6;padding:10px 4px 2px}
+.onia-data-lesson .onia-author{font-size:12px;margin-top:14px;color:var(--text);border-top:1px solid var(--line);padding-top:11px}
+.onia-data-lesson .py-topic p,.onia-data-lesson .py-topic li{font-size:13px}
+.onia-data-lesson .lesson-link{display:inline-flex;margin:10px 8px 8px 0;border:1px solid var(--line);background:var(--panel-alt);border-radius:8px;padding:10px 12px;color:var(--primary);font-weight:800;font-size:12px}
+.onia-data-lesson .lesson-link:hover{border-color:var(--primary)}
+.onia-data-lesson .py-note-list{padding-left:20px;line-height:1.9}
+.onia-data-lesson .source-caption{font-size:11px!important;color:var(--sub)!important}
+.onia-data-lesson .codehilite pre{white-space:pre;tab-size:4}
+.standalone-onia{max-width:1000px;margin:auto;padding:40px 28px 60px}
+@media(max-width:700px){.standalone-onia{padding:14px 11px 40px}}
+
+.exercise-reveal-content code.exercise-inline-code{font-family:Consolas,'SFMono-Regular',monospace;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:2px 5px;color:var(--primary);font-size:.93em;white-space:nowrap}
+.exercise-reveal-content .exercise-code-card{margin-top:12px;max-width:100%}
+.exercise-reveal-content .codehilite pre{white-space:pre!important;tab-size:4!important}
+.native-lesson-actions span{line-height:1.4}

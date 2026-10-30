@@ -1,0 +1,11 @@
+/* ONIA 2.2 · prezentare clasificare logistică */
+.onia-logistic-lesson .lr-intro{border-top:3px solid #265ca9}
+.onia-logistic-lesson .lr-intro .lr-feature-links a{white-space:normal}
+.onia-logistic-lesson .log-output{background:#eff5fc;border-left:3px solid #2872bb;border-radius:0 0 9px 9px;margin:-8px 0 22px;padding:10px 14px;color:#24466f;font-size:12px}
+.onia-logistic-lesson .log-output strong{font-size:10px;letter-spacing:.6px;text-transform:uppercase;display:block;margin-bottom:4px}
+.onia-logistic-lesson .log-output pre{margin:0;white-space:pre-wrap;font-size:12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.onia-logistic-lesson .lr-equation img{max-height:135px;min-height:38px}
+.onia-logistic-lesson .lr-table td code{white-space:normal;overflow-wrap:anywhere}
+.onia-logistic-lesson .lr-table{min-width:520px}
+.onia-logistic-lesson .lr-figure img{max-height:450px;object-fit:contain;margin:auto}
+@media(max-width:600px){.onia-logistic-lesson .lr-intro .lr-feature-links a{width:100%;justify-content:center}}

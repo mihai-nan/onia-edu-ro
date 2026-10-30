@@ -1,0 +1,10 @@
+/* ONIA · 2.3 Regularizare și generalizare */
+.onia-regularization-lesson .reg-figure{margin:20px 0 26px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px;text-align:center}
+.onia-regularization-lesson .reg-figure img{max-width:100%;height:auto;display:block;margin:auto;border-radius:8px}
+.onia-regularization-lesson .reg-figure figcaption{color:var(--sub);font-size:12px;margin:8px 0 2px}
+.onia-regularization-lesson .lr-table-wrap{overflow-x:auto}
+.onia-regularization-lesson .lr-equation img{max-width:100%;max-height:135px}
+.onia-regularization-lesson .py-topic{scroll-margin-top:92px}
+.onia-regularization-lesson .py-code-card pre{white-space:pre;tab-size:4;overflow:auto}
+.onia-regularization-lesson .lr-feature-links a{white-space:normal}
+@media(max-width:640px){.onia-regularization-lesson .lr-feature-links a{width:100%;justify-content:center}}

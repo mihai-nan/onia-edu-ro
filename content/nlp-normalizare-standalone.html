@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<div class="onia-nlp"><header class="nlp-hero"><span class="eyebrow">ONIA · NLP · LECȚIA 5.3</span><h2>Curățarea și normalizarea textului</h2><p>Diacritice, Unicode, URL-uri, numere, emoji și prelucrare fără pierderi inutile. În această lecție explicăm nu doar <em>ce</em> transformări există, ci și <em>de ce</em> unele ajută, iar altele pot strica informația.</p><div><span class="nlp-pill">Unicode</span><span class="nlp-pill">casefold</span><span class="nlp-pill">regex</span><span class="nlp-pill">negație</span><span class="nlp-pill">preprocessor</span></div></header>
+<figure><img src="../assets/nlp-figures/normalizare.png" alt="Reprezentare vizuală pentru normalizare" loading="lazy"></figure>
+<section class="nlp-topic" id="tema-1"><div class="eyebrow">01 / CONCEPT</div><h2>Normalizare înseamnă o decizie, nu un reflex</h2><p><code>lower()</code> trece literele în minusculă. <code>casefold()</code> este și mai potrivit când vrem comparații robuste între forme scrise diferit. <code>unicodedata.normalize("NFC", text)</code> uniformizează reprezentarea unor caractere fără a le elimina. Toate acestea pot ajuta, dar nu trebuie aplicate mecanic.</p><p>Dacă problema este analiza de sentiment, semnele de exclamare, repetițiile de litere și emoji-urile pot transmite informație. Dacă problema este identificarea codurilor de produs, cifrele, slash-urile sau cratimele sunt importante. Normalizarea corectă depinde de scop.</p><div class="nlp-note"><b>De reținut / aplicație:</b><p>Întreabă-te mereu: „Ce tipare utile poate ascunde transformarea mea?”. O preprocesare bună nu face textul „frumos”, ci îl face mai util pentru model.</p></div></section>
+<section class="nlp-topic" id="tema-2"><div class="eyebrow">02 / CONCEPT</div><h2>Regex și marcaje controlate</h2><p>Expresiile regulate sunt utile pentru identificarea URL-urilor, adreselor e-mail, numerelor, mențiunilor și secvențelor repetitive. În multe aplicații nu vrem neapărat valoarea exactă, ci faptul că acea entitate există. De aceea înlocuim uneori <code>https://site.ro</code> cu <code>URL</code> și <code>42</code> cu <code>NUMAR</code>.</p><p>Totuși, ordinea contează. Dacă elimini punctuația înainte să detectezi un e-mail, modelul de regex nu îl mai recunoaște corect. În plus, unele date trebuie anonimizate cu grijă, nu doar „curățate”.</p><div class="nlp-note"><b>De reținut / aplicație:</b><p>Înlocuirea prin marcaje reduce vocabularul și păstrează semnalul structural. Este adesea o alegere mai bună decât ștergerea completă.</p></div></section>
+<section class="nlp-topic" id="tema-3"><div class="eyebrow">03 / CONCEPT</div><h2>Transformări în lanț și verificare</h2><p>Un flux sănătos poate arăta astfel: text original → normalizare Unicode → înlocuire URL/e-mail → comprimare spații → eventual <code>casefold()</code> → verificare pe exemple reale. Păstrăm câteva documente „martor” pentru a vedea exact ce a făcut fiecare pas.</p><div class="nlp-tip"><b>Observație practică:</b> dacă lucrezi cu <code>TfidfVectorizer</code>, poți pune o parte din logică în parametrul <code>preprocessor</code> sau poți normaliza textele înainte. Important este să folosești aceeași transformare și la antrenare, și la predicție.</div></section>
+<section class="nlp-topic"><h2>Exemple Python explicate</h2><p>Mai jos sunt atât exemple de implementare „from scratch”, cât și exemple de integrare într-o bibliotecă folosită în practică.</p><h3>Exemplul 1. Pipeline minimal de normalizare</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre>import re
+import unicodedata
+
+def normalizeaza(text):
+    text = unicodedata.normalize(&quot;NFC&quot;, text)
+    text = re.sub(r&quot;https?://\S+&quot;, &quot; URL &quot;, text)
+    text = re.sub(r&quot;\d+(?:[.,]\d+)?&quot;, &quot; NUMAR &quot;, text)
+    text = re.sub(r&quot;\s+&quot;, &quot; &quot;, text).strip()
+    return text.casefold()
+
+exemplu = &quot;  Bună! Vezi oferta 50% la https://exemplu.ro 😀  &quot;
+print(normalizeaza(exemplu))
+</pre></div></div><h3>Exemplul 2. Comparație între două strategii</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre>texte = [
+    &quot;NU recomand!&quot;, 
+    &quot;Reducere 50% azi&quot;, 
+    &quot;Model AB-123 disponibil&quot;
+]
+
+for text in texte:
+    doar_lower = text.lower()
+    agresiv = &quot;&quot;.join(ch for ch in text.lower() if ch.isalpha() or ch.isspace())
+    print(&quot;ORIGINAL:&quot;, text)
+    print(&quot;LOWER:   &quot;, doar_lower)
+    print(&quot;AGRESIV: &quot;, agresiv)
+    print(&quot;-&quot;)
+</pre></div></div><h3>Exemplul 3. Preprocessor personalizat în TfidfVectorizer</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre>import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def preproc(text):
+    text = text.casefold()
+    text = re.sub(r&quot;https?://\S+&quot;, &quot; URL &quot;, text)
+    text = re.sub(r&quot;\s+&quot;, &quot; &quot;, text).strip()
+    return text
+
+texte = [
+    &quot;Vezi https://site.ro acum&quot;,
+    &quot;Site-ul are ofertă bună&quot;,
+    &quot;Acum citesc documentația&quot;
+]
+vectorizer = TfidfVectorizer(preprocessor=preproc, ngram_range=(1, 2))
+X = vectorizer.fit_transform(texte)
+print(vectorizer.get_feature_names_out()[:10])
+print(X.shape)
+</pre></div></div><div class="nlp-example-box"><h3>Interpretare</h3><p>Exemplul 1 arată un flux „manual”. Exemplul 2 arată că o curățare prea agresivă poate distruge informație: dispare negația scrisă cu majuscule, dispare procentul și dispare structura codului <code>AB-123</code>. Exemplul 3 arată cum aceeași logică poate fi integrată într-un <code>TfidfVectorizer</code>, ca să nu uităm să o aplicăm și pe date noi.</p></div></section>
+<div class="nlp-call"><h2>Experiment interactiv</h2><pNone>Modifică intrarea și observă efectul fiecărei transformări: diacritice, URL, cifre, spații, lowercase.</p><a href="../interactive/nlp-normalizare.html" target="_blank" rel="noopener">Deschide laboratorul într-o pagină separată ↗</a></div>
+<section class="nlp-topic nlp-case"><span class="eyebrow">STUDIU DE CAZ REZOLVAT</span><h2>Studiu de caz: ce pierdem când „curățăm” prea mult?</h2><h3>Text original</h3><p>„NU recomand! Reducere 50% la https://exemplu.ro 😀” conține negație, majuscule, semn de exclamare, cifre, URL și emoji. Unele semnale sunt utile pentru sentiment, altele pot fi zgomot.</p><h3>Variantă minimală</h3><p>Aplicăm doar normalizarea spațiilor și a Unicode. Semnalele rămân, dar vocabularul poate deveni mare din cauza URL-urilor distincte.</p><h3>Variantă intermediară</h3><p>Înlocuim adresa prin marcajul <code>URL</code> și trecem textul în litere mici. Acum modelul poate observa prezența unui link fără să memoreze domeniul exact.</p><h3>Variantă agresivă</h3><p>Eliminarea tuturor cifrelor, punctuației și emoji-urilor poate reduce vocabularul, dar distruge semnale relevante. Cele două variante trebuie comparate pe același set de validare.</p><h3>Decizie</h3><p>Nu alegem strategia după preferințe estetice; o alegem după erorile modelului și metrica obiectivului.</p></section>
+<section class="nlp-topic"><h2>Bibliografie și aprofundare</h2><p>Concepte și API-uri: <a href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction" target="_blank" rel="noopener">Documentația scikit-learn — Text feature extraction</a>; <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank" rel="noopener">scikit-learn User Guide</a>. Pentru preprocesare lingvistică: <a href="https://spacy.io/usage/linguistic-features" target="_blank" rel="noopener">spaCy</a> și <a href="https://stanfordnlp.github.io/stanza/" target="_blank" rel="noopener">Stanza</a>.</p></section>
+</div>

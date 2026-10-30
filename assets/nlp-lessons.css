@@ -1,0 +1,198 @@
+
+.onia-nlp{font:15px/1.78 "DM Sans",system-ui,sans-serif;color:#263954}.onia-nlp *{box-sizing:border-box}.onia-nlp .nlp-hero{background:linear-gradient(115deg,#e7f3fc,#f9fbff);border:1px solid #cce2f4;padding:25px 28px;border-radius:20px;margin-bottom:22px}.onia-nlp .eyebrow{font-size:11px;letter-spacing:.12em;color:#1a6cb4;font-weight:850}.onia-nlp h2{font-size:23px;color:#15385d;line-height:1.3;margin:0 0 13px}.onia-nlp h3{font-size:18px;color:#153a62;margin:18px 0 8px}.onia-nlp p{margin:10px 0}.onia-nlp .nlp-topic{margin:22px 0 34px;padding-bottom:24px;border-bottom:1px solid #dce8f3}.onia-nlp figure{margin:14px 0 22px;padding:12px;border:1px solid #d8e5f2;border-radius:14px;background:#fcfdff}.onia-nlp figure img{width:100%;max-height:360px;object-fit:contain}.onia-nlp figcaption{font-size:12px;color:#63768c}.onia-nlp .nlp-note{background:#edf5ff;border-left:4px solid #2f78c5;border-radius:9px;padding:13px 15px;margin:16px 0;color:#244b73}.onia-nlp table{width:100%;border-collapse:collapse;font-size:13px;margin:15px 0}.onia-nlp th,.onia-nlp td{text-align:left;padding:10px 9px;border-bottom:1px solid #dce7f3;vertical-align:top}.onia-nlp th{color:#205993;background:#f3f7fc}.onia-nlp code:not(pre code){background:#eaf2fb;padding:2px 5px;border-radius:5px}.onia-nlp .nlp-code{border:1px solid #d8e5f3;border-radius:14px;overflow:hidden;margin:17px 0;background:#f9fbff}.onia-nlp .nlp-code-head{display:flex;justify-content:space-between;gap:10px;padding:9px 13px;font-weight:750;font-size:12px;background:#eaf3ff;color:#27629d}.onia-nlp .nlp-copy{border:1px solid #aec7e2;background:#fff;border-radius:8px;cursor:pointer;padding:5px 10px;color:#1e5996}.onia-nlp .codehilite{padding:16px;overflow:auto}.onia-nlp pre{margin:0!important;white-space:pre!important;tab-size:4;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}.onia-nlp .nlp-formula{font:600 16px/1.6 Georgia,serif;background:#f3f8fe;border:1px solid #dbe7f4;border-radius:11px;padding:12px 17px;margin:15px 0;overflow-x:auto}.onia-nlp .nlp-pill{display:inline-block;background:#e7f2ff;color:#1e649f;border:1px solid #c9e2f4;border-radius:99px;padding:2px 10px;font-size:12px;font-weight:750;margin:3px}.onia-nlp .nlp-call{background:#f0f6fd;padding:17px 20px;border-radius:13px;margin:20px 0}.onia-nlp .nlp-call a{display:inline-block;padding:10px 14px;background:#195db0;color:#fff;border-radius:9px;text-decoration:none;font-weight:750}.onia-nlp .nlp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.onia-nlp .nlp-grid>div{border:1px solid #d9e6f4;padding:10px 13px;border-radius:11px;background:#fff}.onia-nlp a{color:#1764aa}.onia-nlp .nlp-muted{color:#6f7f95;font-size:13px}@media(max-width:650px){.onia-nlp .nlp-hero{padding:18px}.onia-nlp .nlp-grid{grid-template-columns:1fr}.onia-nlp table{font-size:11px}.onia-nlp th,.onia-nlp td{padding:6px}}
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.onia-nlp .codehilite .hll { background-color: #ffffcc }
+.onia-nlp .codehilite { background: #f8f8f8; }
+.onia-nlp .codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.onia-nlp .codehilite .err { border: 1px solid #F00 } /* Error */
+.onia-nlp .codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.onia-nlp .codehilite .o { color: #666 } /* Operator */
+.onia-nlp .codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.onia-nlp .codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.onia-nlp .codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.onia-nlp .codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.onia-nlp .codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.onia-nlp .codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.onia-nlp .codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.onia-nlp .codehilite .ge { font-style: italic } /* Generic.Emph */
+.onia-nlp .codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.onia-nlp .codehilite .gr { color: #E40000 } /* Generic.Error */
+.onia-nlp .codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.onia-nlp .codehilite .gi { color: #008400 } /* Generic.Inserted */
+.onia-nlp .codehilite .go { color: #717171 } /* Generic.Output */
+.onia-nlp .codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.onia-nlp .codehilite .gs { font-weight: bold } /* Generic.Strong */
+.onia-nlp .codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.onia-nlp .codehilite .gt { color: #04D } /* Generic.Traceback */
+.onia-nlp .codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.onia-nlp .codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.onia-nlp .codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.onia-nlp .codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.onia-nlp .codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.onia-nlp .codehilite .kt { color: #B00040 } /* Keyword.Type */
+.onia-nlp .codehilite .m { color: #666 } /* Literal.Number */
+.onia-nlp .codehilite .s { color: #BA2121 } /* Literal.String */
+.onia-nlp .codehilite .na { color: #687822 } /* Name.Attribute */
+.onia-nlp .codehilite .nb { color: #008000 } /* Name.Builtin */
+.onia-nlp .codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.onia-nlp .codehilite .no { color: #800 } /* Name.Constant */
+.onia-nlp .codehilite .nd { color: #A2F } /* Name.Decorator */
+.onia-nlp .codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.onia-nlp .codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.onia-nlp .codehilite .nf { color: #00F } /* Name.Function */
+.onia-nlp .codehilite .nl { color: #767600 } /* Name.Label */
+.onia-nlp .codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.onia-nlp .codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.onia-nlp .codehilite .nv { color: #19177C } /* Name.Variable */
+.onia-nlp .codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.onia-nlp .codehilite .w { color: #BBB } /* Text.Whitespace */
+.onia-nlp .codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.onia-nlp .codehilite .mf { color: #666 } /* Literal.Number.Float */
+.onia-nlp .codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.onia-nlp .codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.onia-nlp .codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.onia-nlp .codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.onia-nlp .codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.onia-nlp .codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.onia-nlp .codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.onia-nlp .codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.onia-nlp .codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.onia-nlp .codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.onia-nlp .codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.onia-nlp .codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.onia-nlp .codehilite .sx { color: #008000 } /* Literal.String.Other */
+.onia-nlp .codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.onia-nlp .codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.onia-nlp .codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.onia-nlp .codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.onia-nlp .codehilite .fm { color: #00F } /* Name.Function.Magic */
+.onia-nlp .codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.onia-nlp .codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.onia-nlp .codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.onia-nlp .codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.onia-nlp .codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+.onia-nlp .nlp-flow-wrap{margin:16px 0 26px;padding:18px;border:1px solid #d8e5f2;border-radius:16px;background:#fbfdff}
+.onia-nlp .nlp-flow-wrap h3{margin:0 0 14px;font-size:17px;color:#153a62}
+.onia-nlp .nlp-flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:stretch}
+.onia-nlp .nlp-flow-card{border:1px solid #cfe0f1;border-radius:16px;background:#edf5ff;padding:16px 14px;min-height:120px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.onia-nlp .nlp-flow-card strong{display:block;font-size:17px;color:#194f85;margin-bottom:6px}
+.onia-nlp .nlp-flow-card span{font-size:14px;color:#5f738a}
+.onia-nlp .nlp-flow-card:after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:26px;color:#2f6fb3;font-weight:800}
+.onia-nlp .nlp-flow-card:last-child:after{display:none}
+.onia-nlp .nlp-steps{counter-reset:step;list-style:none;padding:0;margin:14px 0;display:grid;gap:12px}
+.onia-nlp .nlp-steps li{position:relative;padding:14px 16px 14px 62px;background:#f8fbff;border:1px solid #dbe7f4;border-radius:14px}
+.onia-nlp .nlp-steps li:before{counter-increment:step;content:counter(step);position:absolute;left:16px;top:14px;width:30px;height:30px;border-radius:50%;background:#2f78c5;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.onia-nlp .nlp-steps li strong{display:block;color:#18416d;margin-bottom:3px}
+.onia-nlp .nlp-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.onia-nlp .nlp-checklist div{background:#fff;border:1px solid #dbe7f4;border-radius:12px;padding:10px 12px}
+.onia-nlp .nlp-tip{background:#f7fbff;border:1px dashed #bcd3ea;border-radius:11px;padding:10px 12px;color:#35597e;margin:12px 0}
+.onia-nlp .nlp-example-box{background:#f6faff;border:1px solid #dbe7f4;border-radius:14px;padding:14px 16px;margin:16px 0}
+.onia-nlp .nlp-example-box h3{margin-top:0}
+@media(max-width:900px){.onia-nlp .nlp-flow-card:after{display:none}}
+@media(max-width:650px){.onia-nlp .nlp-checklist{grid-template-columns:1fr}.onia-nlp .nlp-steps li{padding-left:56px}}
+
+.onia-nlp .nlp-code-comment{font-size:14px;color:#456480;margin:10px 0 20px;line-height:1.7}
+.onia-nlp .nlp-flow-grid{grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin:18px 0}
+.onia-nlp .nlp-flow-card{min-height:104px}
+.onia-nlp figure img{max-height:420px}
+.onia-nlp .nlp-topic>p{max-width:100%;line-height:1.85}
+.onia-nlp .nlp-code pre{white-space:pre!important;tab-size:4}
+
+/* Python code: syntax highlighting, indentation and horizontal scrolling.
+   Accepts both Pygments wrapper names, codehilite and highlight. */
+.onia-nlp .nlp-code { width:100%; min-width:0; max-width:100%; overflow:hidden; border:1px solid #cbdced; background:#f7faff; }
+.onia-nlp .nlp-code .codehilite,
+.onia-nlp .nlp-code .highlight { width:100%; max-width:100%; min-width:0; overflow-x:auto; overflow-y:hidden; padding:15px 18px; margin:0; background:#f7faff; scrollbar-width:thin; }
+.onia-nlp .nlp-code .codehilite pre,
+.onia-nlp .nlp-code .highlight pre { display:block!important; margin:0!important; padding:0!important; width:max-content; min-width:100%; box-sizing:border-box; font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace!important; font-size:13px!important; font-weight:400; line-height:1.75!important; letter-spacing:0!important; font-variant-ligatures:none!important; white-space:pre!important; white-space-collapse:preserve!important; word-break:normal!important; overflow-wrap:normal!important; tab-size:4!important; color:#243650; background:transparent!important; }
+.onia-nlp .nlp-code .codehilite pre span,
+.onia-nlp .nlp-code .highlight pre span { white-space:inherit; }
+.onia-nlp .nlp-code .codehilite .k,.onia-nlp .nlp-code .codehilite .kd,.onia-nlp .nlp-code .codehilite .kn,.onia-nlp .nlp-code .codehilite .ow,
+.onia-nlp .nlp-code .highlight .k,.onia-nlp .nlp-code .highlight .kd,.onia-nlp .nlp-code .highlight .kn,.onia-nlp .nlp-code .highlight .ow { color:#8246b7; font-weight:700; }
+.onia-nlp .nlp-code .codehilite .s,.onia-nlp .nlp-code .codehilite .s1,.onia-nlp .nlp-code .codehilite .s2,.onia-nlp .nlp-code .codehilite .sa,.onia-nlp .nlp-code .codehilite .sr,
+.onia-nlp .nlp-code .highlight .s,.onia-nlp .nlp-code .highlight .s1,.onia-nlp .nlp-code .highlight .s2,.onia-nlp .nlp-code .highlight .sa,.onia-nlp .nlp-code .highlight .sr { color:#087a58; }
+.onia-nlp .nlp-code .codehilite .nf,.onia-nlp .nlp-code .codehilite .nb,.onia-nlp .nlp-code .codehilite .nc,
+.onia-nlp .nlp-code .highlight .nf,.onia-nlp .nlp-code .highlight .nb,.onia-nlp .nlp-code .highlight .nc { color:#1d68b9; }
+.onia-nlp .nlp-code .codehilite .c,.onia-nlp .nlp-code .codehilite .c1,.onia-nlp .nlp-code .codehilite .cm,
+.onia-nlp .nlp-code .highlight .c,.onia-nlp .nlp-code .highlight .c1,.onia-nlp .nlp-code .highlight .cm { color:#75869d; font-style:italic; }
+.onia-nlp .nlp-code .codehilite .mi,.onia-nlp .nlp-code .codehilite .mf,
+.onia-nlp .nlp-code .highlight .mi,.onia-nlp .nlp-code .highlight .mf { color:#ad5d17; }
+.onia-nlp .nlp-code-head { align-items:center; flex-wrap:wrap; }
+@media(max-width:650px) { .onia-nlp .nlp-code .codehilite, .onia-nlp .nlp-code .highlight { padding:12px; } .onia-nlp .nlp-code pre { font-size:12px!important; } }
+
+
+.onia-nlp .nlp-lead{font-size:16px;color:#456989;font-weight:550}.onia-nlp .nlp-bullets{padding-left:22px;line-height:1.85}.onia-nlp .nlp-bullets li{margin:7px 0}.onia-nlp .nlp-table-scroll{overflow-x:auto;margin:18px 0}.onia-nlp .nlp-warning{background:#fff7ed;border-color:#df893a}.onia-nlp .nlp-code-caption{font-size:13px;color:#536a84;margin-top:-9px}.onia-nlp .nlp-map{padding:18px 20px;border-radius:16px;background:#f4f9ff;border:1px solid #cfe1f4;margin:20px 0 26px}.onia-nlp .nlp-map b{font-size:17px;color:#155382}.onia-nlp .nlp-figure{background:#f8fbff}.onia-nlp .nlp-figure img{max-height:340px}.onia-nlp .nlp-topic{scroll-margin-top:90px}.onia-nlp .nlp-code .codehilite{background:#f8fbff}.onia-nlp .nlp-code pre{white-space:pre!important;line-height:1.62!important;tab-size:4;overflow-x:auto}.onia-nlp .nlp-code .nlp-code-head{background:#eaf3ff}.onia-nlp .nlp-topic h2{margin-bottom:10px}
+
+
+.onia-nlp .nlp-lead{font-size:16px;color:#456989;font-weight:550}.onia-nlp .nlp-bullets{padding-left:22px;line-height:1.85}.onia-nlp .nlp-bullets li{margin:7px 0}.onia-nlp .nlp-table-scroll{overflow-x:auto;margin:18px 0}.onia-nlp .nlp-warning{background:#fff7ed;border-color:#df893a}.onia-nlp .nlp-code-caption{font-size:13px;color:#536a84;margin-top:-9px}.onia-nlp .nlp-map{padding:18px 20px;border-radius:16px;background:#f4f9ff;border:1px solid #cfe1f4;margin:20px 0 26px}.onia-nlp .nlp-map b{font-size:17px;color:#155382}.onia-nlp .nlp-figure{background:#f8fbff}.onia-nlp .nlp-figure img{max-height:340px}.onia-nlp .nlp-topic{scroll-margin-top:90px}.onia-nlp .nlp-code .codehilite{background:#f8fbff}.onia-nlp .nlp-code pre{white-space:pre!important;line-height:1.62!important;tab-size:4;overflow-x:auto}.onia-nlp .nlp-code .nlp-code-head{background:#eaf3ff}.onia-nlp .nlp-topic h2{margin-bottom:10px}
+
+
+.onia-nlp .nlp-lead{font-size:16px;color:#456989;font-weight:550}.onia-nlp .nlp-bullets{padding-left:22px;line-height:1.85}.onia-nlp .nlp-bullets li{margin:7px 0}.onia-nlp .nlp-table-scroll{overflow-x:auto;margin:18px 0}.onia-nlp .nlp-warning{background:#fff7ed;border-color:#df893a}.onia-nlp .nlp-code-caption{font-size:13px;color:#536a84;margin-top:-9px}.onia-nlp .nlp-map{padding:18px 20px;border-radius:16px;background:#f4f9ff;border:1px solid #cfe1f4;margin:20px 0 26px}.onia-nlp .nlp-map b{font-size:17px;color:#155382}.onia-nlp .nlp-figure{background:#f8fbff}.onia-nlp .nlp-figure img{max-height:340px}.onia-nlp .nlp-topic{scroll-margin-top:90px}.onia-nlp .nlp-code .codehilite{background:#f8fbff}.onia-nlp .nlp-code pre{white-space:pre!important;line-height:1.62!important;tab-size:4;overflow-x:auto}.onia-nlp .nlp-code .nlp-code-head{background:#eaf3ff}.onia-nlp .nlp-topic h2{margin-bottom:10px}
+
+
+.onia-pos-ner .nlp-overview-grid,.onia-pos-ner .nlp-reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.onia-pos-ner .nlp-overview-grid>div,.onia-pos-ner .nlp-reading-grid>div{padding:17px;background:#f7faff;border:1px solid #d5e6f7;border-radius:13px}
+.onia-pos-ner .nlp-readable-list{padding-left:22px;line-height:1.8}
+.onia-pos-ner .nlp-readable-list li{margin-bottom:7px}
+.onia-pos-ner .nlp-table-scroll{overflow-x:auto;margin:18px 0}
+.onia-pos-ner .nlp-table-scroll table{min-width:620px;width:100%}
+.onia-pos-ner .nlp-code-explain{padding:10px 14px;border-left:3px solid #7cb3e8;color:#2c4e72;background:#f3f8ff;border-radius:8px;font-size:14px}
+.onia-pos-ner .nlp-code pre{white-space:pre!important;tab-size:4;line-height:1.65;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.onia-pos-ner figure img{max-height:none}
+@media(max-width:700px){.onia-pos-ner .nlp-overview-grid,.onia-pos-ner .nlp-reading-grid{grid-template-columns:1fr}}
+
+
+/* NLP 5.7 · clarity of matrix, scenarios and long code */
+.onia-nlp.nlp-vector-57 .nlp-learning-path{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:20px 0 26px}
+.onia-nlp.nlp-vector-57 .nlp-learning-path>div{flex:1 1 130px;min-height:82px;border:1px solid #cce0f3;border-radius:13px;background:#f0f7ff;padding:12px;text-align:center}
+.onia-nlp.nlp-vector-57 .nlp-learning-path b{display:block;font-size:21px;color:#206bb3}.onia-nlp.nlp-vector-57 .nlp-learning-path span{font-size:13px;font-weight:650}
+.onia-nlp.nlp-vector-57 .nlp-scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:13px;margin:16px 0}
+.onia-nlp.nlp-vector-57 .nlp-scenario-grid article{background:#f7fbff;border:1px solid #d6e5f3;border-radius:15px;padding:14px 16px;min-width:0}
+.onia-nlp.nlp-vector-57 .nlp-scenario-grid h3{font-size:16px;margin:0 0 8px}
+.onia-nlp.nlp-vector-57 .nlp-scenario-grid code{overflow-wrap:anywhere}
+.onia-nlp.nlp-vector-57 .nlp-matrix-frame{overflow:auto;border:1px solid #dbe8f4;border-radius:13px;margin:15px 0;background:#fff}
+.onia-nlp.nlp-vector-57 .nlp-matrix{margin:0;min-width:500px;width:100%}
+.onia-nlp.nlp-vector-57 .nlp-matrix td{text-align:center;font-weight:800;font-size:16px}
+.onia-nlp.nlp-vector-57 .nlp-matrix .cell-positive{background:#d8ecff;color:#175a9f}.onia-nlp.nlp-vector-57 .nlp-matrix .cell-zero{background:#f7f9fc;color:#9aadc0}
+.onia-nlp.nlp-vector-57 .nlp-ngram-demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.onia-nlp.nlp-vector-57 .nlp-ngram-demo>div{background:#f4f9ff;border:1px solid #d5e7f7;padding:12px;border-radius:12px}
+.onia-nlp.nlp-vector-57 .nlp-ngram-demo strong{display:block;margin-bottom:8px;color:#245b91}
+.onia-nlp.nlp-vector-57 .nlp-ngram-demo span{display:inline-block;border-radius:7px;background:#dceeff;padding:3px 7px;margin:2px;font-size:13px}
+.onia-nlp.nlp-vector-57 .nlp-feature-figure img{max-height:none;object-fit:contain}
+.onia-nlp.nlp-vector-57 .nlp-topic p{line-height:1.83}
+.onia-nlp.nlp-vector-57 .nlp-code pre{white-space:pre!important;tab-size:4;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace!important}
+.onia-nlp.nlp-vector-57 .nlp-code .codehilite{padding:16px;overflow:auto}
+.onia-nlp.nlp-vector-57 .nlp-code .codehilite pre{background:transparent}
+@media(max-width:650px){.onia-nlp.nlp-vector-57 .nlp-learning-path>span{display:none}.onia-nlp.nlp-vector-57 .nlp-scenario-grid{grid-template-columns:1fr}}
+
+/* ONIA 5.x · indentare si evidentiere Python consistente în toate materialele */
+.onia-nlp .nlp-code :is(.codehilite,.highlight),.onia-nlp .nlp-code :is(.codehilite,.highlight) pre{display:block!important;white-space:pre!important;tab-size:4!important;}
+.onia-nlp .nlp-code pre,.onia-nlp pre,.onia-nlp .nlp-code pre code{white-space:pre!important;word-break:normal!important;overflow-wrap:normal!important;line-height:1.55!important;font-family:ui-monospace,SFMono-Regular,Consolas,monospace!important;tab-size:4!important;}
+.onia-nlp .nlp-code :is(.codehilite,.highlight){overflow-x:auto!important;max-width:100%;}
+.onia-nlp .nlp-code pre{overflow-x:auto!important;min-width:max-content;}
+.exercise-code .codehilite pre,.exercise-code .highlight pre,.py-code-card pre,.py-code-card pre code{white-space:pre!important;tab-size:4!important;overflow-x:auto!important;word-wrap:normal!important;overflow-wrap:normal!important;}
+.onia-nlp59 .nlp-code-explain{margin:0 0 22px;background:#f2f7ff;padding:10px 14px;border-left:3px solid #3680c4;border-radius:7px;color:#365a7e;}
+.onia-nlp59 figure img{max-height:420px;object-fit:contain}
+@media(max-width:640px){.onia-nlp59 .nlp-code-head{flex-wrap:wrap}.onia-nlp59 figure{padding:6px}}
+
+
+.onia-nlp .nlp-eval-intro{padding:18px 22px;border:1px solid #cfe1ef;border-radius:15px;background:#f7fbff;margin-bottom:23px;color:#244b70}
+.onia-nlp .nlp-eval-intro ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;list-style:decimal;margin:12px 0 0;padding-left:23px}
+.onia-nlp .nlp-eval-intro li{padding:3px 5px 3px 0}
+.onia-nlp .nlp-topic h2{margin-top:8px}.onia-nlp .nlp-topic h3{margin-top:22px}
+.onia-nlp .nlp-topic figure img{max-height:none;height:auto;display:block}
+.onia-nlp .nlp-code pre{white-space:pre!important;tab-size:4!important;word-break:normal!important;word-wrap:normal!important;overflow-wrap:normal!important}
+.onia-nlp .nlp-code .codehilite{overflow:auto!important}
+.onia-nlp .nlp-topic ul{padding-left:26px}.onia-nlp .nlp-topic li{margin:8px 0}
+@media(max-width:700px){.onia-nlp .nlp-eval-intro{padding:14px}.onia-nlp .nlp-eval-intro ol{grid-template-columns:1fr}}
+
+/* Traseu de studiu în carduri numerotate: lizibil pe desktop și mobil. */
+.onia-nlp .nlp-eval-intro ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));list-style:none;counter-reset:pas;gap:12px;padding:0;margin:13px 0 0}
+.onia-nlp .nlp-eval-intro ol li{display:flex;gap:11px;align-items:flex-start;margin:0;min-width:0;padding:12px;background:#fff;border:1px solid #dbe8f4;border-radius:12px;line-height:1.45}
+.onia-nlp .nlp-eval-intro ol li::before{counter-increment:pas;content:counter(pas);display:flex;align-items:center;justify-content:center;flex:none;background:#2c75b9;color:#fff;font-size:12px;font-weight:850;width:27px;height:27px;border-radius:50%}
+@media(max-width:700px){.onia-nlp .nlp-eval-intro ol{grid-template-columns:1fr}}

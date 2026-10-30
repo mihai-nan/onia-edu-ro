@@ -1,0 +1,135 @@
+/* Romanian academic identity, curriculum stages, content placeholders */
+:root { --main:#17469b; --primary:#225bb7; --primary-soft:#eaf2ff; --ro-blue:#16418d; --ro-yellow:#facb48; --ro-red:#d8474e; }
+:root[data-theme=dark] { --main:#81b3ff; --primary:#8ab6ff; --primary-soft:#243552; }
+.brand{position:relative}
+.brand:after{content:"";position:absolute;bottom:-1px;left:22px;width:70px;height:2px;background:linear-gradient(90deg,#2657ad 0 33%,#ffd64a 33% 66%,#de4444 66% 100%);opacity:.75}
+.brand-words small{letter-spacing:.13em}
+.sidebar-ro-card{margin:12px 9px 3px;padding:13px 14px;border-radius:12px;border:1px solid #ffffff18;background:#ffffff08;color:#d4e5ff}
+.sidebar-ro-card strong{display:block;font-size:11px;font-weight:800;margin-bottom:5px}
+.sidebar-ro-card p{font-size:10.5px;margin:0;color:#aabedc;line-height:1.65}
+.sidebar-ro-card span{color:#fff}
+.ro-flag{display:inline-flex;width:22px;height:14px;overflow:hidden;border-radius:2px;border:1px solid #ffffff80;flex:none;box-shadow:0 1px 4px #0002}
+.ro-flag i{flex:1;background:#134e9c}.ro-flag i:nth-child(2){background:#f8cf4d}.ro-flag i:nth-child(3){background:#cf424b}
+.romanian-stripe{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;height:4px}
+.romanian-stripe i{width:33.333%;background:#1251b2}.romanian-stripe i:nth-child(2){background:#ffcd46}.romanian-stripe i:nth-child(3){background:#ce3945}
+.hero{background:radial-gradient(circle at 79% 16%,#265a9b 0,#173b74 28%,transparent 58%),linear-gradient(112deg,#102446 0%,#173b70 68%,#1b5a82 100%);padding-top:52px}
+.hero h1{max-width:675px}.hero-content{max-width:680px}.hero-eyebrow{line-height:1.5}
+.hero-inline-meta{display:flex;gap:19px;align-items:center;flex-wrap:wrap;margin-top:27px;color:#b1cbe9;font-size:10px;font-weight:700}
+.hero-inline-meta span{display:flex;gap:7px;align-items:center}
+.partner-section{margin-top:31px;border:1px solid var(--line);border-radius:18px;padding:27px 30px 30px;background:var(--panel)}
+.partner-section-head h2{font-size:23px;margin:8px 0 10px}.partner-section-head p{font-size:12.2px;color:var(--sub);max-width:900px;line-height:1.75;margin:0 0 23px}.partner-section-head strong{color:var(--text);font-weight:700}
+.partner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.partner-card{min-height:94px;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--panel-alt);display:flex;align-items:center;gap:11px;transition:border-color .2s,transform .2s;min-width:0}
+.partner-card:hover{border-color:#8baadd;transform:translateY(-2px)}
+.partner-card>.svg-icon{align-self:flex-start;margin-left:auto;color:var(--sub)}
+.partner-logo{display:block;object-fit:contain;flex:none;max-width:66px;max-height:64px}
+.poli-logo{width:62px;height:62px}
+.hria-logo{width:76px;max-width:76px;height:55px;object-fit:contain}
+.partner-logo-ac{height:58px;width:58px;display:grid;place-items:center;border-radius:14px;flex:none;background:linear-gradient(140deg,#134787,#42b5b6);color:white;font-size:21px;font-weight:800;letter-spacing:-.06em}
+.partner-logo-ac span{color:#fbd34b}
+.partner-info{display:flex;flex-direction:column;min-width:0;gap:3px}.partner-info small{font-size:8px;font-weight:800;color:var(--primary);letter-spacing:.12em}.partner-info strong{font-size:12px;line-height:1.4}.partner-info span{font-size:10px;color:var(--sub);line-height:1.35}
+.program-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:25px 0 31px}
+.program-stage{display:flex;gap:14px;align-items:flex-start;border:1px solid #dce6f2;border-radius:14px;background:#f3f7fd;padding:21px}
+.program-stage.advanced{background:#fdf8ee;border-color:#f5e5ca}
+:root[data-theme=dark] .program-stage{background:#1a2d47;border-color:#375276}:root[data-theme=dark] .program-stage.advanced{background:#332e23;border-color:#4c4634}
+.stage-ico{display:grid;place-items:center;flex:none;font-family:'Space Grotesk';font-size:13px;font-weight:800;color:#224f93;background:white;border-radius:9px;width:35px;height:35px}
+.advanced .stage-ico{color:#99620c}
+.program-stage>div{flex:1;min-width:0}.program-stage>div>strong{font-size:12.6px;font-weight:800}.program-stage p{color:var(--sub);font-size:11px;line-height:1.65;margin:6px 0 0}
+.program-stage .stage-number{font-size:10px;white-space:nowrap;color:var(--text);padding:6px 9px;border-radius:99px;background:#ffffffad}
+:root[data-theme=dark] .stage-number{background:#ffffff18}
+.chapter-card{min-height:280px}.chapter-pill{letter-spacing:.09em}.stage-pill-national{color:#a25f22!important;background:#fff5de!important}
+.card-stage-detail{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px;font-size:10px;color:var(--sub);font-weight:700}
+.card-stage-detail span{padding:3px 7px;background:var(--panel-alt);border:1px solid var(--line);border-radius:5px}
+.card-stage-detail .nat-dot{background:#fff7e8;border-color:#f2e3ca;color:#a76b21}
+.nav-stage-label{margin:13px 0 7px 45px;font-size:8px;color:#8194b6;letter-spacing:.13em;font-weight:800}
+.nav-stage-label.national-label{color:#ffcf87;margin-top:17px}
+.nav-lesson-num{font-size:9px!important;min-width:26px;width:29px;text-align:center}
+.nav-lessons .nav-lesson{padding-top:8px;padding-bottom:8px}
+.chapter-stage-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}
+.chapter-stage-pills span{display:flex;align-items:center;gap:7px;font-size:10.5px;padding:7px 12px;border:1px solid #ffffff4d;background:#ffffff12;border-radius:100px;font-weight:700}
+.chapter-stage-group{margin:15px 0 36px}.chapter-stage-group .lesson-list{margin:0}
+.stage-group-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}
+.stage-group-header>div{display:grid;grid-template-columns:30px 1fr;column-gap:10px;align-items:center}
+.stage-indicator{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:12px;grid-row:span 2}
+.stage-indicator.national{background:#fff1d8;color:#a26119}
+.stage-group-header h2{font-size:19px;margin:0}.stage-group-header p{font-size:11px;color:var(--sub);margin:3px 0 0;grid-column:2}
+.stage-group-header>span{font-size:10px;white-space:nowrap;font-weight:700;color:var(--sub)}
+.lesson-index{font-size:12px;font-weight:800;min-width:43px}.lesson-index.national-index{background:#fff4df;color:#a26b27;border-color:#f4e1bd}
+.lesson-status{display:flex!important;align-items:center;gap:6px;margin-top:7px!important;font-size:10px!important}
+.lesson-stage-tag{display:inline-flex;gap:7px;align-items:center;background:var(--primary-soft);color:var(--primary);font-size:10px;letter-spacing:.08em;font-weight:800;padding:7px 10px;border-radius:7px;margin:2px 0 16px}
+.lesson-stage-tag.national{background:#fff0d6;color:#9b631b}
+:root[data-theme=dark] .lesson-stage-tag.national,:root[data-theme=dark] .stage-indicator.national{background:#4a3a21;color:#ffd497}
+.lesson-number{color:var(--primary);font-weight:600;white-space:nowrap;margin-right:5px}
+.pending-materials{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:27px;margin:0 0 25px}
+.pending-heading{display:flex;align-items:flex-start;gap:16px}.pending-icon{border-radius:12px;background:var(--primary-soft);color:var(--primary);padding:12px;flex:none}
+.pending-heading h2{font-size:20px;margin:7px 0 10px}.pending-heading p{max-width:690px;color:var(--sub);font-size:12px;line-height:1.8;margin:0}
+.pending-formats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px}
+.pending-formats span{display:flex;align-items:center;gap:7px;border:1px dashed var(--line);background:var(--panel-alt);padding:14px 11px;border-radius:9px;color:var(--sub);font-size:10px;line-height:1.5;font-weight:700}
+.pending-exercises{border:1px dashed #c6d2e3;background:var(--panel);border-radius:14px;padding:24px 26px;margin:15px 0 22px}
+.pending-exercises-title{display:flex;align-items:center;gap:10px;color:var(--text)}.pending-exercises-title .svg-icon{color:var(--primary)}.pending-exercises h2{font-size:19px;margin:0}.pending-exercises p{color:var(--sub);font-size:11.7px;margin:11px 0 0;line-height:1.7}
+.status-soon{font-size:9px;padding:5px 9px;border-radius:50px;background:var(--panel-alt);border:1px solid var(--line);color:var(--sub);font-weight:800;margin-left:auto;white-space:nowrap}
+.toc-pending{font-size:11px;color:var(--sub);display:block;padding:6px 0 15px}
+.site-footer{gap:12px;flex-wrap:wrap}.footer-country{display:flex;align-items:center;gap:7px;color:var(--sub)}
+@media(max-width:1240px){.partner-grid{grid-template-columns:1fr}.partner-card{min-height:75px}.partner-section-head p{max-width:100%}.partner-logo{max-height:51px}.poli-logo{height:47px;width:47px}.partner-logo-ac{height:47px;width:47px}.program-stages{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding:33px 24px}.hero h1{font-size:31px}.hero-inline-meta{margin-top:18px;gap:11px}.partner-section{padding:20px 17px;margin-top:16px}.partner-section-head h2{font-size:19px}.partner-card{padding:13px}.program-stage{padding:16px;flex-wrap:wrap}.program-stage .stage-number{margin-left:49px}.stage-group-header{align-items:flex-start}.stage-group-header h2{font-size:16px}.stage-group-header p{font-size:10px}.stage-group-header>span{font-size:9px}.pending-materials{padding:19px}.pending-formats{grid-template-columns:repeat(2,minmax(0,1fr))}.pending-heading{gap:12px}.pending-heading h2{font-size:18px}.pending-exercises{padding:18px}.status-soon{display:none}.site-footer{gap:8px}.chapter-card{min-height:270px}}
+
+/* Visible local fallback if remotely hosted institutional images cannot load. */
+.partner-logo-fallback{display:none;place-items:center;flex:none;width:57px;height:57px;border-radius:12px;background:#e3eefb;color:#214473;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.05em}
+.partner-logo-fallback.hria-fallback{background:#e6f6fb;color:#386caa;font-size:19px}
+.lesson-row-body>strong{font-family:'DM Sans',system-ui,sans-serif;font-size:13.4px;letter-spacing:-.01em}
+
+
+/* ONIA · identitate grafică România × inteligență artificială */
+.brand{height:97px;gap:13px}
+.brand-mark{background:linear-gradient(145deg,#143b77,#1b659e);border:1px solid #ffffff26;box-shadow:0 10px 25px #0002}
+.brand-mark svg{width:39px;height:39px}
+.brand-words strong{font-size:26px;letter-spacing:.018em;line-height:1.04;font-weight:800}
+.brand-words small{color:#c6d7ef;font-size:10px;font-weight:600;letter-spacing:.012em;line-height:1.4}
+.brand:after{left:21px;bottom:0;width:112px;height:3px;opacity:1}
+.sidebar{background:linear-gradient(160deg,#091a36 0%,#0d203e 58%,#122748 100%)}
+.sidebar-footer{font-size:10.8px;color:#d0ddf2;gap:11px}
+.sidebar-footer .ro-flag{width:21px;height:13px}
+.sidebar-home.active{background:#20447e}
+.nav-lesson.active{background:#1e4779}
+.sidebar-ro-card{background:linear-gradient(130deg,#19376380,#24486e45);border:1px solid #7bafe32e}
+.sidebar-ro-card strong{color:#fff}
+.onia-hero{min-height:400px;padding:49px 52px;background:radial-gradient(circle at 91% 18%,#235ba4 0,#173d77 27%,transparent 58%),linear-gradient(105deg,#0b1c3b 0%,#103065 64%,#164779 100%)}
+.onia-hero:before{background-image:linear-gradient(#75bbff11 1px,transparent 1px),linear-gradient(90deg,#75bbff11 1px,transparent 1px);background-size:33px 33px;opacity:.55;mask-image:linear-gradient(90deg,transparent 20%,black)}
+.onia-hero .hero-content{max-width:670px}
+.onia-hero .hero-eyebrow{margin-bottom:16px;font-size:9.5px;color:#c0dfff;letter-spacing:.14em}
+.onia-hero h1{font-size:clamp(67px,6.2vw,105px);line-height:.98;letter-spacing:.008em;font-weight:700;margin:0;color:#fff;text-shadow:0 6px 28px #0000001f}
+.onia-hero .hero-subtitle{font-family:'Space Grotesk',sans-serif;font-size:clamp(23px,2.5vw,36px);font-weight:600;letter-spacing:-.035em;color:#ffd45e;margin:8px 0 17px}
+.onia-hero p{max-width:590px;margin:0 0 23px;font-size:12.8px;line-height:1.75;color:#ccdcf4}
+.onia-hero .hero-inline-meta{margin-top:25px;color:#afc8e8}
+.onia-hero .hero-art{top:-6px;right:4px;width:465px;height:390px;opacity:.96;z-index:1}
+.onia-hero .hero-network{position:absolute;top:0;left:0;width:100%;height:100%;inset:auto;filter:drop-shadow(0 0 16px #427dbb26)}
+.onia-hero .art-caption{font-size:9px;letter-spacing:.12em;border-color:#a6d0ff3b;background:#163f6a9a;box-shadow:0 7px 20px #09142d22}
+.onia-hero .art-caption-one{top:28px;right:20px;color:#fff}
+.onia-hero .art-caption-two{bottom:26px;left:45px;color:#ccdef8}
+.flag-pips{display:inline-flex;gap:3px;vertical-align:middle;margin-right:7px}.flag-pips i{width:5px;height:11px;background:#287ce4}.flag-pips i:nth-child(2){background:#ffcf4d}.flag-pips i:nth-child(3){background:#e4525f}
+.caption-divider{color:#ffd55d;padding:0 5px}
+.onia-hero .romanian-stripe{height:5px;z-index:5}
+.onia-hero .romanian-stripe i:first-child{background:#3275db}.onia-hero .romanian-stripe i:nth-child(2){background:#ffd451}.onia-hero .romanian-stripe i:nth-child(3){background:#ee5260}
+.partner-section{position:relative;overflow:hidden}
+.partner-section:before{content:'';position:absolute;top:0;left:0;height:4px;width:95px;background:linear-gradient(90deg,#286cd9 0 33.333%,#ffd24a 33.333% 66.666%,#e44b59 66.666%)}
+.partner-section-head .kicker{letter-spacing:.13em}
+.chapters-grid .chapter-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.chapters-grid .chapter-card:hover{transform:translateY(-3px);box-shadow:0 13px 30px #142f5d12;border-color:#b8cae9}
+:root[data-theme=dark] .chapters-grid .chapter-card:hover{border-color:#5073a3}
+.site-footer{justify-content:space-between;gap:15px 30px;align-items:center}
+.footer-identity{display:flex;gap:8px;align-items:baseline;white-space:nowrap}
+.footer-identity strong{font-family:'Space Grotesk';font-size:13px;letter-spacing:.01em;color:var(--text)}
+.footer-identity>span{font-size:10px;color:var(--sub)}
+.footer-institutions{font-size:10.5px;line-height:1.6;text-align:center;max-width:560px}
+.footer-institutions a:hover{color:var(--primary);text-decoration:underline}
+.footer-credit{display:flex;align-items:center;gap:5px;white-space:nowrap;color:var(--sub);font-size:10.5px}
+.footer-credit strong{color:var(--text);font-weight:800}
+.footer-credit .ro-flag{margin-left:6px}
+@media(min-width:1280px){.onia-hero .hero-content{max-width:61%}.onia-hero .hero-art{right:2.3%}}
+@media(max-width:1040px){.onia-hero .hero-art{right:-94px;opacity:.39}.onia-hero .hero-content{max-width:100%}.onia-hero{min-height:390px}.footer-institutions{order:3;width:100%;max-width:none;text-align:left}}
+@media(max-width:650px){.brand{height:84px}.onia-hero{min-height:365px;padding:34px 25px 29px}.onia-hero h1{font-size:64px}.onia-hero .hero-subtitle{font-size:25px;margin:5px 0 17px}.onia-hero .hero-art{width:390px;height:345px;right:-195px;top:18px;opacity:.22}.onia-hero .hero-eyebrow{font-size:8.5px;letter-spacing:.08em;line-height:1.55}.onia-hero p{font-size:12px;line-height:1.6}.onia-hero .hero-actions{gap:8px}.onia-hero .hero-inline-meta{font-size:9.5px;gap:10px;margin-top:19px}.site-footer{padding:19px 23px;justify-content:flex-start;gap:9px 16px}.footer-institutions{font-size:9.7px;order:3}.footer-identity{font-size:10px}.footer-credit{margin-left:auto}.footer-credit .ro-flag{margin-left:2px}}
+
+/* Sigla ACS, inclusă local în proiect */
+.partner-card .acs-logo{width:62px;height:62px;max-height:none;object-fit:contain;border-radius:10px;background:#fff;padding:4px;border:1px solid #e9eef5;flex:none}
+.lesson-native-block{margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+.lesson-native-block .native-lesson{min-width:0}

@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "title": "Introducere în Inteligența Artificială",
+    "category": "Introducere și fundamente",
+    "description": "Ce este inteligența artificială, principalele direcții de cercetare, evoluția domeniului și aplicații contemporane.",
+    "tags": [
+      "Noțiunea de IA",
+      "Scurt istoric",
+      "Aplicații și perspective"
+    ],
+    "authors": "Andrei Olaru · Alexandru Sorici · Adina Florea",
+    "pages": 44,
+    "original": "Lecture-Intro.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/01-introducere-in-inteligenta-artificiala.pdf"
+  },
+  {
+    "id": 2,
+    "title": "Căutare informată",
+    "category": "Căutare și rezolvare de probleme",
+    "description": "Modelarea spațiului stărilor, algoritmi de căutare și utilizarea euristicilor pentru găsirea soluțiilor.",
+    "tags": [
+      "Probleme de căutare",
+      "Euristici",
+      "Căutare informată"
+    ],
+    "authors": "Andrei Olaru · Adina Florea",
+    "pages": 58,
+    "original": "Lecture-Search.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/02-cautare-informata.pdf"
+  },
+  {
+    "id": 3,
+    "title": "Căutare locală și online",
+    "category": "Căutare și rezolvare de probleme",
+    "description": "Strategii locale și căutare în medii în care informațiile sunt descoperite pe parcurs.",
+    "tags": [
+      "Hill Climbing",
+      "Căutare locală",
+      "Căutare online"
+    ],
+    "authors": "Andrei Olaru · Adina Florea",
+    "pages": 27,
+    "original": "Lecture-Local-Search.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/03-cautare-locala-si-online.pdf"
+  },
+  {
+    "id": 4,
+    "title": "Probleme de satisfacere a restricțiilor (CSP)",
+    "category": "Căutare și rezolvare de probleme",
+    "description": "Modelarea problemelor prin variabile, domenii și restricții; backtracking și propagarea constrângerilor.",
+    "tags": [
+      "CSP",
+      "Backtracking",
+      "Propagarea restricțiilor"
+    ],
+    "authors": "Andrei Olaru · Adina Florea",
+    "pages": 35,
+    "original": "Lecture-CSP.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/04-probleme-de-satisfacere-a-restrictiilor-csp.pdf"
+  },
+  {
+    "id": 5,
+    "title": "Căutare în jocuri (Minimax, Alpha-Beta)",
+    "category": "Căutare și rezolvare de probleme",
+    "description": "Arbori de joc, alegerea mutărilor, evaluarea stărilor și strategii de căutare pentru jocuri.",
+    "tags": [
+      "Minimax",
+      "Alpha–Beta",
+      "Monte Carlo Tree Search"
+    ],
+    "authors": "Autorii sunt indicați în material",
+    "pages": 61,
+    "original": "Lecture-Search-in-Games.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/05-cautare-in-jocuri-minimax-alpha-beta.pdf"
+  },
+  {
+    "id": 6,
+    "title": "Introducere în probabilități și rețele Bayesiene",
+    "category": "Probabilități și raționament",
+    "description": "Raționament în prezența incertitudinii, reguli ale probabilităților și reprezentări grafice probabiliste.",
+    "tags": [
+      "Probabilități condiționate",
+      "Cunoștințe incerte",
+      "Rețele Bayesiene"
+    ],
+    "authors": "Alexandru Sorici",
+    "pages": 49,
+    "original": "Lecture-Bayes-Intro.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/06-introducere-in-probabilitati-si-retele-bayesiene.pdf"
+  },
+  {
+    "id": 7,
+    "title": "Inferență în rețele Bayesiene",
+    "category": "Probabilități și raționament",
+    "description": "Independență condiționată și metode de inferență exactă sau aproximativă în rețele probabiliste.",
+    "tags": [
+      "Independență",
+      "Enumerare și eliminare",
+      "Aproximare"
+    ],
+    "authors": "Alexandru Sorici · alte surse menționate în prezentare",
+    "pages": 86,
+    "original": "Lecture-Bayes-Inference.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/07-inferenta-in-retele-bayesiene.pdf"
+  },
+  {
+    "id": 8,
+    "title": "Introducere în Machine Learning",
+    "category": "Învățare automată",
+    "description": "Învățarea din date, tipuri de probleme, etape de construire a modelelor și analizarea performanței.",
+    "tags": [
+      "Definiții ML",
+      "Tipuri de învățare",
+      "Date și predicții"
+    ],
+    "authors": "Mihai Trăscău · Alexandru Sorici · Andrei Olaru",
+    "pages": 48,
+    "original": "Lecture-Intro-to-ML.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/08-introducere-in-machine-learning.pdf"
+  },
+  {
+    "id": 9,
+    "title": "Arbori de decizie",
+    "category": "Învățare automată",
+    "description": "Construirea modelelor bazate pe reguli, algoritmi inductivi și metode ansamblu cu arbori.",
+    "tags": [
+      "ID3",
+      "Criterii de separare",
+      "Păduri aleatoare"
+    ],
+    "authors": "Mihai Trăscău",
+    "pages": 35,
+    "original": "Lecture-Decision-Trees-2024.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/09-arbori-de-decizie.pdf"
+  },
+  {
+    "id": 10,
+    "title": "Regresie liniară",
+    "category": "Învățare automată",
+    "description": "Predicția unor valori numerice, modele liniare, funcții de eroare și arbori de regresie.",
+    "tags": [
+      "Ipoteza liniară",
+      "Estimarea parametrilor",
+      "Arbori de regresie"
+    ],
+    "authors": "Mihai Trăscău",
+    "pages": 41,
+    "original": "Lecture-Linear-Regression.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/10-regresie-liniara.pdf"
+  },
+  {
+    "id": 11,
+    "title": "Regresie logistică",
+    "category": "Învățare automată",
+    "description": "Clasificare binară și multiclasă utilizând modele liniare și funcția sigmoid.",
+    "tags": [
+      "Funcția sigmoid",
+      "Clasificare binară",
+      "Clasificare multiclasă"
+    ],
+    "authors": "Mihai Trăscău",
+    "pages": 19,
+    "original": "Lecture-Logistic-Regression.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/11-regresie-logistica.pdf"
+  },
+  {
+    "id": 12,
+    "title": "Introducere în rețele neuronale",
+    "category": "Deep Learning",
+    "description": "Neuroni artificiali, perceptroni, rețele multilayer și învățare prin backpropagation.",
+    "tags": [
+      "Perceptron",
+      "MLP",
+      "Backpropagation"
+    ],
+    "authors": "Mihai Trăscău · Mihai Nan",
+    "pages": 54,
+    "original": "Lecture-Intro-to-NN.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/12-introducere-in-retele-neuronale.pdf"
+  },
+  {
+    "id": 13,
+    "title": "Rețele neuronale convoluționale (CNN)",
+    "category": "Deep Learning",
+    "description": "Convoluții și filtre, straturi CNN, pooling și prelucrarea imaginilor cu rețele neuronale.",
+    "tags": [
+      "Convoluții",
+      "Straturi CNN",
+      "Pooling"
+    ],
+    "authors": "Mihai Trăscău · Mihai Nan",
+    "pages": 96,
+    "original": "Lecture-CNNs.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/13-retele-neuronale-convolutionale-cnn.pdf"
+  },
+  {
+    "id": 14,
+    "title": "Introducere în agenți inteligenți",
+    "category": "Agenți inteligenți",
+    "description": "Definirea agenților, proprietățile mediului și arhitecturi pentru luarea deciziilor.",
+    "tags": [
+      "Agenți și mediu",
+      "Arhitecturi",
+      "Agenți care învață"
+    ],
+    "authors": "Alexandru Sorici",
+    "pages": 44,
+    "original": "Lecture-Intro-Agents.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/14-introducere-in-agenti-inteligenti.pdf"
+  },
+  {
+    "id": 15,
+    "title": "Agenți în medii MDP",
+    "category": "Agenți inteligenți",
+    "description": "Procese de decizie Markov, utilități, iterația valorilor și politicilor și învățare prin recompensă.",
+    "tags": [
+      "MDP",
+      "Value Iteration",
+      "Policy Iteration"
+    ],
+    "authors": "Alexandru Sorici · surse Stanford CS221 menționate în prezentare",
+    "pages": 32,
+    "original": "Lecture-Agents-MDP.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/15-agenti-in-medii-mdp.pdf"
+  },
+  {
+    "id": 16,
+    "title": "Introducere în NLP",
+    "category": "Procesarea limbajului natural",
+    "description": "Conceptele fundamentale NLP, modele de limbaj și principalele aplicații ale procesării textului.",
+    "tags": [
+      "Modele de limbaj",
+      "Sarcini NLP",
+      "Evoluția NLP"
+    ],
+    "authors": "Alexandru Sorici · surse UMass și ENSAE menționate în prezentare",
+    "pages": 48,
+    "original": "Lecture-Intro-NLP.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/16-introducere-in-nlp.pdf"
+  },
+  {
+    "id": 17,
+    "title": "Modele de limbaj și LLM-uri",
+    "category": "Procesarea limbajului natural",
+    "description": "Reprezentări numerice ale textului, modele de limbaj și introducere în Large Language Models.",
+    "tags": [
+      "Word embeddings",
+      "Modelare lingvistică",
+      "LLM"
+    ],
+    "authors": "Alexandru Sorici · surse Princeton COMP336 menționate în prezentare",
+    "pages": 32,
+    "original": "Lecture-NLP-LLMs.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/17-modele-de-limbaj-si-llm-uri.pdf"
+  },
+  {
+    "id": 18,
+    "title": "Transformers — material complementar",
+    "category": "Material complementar",
+    "description": "Prezentare complementară despre embeddinguri contextualizate, arhitectura Transformer și modelele de limbaj de mari dimensiuni.",
+    "tags": [
+      "Contextual embeddings",
+      "Transformer",
+      "Large Language Models"
+    ],
+    "authors": "Mihai Nan · Adina Magda Florea",
+    "pages": 71,
+    "original": "Curs Transformers.pdf",
+    "file": "../materiale/inteligenta-artificiala-acs/18-transformers.pdf"
+  }
+]

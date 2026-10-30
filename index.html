@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1b39" />
+  <meta name="description" content="Resurse pentru Olimpiada de Inteligență Artificială: lecții, exemple Python, exerciții, laboratoare și cursuri universitare recomandate." />
+  <title>ONIA · Resurse educaționale</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/romania.css" />
+  <link rel="stylesheet" href="assets/python-lesson.css" />
+  <link rel="stylesheet" href="assets/data-lessons.css" />
+  <link rel="stylesheet" href="assets/viz-lessons.css" />
+  <link rel="stylesheet" href="assets/sklearn-lesson.css" />
+  <link rel="stylesheet" href="assets/linear-regression.css" />
+  <link rel="stylesheet" href="assets/logistic-regression.css" />
+  <link rel="stylesheet" href="assets/regularization.css" />
+  <link rel="stylesheet" href="assets/knn.css" />
+  <link rel="stylesheet" href="assets/decision-trees.css" />
+  <link rel="stylesheet" href="assets/ensemble.css" />
+  <link rel="stylesheet" href="assets/svm.css" />
+  <link rel="stylesheet" href="assets/chapter-overviews.css" />
+  <link rel="stylesheet" href="assets/ds-lessons.css" />
+  <link rel="stylesheet" href="assets/unsup-lessons.css" />
+  <link rel="stylesheet" href="assets/nlp-lessons.css" />
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <div class="sidebar-scrim" id="sidebar-scrim"></div>
+    <aside class="sidebar" id="sidebar" aria-label="Navigare principală">
+      <a class="brand" href="#/" aria-label="Pagina principală">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M10 13 23 8 37 15 36 33 23 40 10 31Z" stroke="white" stroke-width="1.5" stroke-opacity=".8"/><path d="M10 13 24 23 37 15M10 31 24 23 36 33M23 8 24 23 23 40" stroke="white" stroke-width="1.5" stroke-opacity=".6"/><circle cx="10" cy="13" r="3.7" fill="#2875E5"/><circle cx="37" cy="15" r="3.7" fill="#F9C949"/><circle cx="36" cy="33" r="3.7" fill="#E7555F"/><circle cx="24" cy="23" r="4" fill="white"/><circle cx="23" cy="40" r="2.8" fill="#A4D9FF"/></svg></span>
+        <span class="brand-words"><strong id="brand-name">ONIA</strong><small>Resurse educaționale</small></span>
+      </a>
+      <div class="sidebar-scroll">
+        <div class="sidebar-section-label">SPAȚIU DE ÎNVĂȚARE</div>
+        <a class="sidebar-home" href="#/" data-home-link><span data-icon="home"></span><span>Acasă</span><span class="side-home-arrow" data-icon="arrow-up-right"></span></a>
+        <a class="sidebar-home" href="cursuri.html"><span data-icon="play"></span><span>Cursuri recomandate</span><span class="side-home-arrow" data-icon="arrow-up-right"></span></a>
+        <div class="sidebar-section-label chapter-label">CAPITOLE <span id="chapter-count"></span></div>
+        <nav id="chapter-nav" aria-label="Capitole și secțiuni"></nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-tiny-card"><div class="sidebar-tiny-icon" data-icon="sparkles"></div><strong>Învață prin explorare</strong><p>Teorie, exemple și simulări, organizate într-un singur loc.</p></div>
+        </div>
+        <div class="sidebar-ro-card"><strong>România · pregătire în IA</strong><p>Materiale realizate în parteneriat cu <span>Facultatea de Automatică și Calculatoare</span>, POLITEHNICA București.</p></div>
+      </div>
+      <div class="sidebar-footer"><span class="ro-flag" aria-hidden="true"><i></i><i></i><i></i></span><span>România · Pregătire pentru ONIA</span></div>
+    </aside>
+    <div class="page-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle" class="icon-btn mobile-menu" aria-label="Deschide meniul" type="button"><span data-icon="menu"></span></button>
+          <div class="crumbs" id="breadcrumbs"></div>
+        </div>
+        <div class="topbar-right">
+          <button class="search-trigger" id="search-trigger" type="button"><span data-icon="search"></span><span>Caută materiale...</span><kbd>⌘ K</kbd></button>
+          <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Schimbă tema"><span data-icon="moon"></span></button>
+        </div>
+      </header>
+      <main id="main" class="main-content" tabindex="-1"></main>
+      <footer class="site-footer"><span class="footer-identity"><strong id="footer-brand">ONIA</strong><span>Resurse educaționale</span></span><span class="footer-institutions">Facultatea de Automatică și Calculatoare · <a href="https://upb.ro/" target="_blank" rel="noopener noreferrer">POLITEHNICA București</a> · <a href="https://hria.upb.ro/" target="_blank" rel="noopener noreferrer">HRIA</a></span><span class="footer-credit">Realizat de <strong>Mihai Nan</strong> <span class="footer-country"><span class="ro-flag" aria-label="România"><i></i><i></i><i></i></span></span></span><a class="footer-resources" href="cursuri.html">Cursuri recomandate</a><a class="footer-resources" href="surse.html">Bibliografie și resurse</a></footer>
+    </div>
+  </div>
+  <div class="search-overlay" id="search-overlay" hidden>
+    <div class="search-backdrop" data-close-search></div>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Caută materiale">
+      <div class="search-input-row"><span data-icon="search"></span><input id="search-input" type="search" placeholder="Caută un capitol sau o secțiune..." autocomplete="off" aria-label="Caută"/><button id="search-close" class="key-close" aria-label="Închide căutarea">ESC</button></div>
+      <div class="search-results" id="search-results"></div>
+      <div class="search-hint"><span>Accesează rapid o secțiune</span><span><kbd>↵</kbd> deschide · <kbd>ESC</kbd> închide</span></div>
+    </div>
+  </div>
+  <script src="data/site-data.js"></script>
+  <script src="data/lesson-content.js"></script>
+  <script src="data/chapter-overviews.js"></script>
+  <script src="assets/chapter-overviews-interactive.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/nlp-copy.js"></script>
+</body>
+</html>

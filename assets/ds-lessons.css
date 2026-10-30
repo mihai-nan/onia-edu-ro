@@ -1,0 +1,20 @@
+/* ONIA · Fundamente de Data Science · presentation */
+.onia-data-science{--ds-ink:#152747;--ds-blue:#2864ba}
+.onia-data-science .ds-lesson-hero{background:linear-gradient(130deg,#ecf4ff,#fff 74%)}
+.onia-data-science .ds-kicker{font-size:11px;color:#235fb6;letter-spacing:.14em;font-weight:800}
+.onia-data-science .ds-micro-meta{font-size:12px;color:#5f7492;margin-top:13px}
+.onia-data-science .ds-topic-body{font-size:15px;line-height:1.85;color:var(--text,#22314b);max-width:100%}
+.onia-data-science .ds-topic-body p{font-size:15px;line-height:1.85;margin:10px 0 17px}
+.onia-data-science .ds-formula{font:600 17px/1.8 Georgia,serif;letter-spacing:.015em;padding:15px 20px;border:1px solid #d4e2f4;border-left:4px solid #2d69c5;background:#f2f7ff;border-radius:10px;margin:15px 0;overflow-x:auto;white-space:nowrap;color:#183d72}
+.onia-data-science .ds-figure{background:#fff;border:1px solid #dfe8f3;border-radius:15px;overflow:hidden;margin:22px 0}
+.onia-data-science .ds-figure img{display:block;width:100%;height:auto;max-height:445px;object-fit:contain;background:#fff}
+.onia-data-science .ds-figure figcaption{font-size:12px;color:#64748b;padding:8px 16px;background:#f8fbff;border-top:1px solid #edf2f7}
+.onia-data-science .ds-final-tips{border-radius:16px;background:#eef5ff;border:1px solid #cfe1fb;padding:24px;margin:20px 0 32px}
+.onia-data-science .ds-final-tips h2{font-size:20px;margin:0 0 10px;color:#153e77}.onia-data-science .ds-final-tips p{font-size:14px;line-height:1.7}
+.onia-data-science .ds-sources a{color:#245fb5;text-decoration:underline}
+.onia-data-science .py-topic-head{scroll-margin-top:100px}
+.onia-data-science pre{white-space:pre!important;tab-size:4!important}
+.onia-data-science .py-code-card pre{overflow-x:auto;line-height:1.7}
+.onia-data-science .py-code-top{position:relative}
+.onia-data-science .codehilite .k{color:#b53f94}.onia-data-science .codehilite .s,.onia-data-science .codehilite .s1,.onia-data-science .codehilite .s2{color:#17815d}.onia-data-science .codehilite .nf{color:#2463ad}.onia-data-science .codehilite .c1{color:#738399;font-style:italic}
+@media(max-width:680px){.onia-data-science .ds-topic-body,.onia-data-science .ds-topic-body p{font-size:14px}.onia-data-science .ds-formula{font-size:15px;padding:12px}.onia-data-science .py-intro{padding:20px}.onia-data-science .py-code-card{max-width:100%}}

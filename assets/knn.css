@@ -1,0 +1,23 @@
+/* ONIA · 2.4 K-NN */
+.onia-knn-lesson{font-size:14px;line-height:1.78;min-width:0}
+.onia-knn-lesson .knn-intro{background:linear-gradient(140deg,#eaf3ff,#fffdf4)}
+.onia-knn-lesson .knn-figure{margin:19px 0 24px;text-align:center;background:#fff;border:1px solid var(--line,#dce6f2);padding:13px;border-radius:14px}
+.onia-knn-lesson .knn-figure img{width:100%;max-width:870px;display:block;margin:auto;height:auto;border-radius:8px}
+.onia-knn-lesson .knn-figure figcaption{font-size:12px;color:var(--sub,#59708b);margin:10px 5px 2px}
+.onia-knn-lesson .knn-math{font:600 18px/1.6 Georgia,serif;color:var(--text,#142e52);text-align:center;padding:13px 8px;margin:14px auto;overflow-x:auto;border:1px solid #d8e7f6;border-radius:12px;background:#f4f8fd}
+.onia-knn-lesson .knn-table-wrap{max-width:100%;overflow-x:auto;margin:15px 0}
+.onia-knn-lesson .knn-table{width:100%;border-collapse:collapse;font-size:13px;min-width:470px}
+.onia-knn-lesson .knn-table th{background:#eaf1fb;color:#173c70;text-align:left}
+.onia-knn-lesson .knn-table th,.onia-knn-lesson .knn-table td{padding:11px 13px;border:1px solid #dce6f2;vertical-align:top}
+.onia-knn-lesson .knn-table tr:nth-child(2n) td{background:#f7faff}
+.onia-knn-lesson .knn-note{background:#edf5ff;border-left:4px solid #2467b2;border-radius:9px;padding:14px 17px;margin:17px 0;color:#244366}
+.onia-knn-lesson .knn-note.warn{background:#fff7e9;border-left-color:#cf8f34}
+.onia-knn-lesson .knn-note p{margin:4px 0 0}
+.onia-knn-lesson .knn-topic{scroll-margin-top:110px}
+.onia-knn-lesson .knn-code{margin:16px 0 23px;max-width:100%;overflow:hidden}
+.onia-knn-lesson .knn-code pre{overflow:auto;white-space:pre;tab-size:4;font-size:12.8px;line-height:1.65}
+.onia-knn-lesson .knn-links{display:flex;flex-wrap:wrap;gap:11px;margin-top:18px}
+.onia-knn-lesson a.knn-btn{display:inline-block;border-radius:9px;padding:10px 15px;text-decoration:none;background:#1d5aba;color:#fff;font-weight:700}
+.onia-knn-lesson a.knn-btn.secondary{background:#eaf1fb;color:#23538d}
+.onia-knn-lesson .knn-steps{padding-left:27px}.onia-knn-lesson .knn-steps li{margin:9px 0}
+@media(max-width:600px){.onia-knn-lesson .knn-math{font-size:15px}.onia-knn-lesson .knn-intro{padding:17px}.onia-knn-lesson a.knn-btn{width:100%;text-align:center}}

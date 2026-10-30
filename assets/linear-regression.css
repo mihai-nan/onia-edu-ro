@@ -1,0 +1,27 @@
+/* Lecția 2.1 · matematică, figurile și exemplele ONIA */
+.onia-linear-lesson .lr-feature-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.onia-linear-lesson .lr-feature-links a{display:inline-flex;align-items:center;padding:11px 14px;border:1px solid #b8d3f4;background:#eef5ff;color:#1e5ba9;border-radius:9px;font-size:12px;font-weight:800;text-decoration:none;line-height:1.35}
+.onia-linear-lesson .lr-feature-links .lr-launch{background:#225eac;color:#fff;border-color:#225eac}
+.onia-linear-lesson .lr-bullets{padding-left:21px;margin:12px 0 22px;line-height:1.85}
+.onia-linear-lesson .lr-bullets li{margin:5px 0}
+.onia-linear-lesson .lr-note{padding:16px 18px;border-radius:12px;border:1px solid #c8dcf6;background:#eff6ff;margin:18px 0 22px;font-size:13px;line-height:1.75}
+.onia-linear-lesson .lr-note strong{display:block;font-weight:800;color:#205aa3;margin-bottom:5px}
+.onia-linear-lesson .lr-note-amber{background:#fff8eb;border-color:#e9d7b0}.onia-linear-lesson .lr-note-amber strong{color:#98621c}
+.onia-linear-lesson .lr-equation{margin:17px 0 22px;background:var(--panel-alt);border:1px solid var(--line);border-left:3px solid #2d66b2;border-radius:11px;padding:17px 13px;text-align:center;overflow-x:auto}
+.onia-linear-lesson .lr-equation img{width:auto;height:auto;max-width:100%;max-height:245px;display:block;margin:0 auto}
+.onia-linear-lesson .lr-equation figcaption{font-size:12px;line-height:1.7;color:var(--sub);margin:11px auto 0;max-width:740px}
+.onia-linear-lesson .lr-figure{margin:20px 0 25px}
+.onia-linear-lesson .lr-figure img{display:block;max-height:none;width:auto;max-width:100%;height:auto}
+.onia-linear-lesson .lr-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px;margin:16px 0 24px}
+.onia-linear-lesson .lr-table{border-collapse:collapse;min-width:480px;width:100%;line-height:1.65;font-size:12px}
+.onia-linear-lesson .lr-table th{background:#e8f1ff;color:#17437f;text-align:left;font-size:12px;padding:12px;border-bottom:1px solid var(--line)}
+.onia-linear-lesson .lr-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.onia-linear-lesson .lr-table tbody tr:last-child td{border-bottom:0}
+.onia-linear-lesson .lr-after-code{font-size:12px;color:var(--sub);margin-top:-10px}
+.onia-linear-lesson .lr-topic p{line-height:1.85;font-size:13.5px}
+.onia-linear-lesson .lr-topic code:not(pre code){font-family:'SFMono-Regular',Consolas,monospace;font-size:.91em;background:var(--panel-alt);border:1px solid var(--line);border-radius:4px;padding:2px 5px;white-space:normal;overflow-wrap:anywhere}
+:root[data-theme=dark] .onia-linear-lesson .lr-table th{background:#213753;color:#c9dfff}
+:root[data-theme=dark] .onia-linear-lesson .lr-note{background:#193457;border-color:#32547a}:root[data-theme=dark] .onia-linear-lesson .lr-note strong{color:#9ec8ff}
+:root[data-theme=dark] .onia-linear-lesson .lr-note-amber{background:#3c3321;border-color:#726040}
+:root[data-theme=dark] .onia-linear-lesson .lr-equation img{filter:invert(1)}
+@media(max-width:600px){.onia-linear-lesson .lr-equation{padding:12px 8px}.onia-linear-lesson .lr-equation img{min-width:170px}.onia-linear-lesson .lr-table{font-size:11px}}

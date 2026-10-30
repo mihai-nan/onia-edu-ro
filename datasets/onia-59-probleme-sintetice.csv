@@ -1,0 +1,11 @@
+id,title,description,statement,label_sintetic
+SYN_001,Shortest paths in a directed graph,Find distances using BFS,Given vertices and directed edges,graphs
+SYN_002,Connected components,Explore nodes and edges with DFS,Given an undirected graph,graphs
+SYN_003,Counting subsequences,Use dynamic programming over prefixes,Given a sequence of integers,dp
+SYN_004,Minimum coin change,Find an optimal result from smaller subproblems,Given coins and a target,dp
+SYN_005,Prefix matching,Find a pattern in a string,Given text and query string,strings
+SYN_006,Palindrome substrings,Count symmetric substrings,Given a string of letters,strings
+SYN_007,Circle intersections,Compute intersections and distances,Given circle centers and radii,geometry
+SYN_008,Convex hull,Order points and determine hull,Given points in the plane,geometry
+SYN_009,Prime factorization,Factorize an integer using prime numbers,Given positive n,number theory
+SYN_010,Modular inverse,Find modular inverse and residues,Given a modulus and integer,number theory

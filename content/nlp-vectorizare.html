@@ -1,0 +1,421 @@
+<meta charset="utf-8"/>
+<div class="onia-nlp nlp-vector-57"><header class="nlp-hero"><span class="eyebrow">ONIA · NLP · LECȚIA 5.7</span><h2>Bag-of-Words, n-grame, TF-IDF și matrici rare</h2><p>O lecție aplicată despre transformarea textului în numere. Construim reprezentările manual, le interpretăm geometric, apoi le reproducem cu scikit-learn. Fiecare alegere de parametri este legată de o situație reală.</p><div><span class="nlp-pill">BoW de la zero</span><span class="nlp-pill">n-grame</span><span class="nlp-pill">TF-IDF</span><span class="nlp-pill">sparse CSR</span><span class="nlp-pill">Pipeline</span></div></header>
+<div class="nlp-learning-path"><div><b>1</b><span>Text brut</span></div><span>→</span><div><b>2</b><span>Tokeni și vocabular</span></div><span>→</span><div><b>3</b><span>Matrice BoW</span></div><span>→</span><div><b>4</b><span>TF-IDF</span></div><span>→</span><div><b>5</b><span>Model / căutare</span></div></div>
+<section class="nlp-topic" id="tema-1"><div class="eyebrow">01 / CONCEPT</div><h2>De ce trebuie să transformăm textele în vectori?</h2>
+<p>Un clasificator liniar, un algoritm K-Means sau un calcul de similaritate lucrează cu valori numerice. Textul „python pentru elevi” nu este direct o listă de coordonate. Trebuie să stabilim ce proprietăți vom măsura și să construim un vector numeric pentru fiecare document.</p>
+<p>Există două decizii distincte: <strong>ce caracteristici construim</strong> (cuvinte, bigrame, caractere) și <strong>ce valoare punem în fiecare coordonată</strong> (0/1, număr de apariții, TF-IDF). De aceea, nu există un singur „vectorizator bun pentru orice problemă”.</p>
+<div class="nlp-example-box"><h3>Exemplu de scopuri diferite</h3><p>La detectarea spamului, apariția termenilor „câștig”, „urgent” sau a unui URL poate fi informativă. La clasificarea sentimentului, expresia <code>nu recomand</code> trebuie păstrată. La căutarea documentelor, preferăm să nu lăsăm termenii foarte răspândiți să domine asemănarea.</p></div>
+</section>
+<section class="nlp-topic" id="tema-2"><div class="eyebrow">02 / CONCEPT</div><h2>Vocabularul: coloana fiecărui cuvânt</h2>
+<p>Vom folosi un corpus mic, tocmai pentru a vedea ce face algoritmul. Considerăm D1 = „tenis sport”, D2 = „tenis sport date”, D3 = „algoritm” și o ordine fixă a coloanelor. Ordinea aleasă nu schimbă informația, dar trebuie folosită consecvent.</p>
+<div class="nlp-matrix-frame"><table class="nlp-matrix"><thead><tr><th>Document</th><th>algoritm</th><th>date</th><th>sport</th><th>tenis</th></tr></thead><tbody><tr><th>D1</th><td class="cell-zero">0</td><td class="cell-zero">0</td><td class="cell-positive">1</td><td class="cell-positive">1</td></tr><tr><th>D2</th><td class="cell-zero">0</td><td class="cell-positive">1</td><td class="cell-positive">1</td><td class="cell-positive">1</td></tr><tr><th>D3</th><td class="cell-positive">1</td><td class="cell-zero">0</td><td class="cell-zero">0</td><td class="cell-zero">0</td></tr></tbody></table></div>
+<p>Fiecare rând descrie un document; fiecare coloană este un termen al vocabularului. Dacă un termen nu apare în document, valoarea sa este zero. Astfel, D3 are valoarea 1 pe coloana „algoritm” și 0 pe celelalte. Matricea prezentată este BoW binar, pentru că în aceste trei documente fiecare termen apare cel mult o dată.</p>
+<h3>Exemplul 1. Construirea vocabularului și a matricii BoW de la zero</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"tenis sport"</span><span class="p">,</span> <span class="s2">"tenis sport date"</span><span class="p">,</span> <span class="s2">"algoritm"</span><span class="p">]</span>
+<span class="n">tokeni</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">]</span>
+<span class="n">vocabular</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">cuvant</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">tokeni</span> <span class="k">for</span> <span class="n">cuvant</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">})</span>
+
+<span class="n">matrice</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">tokeni</span><span class="p">:</span>
+    <span class="n">linie</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cuvant</span> <span class="ow">in</span> <span class="n">vocabular</span><span class="p">:</span>
+        <span class="n">linie</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">cuvant</span><span class="p">))</span>
+    <span class="n">matrice</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linie</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vocabular:"</span><span class="p">,</span> <span class="n">vocabular</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">linie</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrice</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"D"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">linie</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p><code>set</code> elimină termenii repetați; <code>sorted</code> fixează ordinea coloanelor. <code>count</code> determină numărul de apariții dintr-un document. Această implementare este ușor de înțeles, dar pentru corpusuri mari folosim o bibliotecă și matrici rare.</p></div>
+<h3>Exemplul 2. Același lucru cu CountVectorizer</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"tenis sport"</span><span class="p">,</span> <span class="s2">"tenis sport date"</span><span class="p">,</span> <span class="s2">"algoritm"</span><span class="p">]</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>  <span class="c1"># doar pentru un corpus minuscul</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p><code>fit_transform()</code> construiește vocabularul și matricea. <code>get_feature_names_out()</code> arată ordinea coloanelor. Matricea este rară; apelul <code>toarray()</code> este doar pentru afișare didactică.</p></div>
+<div class="nlp-note"><b>Ideea esențială</b><p>Un vocabular nu este o listă de „sensuri”, ci o listă de caracteristici; două cuvinte cu același sens pot primi coloane diferite. BoW nu face automat sinonimizare sau lematizare.</p></div>
+</section>
+<section class="nlp-topic" id="tema-3"><div class="eyebrow">03 / CONCEPT</div><h2>Numărări sau prezență: când alegem binary=True?</h2>
+<p>Dacă un cuvânt apare de cinci ori, în reprezentarea BoW obișnuită valoarea este 5. Dacă ne interesează numai dacă apare, folosim 1. Ambele variante pot fi utile, dar răspund la întrebări diferite.</p>
+<p>Într-o clasificare de mesaje scurte, simpla apariție a expresiei „ofertă” poate fi suficientă. În analiza documentelor lungi, frecvența termenilor poate informa mai bine despre subiect. Nu există însă garanția că repetarea excesivă trebuie să producă un scor mai mare.</p>
+<h3>Exemplul 3. Compararea numărării cu prezența binară</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ofertă ofertă ofertă"</span><span class="p">,</span> <span class="s2">"ofertă verificată"</span><span class="p">,</span> <span class="s2">"mesaj simplu"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">binary</span><span class="o">=</span><span class="n">mod</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"binary="</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="s2">"vocabular="</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Cu <code>binary=False</code> termenul „ofertă” primește 3 în primul document; cu <code>binary=True</code> primește 1. Nu confunda această opțiune cu TF-IDF: într-un vectorizator TF-IDF, <code>binary=True</code> binarizează doar frecvența inițială, iar valorile finale pot fi fracționare.</p></div>
+</section>
+<section class="nlp-topic" id="tema-4"><div class="eyebrow">04 / CONCEPT</div><h2>De ce Bag-of-Words pierde ordinea cuvintelor?</h2>
+<p>Două propoziții pot conține exact aceleași cuvinte, dar în altă ordine. BoW nu distinge între „ana îl vede pe ion” și „ion o vede pe ana” dacă, după preprocesare, rezultă aceeași mulțime cu aceleași frecvențe.</p>
+<p>Pentru sentiment, exemplul clasic este diferența dintre <code>bun</code> și <code>nu bun</code>. Un BoW cu unigrame poate recunoaște separat termenii „nu” și „bun”, însă nu codifică explicit faptul că ei sunt alăturați. N-gramele introduc informație locală despre ordine.</p>
+<div class="nlp-ngram-demo"><div><strong>Unigrame</strong><span>nu</span><span>este</span><span>bun</span></div><div><strong>Bigrame</strong><span>nu este</span><span>este bun</span></div><div><strong>Trigramă</strong><span>nu este bun</span></div></div>
+<h3>Exemplul 4. N-grame calculate manual</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">tokeni</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"nu"</span><span class="p">,</span> <span class="s2">"este"</span><span class="p">,</span> <span class="s2">"foarte"</span><span class="p">,</span> <span class="s2">"bun"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="n">ngrame</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokeni</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ngrame</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokeni</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">-grame:"</span><span class="p">,</span> <span class="n">ngrame</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</section>
+<section class="nlp-topic" id="tema-5"><div class="eyebrow">05 / CONCEPT</div><h2>ngram_range: cum îl alegem pentru problema reală?</h2>
+<p>Pentru <code>analyzer="word"</code>, <code>ngram_range=(1,1)</code> folosește doar cuvinte individuale, <code>(1,2)</code> include și bigrame, iar <code>(1,3)</code> adaugă trigrame. Cu cât intervalul este mai mare, cu atât reprezentarea poate surprinde expresii mai specifice, dar vocabularul și sparsitatea cresc.</p>
+<div class="nlp-scenario-grid"><article><h3>Recenzii și sentiment</h3><p><b>Începe cu:</b> <code>ngram_range=(1,2)</code>. Bigramele pot reprezenta „nu recomand” sau „foarte bun”. Compară cu (1,1) pe aceeași validare.</p></article><article><h3>Știri tematice</h3><p><b>Începe cu:</b> <code>(1,1)</code>, apoi testează (1,2) dacă există expresii precum „piață financiară” sau „inteligență artificială”.</p></article><article><h3>Texte foarte scurte</h3><p>Bigramele pot fi foarte rare. Nu porni automat de la trigrame: există risc de memorare și multe coloane aproape goale.</p></article></div>
+<h3>Exemplul 5. Compararea unigrame–bigrame în scikit-learn</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"nu recomand produsul"</span><span class="p">,</span> <span class="s2">"recomand produsul"</span><span class="p">,</span> <span class="s2">"produs foarte bun"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">limita</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="n">limita</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">limita</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()),</span> <span class="s2">"caracteristici"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Adăugarea bigramelor nu „rezolvă” negațiile în orice context, dar oferă modelului caracteristici care pot diferenția mai bine propozițiile.</p></div>
+</section>
+<section class="nlp-topic" id="tema-6"><div class="eyebrow">06 / CONCEPT</div><h2>Cuvinte sau n-grame de caractere: analyzer=word, char, char_wb</h2>
+<p><code>analyzer="word"</code> construiește caracteristici din tokeni. <code>analyzer="char"</code> extrage secvențe din textul brut; acestea pot trece inclusiv peste spații. <code>analyzer="char_wb"</code> extrage n-grame în interiorul delimitărilor de cuvinte, adăugând spații la marginea lor.</p>
+<p>Pentru texte zgomotoase, greșeli de tastare, diacritice lipsă sau variante flexionare, n-gramele de caractere pot fi robuste. Exemplu: „programare” și „progrmare” împart multe secvențe de 3–5 caractere chiar dacă sunt două cuvinte diferite pentru un vectorizator pe cuvinte.</p>
+<h3>Exemplul 6. N-grame de caractere pentru greșeli de tastare</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"programare"</span><span class="p">,</span> <span class="s2">"progrmare"</span><span class="p">,</span> <span class="s2">"fotbal"</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s2">"char_wb"</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Similaritate programare/progrmare:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Similaritate programare/fotbal:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p><code>(3,5)</code> este o alegere de experiment, nu o constantă universală. La nume foarte scurte sau abrevieri poate fi necesar alt interval.</p></div>
+</section>
+<section class="nlp-topic" id="tema-7"><div class="eyebrow">07 / CONCEPT</div><h2>Tokenizarea și diacriticele: reguli care afectează vocabularul</h2>
+<p>În modul implicit pe cuvinte, <code>token_pattern=r"(?u)\b\w\w+\b"</code> reține secvențe de minimum două caractere de tip „word”. Așadar, „x”, „C” sau „R” pot dispărea. În domenii tehnice, tokenii de o literă pot fi importanți.</p>
+<h3>Exemplul 7. Păstrăm sau nu tokenii de o literă?</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"C și R sunt limbaje"</span><span class="p">,</span> <span class="s2">"X este o variabilă"</span><span class="p">]</span>
+<span class="n">implicit</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">extins</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">"(?u)\b\w+\b"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Implicit:"</span><span class="p">,</span> <span class="n">implicit</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cu o literă:"</span><span class="p">,</span> <span class="n">extins</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p><code>lowercase=True</code> unește literele mari și mici, dar poate elimina diferențe între acronime și cuvinte. <code>strip_accents="unicode"</code> poate simplifica variantele cu/fără diacritice; folosește-l numai dacă pierderea distincțiilor este acceptabilă.</p></div>
+<div class="nlp-note"><b>Ideea esențială</b><p>Când se folosește un <code>analyzer</code> personalizat de tip callable, acesta controlează direct extracția caracteristicilor, iar unele opțiuni implicite de tokenizare devin inactive. Nu presupune că toate setările funcționează simultan.</p></div>
+</section>
+<section class="nlp-topic" id="tema-8"><div class="eyebrow">08 / CONCEPT</div><h2>TF, DF și IDF: trei mărimi care răspund la întrebări diferite</h2>
+<p>TF spune de câte ori apare un termen într-un document. DF spune în câte documente diferite apare termenul. IDF transformă frecvența între documente într-o pondere: termenii foarte răspândiți primesc o pondere mai mică.</p>
+<div class="nlp-scenario-grid"><article><h3>TF</h3><p>În D1 = „python python date”, <b>TF(python, D1) = 2</b>.</p></article><article><h3>DF</h3><p>Dacă „python” apare în trei din patru documente, <b>DF(python) = 3</b>, nu 4 sau numărul total al aparițiilor.</p></article><article><h3>IDF</h3><p>În convenția scikit-learn cu smoothing, <b>IDF = ln((1+N)/(1+DF))+1</b>.</p></article></div>
+<figure class="nlp-feature-figure"><img alt="Graficul IDF în funcție de numărul documentelor" loading="lazy" src="../assets/nlp-figures/vectorizare-idf-comparatie.png"/><figcaption>Grafic calculat cu formula scikit-learn pentru un corpus cu patru documente; valorile sunt exacte pentru configurația cu smoothing.</figcaption></figure>
+<h3>Exemplul 8. TF și DF calculate de la zero</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python python date"</span><span class="p">,</span> <span class="s2">"python model"</span><span class="p">,</span> <span class="s2">"date model"</span><span class="p">,</span> <span class="s2">"python cod"</span><span class="p">]</span>
+<span class="n">tokeni</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">]</span>
+<span class="n">tf_d1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">tokeni</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">tokeni</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">termen</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">termen</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TF în D1:"</span><span class="p">,</span> <span class="n">tf_d1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"DF în corpus:"</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Folosim <code>set(doc)</code> la calculul DF pentru a număra fiecare termen o singură dată în același document.</p></div>
+</section>
+<section class="nlp-topic" id="tema-9"><div class="eyebrow">09 / CONCEPT</div><h2>Formula TF-IDF în scikit-learn, dedusă numeric</h2>
+<p>În setările implicite pentru TF-IDF: <code>TF-IDF(t,d) = TF(t,d) × IDF(t)</code>, unde <code>IDF(t) = ln((1+N)/(1+DF(t))) + 1</code>. Apoi vectorul fiecărui document este normalizat L2. Folosim aici exact această convenție pentru a evita confuziile cu alte definiții din manuale.</p>
+<div class="nlp-formula"><strong>IDF(t)</strong> = ln((1 + N) / (1 + DF(t))) + 1</div><div class="nlp-formula"><strong>TF-IDF(t,d)</strong> = TF(t,d) × IDF(t)  →  <strong>normalizare L2</strong>: fiecare componentă împărțită la √(suma pătratelor componentelor)</div>
+<p><strong>Exemplu:</strong> avem D1 = „python python date”, D2 = „python cod”, D3 = „date cod”. Corpusul are N=3. Fiecare termen apare în două documente: DF=2, deci IDF = ln(4/3)+1 ≈ 1,2877. Pentru D1, TF este 2 pentru „python” și 1 pentru „date”. Vectorul brut, în ordinea [python, date], este [2×1,2877, 1×1,2877] = [2,5754, 1,2877]. După normalizarea L2 obținem aproximativ [0,8944, 0,4472].</p>
+<h3>Exemplul 9. Calculul complet TF-IDF pentru un document</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span>
+
+<span class="n">documente</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python python date"</span><span class="p">,</span> <span class="s2">"python cod"</span><span class="p">,</span> <span class="s2">"date cod"</span><span class="p">]</span>
+<span class="n">tokeni</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">documente</span><span class="p">]</span>
+<span class="n">vocabular</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">,</span> <span class="s2">"cod"</span><span class="p">]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokeni</span><span class="p">)</span>
+
+<span class="n">vector</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">termen</span> <span class="ow">in</span> <span class="n">vocabular</span><span class="p">:</span>
+    <span class="n">tf</span> <span class="o">=</span> <span class="n">tokeni</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">termen</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">termen</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">tokeni</span><span class="p">)</span>
+    <span class="n">idf</span> <span class="o">=</span> <span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">df</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tf</span> <span class="o">*</span> <span class="n">idf</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">termen</span><span class="p">,</span> <span class="s2">"TF="</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="s2">"DF="</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="s2">"IDF="</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">idf</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">norma</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">))</span>
+<span class="n">normalizat</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">/</span><span class="n">norma</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">]</span> <span class="k">if</span> <span class="n">norma</span> <span class="k">else</span> <span class="n">vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TF-IDF brut:"</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TF-IDF L2:"</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">normalizat</span><span class="p">])</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Observă că termenul „cod”, absent din D1, primește zero chiar dacă are IDF nenul.</p></div>
+<h3>Exemplul 10. Verificare: același vector cu TfidfVectorizer</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">documente</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python python date"</span><span class="p">,</span> <span class="s2">"python cod"</span><span class="p">,</span> <span class="s2">"date cod"</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">smooth_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">"l2"</span><span class="p">,</span> <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documente</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Ordinea coloanelor este cea dată de <code>get_feature_names_out()</code>, de aceea poate fi diferită de ordinea aleasă manual. Valorile pe termeni trebuie să coincidă.</p></div>
+</section>
+<section class="nlp-topic" id="tema-10"><div class="eyebrow">10 / CONCEPT</div><h2>De ce normalizăm vectorii? norm="l2" versus norm=None</h2>
+<p>Dacă două documente au aceleași proporții de termeni, dar unul este de zece ori mai lung, vectorii TF-IDF brut pot avea norme foarte diferite. Normalizarea L2 reduce efectul lungimii și este utilă pentru similaritatea cosinus.</p>
+<p>Cu <code>norm="l2"</code>, suma pătratelor componentelor devine 1. Cu <code>norm="l1"</code>, suma valorilor absolute devine 1. Cu <code>norm=None</code>, păstrăm ponderile brute. Alegerea este una de modelare, nu doar de afișare.</p>
+<h3>Exemplul 11. Efectul normalizării la documente de lungimi diferite</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python date"</span><span class="p">,</span> <span class="s2">"python date python date"</span><span class="p">,</span> <span class="s2">"fotbal sport"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">norm</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">"l2"</span><span class="p">]:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"norm="</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Compară primele două linii. Cu L2 ele ajung identice dacă au proporții identice de termeni. Acest comportament este deseori util pentru căutare, dar la unele sarcini lungimea documentului poate fi informativă și trebuie inclusă separat.</p></div>
+</section>
+<section class="nlp-topic" id="tema-11"><div class="eyebrow">11 / CONCEPT</div><h2>Cum reducem influența repetițiilor? sublinear_tf</h2>
+<p>Un document care repetă același cuvânt de 100 de ori nu este automat de 100 de ori mai relevant. <code>sublinear_tf=True</code> transformă orice frecvență pozitivă prin <code>1 + ln(TF)</code>. Repetițiile continuă să conteze, dar câștigul devine din ce în ce mai mic.</p>
+<h3>Exemplul 12. Comparație directă: frecvența brută versus logaritmică</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span>
+
+<span class="k">for</span> <span class="n">tf</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+    <span class="n">liniar</span> <span class="o">=</span> <span class="n">tf</span>
+    <span class="n">subliniar</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">tf</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"TF=</span><span class="si">{</span><span class="n">tf</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">: brut=</span><span class="si">{</span><span class="n">liniar</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2">, sublinear=</span><span class="si">{</span><span class="n">subliniar</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Combină <code>sublinear_tf=True</code> cu <code>norm="l2"</code> într-un experiment pe documente de lungimi foarte diferite. Nu presupune că va îmbunătăți mereu scorul.</p></div>
+</section>
+<section class="nlp-topic" id="tema-12"><div class="eyebrow">12 / CONCEPT</div><h2>min_df și max_df: ce păstrăm din vocabular?</h2>
+<p><code>min_df</code> filtrează termenii care apar în prea puține documente; <code>max_df</code> filtrează termenii care apar în prea multe documente. Dacă valorile sunt întregi, reprezintă număr de documente; dacă sunt între 0 și 1, reprezintă proporții.</p>
+<div class="nlp-scenario-grid"><article><h3>Corpus mic de 20 documente</h3><p>Începe cu <code>min_df=1</code>. Un <code>min_df=5</code> poate elimina aproape toate cuvintele specifice.</p></article><article><h3>10.000 de mesaje zgomotoase</h3><p>Încearcă <code>min_df=2</code> sau 3 ca să elimini greșeli întâmplătoare; verifică să nu pierzi termeni rari importanți.</p></article><article><h3>Texte cu șabloane repetitive</h3><p>Poți compara <code>max_df=0.9</code> cu 1.0, dar verifică dacă nu elimini negații ori cuvinte discriminative.</p></article></div>
+<h3>Exemplul 13. Cum se schimbă vocabularul când modificăm pragurile?</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"model python date"</span><span class="p">,</span> <span class="s2">"model python cod"</span><span class="p">,</span>
+    <span class="s2">"model date sport"</span><span class="p">,</span> <span class="s2">"model date economie"</span>
+<span class="p">]</span>
+<span class="n">configurari</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">dict</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="nb">dict</span><span class="p">(</span><span class="n">max_df</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">configurari</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Cu <code>max_df=0.75</code> se elimină „model”, care apare în toate documentele. Cu <code>min_df=2</code> dispar termenii prezenți într-un singur document. Privește ce informație s-a pierdut, nu numai cât s-a micșorat vocabularul.</p></div>
+</section>
+<section class="nlp-topic" id="tema-13"><div class="eyebrow">13 / CONCEPT</div><h2>max_features versus selecție după importanța pentru etichete</h2>
+<p><code>max_features=5000</code> limitează vocabularul la cei mai frecvenți termeni (după frecvența în corpus). Nu selectează automat cei mai buni termeni pentru a distinge clasele. Cuvinte frecvente precum „astăzi” sau „aici” pot fi inutile, în timp ce un termen rar poate indica aproape perfect o clasă.</p>
+<p>Dacă ne interesează selecția supervizată, după vectorizare putem încerca metode precum <code>SelectKBest(chi2)</code>, adaptate etichetelor. Aceasta este o etapă separată și trebuie învățată numai pe setul de antrenare.</p>
+<h3>Exemplul 14. Selecție supervizată după vectorizare, fără leakage</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">SelectKBest</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">10000</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"selectie"</span><span class="p">,</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1000</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"clasificator"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="c1"># model.fit(X_train, y_train)</span>
+<span class="c1"># Folosește corpus real, cu cel puțin 1000 de caracteristici distincte.</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p><code>max_features</code> și <code>SelectKBest</code> nu sunt echivalente. Pentru corpusuri mici alege <code>k="all"</code> sau un k mai mic decât numărul caracteristicilor disponibile.</p></div>
+</section>
+<section class="nlp-topic" id="tema-14"><div class="eyebrow">14 / CONCEPT</div><h2>De ce matricea este sparse și ce înseamnă CSR?</h2>
+<p>Un vocabular realist poate avea zeci de mii de termeni, dar un document poate utiliza doar câteva sute. Prin urmare, majoritatea elementelor din matricea document–termen sunt zero. În loc să memorăm toate zerourile, folosim matrici sparse.</p>
+<figure class="nlp-feature-figure"><img alt="Matrice rară și numărul de zerouri" loading="lazy" src="../assets/nlp-figures/vectorizare-sparse.png"/><figcaption>Exemplu cu 5 documente și 8 termeni: doar 9 din 40 de poziții sunt nenule.</figcaption></figure>
+<p>Formatul <strong>CSR</strong> (Compressed Sparse Row) păstrează <code>data</code> (valorile nenule), <code>indices</code> (coloanele lor) și <code>indptr</code> (unde începe fiecare rând). Aceste trei tablouri permit reconstruirea matricei fără a stoca toate zerourile.</p>
+<h3>Exemplul 15. Inspectarea reprezentării CSR</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python cod"</span><span class="p">,</span> <span class="s2">"python date"</span><span class="p">,</span> <span class="s2">"sport fotbal"</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tip:"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimensiune:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"valori nenule:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">nnz</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"data:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"indices:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"indptr:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">indptr</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Matrice (numai pentru demo):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Pentru date reale, evită <code>toarray()</code> dacă matricea este mare. Majoritatea modelelor liniare pentru text din scikit-learn pot lucra direct pe reprezentări sparse.</p></div>
+</section>
+<section class="nlp-topic" id="tema-15"><div class="eyebrow">15 / CONCEPT</div><h2>fit_transform versus transform: regula care previne data leakage</h2>
+<p>Folosim <code>fit_transform()</code> numai pe documentele de antrenare pentru a învăța vocabularul și IDF. Pe documentele de validare, test sau pe interogările noi folosim exclusiv <code>transform()</code>. Dacă învățăm vocabularul sau IDF și din validare, am introdus informație din setul pe care încercăm să-l evaluăm independent.</p>
+<h3>Exemplul 16. Separarea corectă train / test</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python algoritmi"</span><span class="p">,</span> <span class="s2">"matematică date"</span><span class="p">,</span> <span class="s2">"python modele"</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"algoritmi noi"</span><span class="p">,</span> <span class="s2">"robotică și python"</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>   <span class="c1"># NU fit_transform(test)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Aceleași coloane:"</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vocabular:"</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Termenii noi, inexistenți în vocabularul antrenării, sunt ignorați de TfidfVectorizer. Dacă un document nou conține numai termeni necunoscuți, vectorul său poate fi integral zero; este un caz care trebuie inspectat.</p></div>
+</section>
+<section class="nlp-topic" id="tema-16"><div class="eyebrow">16 / CONCEPT</div><h2>TfidfVectorizer sau CountVectorizer + TfidfTransformer?</h2>
+<p><code>TfidfVectorizer</code> este, în esență, combinația dintre <code>CountVectorizer</code> și <code>TfidfTransformer</code>. Prima variantă este mai comodă pentru un pipeline standard. A doua este utilă când vrem să inspectăm explicit contorizarea și apoi ponderea TF-IDF, ori când pornim de la o matrice de numărări deja calculată.</p>
+<h3>Exemplul 17. Două implementări echivalente pentru aceleași setări</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">allclose</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"python python date"</span><span class="p">,</span> <span class="s2">"python algoritm"</span><span class="p">,</span> <span class="s2">"date și modele"</span><span class="p">]</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">X_counts</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_counts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">allclose</span><span class="p">(</span><span class="n">X1</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">X2</span><span class="o">.</span><span class="n">toarray</span><span class="p">()))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>În acest exemplu, setările sunt aceleași, inclusiv regulile de tokenizare și normalizare. Dacă configurezi diferit cele două etape, rezultatele nu vor mai coincide.</p></div>
+</section>
+<section class="nlp-topic" id="tema-17"><div class="eyebrow">17 / CONCEPT</div><h2>HashingVectorizer: când vocabularul devine foarte mare</h2>
+<p><code>HashingVectorizer</code> nu învață și nu păstrează un dicționar de termeni; aplică o funcție hash pentru a proiecta termenii într-un număr fix de coloane. Este util pentru fluxuri de date, procesare incrementală sau corpusuri foarte mari, unde memorarea vocabularului este costisitoare.</p>
+<p>Compromisul important sunt <strong>coliziunile</strong>: doi termeni diferiți pot ajunge în aceeași coloană. Nu există un <code>get_feature_names_out()</code> care să inverseze hashingul în lista exactă a termenilor. <code>alternate_sign</code> poate ajuta la conservarea aproximativă a produselor scalare, dar nu produce o interpretare simplă a coloanelor.</p>
+<h3>Exemplul 18. HashingVectorizer pe texte noi, fără fit</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">HashingVectorizer</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">alternate_sign</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">"python date"</span><span class="p">,</span> <span class="s2">"sport meci"</span><span class="p">])</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">"python model nou"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Număr coloane fix:"</span><span class="p">,</span> <span class="n">X1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Valori nenule:"</span><span class="p">,</span> <span class="n">X1</span><span class="o">.</span><span class="n">nnz</span><span class="p">,</span> <span class="n">X2</span><span class="o">.</span><span class="n">nnz</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Pentru demonstrație am ales doar 16 coloane, deci coliziunile sunt mai probabile. În practică se folosesc mult mai multe coloane; măsura exactă se alege în funcție de resurse și de performanță.</p></div>
+</section>
+<section class="nlp-topic" id="tema-18"><div class="eyebrow">18 / CONCEPT</div><h2>Reducerea dimensionalității cu TruncatedSVD</h2>
+<p>TF-IDF poate produce sute de mii de coloane. Pentru clustering sau explorare vizuală, putem proiecta vectorii într-un spațiu mai mic. <code>TruncatedSVD</code> funcționează pe matrici sparse fără centrare explicită, spre deosebire de PCA obișnuită.</p>
+<p>În NLP, combinația <code>TfidfVectorizer → TruncatedSVD</code> este cunoscută adesea drept <strong>Latent Semantic Analysis (LSA)</strong>. Ea comprimă informația de co-apariție, dar nu garantează „înțelegerea semantică” a textului.</p>
+<h3>Exemplul 19. TF-IDF → SVD → vectori de dimensiune redusă</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">TruncatedSVD</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"tenis sport meci"</span><span class="p">,</span> <span class="s2">"fotbal stadion sport"</span><span class="p">,</span> <span class="s2">"echipă sport meci"</span><span class="p">,</span>
+    <span class="s2">"python cod date"</span><span class="p">,</span> <span class="s2">"algoritmi python date"</span><span class="p">,</span> <span class="s2">"model cod date"</span>
+<span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Înainte:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"după:"</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Numărul componentelor trebuie să fie compatibil cu dimensiunile matricei. Pe un corpus real alegem <code>n_components</code> folosind validare și analizăm ce informație se pierde.</p></div>
+</section>
+<section class="nlp-topic" id="tema-19"><div class="eyebrow">19 / CONCEPT</div><h2>Combinarea reprezentărilor: când cuvintele și caracterele se completează</h2>
+<p>Un vectorizator pe cuvinte surprinde termeni și expresii, în timp ce unul pe caractere poate tolera variante ortografice. Într-un proiect cu mesaje scurte, cele două reprezentări pot fi complementare. Putem reuni rezultatele folosind <code>FeatureUnion</code>.</p>
+<h3>Exemplul 20. FeatureUnion: TF-IDF de cuvinte + TF-IDF de caractere</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureUnion</span><span class="p">,</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">reprezentare</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"cuvinte"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">"caractere"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s2">"char_wb"</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+<span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"vectorizare"</span><span class="p">,</span> <span class="n">reprezentare</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"clasificare"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ofertă urgentă"</span><span class="p">,</span> <span class="s2">"reducere mare"</span><span class="p">,</span> <span class="s2">"proiect python"</span><span class="p">,</span> <span class="s2">"lecție matematică"</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"spam"</span><span class="p">,</span> <span class="s2">"spam"</span><span class="p">,</span> <span class="s2">"educație"</span><span class="p">,</span> <span class="s2">"educație"</span><span class="p">]</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s2">"oferata urgenta"</span><span class="p">,</span> <span class="s2">"proiect algoritmi"</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Acesta este un exemplu didactic cu foarte puține date, nu un model fiabil. Într-un experiment real comparăm abordarea mixtă cu fiecare reprezentare individuală, folosind cross-validation.</p></div>
+</section>
+<section class="nlp-topic" id="tema-20"><div class="eyebrow">20 / CONCEPT</div><h2>Trei combinații de pornire, asociate cu sarcini concrete</h2>
+<p>În loc să alegem parametrii individual, pornim de la natura problemei și testăm câteva combinații coerente. Fiecare configurație este o ipoteză de experiment, nu o rețetă universală.</p>
+<div class="nlp-scenario-grid"><article><h3>A. Clasificare știri</h3><p><code>TfidfVectorizer(ngram_range=(1,2), min_df=2, max_df=0.95, norm="l2")</code> + <code>LinearSVC(C=1)</code>.</p><p><b>De ce:</b> subiectele au termeni și expresii recurente; corpusul suficient de mare permite filtrarea zgomotului rar.</p></article><article><h3>B. Recenzii scurte cu negații</h3><p><code>TfidfVectorizer(ngram_range=(1,2), min_df=1)</code> + <code>LogisticRegression(C=1)</code>.</p><p><b>De ce:</b> bigramele pot reprezenta „nu recomand”; negațiile trebuie păstrate.</p></article><article><h3>C. Mesaje cu greșeli</h3><p><code>TfidfVectorizer(analyzer="char_wb", ngram_range=(3,5))</code> + <code>LinearSVC(C=1)</code>.</p><p><b>De ce:</b> modelele pe caractere au mai multă toleranță la variații ortografice.</p></article></div>
+<h3>Exemplul 21. Pipeline corect pentru clasificarea textului și validare</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+
+<span class="n">texte</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"tenis turneu"</span><span class="p">,</span> <span class="s2">"fotbal meci"</span><span class="p">,</span> <span class="s2">"echipă stadion"</span><span class="p">,</span> <span class="s2">"sport competiție"</span><span class="p">,</span>
+    <span class="s2">"cod python"</span><span class="p">,</span> <span class="s2">"date algoritm"</span><span class="p">,</span> <span class="s2">"programare python"</span><span class="p">,</span> <span class="s2">"software aplicație"</span>
+<span class="p">]</span>
+<span class="n">etichete</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"sport"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"tech"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"tfidf"</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">"clf"</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">texte</span><span class="p">,</span> <span class="n">etichete</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"f1_macro"</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Pipeline-ul învață vocabularul separat în fiecare fold. Pentru seturi reale și dezechilibrate, folosește mai multe documente și alegerea adecvată a numărului de folduri; scorul pe 8 exemple este doar demonstrativ.</p></div>
+</section>
+<section class="nlp-topic" id="tema-21"><div class="eyebrow">21 / CONCEPT</div><h2>Căutarea documentelor după similaritate cosinus</h2>
+<p>Pentru un sistem simplu de căutare lexicală, vectorizăm corpusul o singură dată. Când primim o interogare, folosim <code>transform()</code>, nu <code>fit_transform()</code>. Apoi calculăm similaritatea cosinus dintre interogare și fiecare document.</p>
+<h3>Exemplul 22. Motor de căutare lexicală cu TF-IDF</h3><div class="nlp-code"><div class="nlp-code-head"><span>Python 3 · cod executabil</span><button class="nlp-copy" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="n">documente</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"elevii învață python și algoritmi"</span><span class="p">,</span>
+    <span class="s2">"echipa a câștigat meciul de fotbal"</span><span class="p">,</span>
+    <span class="s2">"date și modele de inteligență artificială"</span><span class="p">,</span>
+    <span class="s2">"profesorul explică exerciții python"</span>
+<span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documente</span><span class="p">)</span>
+<span class="n">interogare</span> <span class="o">=</span> <span class="s2">"exerciții python"</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">interogare</span><span class="p">])</span>
+<span class="n">scoruri</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="n">ordine</span> <span class="o">=</span> <span class="n">scoruri</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ordine</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scoruri</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">documente</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<div class="nlp-example-box"><h3>Explicația exemplului</h3><p>Aceasta este o căutare lexicală: documentele pot fi semantic similare fără să împartă termeni importanți, caz în care scorul TF-IDF poate fi mic. Distinge această metodă de căutarea semantică bazată pe embeddings.</p></div>
+</section>
+<section class="nlp-topic" id="tema-22"><div class="eyebrow">22 / CONCEPT</div><h2>Greșeli frecvente și checklist înainte de o predicție ONIA</h2>
+<p>Erorile din vectorizare pot afecta puternic scorul final, chiar dacă algoritmul de clasificare este corect.</p>
+<ol class="nlp-steps"><li><strong>Nu construi vocabularul pe test.</strong> Aplică <code>fit</code> numai pe train; pe date noi folosește <code>transform</code>.</li><li><strong>Nu elimina automat negațiile.</strong> Verifică texte precum „nu recomand” sau „nu este rău”.</li><li><strong>Nu începe cu trigrame fără motiv.</strong> Mai multe coloane înseamnă și mai multe apariții rare și risc de overfit.</li><li><strong>Nu converti matricea sparse în dense pe seturi mari.</strong> Poți epuiza rapid memoria.</li><li><strong>Nu considera max_features o selecție supervizată.</strong> Frecvența termenilor nu garantează relevanță pentru etichetă.</li><li><strong>Nu confunda TF-IDF cu probabilități.</strong> Coordonatele sunt ponderi, nu șansele ca un termen să aibă un sens.</li><li><strong>Nu alege configurația numai după scorul public.</strong> Compară alternative folosind o validare proprie, cu metrică potrivită.</li></ol>
+</section>
+<div class="nlp-call"><h2>Laborator interactiv — construiești singur vectorizarea</h2><p>Schimbă documentele și construiește BoW, bigrame, TF-IDF, vocabular filtrat și reprezentări sparse CSR. Laboratorul include și un experiment de căutare cosinus. Fiecare calcul este explicat și recalculat local.</p><a href="../interactive/nlp-vectorizare.html" rel="noopener" target="_blank">Deschide laboratorul într-o pagină separată ↗</a></div>
+<section class="nlp-topic"><h2>Surse și aprofundare</h2><pNone>Explicațiile despre IDF, tokenizare și transformări respectă convenția scikit-learn documentată în Text feature extraction și TfidfVectorizer . Exemplele folosesc date educaționale sintetice.</p></section>
+</div>

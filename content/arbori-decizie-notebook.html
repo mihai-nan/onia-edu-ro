@@ -1,0 +1,138 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:18px;background:#f6f9fd;color:#17314f;font:14px/1.6 system-ui}article{background:white;border:1px solid #dce5f0;border-radius:12px;padding:16px;margin-bottom:13px}h1{font-size:20px}h2{font-size:15px}pre{overflow:auto;white-space:pre;tab-size:4;background:#102847;color:#edf6ff;padding:14px;border-radius:9px;font:12px/1.6 ui-monospace,monospace}</style></head><body><h1>Notebook ONIA · Arborii de decizie</h1><p>Selecție de celule pentru previzualizare. Pentru execuție, descarcă notebookul complet.</p><article><h2>Parcurgerea unui arbore reprezentat cu dicționare</h2><pre>def prezice_arbore(nod, x):
+    while &quot;stanga&quot; in nod:
+        j = nod[&quot;caracteristica&quot;]
+        prag = nod[&quot;prag&quot;]
+        if x[j] &lt;= prag:
+            nod = nod[&quot;stanga&quot;]
+        else:
+            nod = nod[&quot;dreapta&quot;]
+    return nod[&quot;clasa&quot;]
+</pre></article><article><h2>Calculul Gini de la zero</h2><pre>def gini(etichete):
+    if len(etichete) == 0:
+        return 0.0
+    frecvente = {}
+    for clasa in etichete:
+        frecvente[clasa] = frecvente.get(clasa, 0) + 1
+    rezultat = 1.0
+    for nr in frecvente.values():
+        p = nr / len(etichete)
+        rezultat -= p * p
+    return rezultat
+
+print(gini([0, 0, 0, 0]))  # 0.0
+print(gini([0, 0, 1, 1]))  # 0.5
+print(gini([0] * 8 + [1] * 2))  # 0.32
+</pre></article><article><h2>Entropia în Python</h2><pre>from math import log2
+
+def entropie(etichete):
+    n = len(etichete)
+    if n == 0:
+        return 0.0
+    frecvente = {}
+    for y in etichete:
+        frecvente[y] = frecvente.get(y, 0) + 1
+    h = 0.0
+    for nr in frecvente.values():
+        p = nr / n
+        h -= p * log2(p)
+    return h
+
+print(round(entropie([0, 0, 0, 1]), 3))  # 0.811
+</pre></article><article><h2>De la zero: alegerea celui mai bun prag</h2><pre>def gini_binar(etichete):
+    if not etichete:
+        return 0.0
+    p = sum(etichete) / len(etichete)
+    return 2 * p * (1 - p)
+
+def cel_mai_bun_prag(x, y):
+    valori = sorted(set(x))
+    scor_minim = float(&quot;inf&quot;)
+    rezultat = None
+    for i in range(len(valori) - 1):
+        prag = (valori[i] + valori[i + 1]) / 2
+        st = [y[j] for j in range(len(x)) if x[j] &lt;= prag]
+        dr = [y[j] for j in range(len(x)) if x[j] &gt; prag]
+        scor = (len(st) * gini_binar(st) +
+                len(dr) * gini_binar(dr)) / len(y)
+        if scor &lt; scor_minim:
+            scor_minim = scor
+            rezultat = prag
+    return rezultat, scor_minim
+
+x = [1, 2, 3, 7, 8, 9]
+y = [0, 0, 0, 1, 1, 1]
+print(cel_mai_bun_prag(x, y))  # (5.0, 0.0)
+</pre></article><article><h2>Implementare didactică a unui arbore CART binar</h2><pre>def gini_lista(valori):
+    if not valori:
+        return 0.0
+    f = {}
+    for y in valori:
+        f[y] = f.get(y, 0) + 1
+    return 1 - sum((nr / len(valori)) ** 2 for nr in f.values())
+
+def cauta_split(X, y, indici, min_frunza=1):
+    cel_mai_bun = None
+    scor_minim = gini_lista([y[i] for i in indici])
+    for j in range(len(X[0])):
+        valori = sorted(set(X[i][j] for i in indici))
+        for t in range(len(valori) - 1):
+            prag = (valori[t] + valori[t + 1]) / 2
+            st = [i for i in indici if X[i][j] &lt;= prag]
+            dr = [i for i in indici if X[i][j] &gt; prag]
+            if min(len(st), len(dr)) &lt; min_frunza:
+                continue
+            scor = (len(st) * gini_lista([y[i] for i in st]) +
+                    len(dr) * gini_lista([y[i] for i in dr])) / len(indici)
+            if scor &lt; scor_minim - 1e-12:
+                scor_minim = scor
+                cel_mai_bun = (j, prag, st, dr)
+    return cel_mai_bun
+
+def construieste_arbore(X, y, indici, adancime=0,
+                        max_adancime=3, min_frunza=1):
+    frecvente = {}
+    for i in indici:
+        frecvente[y[i]] = frecvente.get(y[i], 0) + 1
+    clasa = max(sorted(frecvente), key=lambda c: frecvente[c])
+    nod = {&quot;clasa&quot;: clasa, &quot;n&quot;: len(indici),
+           &quot;exemple&quot;: indici[:], &quot;frecvente&quot;: frecvente}
+    if adancime == max_adancime or len(frecvente) == 1:
+        return nod
+    split = cauta_split(X, y, indici, min_frunza)
+    if split is None:
+        return nod
+    j, prag, st, dr = split
+    nod[&quot;caracteristica&quot;] = j
+    nod[&quot;prag&quot;] = prag
+    nod[&quot;stanga&quot;] = construieste_arbore(
+        X, y, st, adancime + 1, max_adancime, min_frunza)
+    nod[&quot;dreapta&quot;] = construieste_arbore(
+        X, y, dr, adancime + 1, max_adancime, min_frunza)
+    return nod
+
+def prezice(nod, x):
+    while &quot;stanga&quot; in nod:
+        if x[nod[&quot;caracteristica&quot;]] &lt;= nod[&quot;prag&quot;]:
+            nod = nod[&quot;stanga&quot;]
+        else:
+            nod = nod[&quot;dreapta&quot;]
+    return nod[&quot;clasa&quot;]
+
+X = [[1, 2], [2, 4], [3, 8], [5, 3],
+     [6, 6], [8, 8], [9, 2], [9, 7]]
+y = [0, 0, 1, 0, 1, 1, 0, 1]
+arbore = construieste_arbore(X, y, list(range(len(X))))
+print(prezice(arbore, [7, 6]))
+</pre></article><article><h2>Frecvențele relative într-o frunză</h2><pre>def probabilitati_frunza(nod):
+    nr = nod[&quot;n&quot;]
+    return {c: f / nr for c, f in nod[&quot;frecvente&quot;].items()}
+
+frunza = {&quot;n&quot;: 10, &quot;frecvente&quot;: {&quot;pisica&quot;: 7, &quot;caine&quot;: 2, &quot;iepure&quot;: 1}}
+print(probabilitati_frunza(frunza))
+</pre></article><article><h2>Calculul impurității unui nod de regresie</h2><pre>def mse_valori(valori):
+    medie = sum(valori) / len(valori)
+    return sum((v - medie) ** 2 for v in valori) / len(valori)
+
+print(round(mse_valori([10, 12, 20]), 3))  # 18.667
+print(sum([10, 12, 20]) / 3)              # 14.0
+</pre></article></body></html>
