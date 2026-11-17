@@ -222,6 +222,25 @@
         }
         if (!container.isConnected) continue;
         container.innerHTML = html; // fișier HTML administrat în același repository
+        // Fragmentul NumPy conține animații/interacțiuni JS. Scripturile
+        // inserate prin innerHTML sunt inerte; le activăm explicit după montare.
+        // La fiecare navigare, noul fragment primește propriile evenimente.
+        const numpyEmbeddedScript = container.querySelector('script[data-onia-numpy-interactions]');
+        if (numpyEmbeddedScript) {
+          const activeScript = document.createElement('script');
+          activeScript.dataset.oniaNumpyInteractions = '';
+          activeScript.textContent = numpyEmbeddedScript.textContent;
+          numpyEmbeddedScript.replaceWith(activeScript);
+        }
+        // Pandas: activează vizualizările după inserarea fragmentului (innerHTML
+        // nu execută automat scripturile dintr-un fișier HTML încărcat).
+        const pandasEmbeddedScript = container.querySelector('script[data-onia-pandas-interactions]');
+        if (pandasEmbeddedScript) {
+          const activeScript = document.createElement('script');
+          activeScript.dataset.oniaPandasInteractions = '';
+          activeScript.textContent = pandasEmbeddedScript.textContent;
+          pandasEmbeddedScript.replaceWith(activeScript);
+        }
         // Fragmentele HTML sunt scrise relativ la content/<lectie>.html,
         // dar sunt inserate în index.html. Corectăm imaginile și linkurile
         // astfel încât să funcționeze local (file://) și pe GitHub Pages.
@@ -231,6 +250,9 @@
           const relative = el.getAttribute(attr);
           try { el.setAttribute(attr, new URL(relative, lessonBase).href); } catch (_) {}
         });
+        // Inițializează vizualizările inline pentru regresia liniară după inserarea
+        // fragmentului și corectarea căilor; funcționează și prin file://.
+        window.ONIA_LR_INIT?.(container.querySelector('.onia-linear-lesson'));
         // Cuprins combinat pentru mai multe suporturi native (NumPy, Pandas, CSV).
         const lessonHeadings = $$('.lesson-content .native-lesson .py-topic-head h2, .lesson-content .native-lesson .uns-head h2, .lesson-content .native-lesson .nlp-topic h2');
         const toc = $('.lesson-toc nav');

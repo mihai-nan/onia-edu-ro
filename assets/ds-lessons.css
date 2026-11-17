@@ -18,3 +18,59 @@
 .onia-data-science .py-code-top{position:relative}
 .onia-data-science .codehilite .k{color:#b53f94}.onia-data-science .codehilite .s,.onia-data-science .codehilite .s1,.onia-data-science .codehilite .s2{color:#17815d}.onia-data-science .codehilite .nf{color:#2463ad}.onia-data-science .codehilite .c1{color:#738399;font-style:italic}
 @media(max-width:680px){.onia-data-science .ds-topic-body,.onia-data-science .ds-topic-body p{font-size:14px}.onia-data-science .ds-formula{font-size:15px;padding:12px}.onia-data-science .py-intro{padding:20px}.onia-data-science .py-code-card{max-width:100%}}
+
+/* ONIA · Metrici de evaluare: formule matematice native MathML, offline */
+.onia-data-science .ds-section-kicker{margin:25px 0 11px;color:var(--primary,#235fb6);font-size:11px;text-transform:uppercase;font-weight:800;letter-spacing:.11em}
+.onia-data-science .ds-math-card{min-width:0;flex:1 1 235px;border:1px solid #d7e3f2;border-radius:13px;background:linear-gradient(145deg,#f6faff,#fff);padding:17px 19px;margin:17px 0;overflow-x:auto;color:#193e71}
+.onia-data-science .ds-math-row{display:flex;flex-wrap:wrap;gap:13px;align-items:stretch;margin:15px 0}
+.onia-data-science .ds-math-row>.ds-math-card{margin:0}
+.onia-data-science .ds-math-label{font:800 11px/1.4 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#38669f;margin-bottom:13px}
+.onia-data-science .ds-math-card math{display:block;font-family:'Cambria Math','STIX Two Math','Latin Modern Math',serif;font-size:1.43rem;line-height:1.5;max-width:100%;width:max-content;min-width:min-content;margin:6px auto 9px;color:#193862}
+.onia-data-science .ds-math-caption{font:400 12.5px/1.75 system-ui,sans-serif;color:#617593;margin:10px 0 0}
+.onia-data-science .ds-explainer{margin:15px 0!important;color:var(--text,#22314b)}
+.onia-data-science .ds-learning-point{border-left:3px solid #399c92;background:#eef8f6;padding:15px 19px;border-radius:8px;margin:18px 0;color:#214b49}
+.onia-data-science .ds-learning-point>strong{display:block;font-size:13px;margin-bottom:5px}
+.onia-data-science .ds-learning-point>p{margin:0!important;font-size:13px!important;line-height:1.75}
+.onia-data-science .ds-two-panel,.onia-data-science .ds-compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.onia-data-science .ds-compare-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.onia-data-science .ds-two-panel>div,.onia-data-science .ds-compare-grid>div{min-width:0;padding:16px;border:1px solid #dee7f4;background:#f9fbff;border-radius:12px}
+.onia-data-science .ds-two-panel h3{font-size:16px;margin:0 0 9px;color:var(--text,#193c6f)}
+.onia-data-science .ds-two-panel p{margin:0 0 9px;font-size:13px;line-height:1.7}
+.onia-data-science .ds-inline-math{color:#1c568f;font-size:13px}
+.onia-data-science .ds-mini-example{background:#fff8e9;border-left:3px solid #d5a64d;border-radius:8px;padding:15px 17px;margin:17px 0;line-height:1.7}
+.onia-data-science .ds-split-diagram{display:flex;border-radius:10px;overflow:hidden;margin:17px 0;min-height:62px;color:white;font-size:12px;font-weight:800}
+.onia-data-science .ds-split-diagram>div{display:grid;place-items:center;min-width:0;text-align:center;padding:10px 4px}
+.onia-data-science .ds-table-scroll,.onia-data-science .ds-confusion-wrap{overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #dbe5f1;background:white}
+.onia-data-science table.ds-math-table,.onia-data-science table.ds-confusion{width:100%;border-collapse:collapse;font-size:13px;text-align:center;color:#253951}
+.onia-data-science table.ds-math-table th,.onia-data-science table.ds-math-table td,.onia-data-science table.ds-confusion th,.onia-data-science table.ds-confusion td{border-bottom:1px solid #e2eaf2;padding:12px 13px}
+.onia-data-science table.ds-math-table thead th,.onia-data-science table.ds-confusion thead th{background:#eef5fe;color:#19477f;font-size:12px;font-weight:800}
+.onia-data-science table.ds-math-table tbody tr:last-child td{border-bottom:0}
+.onia-data-science table.ds-math-table tfoot td{background:#edf6f4;font-weight:800}
+.onia-data-science table.ds-math-table code{font-size:11px;white-space:nowrap}
+.onia-data-science .ds-compare-grid b{display:block;font-size:12px;color:#32639b}
+.onia-data-science .ds-numeric{font-size:19px;font-weight:800;letter-spacing:-.035em;color:#184987;line-height:1.45;margin:10px 0}
+.onia-data-science .ds-compare-grid small{font-size:11.8px;line-height:1.65;color:#6a7b92;display:block}
+.onia-data-science .ds-visual-classification{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:19px 0}
+.onia-data-science .ds-class-cell{padding:15px 5px;text-align:center;border-radius:9px;font-size:14px;font-weight:800}
+.onia-data-science .ds-class-cell small{font-size:10px;display:block;font-weight:600}
+.onia-data-science .ds-class-cell.good{background:#dbf3ea;border:1px solid #acdcca;color:#186752}
+.onia-data-science .ds-class-cell.bad{background:#ffe5e5;border:1px solid #f2b6b7;color:#a43742}
+.onia-data-science .ds-confusion caption{padding:12px;font-size:12px;font-weight:700;color:#617591}
+.onia-data-science .ds-confusion th{text-align:left;min-width:105px}
+.onia-data-science .ds-confusion td{font-size:16px;min-width:130px}
+.onia-data-science .ds-confusion td strong{display:block}
+.onia-data-science .ds-confusion td small{display:block;font-size:11px;font-weight:500;margin-top:4px}
+.onia-data-science .ds-confusion .cm-tp,.onia-data-science .ds-confusion .cm-tn{background:#e3f8ee;color:#176e54}
+.onia-data-science .ds-confusion .cm-fp,.onia-data-science .ds-confusion .cm-fn{background:#ffeded;color:#9c343b}
+.onia-data-science .ds-formula{white-space:normal;line-height:1.7;font-size:15px}
+:root[data-theme=dark] .onia-data-science .ds-math-card,:root[data-theme=dark] .onia-data-science .ds-two-panel>div,:root[data-theme=dark] .onia-data-science .ds-compare-grid>div{background:#172b45;border-color:#38506c;color:#d9ebff}
+:root[data-theme=dark] .onia-data-science .ds-math-card math,:root[data-theme=dark] .onia-data-science .ds-numeric{color:#c7dcff}
+:root[data-theme=dark] .onia-data-science .ds-math-label,:root[data-theme=dark] .onia-data-science .ds-math-caption,:root[data-theme=dark] .onia-data-science .ds-compare-grid b{color:#abc7f3}
+:root[data-theme=dark] .onia-data-science .ds-learning-point{background:#173a36;color:#d0e8e0}
+:root[data-theme=dark] .onia-data-science .ds-mini-example{background:#3b3120;color:#f5e5be}
+:root[data-theme=dark] .onia-data-science .ds-math-table,:root[data-theme=dark] .onia-data-science .ds-confusion{color:#203953}
+@media(max-width:700px){.onia-data-science .ds-compare-grid,.onia-data-science .ds-two-panel{grid-template-columns:1fr}.onia-data-science .ds-math-card{padding:14px}.onia-data-science .ds-math-card math{font-size:1.22rem}.onia-data-science .ds-visual-classification{grid-template-columns:repeat(3,minmax(0,1fr))}.onia-data-science .ds-split-diagram{font-size:10px}.onia-data-science .ds-math-row{display:block}.onia-data-science .ds-math-row>.ds-math-card{margin:12px 0}}
+
+.onia-data-science .ds-symbol-guide{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:21px 0 25px;border:1px solid var(--line,#dfe8f4);background:var(--panel,#fff);border-radius:13px;padding:14px 16px;color:var(--text,#21334c)}
+.onia-data-science .ds-symbol-guide strong{width:100%;font-size:13px;color:var(--primary,#235fb6)}
+.onia-data-science .ds-symbol-guide span{display:inline-block;font-size:11px;padding:5px 9px;border-radius:6px;background:var(--panel-alt,#f2f7ff);border:1px solid var(--line,#d9e6f3)}

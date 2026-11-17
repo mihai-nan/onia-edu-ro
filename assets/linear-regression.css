@@ -25,3 +25,95 @@
 :root[data-theme=dark] .onia-linear-lesson .lr-note-amber{background:#3c3321;border-color:#726040}
 :root[data-theme=dark] .onia-linear-lesson .lr-equation img{filter:invert(1)}
 @media(max-width:600px){.onia-linear-lesson .lr-equation{padding:12px 8px}.onia-linear-lesson .lr-equation img{min-width:170px}.onia-linear-lesson .lr-table{font-size:11px}}
+
+/* ONIA 2.1 — atelierul de regresie. Stiluri încapsulate; fără dependențe externe. */
+.onia-linear-lesson .lr-path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:21px 0 8px}
+.onia-linear-lesson .lr-path a{display:block;border:1px solid #dbe6f4;background:var(--panel);color:var(--text);padding:14px;border-radius:13px;text-decoration:none;transition:transform .15s,border-color .15s}
+.onia-linear-lesson .lr-path a:hover{transform:translateY(-2px);border-color:#7caddd}
+.onia-linear-lesson .lr-path strong{display:block;font-size:12px;color:var(--primary);margin:6px 0 4px}.onia-linear-lesson .lr-path small{font-size:11px;line-height:1.5;display:block;color:var(--sub)}
+.onia-linear-lesson .lr-path .lr-path-icon{font-size:21px;line-height:1}
+.onia-linear-lesson .lr-learning-goal{display:flex;gap:10px;align-items:flex-start;border-left:3px solid #31988a;background:#eaf8f5;padding:13px 15px;margin:15px 0 20px;border-radius:3px 10px 10px 3px;color:#1c635a;font-size:12px;line-height:1.7}
+.onia-linear-lesson .lr-learning-goal strong{white-space:nowrap}
+.onia-linear-lesson .lr-studio{background:var(--panel);border:1px solid #cbdcf0;border-radius:16px;padding:19px 21px;margin:22px 0 28px;box-shadow:0 5px 23px #1739630a;overflow:hidden;color:var(--text)}
+.onia-linear-lesson .lr-studio-header{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:16px}
+.onia-linear-lesson .lr-studio-header>div{min-width:0}
+.onia-linear-lesson .lr-studio-kicker{font-size:10px;color:#155bb5;letter-spacing:.12em;font-weight:900;text-transform:uppercase;margin-bottom:5px}
+.onia-linear-lesson .lr-studio h3{font-size:17px;margin:0 0 5px;color:var(--text);letter-spacing:-.025em}
+.onia-linear-lesson .lr-studio-header p,.onia-linear-lesson .lr-studio p{font-size:12.4px;line-height:1.72;color:var(--sub);margin:5px 0 10px}
+.onia-linear-lesson .lr-studio-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(220px,1fr);gap:16px;align-items:start}
+.onia-linear-lesson .lr-studio-graph{border:1px solid var(--line);background:linear-gradient(180deg,#fff,#f9fbff);border-radius:11px;padding:8px;min-width:0}
+.onia-linear-lesson .lr-studio-svg{display:block;width:100%;height:auto;min-height:188px}
+.onia-linear-lesson .lr-studio-svg text{font-family:system-ui,sans-serif;fill:#526680;font-size:11px}
+.onia-linear-lesson .lr-studio-svg .lr-gridline{stroke:#e4edf6;stroke-width:1}.onia-linear-lesson .lr-studio-svg .lr-axis{stroke:#9db0c7;stroke-width:1.2}
+.onia-linear-lesson .lr-studio-svg .lr-datapoint{fill:#2769bb;stroke:white;stroke-width:2}.onia-linear-lesson .lr-studio-svg .lr-residual{stroke:#e36267;stroke-width:2;stroke-dasharray:5 4}.onia-linear-lesson .lr-studio-svg .lr-model{stroke:#129786;stroke-width:3;fill:none}
+.onia-linear-lesson .lr-controls{display:grid;gap:11px}
+.onia-linear-lesson .lr-control{display:block;padding:0;margin:0}
+.onia-linear-lesson .lr-control>span{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px}
+.onia-linear-lesson .lr-control output{font-variant-numeric:tabular-nums;color:#1f64af}
+.onia-linear-lesson .lr-control input[type=range]{width:100%;accent-color:#286fc2;cursor:pointer}
+.onia-linear-lesson .lr-control select{width:100%;max-width:100%;padding:8px 10px;border:1px solid #cbd9ea;border-radius:9px;background:var(--panel);color:var(--text);font-size:12px}
+.onia-linear-lesson .lr-btnrow{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.onia-linear-lesson .lr-action{background:#eef5ff;border:1px solid #c9dbf3;color:#175392;padding:8px 12px;border-radius:8px;font-size:11.5px;font-weight:800;cursor:pointer;transition:background .15s}
+.onia-linear-lesson .lr-action:hover{background:#dceaff}.onia-linear-lesson .lr-action.lr-primary{color:#fff;background:#205eae;border-color:#205eae}
+.onia-linear-lesson .lr-action[aria-pressed=true]{background:#205eae;border-color:#205eae;color:white}
+.onia-linear-lesson .lr-indicator{display:flex;gap:12px;flex-wrap:wrap;align-items:center;color:var(--sub);font-size:11px;margin:9px 0}
+.onia-linear-lesson .lr-dot{width:9px;height:9px;display:inline-block;margin-right:4px;border-radius:50%;background:#2467bb}.onia-linear-lesson .lr-dot-green{background:#129786}.onia-linear-lesson .lr-dot-red{background:#df6568}.onia-linear-lesson .lr-dot-gold{background:#d49a29}
+.onia-linear-lesson .lr-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0}
+.onia-linear-lesson .lr-stat{border:1px solid var(--line);border-radius:9px;background:var(--panel-alt);padding:10px;min-width:0}
+.onia-linear-lesson .lr-stat small{display:block;color:var(--sub);font-size:10px;line-height:1.35}
+.onia-linear-lesson .lr-stat strong{display:block;color:var(--text);font-size:17px;font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin-top:5px}
+.onia-linear-lesson .lr-studio .lr-formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;border:1px solid #dce9f8;background:#f0f6ff;border-radius:9px;padding:12px 13px;overflow-x:auto;line-height:1.7;color:#1e4c85;margin:12px 0}
+.onia-linear-lesson .lr-studio .lr-formula strong{color:#154c92}
+.onia-linear-lesson .lr-explain{border-radius:10px;background:#eef8f6;color:#226258;padding:12px 14px;margin:12px 0 6px;font-size:12px;line-height:1.75;border:1px solid #d2eae3}
+.onia-linear-lesson .lr-explain strong{color:#0d6f5f}
+.onia-linear-lesson .lr-worked-table{border-collapse:collapse;width:100%;margin:9px 0;font-size:11px;line-height:1.45}
+.onia-linear-lesson .lr-worked-table th{color:#1d568d;font-weight:800;background:#eef4fc;text-align:center;padding:8px 7px;border-bottom:1px solid #cfddea}
+.onia-linear-lesson .lr-worked-table td{text-align:center;padding:8px 5px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.onia-linear-lesson .lr-worked-table tr:last-child td{border-bottom:0}
+.onia-linear-lesson .lr-worked-table tr.lr-selected td{background:#fff2dd}
+.onia-linear-lesson .lr-worked-table .lr-sumrow td{background:#eaf6f2;font-weight:800;color:#176b5b}
+.onia-linear-lesson .lr-table-scroll{overflow-x:auto;width:100%}
+.onia-linear-lesson .lr-steps{display:grid;gap:8px;margin:13px 0}
+.onia-linear-lesson .lr-step{display:flex;align-items:flex-start;gap:10px;padding:11px;background:var(--panel-alt);border:1px solid var(--line);border-radius:9px;font-size:12px;line-height:1.65}
+.onia-linear-lesson .lr-step-index{border-radius:8px;display:grid;place-items:center;background:#e0edff;color:#1d5da7;font-size:12px;font-weight:900;width:25px;height:25px;flex:none}
+.onia-linear-lesson .lr-step strong{color:var(--text)}.onia-linear-lesson .lr-step span{color:var(--sub)}
+.onia-linear-lesson .lr-concept-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:17px 0}
+.onia-linear-lesson .lr-concept-card{border:1px solid var(--line);background:var(--panel-alt);border-radius:11px;padding:14px}
+.onia-linear-lesson .lr-concept-card strong{font-size:12px;color:var(--primary);display:block;margin-bottom:6px}
+.onia-linear-lesson .lr-concept-card p{margin:0;font-size:11.5px;line-height:1.65}
+.onia-linear-lesson .lr-expand{margin:15px 0;border:1px solid var(--line);border-radius:11px;background:var(--panel-alt);padding:13px 15px}
+.onia-linear-lesson .lr-expand summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--primary)}.onia-linear-lesson .lr-expand .lr-expand-body{padding-top:12px;font-size:12px;line-height:1.8}
+.onia-linear-lesson .lr-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;border-radius:50px;padding:5px 9px;background:#eaf3ff;color:#1957a2}
+.onia-linear-lesson .lr-sample-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.onia-linear-lesson .lr-sample{display:grid;place-items:center;width:51px;height:48px;border-radius:9px;border:1px solid #d3deec;background:var(--panel-alt);font-size:12px;font-weight:800;transition:.18s}
+.onia-linear-lesson .lr-sample.active{background:#cce6ff;border-color:#1f66b4;box-shadow:0 0 0 2px #205eae33}
+.onia-linear-lesson .lr-sample small{font-size:9px;color:var(--sub);display:block;font-weight:600}
+.onia-linear-lesson .lr-bars{display:grid;gap:9px;margin:15px 0}
+.onia-linear-lesson .lr-bar-row{display:grid;grid-template-columns:80px minmax(0,1fr) 56px;gap:9px;align-items:center;font-size:12px}
+.onia-linear-lesson .lr-bar-track{height:15px;border-radius:8px;background:#e6ecf4;overflow:hidden}
+.onia-linear-lesson .lr-bar-fill{display:block;height:100%;width:0;border-radius:8px;background:#2b6fc0;transition:width .15s}
+.onia-linear-lesson .lr-bar-row strong{font-variant-numeric:tabular-nums;font-size:11px;text-align:right}
+.onia-linear-lesson .lr-mathline{font-family:Cambria,Georgia,serif;font-size:19px!important;text-align:center;color:var(--text)!important;background:var(--panel-alt);border:1px solid var(--line);border-radius:10px;padding:14px 9px;line-height:1.7;margin:15px 0}
+.onia-linear-lesson .lr-grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.onia-linear-lesson .lr-quiz-item{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:12px 0}
+.onia-linear-lesson .lr-quiz-item h3{font-size:13.5px;line-height:1.5;margin:0 0 10px}
+.onia-linear-lesson .lr-quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.onia-linear-lesson .lr-quiz-option{border:1px solid var(--line);padding:9px 11px;border-radius:8px;text-align:left;background:var(--panel-alt);color:var(--text);font-size:12px;cursor:pointer}
+.onia-linear-lesson .lr-quiz-option:hover{border-color:#397ac0}.onia-linear-lesson .lr-quiz-option.correct{background:#ddf5ea;border-color:#5dbb9b;color:#175f4b}.onia-linear-lesson .lr-quiz-option.incorrect{background:#fff0ed;border-color:#e7a09a;color:#933c32}
+.onia-linear-lesson .lr-quiz-feedback{font-size:12px;line-height:1.6;min-height:23px;margin-top:10px;color:var(--sub)}
+.onia-linear-lesson .lr-quiz-score{display:flex;flex-wrap:wrap;align-items:center;gap:12px;border:1px solid #c7e6d9;background:#ecf9f3;border-radius:11px;padding:13px 15px;margin:14px 0}
+.onia-linear-lesson .lr-quiz-score strong{color:#135844;font-size:17px}
+.onia-linear-lesson .lr-note-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.onia-linear-lesson .lr-note-grid > div{border:1px solid var(--line);border-radius:11px;padding:14px;background:var(--panel-alt)}
+.onia-linear-lesson .lr-note-grid strong{font-size:12px;color:var(--primary)}.onia-linear-lesson .lr-note-grid p{margin:7px 0 0;font-size:11.8px}
+:root[data-theme=dark] .onia-linear-lesson .lr-learning-goal{background:#183d38;color:#b4e6db}
+:root[data-theme=dark] .onia-linear-lesson .lr-studio-graph{background:#fbfcff}
+:root[data-theme=dark] .onia-linear-lesson .lr-worked-table th{background:#223755;color:#c2dfff}
+:root[data-theme=dark] .onia-linear-lesson .lr-explain{background:#1b3a36;color:#c3e9de;border-color:#31534c}
+:root[data-theme=dark] .onia-linear-lesson .lr-formula{background:#1c304b;color:#c6dffd;border-color:#3a5172}
+:root[data-theme=dark] .onia-linear-lesson .lr-quiz-score{background:#1b3a34;border-color:#386959}
+:root[data-theme=dark] .onia-linear-lesson .lr-quiz-score strong{color:#8fe8c5}
+:root[data-theme=dark] .onia-linear-lesson .lr-sample.active{background:#294569;color:#e4f0ff}
+@media(max-width:800px){.onia-linear-lesson .lr-studio-grid{grid-template-columns:1fr}.onia-linear-lesson .lr-path{grid-template-columns:1fr}.onia-linear-lesson .lr-concept-cards{grid-template-columns:1fr}}
+@media(max-width:580px){.onia-linear-lesson .lr-studio{padding:13px}.onia-linear-lesson .lr-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.onia-linear-lesson .lr-grid-two,.onia-linear-lesson .lr-note-grid,.onia-linear-lesson .lr-quiz-options{grid-template-columns:1fr}.onia-linear-lesson .lr-learning-goal{flex-direction:column;gap:3px}.onia-linear-lesson .lr-studio-header{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.onia-linear-lesson .lr-bar-fill,.onia-linear-lesson .lr-sample{transition:none}}
