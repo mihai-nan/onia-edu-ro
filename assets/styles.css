@@ -126,3 +126,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .exercise-code .codehilite .vi { color: #19177C } /* Name.Variable.Instance */
 .exercise-code .codehilite .vm { color: #19177C } /* Name.Variable.Magic */
 .exercise-code .codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+
+/* Cuprinsuri ale materialelor native: țintele nu se ascund sub bara fixă. */
+#app-shell .native-lesson [id] { scroll-margin-top: 110px !important; }
