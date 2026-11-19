@@ -1,0 +1,113 @@
+/* Identitate vizuală comună – Învățare Automată, 2026–2027.
+   Toate cele trei materiale utilizează aceleași culori, tipografie și elemente de navigare. */
+:root{
+  --ia-ink:#142b49; --ia-navy:#0b1d43; --ia-blue:#2563c7;
+  --ia-blue-soft:#eaf3ff; --ia-blue-light:#83b6ff;
+  --ia-secondary:#566b85; --ia-border:#dce7f3;
+  --ia-surface:#ffffff; --ia-background:#f8fafd;
+}
+body{background:var(--ia-background);color:var(--ia-ink);font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.sidebar{background:var(--ia-navy)!important;border-color:#263b65!important}
+.ma-course-switcher{background:linear-gradient(106deg,#0b1d43,#122d57 78%,#173e76)!important;border-bottom-color:#314870!important;color:#eff6ff!important}
+.ma-course-switcher .ma-logo{background:#234b86!important;color:#dfedff!important;border-color:#598fdb!important}
+.ma-course-switcher .ma-tab[aria-current="page"]{background:#254f8c!important;border-color:#74a4ee!important;color:#fff!important}
+.ma-course-switcher .ma-tab:hover{background:#244675!important;border-color:#74a4ee!important}
+.ma-course-switcher .ma-tab .ma-n{color:#a5caff!important}
+.ma-material-strip{background:#edf4ff!important;border-bottom-color:#d7e6f8!important;color:#24518a!important}
+.ma-material-strip .ma-material-return{background:#fff!important;color:#1b5eb4!important;border-color:#bad4f5!important}
+.ma-material-strip .ma-material-return:hover{background:#e6f1ff!important;border-color:#78a8ec!important}
+.ma-side-home{background:#18345e!important;color:#e7f3ff!important;border-color:#355c96!important}
+.ma-side-home:hover{background:#224879!important;border-color:#6294db!important}
+/* Common rhythm of cards and headings */
+.panel,.lesson-card,.task-card,.concept-card,.act-card{border-color:var(--ia-border);border-radius:16px;box-shadow:0 14px 37px rgba(18,45,85,.045)}
+.chapter-title h2,.section-heading h2{color:#102a52}
+.chapter-title p,.section-heading>p,.muted{color:var(--ia-secondary)}
+/* Consistent 263px sidebar and light, blue-accented hero in course 1 */
+body.ia-course-one .app-shell{grid-template-columns:263px minmax(0,1fr)}
+body.ia-course-one .crest{font:800 16px/1 Inter,"Segoe UI",Arial,sans-serif;letter-spacing:-.04em;color:#eef6ff;border-color:#5889da;background:linear-gradient(135deg,#3179d9,#1e4f9c)}
+body.ia-course-one .hero{min-height:540px;background:linear-gradient(123deg,#fff 0%,#fff 43%,#edf5ff 100%);padding:65px min(4vw,74px) 62px;color:#152d50}
+body.ia-course-one .hero::before{background:#4f96ff;opacity:.055}
+body.ia-course-one .hero::after{opacity:.02}
+body.ia-course-one .hero h1{font-size:clamp(35px,3.6vw,57px);line-height:1.10;color:#0b1d43;letter-spacing:-.045em}
+body.ia-course-one .hero h1 em{color:#2869c7}
+body.ia-course-one .eyebrow{color:#2865bc}
+body.ia-course-one .hero-lead{font-size:15.5px;line-height:1.85;color:#536985}
+body.ia-course-one .hero-facts strong{color:#173b72}
+body.ia-course-one .hero-facts span{color:#617893}
+body.ia-course-one .hero-facts>div{border-left-color:#cbdcf2}
+body.ia-course-one .btn-outline{border-color:#c6d9f1;color:#245b9f;background:#fff}
+body.ia-course-one .btn-outline:hover{background:#eef5ff}
+body.ia-course-one .hero-visual{background:linear-gradient(145deg,#102952,#0e2143);border-color:#295187}
+body.ia-course-one .section-kicker,body.ia-course-one .card-cap{color:#2569c7}
+body.ia-course-one .nav-item.active{background:#1a3c71;color:#fff;box-shadow:inset 3px 0 #76aaff}
+body.ia-course-one .sidebar-footer .course-progress-wrap{border-color:#2c4b78}
+/* Consistent sidebar active states for courses 2 and 3 */
+body.ia-course-two .nav-link.active,body.ia-course-three .nav-link.active{background:#1a3c71;color:#fff;box-shadow:inset 3px 0 #76aaff}
+body.ia-course-two .brand-emblem,body.ia-course-three .brand-emblem{background:linear-gradient(135deg,#3179d9,#1e4f9c)}
+/* U-Net always occupies one complete row – the explanation follows below, never at the side. */
+body.ia-course-three .deep-dive-single{display:flex!important;flex-direction:column!important;gap:24px!important;min-width:0!important}
+body.ia-course-three .deep-dive-single>.panel{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important}
+body.ia-course-three .unet-master{overflow:hidden}
+body.ia-course-three .unet-diagram-scroll{display:block;width:100%;overflow-x:auto;max-width:100%;background:#f8fbff}
+body.ia-course-three .unet-diagram-scroll>svg{display:block;min-width:1000px;width:100%;height:auto}
+body.ia-course-three .unet-explainer{display:block!important;width:100%;max-width:none}
+body.ia-course-three .unet-selection{display:flex;flex-wrap:wrap}
+body.ia-course-three .unet-controls{display:flex;flex-wrap:wrap}
+body.ia-course-three .unet-diagram-scroll .u-skip-path{stroke:#2e79cd}
+body.ia-course-three .unet-diagram-scroll .u-skip-path.active{stroke:#1859a4}
+body.ia-course-three .unet-diagram-scroll .u-skip-label-bg{fill:#eff6ff;stroke:#5b96da}
+body.ia-course-three .unet-diagram-scroll .u-skip-label{fill:#1a609e}
+body.ia-course-three .unet-stage-chip.active{background:#e8f3ff;border-color:#72a4df;color:#1b5eb4}
+body.ia-course-three .unet-legend{color:#526b87}
+@media(max-width:720px){
+ body.ia-course-one .app-shell{display:block}
+ body.ia-course-one .hero{padding:40px 19px;min-height:0}
+ body.ia-course-one .hero h1{font-size:clamp(34px,8vw,43px)}
+ body.ia-course-three .unet-diagram-scroll>svg{width:100%;min-width:1000px}
+}
+
+/* Course 2 light hero – same architecture as courses 1 and 3 */
+body.ia-course-two .hero{
+ background:linear-gradient(122deg,#ffffff 0%,#ffffff 44%,#f0f7ff 100%)!important;
+ border-bottom:1px solid #e5edf9!important;min-height:540px!important;
+ padding:65px clamp(24px,4vw,74px) 62px!important;
+}
+body.ia-course-two .hero h1{color:#0b1d43!important;font-size:clamp(35px,3.6vw,57px)!important;line-height:1.11!important;letter-spacing:-.045em!important}
+body.ia-course-two .hero h1 span{color:#2868bd!important}
+body.ia-course-two .hero-copy>p{font-size:15.5px!important;color:#566e8b!important;line-height:1.85!important}
+body.ia-course-two .hero .overline{color:#2566bd!important}
+body.ia-course-two .hero-meta span{color:#355a91!important;background:#fff!important;border:1px solid #dce7f5!important}
+body.ia-course-two .hero-visual{border-color:#d7e4f5!important;box-shadow:0 24px 60px rgba(21,61,114,.12)!important;background:#fff!important}
+body.ia-course-two .scene-controls{background:#f7faff!important}
+body.ia-course-two .scene-btn.active{background:#e4efff!important;border-color:#cbdff9!important;color:#1e5caa!important}
+body.ia-course-two .chapter-title h2,body.ia-course-three .chapter-title h2{color:#102a58!important}
+body.ia-course-one .crest{font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:16px;font-weight:850}
+@media(max-width:720px){body.ia-course-two .hero{padding:40px 17px 34px!important;min-height:auto!important}}
+/* Identical narrow-screen treatment for all three course pages */
+@media(max-width:720px){
+ body.ia-course-two .app-shell,body.ia-course-three .app-shell{display:block!important}
+ body.ia-course-one .sidebar,body.ia-course-two .sidebar,body.ia-course-three .sidebar{
+   position:relative!important;top:auto!important;left:auto!important;display:block!important;
+   width:100%!important;min-width:0!important;max-width:100%!important;
+   height:auto!important;max-height:none!important;overflow:visible!important
+ }
+ body.ia-course-two .sidebar .sidebar-label,body.ia-course-two .sidebar .sidebar-bottom,
+ body.ia-course-three .sidebar .sidebar-label,body.ia-course-three .sidebar .sidebar-bottom{display:none!important}
+ body.ia-course-two .sidebar nav,body.ia-course-three .sidebar nav{
+   display:flex!important;flex-direction:row!important;gap:5px!important;align-items:center!important;
+   max-width:100vw!important;width:100%!important;padding:8px 12px 12px!important;
+   overflow-x:auto!important;overscroll-behavior-x:contain;scrollbar-width:thin
+ }
+ body.ia-course-two .sidebar nav .nav-link,body.ia-course-three .sidebar nav .nav-link{
+   white-space:nowrap!important;min-width:max-content!important;font-size:11px!important;
+   padding:8px 11px!important
+ }
+ body.ia-course-two .work-area,body.ia-course-three .work-area,body.ia-course-one .content{
+   display:block!important;width:100%!important;max-width:100%!important;min-width:0!important
+ }
+ body.ia-course-one .app-shell{display:block!important;max-width:100%!important}
+ body.ia-course-one .main-inner,body.ia-course-two .content,body.ia-course-three .content{min-width:0;max-width:100%}
+ body.ia-course-one .table-wrap,body.ia-course-one .formula-box{max-width:100%;overflow-x:auto}
+ body.ia-course-one{overflow-x:clip}
+}
+@media(max-width:720px){body.ia-course-one #optimizatori{min-width:0;max-width:100%;overflow-x:auto}}
