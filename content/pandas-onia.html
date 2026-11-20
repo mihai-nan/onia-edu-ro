@@ -1,264 +1,1805 @@
 <style data-onia-pandas-ext="">
-/* Extensie didactică Pandas · ONIA: stil izolat în lecția Pandas */
-.onia-data-lesson[data-lesson="Pandas"] .pd-block{margin:25px 0 28px;padding:22px 23px;background:linear-gradient(135deg,var(--panel),var(--panel-alt));border:1px solid #cbdcf0;border-radius:15px;min-width:0;box-shadow:0 5px 18px #19375c0b}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block h3{font-size:19px;line-height:1.4;letter-spacing:-.025em;margin:0 0 10px;color:var(--text)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block h4{font-size:14px;margin:19px 0 8px;color:var(--text)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block p,.onia-data-lesson[data-lesson="Pandas"] .pd-block li{font-size:12.9px;line-height:1.82;margin:8px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block code{background:var(--primary-soft);color:var(--primary);padding:2px 5px;border-radius:5px;overflow-wrap:anywhere}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-label{font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:850;color:var(--primary);display:block;margin:0 0 8px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-panel{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:13px 15px;margin:12px 0;overflow:auto}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:13px;min-width:0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card strong{color:var(--primary);font-size:12px;display:block;margin-bottom:5px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card p{font-size:11.9px;line-height:1.65;margin:5px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-math{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:12px 13px;margin:10px 0;font-size:14px;font-weight:700;line-height:1.8;overflow:auto}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-code{background:#14233e;color:#eef3ff;padding:13px 15px;border-radius:9px;white-space:pre;overflow:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;margin:12px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table{border-collapse:separate;border-spacing:0;width:100%;font-size:11.9px;line-height:1.48;border:1px solid #d5e2f1;border-radius:10px;overflow:hidden}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th,.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td{border-right:1px solid #dbe5f2;border-bottom:1px solid #dbe5f2;text-align:left;padding:9px 10px;white-space:nowrap}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr:last-child td{border-bottom:0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table :is(th,td):last-child{border-right:0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th{background:#e8f1fd;color:#214b7a;font-weight:800}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td{background:var(--panel);color:var(--text)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr.pd-highlight td{background:#fff0c9;color:#603f0b;font-weight:750}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr.pd-muted td{background:var(--panel-alt);opacity:.67}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-good{background:#c8f4dd!important;color:#165f46!important;font-weight:750}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-chosen{background:#fee8b3!important;color:#684505!important;font-weight:750}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-cold{background:#e6effc!important;color:#244f80!important}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th.pd-col-choice{background:#d6e5ff;color:#183c6b}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-note{border-left:3px solid #278d8b;background:#eaf8f6;color:#1a6661;padding:10px 13px;margin:12px 0;font-size:12px;line-height:1.7;border-radius:0 8px 8px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-warning{border-left-color:#ca8e30;background:#fff4e0;color:#815524}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:13px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls button,.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls select{min-height:35px;cursor:pointer;background:var(--panel);color:var(--text);border:1px solid #b7cde8;border-radius:8px;padding:7px 11px;font:750 11.9px system-ui,sans-serif}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls button.active{background:#235da7;border-color:#235da7;color:#fff}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls input[type=range]{accent-color:#2360a7;min-width:125px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls label{font-size:12px;font-weight:700;color:var(--text)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-result{font-size:12px;line-height:1.75;padding:12px 13px;border:1px solid #c6ddf3;background:var(--panel-alt);border-radius:9px;margin:11px 0;overflow-wrap:anywhere}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-result strong{color:var(--primary)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:13px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow>*{flex:1;min-width:118px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-arrow{flex:0;min-width:15px;font-size:22px;color:var(--primary);font-weight:800;text-align:center}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-step{padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:9px;font-size:11.8px;line-height:1.7}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-step strong{font-size:11px;color:var(--primary);display:block;margin-bottom:6px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:12px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow span:first-child{min-width:78px;font-weight:750}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-bartrack{flex:1;min-width:60px;height:17px;background:#e8eef7;border-radius:4px;overflow:hidden}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-bartrack i{display:block;height:100%;background:linear-gradient(90deg,#3277bc,#64c0ce);border-radius:4px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow b{min-width:42px;text-align:right;font-size:11.5px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-pill{display:inline-block;border:1px solid #bdd6f0;background:#ebf4ff;color:#255989;padding:4px 7px;margin:2px;border-radius:6px;font-weight:750;font-size:11px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-steps{margin:9px 0;padding-left:18px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-steps li{padding-left:3px;margin:5px 0}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-muted-text{font-size:11.4px;color:var(--sub)}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-svg{width:100%;max-width:620px;height:auto;display:block;margin:0 auto}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-quizz{border-top:1px dashed #c2d3e8;margin-top:18px;padding-top:12px}
-.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-quizz summary{cursor:pointer;font-size:12.3px;font-weight:800;color:var(--primary)}
-@media(max-width:760px){.onia-data-lesson[data-lesson="Pandas"] .pd-block{padding:16px 12px;margin:17px 0}.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid,.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid.three{grid-template-columns:1fr}.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th,.onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td{padding:7px 5px;font-size:10.5px}}
-:root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th{background:#213c61;color:#c0dbfa}
-:root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-note{background:#1b3b39;color:#acf0dd}
-:root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-warning{background:#463926;color:#f3d49a}
-:root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-pill{background:#253d5a;color:#bddeff;border-color:#456c91}
-</style><div class="onia-python onia-data-lesson" data-lesson="Pandas"><div class="py-intro"><div class="py-intro-meta"><span>ONIA · ANALIZĂ ȘI PRELUCRARE DE DATE</span><span>LECȚIE · 1.2</span></div><h2>Pandas — ghid practic pentru DataFrame</h2><p>Curs ONIA extins cu explicații matematic fundamentate, exemple calculate pas cu pas, reprezentări vizuale și simulări interactive pentru prelucrarea datelor tabelare. Include 14 secțiuni și notebook Jupyter aplicativ; conținutul inițial din notebookul Pandas al lui Dan Novischi este păstrat și completat didactic.</p><div class="py-progress-track"><span></span><span></span><span></span></div><div class="py-focus"><strong>Conținut:</strong> Series · DataFrame · CSV · filtrare · grupare · date lipsă</div><div class="onia-author">Autor material Pandas: <strong>Dan Novischi</strong></div></div><section class="py-topic" id="pandas-de-ce"><div class="py-topic-head"><span class="py-topic-index">01</span><h2>1. Ce este Pandas?</h2></div><p class="py-lead">Pandas este o bibliotecă Python pentru analiza și prelucrarea datelor tabelare, cu facilități de import/export în CSV, JSON, Excel și alte formate.</p><p>Două structuri sunt centrale: <strong>Series</strong> (o coloană, cu valori și etichete de index) și <strong>DataFrame</strong> (un tabel bidimensional cu rânduri și coloane). Un DataFrame poate conține coloane de tipuri diferite.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Cum este construit un DataFrame?</h3><p>În Pandas, <strong>Series</strong> este un șir de valori asociate unor etichete (index), iar <strong>DataFrame</strong> este o colecție de coloane, fiecare având propriul tip de date. Gândește-te la un tabel de observații: un rând reprezintă o observație, iar o coloană o caracteristică.</p><div class="pd-grid"><div class="pd-card"><strong>Series — o singură coloană</strong><p><code>s = pd.Series([1.2, 1.4, 1.1])</code>. Indexul implicit este <code>0, 1, 2</code>; numele <code>pret</code> descrie seria.</p></div><div class="pd-card"><strong>DataFrame — mai multe coloane</strong><p><code>pd.DataFrame({"oras": [...], "scor": [...]})</code>. Coloana <code>oras</code> este text, iar <code>scor</code> este numerică.</p></div></div><div class="pd-panel"><table class="pd-table"><thead><tr><th>index</th><th>oras</th><th>scor</th></tr></thead><tbody><tr class=""><td>0</td><td>București</td><td>0.91</td></tr><tr class=""><td>1</td><td>Cluj</td><td>0.88</td></tr><tr class=""><td>2</td><td>Iași</td><td>0.86</td></tr></tbody></table></div><p><code>df.shape</code> returnează tuplul <code>(3, 2)</code>: <strong>3 observații × 2 caracteristici</strong>. Atributul <code>df.columns</code> dă numele coloanelor, <code>df.index</code> dă etichetele rândurilor, iar <code>df.dtypes</code> descrie tipurile coloanelor.</p><div class="pd-math">s.mean() = (1.2 + 1.4 + 1.1) / 3 = 3.7 / 3 ≈ 1.2333</div><pre class="pd-code">print(df["scor"].mean())  # (0.91 + 0.88 + 0.86) / 3 = 0.883333...
+    /* Extensie didactică Pandas · ONIA: stil izolat în lecția Pandas */
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block {
+        margin: 25px 0 28px;
+        padding: 22px 23px;
+        background: linear-gradient(135deg, var(--panel), var(--panel-alt));
+        border: 1px solid #cbdcf0;
+        border-radius: 15px;
+        min-width: 0;
+        box-shadow: 0 5px 18px #19375c0b
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block h3 {
+        font-size: 19px;
+        line-height: 1.4;
+        letter-spacing: -.025em;
+        margin: 0 0 10px;
+        color: var(--text)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block h4 {
+        font-size: 14px;
+        margin: 19px 0 8px;
+        color: var(--text)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block p, .onia-data-lesson[data-lesson="Pandas"] .pd-block li {
+        font-size: 12.9px;
+        line-height: 1.82;
+        margin: 8px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block code {
+        background: var(--primary-soft);
+        color: var(--primary);
+        padding: 2px 5px;
+        border-radius: 5px;
+        overflow-wrap: anywhere
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-label {
+        font-size: 10px;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        font-weight: 850;
+        color: var(--primary);
+        display: block;
+        margin: 0 0 8px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 11px;
+        padding: 13px 15px;
+        margin: 12px 0;
+        overflow: auto
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid {
+        display: grid;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 14px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid.three {
+        grid-template-columns:repeat(3, minmax(0, 1fr))
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        padding: 13px;
+        min-width: 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card strong {
+        color: var(--primary);
+        font-size: 12px;
+        display: block;
+        margin-bottom: 5px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-card p {
+        font-size: 11.9px;
+        line-height: 1.65;
+        margin: 5px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-math {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 9px;
+        padding: 12px 13px;
+        margin: 10px 0;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.8;
+        overflow: auto
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-code {
+        background: #14233e;
+        color: #eef3ff;
+        padding: 13px 15px;
+        border-radius: 9px;
+        white-space: pre;
+        overflow: auto;
+        font: 12px/1.7 ui-monospace, SFMono-Regular, Consolas, monospace;
+        tab-size: 4;
+        margin: 12px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        font-size: 11.9px;
+        line-height: 1.48;
+        border: 1px solid #d5e2f1;
+        border-radius: 10px;
+        overflow: hidden
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th, .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td {
+        border-right: 1px solid #dbe5f2;
+        border-bottom: 1px solid #dbe5f2;
+        text-align: left;
+        padding: 9px 10px;
+        white-space: nowrap
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr:last-child td {
+        border-bottom: 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table :is(th,td):last-child {
+        border-right: 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th {
+        background: #e8f1fd;
+        color: #214b7a;
+        font-weight: 800
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td {
+        background: var(--panel);
+        color: var(--text)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr.pd-highlight td {
+        background: #fff0c9;
+        color: #603f0b;
+        font-weight: 750
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table tr.pd-muted td {
+        background: var(--panel-alt);
+        opacity: .67
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-good {
+        background: #c8f4dd !important;
+        color: #165f46 !important;
+        font-weight: 750
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-chosen {
+        background: #fee8b3 !important;
+        color: #684505 !important;
+        font-weight: 750
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td.pd-cold {
+        background: #e6effc !important;
+        color: #244f80 !important
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th.pd-col-choice {
+        background: #d6e5ff;
+        color: #183c6b
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-note {
+        border-left: 3px solid #278d8b;
+        background: #eaf8f6;
+        color: #1a6661;
+        padding: 10px 13px;
+        margin: 12px 0;
+        font-size: 12px;
+        line-height: 1.7;
+        border-radius: 0 8px 8px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-warning {
+        border-left-color: #ca8e30;
+        background: #fff4e0;
+        color: #815524
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 9px;
+        margin: 13px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls button, .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls select {
+        min-height: 35px;
+        cursor: pointer;
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid #b7cde8;
+        border-radius: 8px;
+        padding: 7px 11px;
+        font: 750 11.9px system-ui, sans-serif
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls button.active {
+        background: #235da7;
+        border-color: #235da7;
+        color: #fff
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls input[type=range] {
+        accent-color: #2360a7;
+        min-width: 125px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-controls label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-result {
+        font-size: 12px;
+        line-height: 1.75;
+        padding: 12px 13px;
+        border: 1px solid #c6ddf3;
+        background: var(--panel-alt);
+        border-radius: 9px;
+        margin: 11px 0;
+        overflow-wrap: anywhere
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-result strong {
+        color: var(--primary)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 13px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow > * {
+        flex: 1;
+        min-width: 118px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-arrow {
+        flex: 0;
+        min-width: 15px;
+        font-size: 22px;
+        color: var(--primary);
+        font-weight: 800;
+        text-align: center
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-step {
+        padding: 13px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        font-size: 11.8px;
+        line-height: 1.7
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-flow .pd-step strong {
+        font-size: 11px;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 6px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 8px 0;
+        font-size: 12px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow span:first-child {
+        min-width: 78px;
+        font-weight: 750
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-bartrack {
+        flex: 1;
+        min-width: 60px;
+        height: 17px;
+        background: #e8eef7;
+        border-radius: 4px;
+        overflow: hidden
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-bartrack i {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #3277bc, #64c0ce);
+        border-radius: 4px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-barrow b {
+        min-width: 42px;
+        text-align: right;
+        font-size: 11.5px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-pill {
+        display: inline-block;
+        border: 1px solid #bdd6f0;
+        background: #ebf4ff;
+        color: #255989;
+        padding: 4px 7px;
+        margin: 2px;
+        border-radius: 6px;
+        font-weight: 750;
+        font-size: 11px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-steps {
+        margin: 9px 0;
+        padding-left: 18px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-steps li {
+        padding-left: 3px;
+        margin: 5px 0
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-muted-text {
+        font-size: 11.4px;
+        color: var(--sub)
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-svg {
+        width: 100%;
+        max-width: 620px;
+        height: auto;
+        display: block;
+        margin: 0 auto
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-quizz {
+        border-top: 1px dashed #c2d3e8;
+        margin-top: 18px;
+        padding-top: 12px
+    }
+
+    .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-quizz summary {
+        cursor: pointer;
+        font-size: 12.3px;
+        font-weight: 800;
+        color: var(--primary)
+    }
+
+    @media (max-width: 760px) {
+        .onia-data-lesson[data-lesson="Pandas"] .pd-block {
+            padding: 16px 12px;
+            margin: 17px 0
+        }
+
+        .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid, .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-grid.three {
+            grid-template-columns:1fr
+        }
+
+        .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th, .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table td {
+            padding: 7px 5px;
+            font-size: 10.5px
+        }
+    }
+
+    :root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-table th {
+        background: #213c61;
+        color: #c0dbfa
+    }
+
+    :root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-note {
+        background: #1b3b39;
+        color: #acf0dd
+    }
+
+    :root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-warning {
+        background: #463926;
+        color: #f3d49a
+    }
+
+    :root[data-theme=dark] .onia-data-lesson[data-lesson="Pandas"] .pd-block .pd-pill {
+        background: #253d5a;
+        color: #bddeff;
+        border-color: #456c91
+    }
+</style>
+<div class="onia-python onia-data-lesson" data-lesson="Pandas">
+    <div class="py-intro">
+        <div class="py-intro-meta"><span>ONIA · ANALIZĂ ȘI PRELUCRARE DE DATE</span><span>LECȚIE · 1.2</span></div>
+        <h2>Pandas — ghid practic pentru DataFrame</h2>
+        <p>Curs ONIA extins cu explicații matematic fundamentate, exemple calculate pas cu pas, reprezentări vizuale și
+            simulări interactive pentru prelucrarea datelor tabelare. Include 14 secțiuni și notebook Jupyter aplicativ;
+            conținutul inițial din notebookul Pandas al lui Dan Novischi este păstrat și completat didactic.</p>
+        <div class="py-progress-track"><span></span><span></span><span></span></div>
+        <div class="py-focus"><strong>Conținut:</strong> Series · DataFrame · CSV · filtrare · grupare · date lipsă
+        </div>
+        <div class="onia-author">Autor material Pandas: <strong>Dan Novischi</strong></div>
+    </div>
+    <section class="py-topic" id="pandas-de-ce">
+        <div class="py-topic-head"><span class="py-topic-index">01</span>
+            <h2>1. Ce este Pandas?</h2></div>
+        <p class="py-lead">Pandas este o bibliotecă Python pentru analiza și prelucrarea datelor tabelare, cu facilități
+            de import/export în CSV, JSON, Excel și alte formate.</p>
+        <p>Două structuri sunt centrale: <strong>Series</strong> (o coloană, cu valori și etichete de index) și <strong>DataFrame</strong>
+            (un tabel bidimensional cu rânduri și coloane). Un DataFrame poate conține coloane de tipuri diferite.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Cum este construit un DataFrame?</h3>
+            <p>În Pandas, <strong>Series</strong> este un șir de valori asociate unor etichete (index), iar <strong>DataFrame</strong>
+                este o colecție de coloane, fiecare având propriul tip de date. Gândește-te la un tabel de observații:
+                un rând reprezintă o observație, iar o coloană o caracteristică.</p>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>Series — o singură coloană</strong>
+                    <p><code>s = pd.Series([1.2, 1.4, 1.1])</code>. Indexul implicit este <code>0, 1, 2</code>; numele
+                        <code>pret</code> descrie seria.</p></div>
+                <div class="pd-card"><strong>DataFrame — mai multe coloane</strong>
+                    <p><code>pd.DataFrame({"oras": [...], "scor": [...]})</code>. Coloana <code>oras</code> este text,
+                        iar <code>scor</code> este numerică.</p></div>
+            </div>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>oras</th>
+                        <th>scor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>0</td>
+                        <td>București</td>
+                        <td>0.91</td>
+                    </tr>
+                    <tr class="">
+                        <td>1</td>
+                        <td>Cluj</td>
+                        <td>0.88</td>
+                    </tr>
+                    <tr class="">
+                        <td>2</td>
+                        <td>Iași</td>
+                        <td>0.86</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><code>df.shape</code> returnează tuplul <code>(3, 2)</code>: <strong>3 observații × 2
+                caracteristici</strong>. Atributul <code>df.columns</code> dă numele coloanelor, <code>df.index</code>
+                dă etichetele rândurilor, iar <code>df.dtypes</code> descrie tipurile coloanelor.</p>
+            <div class="pd-math">s.mean() = (1.2 + 1.4 + 1.1) / 3 = 3.7 / 3 ≈ 1.2333</div>
+            <pre class="pd-code">print(df["scor"].mean())  # (0.91 + 0.88 + 0.86) / 3 = 0.883333...
 print(df.shape)           # (3, 2)
-print(df["oras"].iloc[1]) # Cluj</pre><details class="pd-quizz"><summary>Ce diferență este între df["scor"] și df[["scor"]]? · Afișează răspunsul</summary><p>Prima întoarce o Series (1D); a doua, un DataFrame (2D) cu o singură coloană. Forma acestuia din urmă este (3, 1).</p></details></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Series și DataFrame</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"pret"</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"oras"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"București"</span><span class="p">,</span> <span class="s2">"Cluj"</span><span class="p">,</span> <span class="s2">"Iași"</span><span class="p">],</span>
-                   <span class="s2">"scor"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.91</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.86</span><span class="p">]})</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-<div class="py-code-output"><span>Rezultat</span><pre>1.2333333333333334
-(3, 2)</pre></div></div></section><section class="py-topic" id="pandas-csv"><div class="py-topic-head"><span class="py-topic-index">02</span><h2>2. Importul și exportul fișierelor CSV</h2></div><p class="py-lead">CSV este un fișier text care reprezintă datele sub formă de rânduri și câmpuri delimitate; Pandas îl citește de obicei cu <code>read_csv()</code>.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Din fișier text în tabel: pașii importului</h3><p>CSV (comma-separated values) este <strong>text structurat</strong>: prima linie poate conține antetul, iar liniile următoare înregistrări. Pandas transformă câmpurile în coloane; citește datele și încearcă să deducă tipurile. Delimitatorul poate fi virgulă, punct și virgulă etc.</p><div class="pd-panel"><span class="pd-label">Ce conține un CSV?</span><pre class="pd-code">Date,AveragePrice,region
+print(df["oras"].iloc[1]) # Cluj</pre>
+            <details class="pd-quizz">
+                <summary>Ce diferență este între df["scor"] și df[["scor"]]? · Afișează răspunsul</summary>
+                <p>Prima întoarce o Series (1D); a doua, un DataFrame (2D) cu o singură coloană. Forma acestuia din urmă
+                    este (3, 1).</p></details>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Series și DataFrame</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span
+                    class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span
+                    class="w"> </span><span class="nn">pd</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span
+                        class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span
+                        class="mf">1.4</span><span class="p">,</span> <span class="mf">1.1</span><span
+                        class="p">],</span> <span class="n">name</span><span class="o">=</span><span
+                        class="s2">"pret"</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span
+                        class="p">({</span><span class="s2">"oras"</span><span class="p">:</span> <span
+                        class="p">[</span><span class="s2">"București"</span><span class="p">,</span> <span class="s2">"Cluj"</span><span
+                        class="p">,</span> <span class="s2">"Iași"</span><span class="p">],</span>
+                   <span class="s2">"scor"</span><span class="p">:</span> <span class="p">[</span><span
+                        class="mf">0.91</span><span class="p">,</span> <span class="mf">0.88</span><span
+                        class="p">,</span> <span class="mf">0.86</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span
+                        class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span
+                        class="p">)</span>
+</pre>
+            </div>
+            <div class="py-code-output"><span>Rezultat</span>
+                <pre>1.2333333333333334
+(3, 2)</pre>
+            </div>
+        </div>
+    </section>
+    <section class="py-topic" id="pandas-csv">
+        <div class="py-topic-head"><span class="py-topic-index">02</span>
+            <h2>2. Importul și exportul fișierelor CSV</h2></div>
+        <p class="py-lead">CSV este un fișier text care reprezintă datele sub formă de rânduri și câmpuri delimitate;
+            Pandas îl citește de obicei cu <code>read_csv()</code>.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Din fișier text în tabel: pașii importului</h3>
+            <p>CSV (comma-separated values) este <strong>text structurat</strong>: prima linie poate conține antetul,
+                iar liniile următoare înregistrări. Pandas transformă câmpurile în coloane; citește datele și încearcă
+                să deducă tipurile. Delimitatorul poate fi virgulă, punct și virgulă etc.</p>
+            <div class="pd-panel"><span class="pd-label">Ce conține un CSV?</span>
+                <pre class="pd-code">Date,AveragePrice,region
 2015-12-27,1.33,Albany
-2015-12-20,1.35,Albany</pre><div class="pd-flow"><div class="pd-step"><strong>1. Fișier text</strong>Rânduri separate prin newline, câmpuri separate prin virgulă.</div><span class="pd-arrow">→</span><div class="pd-step"><strong>2. pd.read_csv(...)</strong>Identifică antetul, împarte câmpurile, construiește tabelul.</div><span class="pd-arrow">→</span><div class="pd-step"><strong>3. DataFrame</strong>3 coloane cu tipuri și valori care pot fi prelucrate.</div></div></div><div class="pd-panel"><table class="pd-table"><thead><tr><th>Date</th><th>AveragePrice</th><th>region</th></tr></thead><tbody><tr class=""><td>2015-12-27</td><td>1.33</td><td>Albany</td></tr><tr class=""><td>2015-12-20</td><td>1.35</td><td>Albany</td></tr></tbody></table></div><p>În proiectul ONIA, <code>datasets/avocado.csv</code> are <strong>18 249 rânduri și 13 coloane de date</strong> după citirea primei coloane ca index. De aceea <code>avocado.shape</code> este <code>(18249, 13)</code>. Calea relativă depinde de directorul din care rulezi codul, nu de poziția textului în notebook.</p><div class="pd-grid"><div class="pd-card"><strong>index_col=0</strong><p>Prima coloană existentă în CSV devine indexul rândurilor, în loc să fie păstrată ca o coloană de date. Indexul astfel citit poate conține etichete repetate.</p></div><div class="pd-card"><strong>to_csv(..., index=False)</strong><p>Salvează coloanele într-un nou CSV fără să adauge și indexul tabelului ca primă coloană; este de multe ori alegerea potrivită pentru export.</p></div></div><pre class="pd-code">avocado = pd.read_csv("datasets/avocado.csv", index_col=0)
+2015-12-20,1.35,Albany</pre>
+                <div class="pd-flow">
+                    <div class="pd-step"><strong>1. Fișier text</strong>Rânduri separate prin newline, câmpuri separate
+                        prin virgulă.
+                    </div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>2. pd.read_csv(...)</strong>Identifică antetul, împarte câmpurile,
+                        construiește tabelul.
+                    </div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>3. DataFrame</strong>3 coloane cu tipuri și valori care pot fi
+                        prelucrate.
+                    </div>
+                </div>
+            </div>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>AveragePrice</th>
+                        <th>region</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>2015-12-27</td>
+                        <td>1.33</td>
+                        <td>Albany</td>
+                    </tr>
+                    <tr class="">
+                        <td>2015-12-20</td>
+                        <td>1.35</td>
+                        <td>Albany</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>În proiectul ONIA, <code>datasets/avocado.csv</code> are <strong>18 249 rânduri și 13 coloane de
+                date</strong> după citirea primei coloane ca index. De aceea <code>avocado.shape</code> este <code>(18249,
+                13)</code>. Calea relativă depinde de directorul din care rulezi codul, nu de poziția textului în
+                notebook.</p>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>index_col=0</strong>
+                    <p>Prima coloană existentă în CSV devine indexul rândurilor, în loc să fie păstrată ca o coloană de
+                        date. Indexul astfel citit poate conține etichete repetate.</p></div>
+                <div class="pd-card"><strong>to_csv(..., index=False)</strong>
+                    <p>Salvează coloanele într-un nou CSV fără să adauge și indexul tabelului ca primă coloană; este de
+                        multe ori alegerea potrivită pentru export.</p></div>
+            </div>
+            <pre class="pd-code">avocado = pd.read_csv("datasets/avocado.csv", index_col=0)
 print(avocado.shape)                    # (18249, 13)
 avocado.head(3).to_csv("primele_trei.csv", index=False)
-# Pentru separator ; : pd.read_csv("date.csv", sep=";")</pre><div class="pd-note">Atenție la codificare (UTF-8), delimitator, valorile lipsă și separatorul zecimal. Dacă datele folosesc virgulă zecimală și ; între câmpuri, pot fi necesare <code>sep=";"</code> și <code>decimal=","</code>.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Citire și export CSV</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+# Pentru separator ; : pd.read_csv("date.csv", sep=";")</pre>
+            <div class="pd-note">Atenție la codificare (UTF-8), delimitator, valorile lipsă și separatorul zecimal. Dacă
+                datele folosesc virgulă zecimală și ; între câmpuri, pot fi necesare <code>sep=";"</code> și <code>decimal=","</code>.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Citire și export CSV</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span
+                    class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span
+                    class="w"> </span><span class="nn">pd</span>
 <span class="c1"># Fișierul este inclus în proiect</span>
-<span class="n">avocado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"datasets/avocado.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<span class="n">avocado</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"primele_trei.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-<div class="py-code-output"><span>Rezultat</span><pre>(18249, 13)
-['Date', 'AveragePrice', 'Total Volume', '4046']</pre></div></div><p><code>index_col=0</code> folosește prima coloană ca index. Dacă nu dorești să salvezi indexul în fișierul de ieșire, treci <code>index=False</code> la <code>to_csv()</code>. Astfel eviți apariția unor coloane suplimentare de index la importuri succesive.</p><div class="py-tip note"><strong>Adaptare pentru portabilitate</strong><div>Notebookul furnizat exportă o dată în <code>/tmp/avocado.cvs</code>; în material folosim extensia uzuală <code>.csv</code> și o cale relativă pentru compatibilitate Windows/macOS/GitHub.</div></div><p><a class="lesson-link" download="" href="datasets/avocado.csv">Descarcă setul avocado.csv</a><a class="lesson-link" href="content/csv-onia-standalone.html">Vezi ghidul CSV detaliat</a></p></section><section class="py-topic" id="pandas-explorare"><div class="py-topic-head"><span class="py-topic-index">03</span><h2>3. Primele observații și caracteristicile tabelului</h2></div><p class="py-lead">În practică, după import verificăm dimensiunea, tipurile, valorile lipsă și distribuția aproximativă a coloanelor.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Ce semnifică fiecare statistică din describe()?</h3><p>Înaintea oricărei analize, inspectează <strong>forma, tipurile, calitatea datelor și câteva înregistrări</strong>. Nici <code>head()</code>, nici <code>tail()</code> nu reprezintă un eșantion aleator; arată începutul și sfârșitul ordinii curente.</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>Instrucțiune</th><th>Ce aflăm?</th><th>Exemplu din proiect</th></tr></thead><tbody><tr class=""><td><code>.shape</code></td><td>Numărul de rânduri și coloane</td><td>(18249, 13)</td></tr><tr class=""><td><code>.head(3)</code></td><td>Primele trei observații</td><td>primele trei săptămâni din fișier</td></tr><tr class=""><td><code>.tail(3)</code></td><td>Ultimele trei observații</td><td>ultimele trei rânduri</td></tr><tr class=""><td><code>.info()</code></td><td>Tipuri, număr de valori nenule, memorie</td><td>Date = object înainte de conversie</td></tr><tr class=""><td><code>.describe()</code></td><td>count, mean, std, min, quartile, max</td><td>sumar numeric pe coloane</td></tr><tr class=""><td><code>.isna().sum()</code></td><td>Valori lipsă pe coloane</td><td>0 în fișierul avocado inclus</td></tr></tbody></table></div><p>Pentru o serie simplă <code>[1, 2, 3, 4, 10]</code>, rezultatul statisticilor se poate verifica manual:</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>Statistică</th><th>Calcul</th><th>Rezultat</th></tr></thead><tbody><tr class=""><td>mean</td><td>(1 + 2 + 3 + 4 + 10) / 5</td><td>4</td></tr><tr class=""><td>median</td><td>Valoarea din mijloc după ordonare</td><td>3</td></tr><tr class=""><td>min / max</td><td>Cea mai mică / cea mai mare</td><td>1 / 10</td></tr><tr class=""><td>count</td><td>Câte valori nenule sunt</td><td>5</td></tr><tr class=""><td>std</td><td>Abaterea standard a eșantionului (implicit ddof=1)</td><td>≈ 3.536</td></tr></tbody></table></div><div class="pd-note"><code>describe()</code> nu include automat coloanele text atunci când sunt și coloane numerice; pentru coloanele de tip text poți utiliza <code>describe(include="all")</code>. Media este sensibilă la valori extreme, în timp ce mediana este mai robustă.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Inspecția inițială</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">avocado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span
+                        class="n">read_csv</span><span class="p">(</span><span
+                        class="s2">"datasets/avocado.csv"</span><span class="p">,</span> <span
+                        class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span
+                        class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span
+                        class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span
+                        class="n">columns</span><span class="p">[:</span><span class="mi">4</span><span
+                        class="p">]</span><span class="o">.</span><span class="n">tolist</span><span
+                        class="p">())</span>
+<span class="n">avocado</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span
+                        class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span
+                        class="p">(</span><span class="s2">"primele_trei.csv"</span><span class="p">,</span> <span
+                        class="n">index</span><span class="o">=</span><span class="kc">False</span><span
+                        class="p">)</span>
+</pre>
+            </div>
+            <div class="py-code-output"><span>Rezultat</span>
+                <pre>(18249, 13)
+['Date', 'AveragePrice', 'Total Volume', '4046']</pre>
+            </div>
+        </div>
+        <p><code>index_col=0</code> folosește prima coloană ca index. Dacă nu dorești să salvezi indexul în fișierul de
+            ieșire, treci <code>index=False</code> la <code>to_csv()</code>. Astfel eviți apariția unor coloane
+            suplimentare de index la importuri succesive.</p>
+        <div class="py-tip note"><strong>Adaptare pentru portabilitate</strong>
+            <div>Notebookul furnizat exportă o dată în <code>/tmp/avocado.cvs</code>; în material folosim extensia
+                uzuală <code>.csv</code> și o cale relativă pentru compatibilitate Windows/macOS/GitHub.
+            </div>
+        </div>
+        <p><a class="lesson-link" download="" href="datasets/avocado.csv">Descarcă setul avocado.csv</a><a
+                class="lesson-link" href="content/csv-onia-standalone.html">Vezi ghidul CSV detaliat</a></p></section>
+    <section class="py-topic" id="pandas-explorare">
+        <div class="py-topic-head"><span class="py-topic-index">03</span>
+            <h2>3. Primele observații și caracteristicile tabelului</h2></div>
+        <p class="py-lead">În practică, după import verificăm dimensiunea, tipurile, valorile lipsă și distribuția
+            aproximativă a coloanelor.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Ce semnifică fiecare statistică din describe()?</h3>
+            <p>Înaintea oricărei analize, inspectează <strong>forma, tipurile, calitatea datelor și câteva
+                înregistrări</strong>. Nici <code>head()</code>, nici <code>tail()</code> nu reprezintă un eșantion
+                aleator; arată începutul și sfârșitul ordinii curente.</p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Instrucțiune</th>
+                        <th>Ce aflăm?</th>
+                        <th>Exemplu din proiect</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td><code>.shape</code></td>
+                        <td>Numărul de rânduri și coloane</td>
+                        <td>(18249, 13)</td>
+                    </tr>
+                    <tr class="">
+                        <td><code>.head(3)</code></td>
+                        <td>Primele trei observații</td>
+                        <td>primele trei săptămâni din fișier</td>
+                    </tr>
+                    <tr class="">
+                        <td><code>.tail(3)</code></td>
+                        <td>Ultimele trei observații</td>
+                        <td>ultimele trei rânduri</td>
+                    </tr>
+                    <tr class="">
+                        <td><code>.info()</code></td>
+                        <td>Tipuri, număr de valori nenule, memorie</td>
+                        <td>Date = object înainte de conversie</td>
+                    </tr>
+                    <tr class="">
+                        <td><code>.describe()</code></td>
+                        <td>count, mean, std, min, quartile, max</td>
+                        <td>sumar numeric pe coloane</td>
+                    </tr>
+                    <tr class="">
+                        <td><code>.isna().sum()</code></td>
+                        <td>Valori lipsă pe coloane</td>
+                        <td>0 în fișierul avocado inclus</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Pentru o serie simplă <code>[1, 2, 3, 4, 10]</code>, rezultatul statisticilor se poate verifica manual:
+            </p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Statistică</th>
+                        <th>Calcul</th>
+                        <th>Rezultat</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>mean</td>
+                        <td>(1 + 2 + 3 + 4 + 10) / 5</td>
+                        <td>4</td>
+                    </tr>
+                    <tr class="">
+                        <td>median</td>
+                        <td>Valoarea din mijloc după ordonare</td>
+                        <td>3</td>
+                    </tr>
+                    <tr class="">
+                        <td>min / max</td>
+                        <td>Cea mai mică / cea mai mare</td>
+                        <td>1 / 10</td>
+                    </tr>
+                    <tr class="">
+                        <td>count</td>
+                        <td>Câte valori nenule sunt</td>
+                        <td>5</td>
+                    </tr>
+                    <tr class="">
+                        <td>std</td>
+                        <td>Abaterea standard a eșantionului (implicit ddof=1)</td>
+                        <td>≈ 3.536</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pd-note"><code>describe()</code> nu include automat coloanele text atunci când sunt și coloane
+                numerice; pentru coloanele de tip text poți utiliza <code>describe(include="all")</code>. Media este
+                sensibilă la valori extreme, în timp ce mediana este mai robustă.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Inspecția inițială</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span
+                    class="n">avocado</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span
+                        class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span
+                        class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">avocado</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
-</pre></div>
-</div><p><code>head(n)</code> afișează primele n observații; <code>tail(n)</code> afișează ultimele n. <code>info()</code> rezumă coloanele, tipurile și valorile nenule. <code>describe()</code> calculează statistici descriptive pentru coloanele numerice.</p></section><section class="py-topic" id="pandas-selectie"><div class="py-topic-head"><span class="py-topic-index">04</span><h2>4. Selectarea coloanelor, loc și iloc</h2></div><p class="py-lead">Selectezi o coloană printr-un nume, mai multe coloane printr-o listă, iar elementele prin <code>loc</code> sau <code>iloc</code>.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>loc vs. iloc — aceeași celulă, două moduri de selectare</h3><p>În Pandas există <strong>două sisteme de referință</strong>: etichetele rândurilor/coloanelor (<code>loc</code>) și pozițiile lor de la 0 (<code>iloc</code>). Pentru a le compara, folosim un tabel mic cu indexuri text.</p><div class="pd-panel"><span class="pd-label">Selectează o expresie și urmărește celulele evidențiate</span><div class="pd-controls" id="pd-select-controls"><button class="active" data-pd-select="label" type="button">loc["E02", "scor"]</button><button data-pd-select="pos" type="button">iloc[1, 1]</button><button data-pd-select="col" type="button">df[["scor"]]</button><button data-pd-select="slice" type="button">iloc[0:2, 1:3]</button></div><div id="pd-select-table"></div><div aria-live="polite" class="pd-result" id="pd-select-result"></div></div><p><code>loc</code> folosește numele: <code>df.loc["E02", "scor"]</code>. <code>iloc</code> folosește poziția: <code>df.iloc[1, 1]</code>. În slicing, limita finală <strong>este inclusă la <code>loc</code> în cazul etichetelor existente</strong>, dar este <strong>exclusă la <code>iloc</code></strong>, la fel ca în Python.</p><div class="pd-grid"><div class="pd-card"><strong>O singură coloană</strong><p><code>df["scor"]</code> → Series, shape <code>(3,)</code>.</p></div><div class="pd-card"><strong>Listă de coloane</strong><p><code>df[["scor"]]</code> → DataFrame, shape <code>(3, 1)</code>.</p></div></div><div class="pd-note pd-warning">În fișierul real avocado din proiect, indexul importat cu <code>index_col=0</code> <strong>nu este unic</strong>: eticheta 0 apare de 432 de ori. De aceea <code>avocado.loc[0, "AveragePrice"]</code> întoarce mai multe valori, nu neapărat una singură. Pentru prima valoare după poziție folosește <code>avocado.iloc[0]["AveragePrice"]</code> sau <code>avocado.iloc[0, avocado.columns.get_loc("AveragePrice")]</code>.</div></div><div class="py-code-card"><div class="py-code-top"><span>Selectare după nume sau poziție — fără ambiguitatea etichetelor repetate</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre>preturi = avocado["AveragePrice"]
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="o">.</span><span
+                        class="n">describe</span><span class="p">())</span>
+</pre>
+            </div>
+        </div>
+        <p><code>head(n)</code> afișează primele n observații; <code>tail(n)</code> afișează ultimele n.
+            <code>info()</code> rezumă coloanele, tipurile și valorile nenule. <code>describe()</code> calculează
+            statistici descriptive pentru coloanele numerice.</p></section>
+    <section class="py-topic" id="pandas-selectie">
+        <div class="py-topic-head"><span class="py-topic-index">04</span>
+            <h2>4. Selectarea coloanelor, loc și iloc</h2></div>
+        <p class="py-lead">Selectezi o coloană printr-un nume, mai multe coloane printr-o listă, iar elementele prin
+            <code>loc</code> sau <code>iloc</code>.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>loc vs. iloc — aceeași celulă, două moduri de selectare</h3>
+            <p>În Pandas există <strong>două sisteme de referință</strong>: etichetele rândurilor/coloanelor
+                (<code>loc</code>) și pozițiile lor de la 0 (<code>iloc</code>). Pentru a le compara, folosim un tabel
+                mic cu indexuri text.</p>
+            <div class="pd-panel"><span class="pd-label">Selectează o expresie și urmărește celulele evidențiate</span>
+                <div class="pd-controls" id="pd-select-controls">
+                    <button class="active" data-pd-select="label" type="button">loc["E02", "scor"]</button>
+                    <button data-pd-select="pos" type="button">iloc[1, 1]</button>
+                    <button data-pd-select="col" type="button">df[["scor"]]</button>
+                    <button data-pd-select="slice" type="button">iloc[0:2, 1:3]</button>
+                </div>
+                <div id="pd-select-table"></div>
+                <div aria-live="polite" class="pd-result" id="pd-select-result"></div>
+            </div>
+            <p><code>loc</code> folosește numele: <code>df.loc["E02", "scor"]</code>. <code>iloc</code> folosește
+                poziția: <code>df.iloc[1, 1]</code>. În slicing, limita finală <strong>este inclusă la <code>loc</code>
+                    în cazul etichetelor existente</strong>, dar este <strong>exclusă la <code>iloc</code></strong>, la
+                fel ca în Python.</p>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>O singură coloană</strong>
+                    <p><code>df["scor"]</code> → Series, shape <code>(3,)</code>.</p></div>
+                <div class="pd-card"><strong>Listă de coloane</strong>
+                    <p><code>df[["scor"]]</code> → DataFrame, shape <code>(3, 1)</code>.</p></div>
+            </div>
+            <div class="pd-note pd-warning">În fișierul real avocado din proiect, indexul importat cu
+                <code>index_col=0</code> <strong>nu este unic</strong>: eticheta 0 apare de 432 de ori. De aceea <code>avocado.loc[0,
+                    "AveragePrice"]</code> întoarce mai multe valori, nu neapărat una singură. Pentru prima valoare după
+                poziție folosește <code>avocado.iloc[0]["AveragePrice"]</code> sau <code>avocado.iloc[0,
+                    avocado.columns.get_loc("AveragePrice")]</code>.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top">
+                <span>Selectare după nume sau poziție — fără ambiguitatea etichetelor repetate</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre>preturi = avocado["AveragePrice"]
 selectie = avocado[["AveragePrice", "Total Volume"]]
 print(preturi.head(2))
 print(selectie.iloc[:3, :])
 print(avocado.iloc[0]["AveragePrice"])
-</pre></div>
-</div><p><code>loc</code> folosește <strong>etichetele</strong> rândurilor și coloanelor; <code>iloc</code> folosește <strong>pozițiile întregi</strong>. Nu confunda indexul numeric folosit ca etichetă cu poziția elementului.</p></section><section class="py-topic" id="pandas-filtrare"><div class="py-topic-head"><span class="py-topic-index">05</span><h2>5. Filtrarea pe baza condițiilor</h2></div><p class="py-lead">Condițiile se evaluează pe fiecare rând și produc o mască booleană folosită pentru selectare.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>De la condiție la mască, apoi la rândurile selectate</h3><p>O comparație precum <code>df["scor"] &gt;= 8</code> <strong>nu produce un singur True/False</strong>. Ea compară fiecare rând și întoarce o Series booleană cu câte un rezultat pentru fiecare observație. <code>df[masca]</code> păstrează doar rândurile unde masca este <code>True</code>.</p><div class="pd-panel"><span class="pd-label">Schimbă pragul și urmărește masca booleană</span><div class="pd-controls"><label for="pd-filter-threshold">Prag minim:</label><input id="pd-filter-threshold" max="10" min="5" step="0.5" type="range" value="8"/><strong id="pd-filter-threshold-label">8</strong></div><div id="pd-filter-table"></div><div aria-live="polite" class="pd-result" id="pd-filter-mask"></div></div><pre class="pd-code">masca = elevi["scor"] &gt;= 8
+</pre>
+            </div>
+        </div>
+        <p><code>loc</code> folosește <strong>etichetele</strong> rândurilor și coloanelor; <code>iloc</code> folosește
+            <strong>pozițiile întregi</strong>. Nu confunda indexul numeric folosit ca etichetă cu poziția elementului.
+        </p></section>
+    <section class="py-topic" id="pandas-filtrare">
+        <div class="py-topic-head"><span class="py-topic-index">05</span>
+            <h2>5. Filtrarea pe baza condițiilor</h2></div>
+        <p class="py-lead">Condițiile se evaluează pe fiecare rând și produc o mască booleană folosită pentru
+            selectare.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>De la condiție la mască, apoi la rândurile selectate</h3>
+            <p>O comparație precum <code>df["scor"] &gt;= 8</code> <strong>nu produce un singur True/False</strong>. Ea
+                compară fiecare rând și întoarce o Series booleană cu câte un rezultat pentru fiecare observație. <code>df[masca]</code>
+                păstrează doar rândurile unde masca este <code>True</code>.</p>
+            <div class="pd-panel"><span class="pd-label">Schimbă pragul și urmărește masca booleană</span>
+                <div class="pd-controls"><label for="pd-filter-threshold">Prag minim:</label><input
+                        id="pd-filter-threshold" max="10" min="5" step="0.5" type="range" value="8"/><strong
+                        id="pd-filter-threshold-label">8</strong></div>
+                <div id="pd-filter-table"></div>
+                <div aria-live="polite" class="pd-result" id="pd-filter-mask"></div>
+            </div>
+            <pre class="pd-code">masca = elevi["scor"] &gt;= 8
 print(masca)       # câte un True/False pentru fiecare elev
 print(masca.sum()) # numărul de True (True este numărat ca 1)
-print(elevi[masca]) # rândurile care îndeplinesc condiția</pre><div class="pd-grid"><div class="pd-card"><strong>Condiții simultane: &amp;</strong><p><code>(df["region"] == "Atlanta") &amp; (df["type"] == "organic")</code> — ambele condiții trebuie să fie adevărate.</p></div><div class="pd-card"><strong>Condiții alternative: |</strong><p><code>(df["year"] == 2016) | (df["year"] == 2017)</code> — cel puțin una trebuie să fie adevărată. <code>~</code> inversează o mască.</p></div></div><div class="pd-note"><code>isin(["Atlanta", "Columbus"])</code> verifică apartenența la o listă de valori; <code>between(a, b)</code> verifică încadrarea într-un interval (implicit capetele incluse). Folosește paranteze în jurul fiecărei comparații înainte de <code>&amp;</code> sau <code>|</code>.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Filtrare pe criterii multiple</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">atlanta</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Atlanta"</span><span class="p">]</span>
+print(elevi[masca]) # rândurile care îndeplinesc condiția</pre>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>Condiții simultane: &amp;</strong>
+                    <p><code>(df["region"] == "Atlanta") &amp; (df["type"] == "organic")</code> — ambele condiții
+                        trebuie să fie adevărate.</p></div>
+                <div class="pd-card"><strong>Condiții alternative: |</strong>
+                    <p><code>(df["year"] == 2016) | (df["year"] == 2017)</code> — cel puțin una trebuie să fie
+                        adevărată. <code>~</code> inversează o mască.</p></div>
+            </div>
+            <div class="pd-note"><code>isin(["Atlanta", "Columbus"])</code> verifică apartenența la o listă de valori;
+                <code>between(a, b)</code> verifică încadrarea într-un interval (implicit capetele incluse). Folosește
+                paranteze în jurul fiecărei comparații înainte de <code>&amp;</code> sau <code>|</code>.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Filtrare pe criterii multiple</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">atlanta</span> <span class="o">=</span> <span
+                    class="n">avocado</span><span class="p">[</span><span class="n">avocado</span><span
+                    class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span
+                    class="s2">"Atlanta"</span><span class="p">]</span>
 <span class="n">organic_ieftin</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span>
-    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"organic"</span><span class="p">)</span> <span class="o">&amp;</span>
-    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.02</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"type"</span><span
+                        class="p">]</span> <span class="o">==</span> <span class="s2">"organic"</span><span
+                        class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span
+                        class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.02</span><span
+                        class="p">)</span>
 <span class="p">]</span>
-<span class="n">regiuni</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span>
-    <span class="s2">"Atlanta"</span><span class="p">,</span> <span class="s2">"Columbus"</span><span class="p">,</span> <span class="s2">"SouthCentral"</span>
+<span class="n">regiuni</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span><span
+                        class="n">avocado</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span
+                        class="o">.</span><span class="n">isin</span><span class="p">([</span>
+    <span class="s2">"Atlanta"</span><span class="p">,</span> <span class="s2">"Columbus"</span><span class="p">,</span> <span
+                        class="s2">"SouthCentral"</span>
 <span class="p">])]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">organic_ieftin</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">regiuni</span><span class="p">))</span>
-</pre></div>
-</div><div class="py-tip warning"><strong>Capcană frecventă</strong><div>Pentru serii Pandas folosește <code>&amp;</code> și <code>|</code> între condiții, punând fiecare comparație între paranteze. Operatorii Python <code>and</code>/<code>or</code> nu sunt potriviți pentru combinarea element-cu-element a seriilor.</div></div></section><section class="py-topic" id="pandas-index"><div class="py-topic-head"><span class="py-topic-index">06</span><h2>6. Indexul DataFrame și datele calendaristice</h2></div><p class="py-lead">Un index bine ales simplifică prelucrările, în special pentru serii temporale.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Ce se schimbă când o coloană devine dată calendaristică?</h3><p>Un șir precum <code>"2026-11-16"</code> este inițial text, nu o dată calendaristică. <code>pd.to_datetime()</code> îl transformă într-o valoare temporală care permite extragerea anului/lunii, ordonare cronologică și operații cu intervale.</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>Valoare</th><th>Tip</th><th>Ce permite?</th></tr></thead><tbody><tr class=""><td>"2026-11-16"</td><td>text (object/string)</td><td>afișare, dar ordonare lexicală</td></tr><tr class=""><td>Timestamp("2026-11-16")</td><td>datetime64[ns] / Timestamp</td><td>sortare cronologică, .dt.year, .dt.month</td></tr><tr class=""><td>Index = Date</td><td>DatetimeIndex</td><td>selectare după dată, resampling dacă indexul este temporal</td></tr></tbody></table></div><div class="pd-panel"><span class="pd-label">Conversie explicată vizual</span><div class="pd-flow"><div class="pd-step"><strong>Data ca text</strong><code>"2026-01-07"</code></div><span class="pd-arrow">→</span><div class="pd-step"><strong>to_datetime</strong><code>Timestamp(2026, 1, 7)</code></div><span class="pd-arrow">→</span><div class="pd-step"><strong>Extragere</strong><code>.dt.year → 2026</code><br/><code>.dt.month → 1</code></div></div></div><pre class="pd-code">df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">organic_ieftin</span><span
+                        class="p">),</span> <span class="nb">len</span><span class="p">(</span><span
+                        class="n">regiuni</span><span class="p">))</span>
+</pre>
+            </div>
+        </div>
+        <div class="py-tip warning"><strong>Capcană frecventă</strong>
+            <div>Pentru serii Pandas folosește <code>&amp;</code> și <code>|</code> între condiții, punând fiecare
+                comparație între paranteze. Operatorii Python <code>and</code>/<code>or</code> nu sunt potriviți pentru
+                combinarea element-cu-element a seriilor.
+            </div>
+        </div>
+    </section>
+    <section class="py-topic" id="pandas-index">
+        <div class="py-topic-head"><span class="py-topic-index">06</span>
+            <h2>6. Indexul DataFrame și datele calendaristice</h2></div>
+        <p class="py-lead">Un index bine ales simplifică prelucrările, în special pentru serii temporale.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Ce se schimbă când o coloană devine dată calendaristică?</h3>
+            <p>Un șir precum <code>"2026-11-16"</code> este inițial text, nu o dată calendaristică. <code>pd.to_datetime()</code>
+                îl transformă într-o valoare temporală care permite extragerea anului/lunii, ordonare cronologică și
+                operații cu intervale.</p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Valoare</th>
+                        <th>Tip</th>
+                        <th>Ce permite?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>"2026-11-16"</td>
+                        <td>text (object/string)</td>
+                        <td>afișare, dar ordonare lexicală</td>
+                    </tr>
+                    <tr class="">
+                        <td>Timestamp("2026-11-16")</td>
+                        <td>datetime64[ns] / Timestamp</td>
+                        <td>sortare cronologică, .dt.year, .dt.month</td>
+                    </tr>
+                    <tr class="">
+                        <td>Index = Date</td>
+                        <td>DatetimeIndex</td>
+                        <td>selectare după dată, resampling dacă indexul este temporal</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pd-panel"><span class="pd-label">Conversie explicată vizual</span>
+                <div class="pd-flow">
+                    <div class="pd-step"><strong>Data ca text</strong><code>"2026-01-07"</code></div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>to_datetime</strong><code>Timestamp(2026, 1, 7)</code></div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>Extragere</strong><code>.dt.year → 2026</code><br/><code>.dt.month →
+                        1</code></div>
+                </div>
+            </div>
+            <pre class="pd-code">df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 df["an"] = df["Date"].dt.year
 df["luna"] = df["Date"].dt.month
 pe_date = df.set_index("Date")
 # Pentru revenire la o coloană obișnuită:
-refacut = pe_date.reset_index()</pre><div class="pd-note">La <code>errors="coerce"</code>, datele imposibil de interpretat devin <code>NaT</code> (valoare temporală lipsă). <code>set_index()</code> nu sortează automat și nu garantează unicitatea indexului. Dacă există mai multe observații la aceeași dată, ele rămân distincte.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Date calendaristice și index</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">avocado</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
-<span class="n">pe_date</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pe_date</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="n">refacut</span> <span class="o">=</span> <span class="n">pe_date</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">refacut</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-<div class="py-code-output"><span>Rezultat</span><pre>datetime64[ns]
-Date</pre></div></div><p><code>set_index()</code> stabilește noul index, iar <code>reset_index()</code> readuce un index obișnuit. Conversia cu <code>pd.to_datetime()</code> este necesară deoarece un CSV nu descrie automat semantica fiecărui câmp.</p></section><section class="py-topic" id="pandas-sortare"><div class="py-topic-head"><span class="py-topic-index">07</span><h2>7. Sortarea și construirea de coloane noi</h2></div><p class="py-lead">Sortarea poate folosi valorile unei coloane sau etichetele indexului. Coloanele noi pot fi obținute prin calcule vectorizate.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Cum se schimbă ordinea rândurilor și cum apar coloane noi?</h3><p><code>sort_values()</code> schimbă <strong>ordinea observațiilor</strong>, nu valorile lor. Poți ordona crescător sau descrescător. <code>sort_index()</code> ordonează după etichetele indexului, ceea ce este diferit de sortarea după conținutul unei coloane.</p><div class="pd-panel"><span class="pd-label">Sortare interactivă după preț</span><div class="pd-controls"><button class="active" id="pd-sort-asc" type="button">Crescător</button><button id="pd-sort-desc" type="button">Descrescător</button></div><div id="pd-sort-table"></div></div><pre class="pd-code">ord = df.sort_values("pret", ascending=False)
+refacut = pe_date.reset_index()</pre>
+            <div class="pd-note">La <code>errors="coerce"</code>, datele imposibil de interpretat devin <code>NaT</code>
+                (valoare temporală lipsă). <code>set_index()</code> nu sortează automat și nu garantează unicitatea
+                indexului. Dacă există mai multe observații la aceeași dată, ele rămân distincte.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Date calendaristice și index</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">avocado</span><span class="p">[</span><span
+                    class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span
+                    class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span
+                    class="p">(</span><span class="n">avocado</span><span class="p">[</span><span
+                    class="s2">"Date"</span><span class="p">])</span>
+<span class="n">pe_date</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span
+                        class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pe_date</span><span class="o">.</span><span
+                        class="n">index</span><span class="o">.</span><span class="n">dtype</span><span
+                        class="p">)</span>
+<span class="n">refacut</span> <span class="o">=</span> <span class="n">pe_date</span><span class="o">.</span><span
+                        class="n">reset_index</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">refacut</span><span class="o">.</span><span
+                        class="n">columns</span><span class="p">[</span><span class="mi">0</span><span
+                        class="p">])</span>
+</pre>
+            </div>
+            <div class="py-code-output"><span>Rezultat</span>
+                <pre>datetime64[ns]
+Date</pre>
+            </div>
+        </div>
+        <p><code>set_index()</code> stabilește noul index, iar <code>reset_index()</code> readuce un index obișnuit.
+            Conversia cu <code>pd.to_datetime()</code> este necesară deoarece un CSV nu descrie automat semantica
+            fiecărui câmp.</p></section>
+    <section class="py-topic" id="pandas-sortare">
+        <div class="py-topic-head"><span class="py-topic-index">07</span>
+            <h2>7. Sortarea și construirea de coloane noi</h2></div>
+        <p class="py-lead">Sortarea poate folosi valorile unei coloane sau etichetele indexului. Coloanele noi pot fi
+            obținute prin calcule vectorizate.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Cum se schimbă ordinea rândurilor și cum apar coloane noi?</h3>
+            <p><code>sort_values()</code> schimbă <strong>ordinea observațiilor</strong>, nu valorile lor. Poți ordona
+                crescător sau descrescător. <code>sort_index()</code> ordonează după etichetele indexului, ceea ce este
+                diferit de sortarea după conținutul unei coloane.</p>
+            <div class="pd-panel"><span class="pd-label">Sortare interactivă după preț</span>
+                <div class="pd-controls">
+                    <button class="active" id="pd-sort-asc" type="button">Crescător</button>
+                    <button id="pd-sort-desc" type="button">Descrescător</button>
+                </div>
+                <div id="pd-sort-table"></div>
+            </div>
+            <pre class="pd-code">ord = df.sort_values("pret", ascending=False)
 df["pret_cu_tva"] = df["pret"] * 1.19  # exemplu matematic, cotă ipotetică
 df["dublu_volum"] = df["volum"] * 2
-# Nicio buclă explicită: calculele se aplică fiecărui rând.</pre><div class="pd-grid"><div class="pd-card"><strong>Coloană derivată</strong><p><code>avocado["Volum_mii"] = avocado["Total Volume"] / 1000</code>. Valoarea 42 000 devine 42 — același volum exprimat în mii de unități.</p></div><div class="pd-card"><strong>Eliminare / redenumire</strong><p><code>df.drop(columns=["temporar"])</code> întoarce un nou tabel; <code>df.rename(columns={"pret": "pret_eur"})</code> redenumește o coloană.</p></div></div><div class="pd-note">O sortare <code>sort_values(...)</code> nu schimbă implicit tabelul original; păstrează rezultatul într-o variabilă. Indexul inițial rămâne asociat rândurilor, chiar dacă rândurile își schimbă poziția.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Sortare și transformări</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">ordonat</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"AveragePrice"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">cronologic</span> <span class="o">=</span> <span class="n">pe_date</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
-<span class="n">avocado</span><span class="p">[</span><span class="s2">"Volum_mii"</span><span class="p">]</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span><span class="s2">"Total Volume"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ordonat</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</pre></div>
-</div><p>Pentru eliminarea unei coloane folosește <code>drop(columns=[...])</code>. Operațiile fără <code>inplace=True</code> întorc, de regulă, un obiect nou; este preferabil să atribui explicit rezultatul.</p></section><section class="py-topic" id="pandas-statistici"><div class="py-topic-head"><span class="py-topic-index">08</span><h2>8. Statistici și agregări cumulative</h2></div><p class="py-lead">Valorile numerice pot fi sumarizate prin minim, maxim, medie, mediană sau sumă, iar <code>cumsum()</code> calculează sumele cumulative.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Ce înseamnă mean, median, sum, count și cumsum?</h3><p>O <strong>agregare</strong> transformă mai multe valori într-un rezumat: <code>sum()</code> calculează totalul, <code>mean()</code> media, <code>median()</code> valoarea centrală, iar <code>min()</code>/<code>max()</code> extremele. Spre deosebire de ele, <code>cumsum()</code> returnează câte un rezultat la fiecare poziție.</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>Operație</th><th>Pe [2, 5, 1, 4]</th><th>Explicație</th></tr></thead><tbody><tr class=""><td>sum()</td><td>12</td><td>2 + 5 + 1 + 4</td></tr><tr class=""><td>mean()</td><td>3</td><td>12 / 4</td></tr><tr class=""><td>median()</td><td>3</td><td>Mijlocul valorilor sortate [1,2,4,5] → (2+4)/2</td></tr><tr class=""><td>min() / max()</td><td>1 / 5</td><td>Extreme</td></tr><tr class=""><td>count()</td><td>4</td><td>Câte valori nu sunt lipsă</td></tr><tr class=""><td>nunique()</td><td>4</td><td>Câte valori distincte</td></tr><tr class=""><td>cumsum()</td><td>[2, 7, 8, 12]</td><td>Totalul până la poziția curentă</td></tr></tbody></table></div><div class="pd-panel"><span class="pd-label">Vizualizare: fiecare sumă cumulativă</span><div class="pd-controls"><button id="pd-cum-next" type="button">Adaugă următoarea valoare</button><button id="pd-cum-reset" type="button">Reîncepe</button></div><div id="pd-cum-bars"></div><div aria-live="polite" class="pd-result" id="pd-cum-result"></div></div><div class="pd-note">Funcțiile de agregare pentru Series numerice ignoră implicit multe valori lipsă (<code>skipna=True</code>). <code>count()</code> numără valorile nelipsă; <code>size</code> numără toate rândurile, inclusiv cele cu valori lipsă. Pentru <code>std()</code>, Pandas folosește implicit abaterea standard a eșantionului (<code>ddof=1</code>).</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Statistici uzuale</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"Total Volume"</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-</pre></div>
-</div><p>O medie cumulativă sau o sumă cumulativă exprimă istoricul până la rândul curent. Pentru serii temporale, sortează întâi după dată, astfel încât interpretarea cumulului să fie corectă.</p></section><section class="py-topic" id="pandas-groupby"><div class="py-topic-head"><span class="py-topic-index">09</span><h2>9. Gruparea și agregarea datelor</h2></div><p class="py-lead">Cu <code>groupby()</code> poți obține rapid statistici pentru fiecare regiune, tip de avocado sau dată.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>GroupBy explicat pe cinci observații</h3><p>Instrucțiunea <code>groupby()</code> nu face un simplu filtru. Ea <strong>separă toate rândurile în grupuri</strong> după una sau mai multe coloane, calculează ceva separat în fiecare grup și apoi reunește rezultatele.</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>regiune</th><th>tip</th><th>preț</th></tr></thead><tbody><tr class=""><td>A</td><td>organic</td><td>4</td></tr><tr class=""><td>A</td><td>conventional</td><td>2</td></tr><tr class=""><td>B</td><td>organic</td><td>3</td></tr><tr class=""><td>B</td><td>conventional</td><td>5</td></tr><tr class=""><td>A</td><td>organic</td><td>6</td></tr></tbody></table></div><div class="pd-panel"><span class="pd-label">Split → Apply → Combine (selectează agregarea)</span><div class="pd-controls"><button class="active" id="pd-group-mean" type="button">mean() — media pe regiune</button><button id="pd-group-sum" type="button">sum() — total pe regiune</button><button id="pd-group-count" type="button">count() — număr rânduri</button></div><div id="pd-group-visual"></div><div aria-live="polite" class="pd-result" id="pd-group-result"></div></div><pre class="pd-code">pret_pe_regiune = df.groupby("regiune")["pret"].mean()
+# Nicio buclă explicită: calculele se aplică fiecărui rând.</pre>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>Coloană derivată</strong>
+                    <p><code>avocado["Volum_mii"] = avocado["Total Volume"] / 1000</code>. Valoarea 42 000 devine 42 —
+                        același volum exprimat în mii de unități.</p></div>
+                <div class="pd-card"><strong>Eliminare / redenumire</strong>
+                    <p><code>df.drop(columns=["temporar"])</code> întoarce un nou tabel; <code>df.rename(columns={"pret":
+                        "pret_eur"})</code> redenumește o coloană.</p></div>
+            </div>
+            <div class="pd-note">O sortare <code>sort_values(...)</code> nu schimbă implicit tabelul original; păstrează
+                rezultatul într-o variabilă. Indexul inițial rămâne asociat rândurilor, chiar dacă rândurile își schimbă
+                poziția.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Sortare și transformări</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">ordonat</span> <span class="o">=</span> <span
+                    class="n">avocado</span><span class="o">.</span><span class="n">sort_values</span><span
+                    class="p">(</span><span class="s2">"AveragePrice"</span><span class="p">,</span> <span class="n">ascending</span><span
+                    class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">cronologic</span> <span class="o">=</span> <span class="n">pe_date</span><span class="o">.</span><span
+                        class="n">sort_index</span><span class="p">()</span>
+<span class="n">avocado</span><span class="p">[</span><span class="s2">"Volum_mii"</span><span class="p">]</span> <span
+                        class="o">=</span> <span class="n">avocado</span><span class="p">[</span><span class="s2">"Total Volume"</span><span
+                        class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ordonat</span><span class="p">[</span><span
+                        class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span
+                        class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span
+                        class="n">tolist</span><span class="p">())</span>
+</pre>
+            </div>
+        </div>
+        <p>Pentru eliminarea unei coloane folosește <code>drop(columns=[...])</code>. Operațiile fără
+            <code>inplace=True</code> întorc, de regulă, un obiect nou; este preferabil să atribui explicit rezultatul.
+        </p></section>
+    <section class="py-topic" id="pandas-statistici">
+        <div class="py-topic-head"><span class="py-topic-index">08</span>
+            <h2>8. Statistici și agregări cumulative</h2></div>
+        <p class="py-lead">Valorile numerice pot fi sumarizate prin minim, maxim, medie, mediană sau sumă, iar <code>cumsum()</code>
+            calculează sumele cumulative.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Ce înseamnă mean, median, sum, count și cumsum?</h3>
+            <p>O <strong>agregare</strong> transformă mai multe valori într-un rezumat: <code>sum()</code> calculează
+                totalul, <code>mean()</code> media, <code>median()</code> valoarea centrală, iar
+                <code>min()</code>/<code>max()</code> extremele. Spre deosebire de ele, <code>cumsum()</code> returnează
+                câte un rezultat la fiecare poziție.</p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Operație</th>
+                        <th>Pe [2, 5, 1, 4]</th>
+                        <th>Explicație</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>sum()</td>
+                        <td>12</td>
+                        <td>2 + 5 + 1 + 4</td>
+                    </tr>
+                    <tr class="">
+                        <td>mean()</td>
+                        <td>3</td>
+                        <td>12 / 4</td>
+                    </tr>
+                    <tr class="">
+                        <td>median()</td>
+                        <td>3</td>
+                        <td>Mijlocul valorilor sortate [1,2,4,5] → (2+4)/2</td>
+                    </tr>
+                    <tr class="">
+                        <td>min() / max()</td>
+                        <td>1 / 5</td>
+                        <td>Extreme</td>
+                    </tr>
+                    <tr class="">
+                        <td>count()</td>
+                        <td>4</td>
+                        <td>Câte valori nu sunt lipsă</td>
+                    </tr>
+                    <tr class="">
+                        <td>nunique()</td>
+                        <td>4</td>
+                        <td>Câte valori distincte</td>
+                    </tr>
+                    <tr class="">
+                        <td>cumsum()</td>
+                        <td>[2, 7, 8, 12]</td>
+                        <td>Totalul până la poziția curentă</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pd-panel"><span class="pd-label">Vizualizare: fiecare sumă cumulativă</span>
+                <div class="pd-controls">
+                    <button id="pd-cum-next" type="button">Adaugă următoarea valoare</button>
+                    <button id="pd-cum-reset" type="button">Reîncepe</button>
+                </div>
+                <div id="pd-cum-bars"></div>
+                <div aria-live="polite" class="pd-result" id="pd-cum-result"></div>
+            </div>
+            <div class="pd-note">Funcțiile de agregare pentru Series numerice ignoră implicit multe valori lipsă (<code>skipna=True</code>).
+                <code>count()</code> numără valorile nelipsă; <code>size</code> numără toate rândurile, inclusiv cele cu
+                valori lipsă. Pentru <code>std()</code>, Pandas folosește implicit abaterea standard a eșantionului
+                (<code>ddof=1</code>).
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Statistici uzuale</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span
+                    class="n">avocado</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span
+                    class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span
+                        class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span
+                        class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span
+                        class="s2">"Total Volume"</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span
+                        class="p">()</span><span class="o">.</span><span class="n">head</span><span
+                        class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre>
+            </div>
+        </div>
+        <p>O medie cumulativă sau o sumă cumulativă exprimă istoricul până la rândul curent. Pentru serii temporale,
+            sortează întâi după dată, astfel încât interpretarea cumulului să fie corectă.</p></section>
+    <section class="py-topic" id="pandas-groupby">
+        <div class="py-topic-head"><span class="py-topic-index">09</span>
+            <h2>9. Gruparea și agregarea datelor</h2></div>
+        <p class="py-lead">Cu <code>groupby()</code> poți obține rapid statistici pentru fiecare regiune, tip de avocado
+            sau dată.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>GroupBy explicat pe cinci observații</h3>
+            <p>Instrucțiunea <code>groupby()</code> nu face un simplu filtru. Ea <strong>separă toate rândurile în
+                grupuri</strong> după una sau mai multe coloane, calculează ceva separat în fiecare grup și apoi
+                reunește rezultatele.</p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>regiune</th>
+                        <th>tip</th>
+                        <th>preț</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>A</td>
+                        <td>organic</td>
+                        <td>4</td>
+                    </tr>
+                    <tr class="">
+                        <td>A</td>
+                        <td>conventional</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="">
+                        <td>B</td>
+                        <td>organic</td>
+                        <td>3</td>
+                    </tr>
+                    <tr class="">
+                        <td>B</td>
+                        <td>conventional</td>
+                        <td>5</td>
+                    </tr>
+                    <tr class="">
+                        <td>A</td>
+                        <td>organic</td>
+                        <td>6</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pd-panel"><span class="pd-label">Split → Apply → Combine (selectează agregarea)</span>
+                <div class="pd-controls">
+                    <button class="active" id="pd-group-mean" type="button">mean() — media pe regiune</button>
+                    <button id="pd-group-sum" type="button">sum() — total pe regiune</button>
+                    <button id="pd-group-count" type="button">count() — număr rânduri</button>
+                </div>
+                <div id="pd-group-visual"></div>
+                <div aria-live="polite" class="pd-result" id="pd-group-result"></div>
+            </div>
+            <pre class="pd-code">pret_pe_regiune = df.groupby("regiune")["pret"].mean()
 # A: (4 + 2 + 6) / 3 = 4
 # B: (3 + 5) / 2 = 4
-statistici = df.groupby("regiune")["pret"].agg(["count", "mean", "max"])</pre><div class="pd-note">Dacă grupurile au mărimi diferite, media mediilor grupurilor nu este în general media tuturor observațiilor. Pentru media globală trebuie luat în calcul și numărul de observații din fiecare grup. Agregarea fără ponderare poate schimba concluzia.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>GroupBy pe una sau mai multe coloane</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">medii</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">volume</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">])[</span><span class="s2">"Total Volume"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">statistici</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">"count"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">medii</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-</pre></div>
-</div><p>O grupare urmează logica <strong>split → apply → combine</strong>: datele sunt despărțite în grupuri, asupra fiecărui grup se calculează o statistică, apoi rezultatele sunt reunite. Este o operație centrală în analiza exploratorie.</p></section><section class="py-topic" id="pandas-grafice"><div class="py-topic-head"><span class="py-topic-index">10</span><h2>10. Vizualizări în Pandas</h2></div><p class="py-lead">Pandas poate folosi Matplotlib pentru grafice cu bare, linii, histograme și diagrame de dispersie.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Cum aleg tipul de grafic și cum interpretez axele?</h3><p>Un grafic corect are cel puțin o variabilă pe fiecare axă, o unitate de măsură și un tip potrivit scopului. Pandas folosește Matplotlib pentru multe dintre metodele <code>.plot()</code>; în notebook trebuie să ai disponibilă această bibliotecă.</p><div class="pd-grid"><div class="pd-card"><strong>bar — compararea categoriilor</strong><p>Axa X: regiuni; axa Y: volumul total. Compari mărimi agregate între categorii, nu fiecare rând din fișier.</p></div><div class="pd-card"><strong>scatter — relația între două variabile</strong><p>Un punct = o observație cu două coordonate: (volum, preț). Poți observa asocieri sau valori extreme, nu deduce automat cauzalitate.</p></div></div><div class="pd-grid"><div class="pd-card"><strong>line — evoluția în timp</strong><p>Axa X: data; axa Y: prețul mediu. Sortează cronologic și agregă mai întâi dacă există mai multe rânduri în aceeași dată.</p></div><div class="pd-card"><strong>hist — distribuție numerică</strong><p>Axa X: intervale de preț; axa Y: câte observații cad în fiecare interval. Nu reprezintă exact un grafic cu bare al categoriilor.</p></div></div><div class="pd-panel"><span class="pd-label">Aceleași idei, reprezentate prin grafice diferite</span><div class="pd-controls"><button class="active" id="pd-chart-bar" type="button">Bare</button><button id="pd-chart-line" type="button">Linie</button><button id="pd-chart-hist" type="button">Histogramă</button><button id="pd-chart-scatter" type="button">Scatter</button></div><div id="pd-chart-visual"></div><div aria-live="polite" class="pd-result" id="pd-chart-caption"></div></div><pre class="pd-code">df.groupby("regiune")["volum"].sum().plot(kind="bar")
+statistici = df.groupby("regiune")["pret"].agg(["count", "mean", "max"])</pre>
+            <div class="pd-note">Dacă grupurile au mărimi diferite, media mediilor grupurilor nu este în general media
+                tuturor observațiilor. Pentru media globală trebuie luat în calcul și numărul de observații din fiecare
+                grup. Agregarea fără ponderare poate schimba concluzia.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>GroupBy pe una sau mai multe coloane</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">medii</span> <span class="o">=</span> <span
+                    class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span
+                    class="p">(</span><span class="s2">"region"</span><span class="p">)[</span><span class="s2">"AveragePrice"</span><span
+                    class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span
+                        class="n">groupby</span><span class="p">([</span><span class="s2">"region"</span><span
+                        class="p">,</span> <span class="s2">"type"</span><span class="p">])[</span><span class="s2">"Total Volume"</span><span
+                        class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">statistici</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span
+                        class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)[</span><span
+                        class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span
+                        class="p">(</span>
+    <span class="p">[</span><span class="s2">"count"</span><span class="p">,</span> <span class="s2">"mean"</span><span
+                        class="p">,</span> <span class="s2">"median"</span><span class="p">,</span> <span class="s2">"max"</span><span
+                        class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">medii</span><span class="o">.</span><span
+                        class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre>
+            </div>
+        </div>
+        <p>O grupare urmează logica <strong>split → apply → combine</strong>: datele sunt despărțite în grupuri, asupra
+            fiecărui grup se calculează o statistică, apoi rezultatele sunt reunite. Este o operație centrală în analiza
+            exploratorie.</p></section>
+    <section class="py-topic" id="pandas-grafice">
+        <div class="py-topic-head"><span class="py-topic-index">10</span>
+            <h2>10. Vizualizări în Pandas</h2></div>
+        <p class="py-lead">Pandas poate folosi Matplotlib pentru grafice cu bare, linii, histograme și diagrame de
+            dispersie.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Cum aleg tipul de grafic și cum interpretez axele?</h3>
+            <p>Un grafic corect are cel puțin o variabilă pe fiecare axă, o unitate de măsură și un tip potrivit
+                scopului. Pandas folosește Matplotlib pentru multe dintre metodele <code>.plot()</code>; în notebook
+                trebuie să ai disponibilă această bibliotecă.</p>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>bar — compararea categoriilor</strong>
+                    <p>Axa X: regiuni; axa Y: volumul total. Compari mărimi agregate între categorii, nu fiecare rând
+                        din fișier.</p></div>
+                <div class="pd-card"><strong>scatter — relația între două variabile</strong>
+                    <p>Un punct = o observație cu două coordonate: (volum, preț). Poți observa asocieri sau valori
+                        extreme, nu deduce automat cauzalitate.</p></div>
+            </div>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>line — evoluția în timp</strong>
+                    <p>Axa X: data; axa Y: prețul mediu. Sortează cronologic și agregă mai întâi dacă există mai multe
+                        rânduri în aceeași dată.</p></div>
+                <div class="pd-card"><strong>hist — distribuție numerică</strong>
+                    <p>Axa X: intervale de preț; axa Y: câte observații cad în fiecare interval. Nu reprezintă exact un
+                        grafic cu bare al categoriilor.</p></div>
+            </div>
+            <div class="pd-panel"><span class="pd-label">Aceleași idei, reprezentate prin grafice diferite</span>
+                <div class="pd-controls">
+                    <button class="active" id="pd-chart-bar" type="button">Bare</button>
+                    <button id="pd-chart-line" type="button">Linie</button>
+                    <button id="pd-chart-hist" type="button">Histogramă</button>
+                    <button id="pd-chart-scatter" type="button">Scatter</button>
+                </div>
+                <div id="pd-chart-visual"></div>
+                <div aria-live="polite" class="pd-result" id="pd-chart-caption"></div>
+            </div>
+            <pre class="pd-code">df.groupby("regiune")["volum"].sum().plot(kind="bar")
 df.sort_values("Date").plot(x="Date", y="pret", kind="line")
 df["pret"].plot(kind="hist", bins=5)
-df.plot(x="volum", y="pret", kind="scatter")</pre><div class="pd-note">Un scatter cu multe puncte se poate suprapune: încearcă transparență <code>alpha=0.3</code>. Graficele originale din notebook, păstrate mai jos, folosesc datele avocado și trebuie interpretate ținând cont de numărul mare de observații.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Grafice cu bare și scatter</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="n">volum_regiuni</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)[</span><span class="s2">"Total Volume"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">volum_regiuni</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+df.plot(x="volum", y="pret", kind="scatter")</pre>
+            <div class="pd-note">Un scatter cu multe puncte se poate suprapune: încearcă transparență
+                <code>alpha=0.3</code>. Graficele originale din notebook, păstrate mai jos, folosesc datele avocado și
+                trebuie interpretate ținând cont de numărul mare de observații.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Grafice cu bare și scatter</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span
+                    class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span
+                    class="w"> </span><span class="nn">plt</span>
+<span class="n">volum_regiuni</span> <span class="o">=</span> <span class="n">avocado</span><span
+                        class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span
+                        class="p">)[</span><span class="s2">"Total Volume"</span><span class="p">]</span><span
+                        class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">volum_regiuni</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span
+                        class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span
+                        class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span
+                        class="p">(</span><span class="mi">11</span><span class="p">,</span> <span
+                        class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">avocado</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"Total Volume"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"AveragePrice"</span><span class="p">,</span>
-             <span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">avocado</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span
+                        class="n">x</span><span class="o">=</span><span class="s2">"Total Volume"</span><span class="p">,</span> <span
+                        class="n">y</span><span class="o">=</span><span class="s2">"AveragePrice"</span><span class="p">,</span>
+             <span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span
+                        class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span
+                        class="p">(</span><span class="mi">8</span><span class="p">,</span> <span
+                        class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div><figure class="onia-figure"><img alt="Grafic cu bare extras local din notebookul Pandas original." loading="lazy" src="assets/lesson-images/pandas-celula-078-1.webp"/><figcaption>Grafic cu bare extras local din notebookul Pandas original.</figcaption></figure><figure class="onia-figure"><img alt="Relația dintre volumul vândut și prețul mediu — graficul din notebook." loading="lazy" src="assets/lesson-images/pandas-celula-084-1.webp"/><figcaption>Relația dintre volumul vândut și prețul mediu — graficul din notebook.</figcaption></figure><figure class="onia-figure"><img alt="Distribuția prețurilor pe categorii, reprezentată prin histograme." loading="lazy" src="assets/lesson-images/pandas-celula-088-1.webp"/><figcaption>Distribuția prețurilor pe categorii, reprezentată prin histograme.</figcaption></figure></section><section class="py-topic" id="pandas-rolling"><div class="py-topic-head"><span class="py-topic-index">11</span><h2>11. Medii mobile și serii temporale</h2></div><p class="py-lead">O medie mobilă atenuează fluctuațiile și evidențiază tendința unei serii; fereastra stabilește câte observații intră în calcul.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>Media mobilă: vezi exact ce valori intră în calcul</h3><p>Media mobilă cu fereastra <code>w</code> calculează, la fiecare poziție, media celor mai recente <code>w</code> observații (incluzând observația curentă). <strong>Nu este media întregului set</strong>, ci o statistică locală care se deplasează odată cu fereastra.</p><div class="pd-panel"><span class="pd-label">Fereastra evidențiată se deplasează pe seria [2, 4, 6, 8, 10]</span><div class="pd-controls"><label for="pd-rolling-w">Dimensiunea ferestrei:</label><select id="pd-rolling-w"><option value="2">2 observații</option><option selected="" value="3">3 observații</option><option value="4">4 observații</option></select><button id="pd-rolling-next" type="button">Pasul următor</button><button id="pd-rolling-reset" type="button">De la început</button></div><div id="pd-rolling-table"></div><div aria-live="polite" class="pd-result" id="pd-rolling-result"></div></div><pre class="pd-code">pret = pd.Series([2, 4, 6, 8, 10])
+</pre>
+            </div>
+        </div>
+        <figure class="onia-figure"><img alt="Grafic cu bare extras local din notebookul Pandas original."
+                                         loading="lazy" src="assets/lesson-images/pandas-celula-078-1.webp"/>
+            <figcaption>Grafic cu bare extras local din notebookul Pandas original.</figcaption>
+        </figure>
+        <figure class="onia-figure"><img alt="Relația dintre volumul vândut și prețul mediu — graficul din notebook."
+                                         loading="lazy" src="assets/lesson-images/pandas-celula-084-1.webp"/>
+            <figcaption>Relația dintre volumul vândut și prețul mediu — graficul din notebook.</figcaption>
+        </figure>
+        <figure class="onia-figure"><img alt="Distribuția prețurilor pe categorii, reprezentată prin histograme."
+                                         loading="lazy" src="assets/lesson-images/pandas-celula-088-1.webp"/>
+            <figcaption>Distribuția prețurilor pe categorii, reprezentată prin histograme.</figcaption>
+        </figure>
+    </section>
+    <section class="py-topic" id="pandas-rolling">
+        <div class="py-topic-head"><span class="py-topic-index">11</span>
+            <h2>11. Medii mobile și serii temporale</h2></div>
+        <p class="py-lead">O medie mobilă atenuează fluctuațiile și evidențiază tendința unei serii; fereastra
+            stabilește câte observații intră în calcul.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>Media mobilă: vezi exact ce valori intră în calcul</h3>
+            <p>Media mobilă cu fereastra <code>w</code> calculează, la fiecare poziție, media celor mai recente
+                <code>w</code> observații (incluzând observația curentă). <strong>Nu este media întregului set</strong>,
+                ci o statistică locală care se deplasează odată cu fereastra.</p>
+            <div class="pd-panel"><span
+                    class="pd-label">Fereastra evidențiată se deplasează pe seria [2, 4, 6, 8, 10]</span>
+                <div class="pd-controls"><label for="pd-rolling-w">Dimensiunea ferestrei:</label><select
+                        id="pd-rolling-w">
+                    <option value="2">2 observații</option>
+                    <option selected="" value="3">3 observații</option>
+                    <option value="4">4 observații</option>
+                </select>
+                    <button id="pd-rolling-next" type="button">Pasul următor</button>
+                    <button id="pd-rolling-reset" type="button">De la început</button>
+                </div>
+                <div id="pd-rolling-table"></div>
+                <div aria-live="polite" class="pd-result" id="pd-rolling-result"></div>
+            </div>
+            <pre class="pd-code">pret = pd.Series([2, 4, 6, 8, 10])
 print(pret.rolling(window=3).mean())
 # NaN, NaN, 4.0, 6.0, 8.0
 print(pret.rolling(window=3, min_periods=1).mean())
-# 2.0, 3.0, 4.0, 6.0, 8.0</pre><div class="pd-note">Important: <code>rolling(window=14)</code> în exemplul avocado înseamnă <strong>14 observații, nu automat 14 zile</strong>. Pentru seria din proiect, filtrată pe Atlanta și un singur tip, înregistrările sunt în mod obișnuit săptămânale; sortează după dată înainte de mediere. Pentru intervale calendaristice pot fi folosite ferestre de tip <code>rolling("14D")</code> pe un index temporal potrivit.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Fereastră mobilă de 14 observații</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">avocado</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">])</span>
+# 2.0, 3.0, 4.0, 6.0, 8.0</pre>
+            <div class="pd-note">Important: <code>rolling(window=14)</code> în exemplul avocado înseamnă <strong>14
+                observații, nu automat 14 zile</strong>. Pentru seria din proiect, filtrată pe Atlanta și un singur tip,
+                înregistrările sunt în mod obișnuit săptămânale; sortează după dată înainte de mediere. Pentru intervale
+                calendaristice pot fi folosite ferestre de tip <code>rolling("14D")</code> pe un index temporal
+                potrivit.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Fereastră mobilă de 14 observații</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">avocado</span><span class="p">[</span><span
+                    class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span
+                    class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span
+                    class="p">(</span><span class="n">avocado</span><span class="p">[</span><span
+                    class="s2">"Date"</span><span class="p">])</span>
 <span class="n">atlanta</span> <span class="o">=</span> <span class="n">avocado</span><span class="p">[</span>
-    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Atlanta"</span><span class="p">)</span> <span class="o">&amp;</span>
-    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"conventional"</span><span class="p">)</span>
-<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
-<span class="n">atlanta</span><span class="p">[</span><span class="s2">"medie_mobila_14"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">atlanta</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"region"</span><span
+                        class="p">]</span> <span class="o">==</span> <span class="s2">"Atlanta"</span><span
+                        class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">avocado</span><span class="p">[</span><span class="s2">"type"</span><span
+                        class="p">]</span> <span class="o">==</span> <span class="s2">"conventional"</span><span
+                        class="p">)</span>
+<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span
+                        class="s2">"Date"</span><span class="p">)</span>
+<span class="n">atlanta</span><span class="p">[</span><span class="s2">"medie_mobila_14"</span><span class="p">]</span> <span
+                        class="o">=</span> <span class="p">(</span>
+    <span class="n">atlanta</span><span class="p">[</span><span class="s2">"AveragePrice"</span><span class="p">]</span><span
+                        class="o">.</span><span class="n">rolling</span><span class="p">(</span><span
+                        class="n">window</span><span class="o">=</span><span class="mi">14</span><span
+                        class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="p">)</span>
-</pre></div>
-</div><figure class="onia-figure"><img alt="Exemplu de medie mobilă extras local din notebookul Pandas." loading="lazy" src="assets/lesson-images/pandas-celula-093-1.webp"/><figcaption>Exemplu de medie mobilă extras local din notebookul Pandas.</figcaption></figure><div class="py-tip note"><strong>De reținut</strong><div>Începutul unei serii cu <code>rolling(14)</code> are implicit 13 valori <code>NaN</code>, fiindcă nu există încă suficiente observații pentru o fereastră completă. Poți controla acest comportament prin <code>min_periods</code>.</div></div></section><section class="py-topic" id="pandas-missing"><div class="py-topic-head"><span class="py-topic-index">12</span><h2>12. Identificarea și tratarea valorilor lipsă</h2></div><p class="py-lead">Datele reale pot avea celule necunoscute. Pandas reprezintă frecvent aceste valori prin <code>NaN</code> sau <code>pd.NA</code>, în funcție de tip.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>NaN nu este 0: cum se construiește masca de lipsuri?</h3><p>O valoare lipsă <strong>nu înseamnă zero</strong>. Zero poate fi o măsurătoare validă, pe când <code>NaN</code> sau <code>pd.NA</code> semnalează că informația nu este disponibilă. Alegerea tratării poate modifica mediile, modelele și concluziile.</p><div class="pd-panel"><span class="pd-label">Două valori cunoscute și una lipsă</span><div class="pd-controls"><button class="active" id="pd-missing-mask" type="button">isna() — identificare</button><button id="pd-missing-drop" type="button">dropna() — eliminare</button><button id="pd-missing-mean" type="button">fillna(media) — completare</button></div><div id="pd-missing-visual"></div><div aria-live="polite" class="pd-result" id="pd-missing-result"></div></div><pre class="pd-code">df = pd.DataFrame({"elev": ["Ana", "Bogdan", "Cora"],
+</pre>
+            </div>
+        </div>
+        <figure class="onia-figure"><img alt="Exemplu de medie mobilă extras local din notebookul Pandas."
+                                         loading="lazy" src="assets/lesson-images/pandas-celula-093-1.webp"/>
+            <figcaption>Exemplu de medie mobilă extras local din notebookul Pandas.</figcaption>
+        </figure>
+        <div class="py-tip note"><strong>De reținut</strong>
+            <div>Începutul unei serii cu <code>rolling(14)</code> are implicit 13 valori <code>NaN</code>, fiindcă nu
+                există încă suficiente observații pentru o fereastră completă. Poți controla acest comportament prin
+                <code>min_periods</code>.
+            </div>
+        </div>
+    </section>
+    <section class="py-topic" id="pandas-missing">
+        <div class="py-topic-head"><span class="py-topic-index">12</span>
+            <h2>12. Identificarea și tratarea valorilor lipsă</h2></div>
+        <p class="py-lead">Datele reale pot avea celule necunoscute. Pandas reprezintă frecvent aceste valori prin
+            <code>NaN</code> sau <code>pd.NA</code>, în funcție de tip.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>NaN nu este 0: cum se construiește masca de lipsuri?</h3>
+            <p>O valoare lipsă <strong>nu înseamnă zero</strong>. Zero poate fi o măsurătoare validă, pe când
+                <code>NaN</code> sau <code>pd.NA</code> semnalează că informația nu este disponibilă. Alegerea tratării
+                poate modifica mediile, modelele și concluziile.</p>
+            <div class="pd-panel"><span class="pd-label">Două valori cunoscute și una lipsă</span>
+                <div class="pd-controls">
+                    <button class="active" id="pd-missing-mask" type="button">isna() — identificare</button>
+                    <button id="pd-missing-drop" type="button">dropna() — eliminare</button>
+                    <button id="pd-missing-mean" type="button">fillna(media) — completare</button>
+                </div>
+                <div id="pd-missing-visual"></div>
+                <div aria-live="polite" class="pd-result" id="pd-missing-result"></div>
+            </div>
+            <pre class="pd-code">df = pd.DataFrame({"elev": ["Ana", "Bogdan", "Cora"],
                    "nota": [8.0, float("nan"), 10.0]})
 print(df["nota"].isna())   # False, True, False
 print(df["nota"].isna().sum()) # 1
 print(df["nota"].mean())   # (8 + 10) / 2 = 9
-df_completat = df.fillna({"nota": 9.0})</pre><div class="pd-grid"><div class="pd-card"><strong>dropna()</strong><p>Elimină rândurile care conțin valori lipsă (implicit, oricare dintre coloane). Poate reduce setul și introduce bias.</p></div><div class="pd-card"><strong>fillna()</strong><p>Înlocuiește lipsurile cu o valoare justificată (mediană, constantă de domeniu etc.); valoarea înlocuită nu este o observație reală.</p></div></div><div class="pd-note">Fișierul avocado furnizat în proiect are 0 valori lipsă detectate prin <code>isna()</code> în coloanele citite. Diagrama folosește intenționat un set demonstrativ cu o valoare lipsă pentru a explica procedeul.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>Valori lipsă: isna, dropna, fillna</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">lipsa</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lipsa</span><span class="p">[</span><span class="n">lipsa</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">fara_lipsa</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">completat</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">"AveragePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
-</pre></div>
-</div><p><code>isna()</code> produce o mască booleană. Prin <code>isna().sum()</code> obții numărul de valori lipsă per coloană. Eliminarea sau completarea trebuie justificată în funcție de semnificația datelor: înlocuirea arbitrară cu zero poate introduce erori statistice.</p><figure class="onia-figure"><img alt="Graficul numărului de valori lipsă, extras din notebookul Pandas." loading="lazy" src="assets/lesson-images/pandas-celula-106-1.webp"/><figcaption>Graficul numărului de valori lipsă, extras din notebookul Pandas.</figcaption></figure></section><section class="py-topic" id="pandas-categorii"><div class="py-topic-head"><span class="py-topic-index">13</span><h2>13. Codificarea caracteristicilor categoriale</h2></div><p class="py-lead">Modelele de machine learning folosesc în general reprezentări numerice; de aceea, valorile de tip categorie trebuie codificate.</p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>One-hot encoding, de ce și cum?</h3><p>Categoria <code>organic</code> nu este numerică. Dacă atribuim codurile <code>0</code> și <code>1</code> unor categorii fără ordine naturală, unele modele le pot interpreta greșit ca având o relație numerică. <strong>One-hot encoding</strong> creează indicatori separați de tip 0/1.</p><div class="pd-panel"><span class="pd-label">Din text în coloane binare</span><div class="pd-flow"><div class="pd-step"><strong>Coloană categorială</strong>organic<br/>conventional<br/>organic</div><span class="pd-arrow">→</span><div class="pd-step"><strong>get_dummies(...)</strong>Identifică cele două categorii și creează câte un indicator pentru fiecare.</div><span class="pd-arrow">→</span><div class="pd-step"><strong>Coloane numerice</strong>organic? (1,0,1)<br/>conventional? (0,1,0)</div></div></div><div class="pd-panel"><table class="pd-table"><thead><tr><th>index</th><th>tip (original)</th><th>tip_conventional</th><th>tip_organic</th></tr></thead><tbody><tr class=""><td>0</td><td>organic</td><td>0</td><td><strong>1</strong></td></tr><tr class=""><td>1</td><td>conventional</td><td><strong>1</strong></td><td>0</td></tr><tr class=""><td>2</td><td>organic</td><td>0</td><td><strong>1</strong></td></tr></tbody></table></div><pre class="pd-code">pd.get_dummies(etichete, columns=["tip"], dtype=int)
+df_completat = df.fillna({"nota": 9.0})</pre>
+            <div class="pd-grid">
+                <div class="pd-card"><strong>dropna()</strong>
+                    <p>Elimină rândurile care conțin valori lipsă (implicit, oricare dintre coloane). Poate reduce setul
+                        și introduce bias.</p></div>
+                <div class="pd-card"><strong>fillna()</strong>
+                    <p>Înlocuiește lipsurile cu o valoare justificată (mediană, constantă de domeniu etc.); valoarea
+                        înlocuită nu este o observație reală.</p></div>
+            </div>
+            <div class="pd-note">Fișierul avocado furnizat în proiect are 0 valori lipsă detectate prin
+                <code>isna()</code> în coloanele citite. Diagrama folosește intenționat un set demonstrativ cu o valoare
+                lipsă pentru a explica procedeul.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>Valori lipsă: isna, dropna, fillna</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">lipsa</span> <span class="o">=</span> <span
+                    class="n">avocado</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span
+                    class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lipsa</span><span class="p">[</span><span
+                        class="n">lipsa</span> <span class="o">&gt;</span> <span class="mi">0</span><span
+                        class="p">])</span>
+<span class="n">fara_lipsa</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span
+                        class="n">dropna</span><span class="p">()</span>
+<span class="n">completat</span> <span class="o">=</span> <span class="n">avocado</span><span class="o">.</span><span
+                        class="n">fillna</span><span class="p">({</span><span class="s2">"AveragePrice"</span><span
+                        class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</pre>
+            </div>
+        </div>
+        <p><code>isna()</code> produce o mască booleană. Prin <code>isna().sum()</code> obții numărul de valori lipsă
+            per coloană. Eliminarea sau completarea trebuie justificată în funcție de semnificația datelor: înlocuirea
+            arbitrară cu zero poate introduce erori statistice.</p>
+        <figure class="onia-figure"><img alt="Graficul numărului de valori lipsă, extras din notebookul Pandas."
+                                         loading="lazy" src="assets/lesson-images/pandas-celula-106-1.webp"/>
+            <figcaption>Graficul numărului de valori lipsă, extras din notebookul Pandas.</figcaption>
+        </figure>
+    </section>
+    <section class="py-topic" id="pandas-categorii">
+        <div class="py-topic-head"><span class="py-topic-index">13</span>
+            <h2>13. Codificarea caracteristicilor categoriale</h2></div>
+        <p class="py-lead">Modelele de machine learning folosesc în general reprezentări numerice; de aceea, valorile de
+            tip categorie trebuie codificate.</p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>One-hot encoding, de ce și cum?</h3>
+            <p>Categoria <code>organic</code> nu este numerică. Dacă atribuim codurile <code>0</code> și <code>1</code>
+                unor categorii fără ordine naturală, unele modele le pot interpreta greșit ca având o relație numerică.
+                <strong>One-hot encoding</strong> creează indicatori separați de tip 0/1.</p>
+            <div class="pd-panel"><span class="pd-label">Din text în coloane binare</span>
+                <div class="pd-flow">
+                    <div class="pd-step"><strong>Coloană categorială</strong>organic<br/>conventional<br/>organic</div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>get_dummies(...)</strong>Identifică cele două categorii și creează câte
+                        un indicator pentru fiecare.
+                    </div>
+                    <span class="pd-arrow">→</span>
+                    <div class="pd-step"><strong>Coloane numerice</strong>organic? (1,0,1)<br/>conventional? (0,1,0)
+                    </div>
+                </div>
+            </div>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>tip (original)</th>
+                        <th>tip_conventional</th>
+                        <th>tip_organic</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>0</td>
+                        <td>organic</td>
+                        <td>0</td>
+                        <td><strong>1</strong></td>
+                    </tr>
+                    <tr class="">
+                        <td>1</td>
+                        <td>conventional</td>
+                        <td><strong>1</strong></td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="">
+                        <td>2</td>
+                        <td>organic</td>
+                        <td>0</td>
+                        <td><strong>1</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pre class="pd-code">pd.get_dummies(etichete, columns=["tip"], dtype=int)
 # tip_conventional: [0, 1, 0]
-# tip_organic:      [1, 0, 1]</pre><div class="pd-note"><code>dtype=int</code> produce indicatori 0/1; fără el, anumite versiuni Pandas generează implicit valori booleene. La evaluarea unui model, transformările trebuie ajustate pe datele de antrenare și aplicate consecvent datelor noi; coloanele rezultate trebuie aliniate între antrenare și test.</div></div><div class="py-code-card"><div class="py-code-top"><span><span class="py-code-dot"></span>One-hot encoding</span><button class="py-copy" data-copy-code="" type="button">Copiază codul</button></div><div class="codehilite"><pre><span></span><span class="n">etichete</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">"tip"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"organic"</span><span class="p">,</span> <span class="s2">"conventional"</span><span class="p">,</span> <span class="s2">"organic"</span><span class="p">]</span>
+# tip_organic:      [1, 0, 1]</pre>
+            <div class="pd-note"><code>dtype=int</code> produce indicatori 0/1; fără el, anumite versiuni Pandas
+                generează implicit valori booleene. La evaluarea unui model, transformările trebuie ajustate pe datele
+                de antrenare și aplicate consecvent datelor noi; coloanele rezultate trebuie aliniate între antrenare și
+                test.
+            </div>
+        </div>
+        <div class="py-code-card">
+            <div class="py-code-top"><span><span class="py-code-dot"></span>One-hot encoding</span>
+                <button class="py-copy" data-copy-code="" type="button">Copiază codul</button>
+            </div>
+            <div class="codehilite"><pre><span></span><span class="n">etichete</span> <span class="o">=</span> <span
+                    class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"tip"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"organic"</span><span
+                        class="p">,</span> <span class="s2">"conventional"</span><span class="p">,</span> <span
+                        class="s2">"organic"</span><span class="p">]</span>
 <span class="p">})</span>
-<span class="n">encodat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">etichete</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">encodat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span
+                        class="n">get_dummies</span><span class="p">(</span><span class="n">etichete</span><span
+                        class="p">,</span> <span class="n">columns</span><span class="o">=</span><span
+                        class="p">[</span><span class="s2">"tip"</span><span class="p">],</span> <span
+                        class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span
+                        class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">encodat</span><span class="p">)</span>
-</pre></div>
-<div class="py-code-output"><span>Rezultat</span><pre>   tip_conventional  tip_organic
+</pre>
+            </div>
+            <div class="py-code-output"><span>Rezultat</span>
+                <pre>   tip_conventional  tip_organic
 0                 0            1
 1                 1            0
-2                 0            1</pre></div></div><p>Codificarea <em>one-hot</em> creează câte o coloană binară pentru fiecare categorie. Materialul sursă compară această abordare cu atribuirea unui număr întreg fiecărei clase (<em>label encoding</em>). Alegerea codificării depinde de model și de natura atributelor.</p></section><section class="py-topic" id="pandas-notebook"><div class="py-topic-head"><span class="py-topic-index">14</span><h2>14. Resurse și exerciții de continuare</h2></div><p class="py-lead">Materialul oferă baza pentru preprocesarea datelor care vor fi folosite în lecțiile despre regresie, clasificare și evaluarea modelelor.</p><p>Exerciții: (1) determină regiunea cu volumul total maxim; (2) calculează prețul mediu pe fiecare an și tip; (3) reprezintă grafic prețul mediu lunar în Atlanta; (4) verifică dacă există date lipsă; (5) salvează rezultatele într-un CSV fără index suplimentar.</p><p><a class="lesson-link" download="" href="notebooks/Pandas-Dan-Novischi.ipynb">Descarcă notebookul Pandas original</a><a class="lesson-link" download="" href="datasets/avocado.csv">Descarcă datele avocado.csv</a><a class="lesson-link" href="https://pandas.pydata.org/docs/" rel="noopener" target="_blank">Documentația Pandas</a></p><p><span class="source-caption">Traducere și adaptare didactică a notebookului „Pandas – A Quick Introduction”. Autorul materialului Pandas: Dan Novischi. Figurile din ieșirile notebookului sunt stocate local în site.</span></p><div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span><h3>De la întrebare la analiză — rezolvare model</h3><p>Pentru a rezolva o problemă practică, începe cu o <strong>întrebare formulată clar</strong>, alege coloanele necesare, verifică tipurile și valorile lipsă, apoi aplică transformările și confirmă rezultatul pe un exemplu mic.</p><div class="pd-panel"><table class="pd-table"><thead><tr><th>Întrebare</th><th>Operație recomandată</th><th>De ce?</th></tr></thead><tbody><tr class=""><td>Ce regiune are volumul total maxim?</td><td>groupby("region")["Total Volume"].sum().idxmax()</td><td>Întâi adună volumele pe regiune, apoi compară totalurile</td></tr><tr class=""><td>Ce preț mediu are fiecare tip?</td><td>groupby("type")["AveragePrice"].mean()</td><td>Calculează o medie separată pentru fiecare grup</td></tr><tr class=""><td>Există date lipsă?</td><td>isna().sum()</td><td>Numără separat celulele lipsă pe fiecare coloană</td></tr><tr class=""><td>Cum export un rezumat?</td><td>to_csv("rezumat.csv", index=False)</td><td>Păstrează coloanele fără index suplimentar</td></tr></tbody></table></div><pre class="pd-code">volum_regiuni = avocado.groupby("region")["Total Volume"].sum()
+2                 0            1</pre>
+            </div>
+        </div>
+        <p>Codificarea <em>one-hot</em> creează câte o coloană binară pentru fiecare categorie. Materialul sursă compară
+            această abordare cu atribuirea unui număr întreg fiecărei clase (<em>label encoding</em>). Alegerea
+            codificării depinde de model și de natura atributelor.</p></section>
+    <section class="py-topic" id="pandas-notebook">
+        <div class="py-topic-head"><span class="py-topic-index">14</span>
+            <h2>14. Resurse și exerciții de continuare</h2></div>
+        <p class="py-lead">Materialul oferă baza pentru preprocesarea datelor care vor fi folosite în lecțiile despre
+            regresie, clasificare și evaluarea modelelor.</p>
+        <p>Exerciții: (1) determină regiunea cu volumul total maxim; (2) calculează prețul mediu pe fiecare an și tip;
+            (3) reprezintă grafic prețul mediu lunar în Atlanta; (4) verifică dacă există date lipsă; (5) salvează
+            rezultatele într-un CSV fără index suplimentar.</p>
+        <p><a class="lesson-link" download="" href="notebooks/Pandas-Dan-Novischi.ipynb">Descarcă notebookul Pandas
+            original</a><a class="lesson-link" download="" href="datasets/avocado.csv">Descarcă datele avocado.csv</a><a
+                class="lesson-link" href="https://pandas.pydata.org/docs/" rel="noopener" target="_blank">Documentația
+            Pandas</a></p>
+        <p><span class="source-caption">Traducere și adaptare didactică a notebookului „Pandas – A Quick Introduction”. Autorul materialului Pandas: Dan Novischi. Figurile din ieșirile notebookului sunt stocate local în site.</span>
+        </p>
+        <div class="pd-block"><span class="pd-label">Explicație pas cu pas · exemplu vizual</span>
+            <h3>De la întrebare la analiză — rezolvare model</h3>
+            <p>Pentru a rezolva o problemă practică, începe cu o <strong>întrebare formulată clar</strong>, alege
+                coloanele necesare, verifică tipurile și valorile lipsă, apoi aplică transformările și confirmă
+                rezultatul pe un exemplu mic.</p>
+            <div class="pd-panel">
+                <table class="pd-table">
+                    <thead>
+                    <tr>
+                        <th>Întrebare</th>
+                        <th>Operație recomandată</th>
+                        <th>De ce?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>Ce regiune are volumul total maxim?</td>
+                        <td>groupby("region")["Total Volume"].sum().idxmax()</td>
+                        <td>Întâi adună volumele pe regiune, apoi compară totalurile</td>
+                    </tr>
+                    <tr class="">
+                        <td>Ce preț mediu are fiecare tip?</td>
+                        <td>groupby("type")["AveragePrice"].mean()</td>
+                        <td>Calculează o medie separată pentru fiecare grup</td>
+                    </tr>
+                    <tr class="">
+                        <td>Există date lipsă?</td>
+                        <td>isna().sum()</td>
+                        <td>Numără separat celulele lipsă pe fiecare coloană</td>
+                    </tr>
+                    <tr class="">
+                        <td>Cum export un rezumat?</td>
+                        <td>to_csv("rezumat.csv", index=False)</td>
+                        <td>Păstrează coloanele fără index suplimentar</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pre class="pd-code">volum_regiuni = avocado.groupby("region")["Total Volume"].sum()
 regiune_maxima = volum_regiuni.idxmax()
 print(regiune_maxima, volum_regiuni.max())
 
 medii = avocado.groupby(["year", "type"], as_index=False)["AveragePrice"].mean()
-medii.to_csv("medii_avocado.csv", index=False)</pre><details class="pd-quizz"><summary>De ce nu căutăm direct rândul cu Total Volume maxim pentru a găsi regiunea cu cel mai mare volum total? · Afișează răspunsul</summary><p>Fiindcă cel mai mare volum al unei singure observații nu garantează cel mai mare total pe întreaga regiune. Trebuie mai întâi să grupăm toate observațiile după regiune și să calculăm suma fiecărui grup.</p></details><div class="pd-note">În arhiva actualizată există un notebook nou, <code>ONIA-Pandas-Ghid-Explicat.ipynb</code>, cu lecția explicată și exerciții executabile. Notebookul-sursă <code>Pandas-Dan-Novischi.ipynb</code> este păstrat nemodificat.</div></div><p><a class="btn btn-primary" download="" href="notebooks/ONIA-Pandas-Ghid-Explicat.ipynb">Descarcă notebookul didactic Pandas — explicații și exerciții</a></p></section></div><script data-onia-pandas-interactions="">
-(()=>{
-'use strict';
-const root=document.querySelector('.onia-data-lesson[data-lesson="Pandas"]');
-if(!root)return;
-const el=id=>root.querySelector('#'+id);
-const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt=x=>Number.isInteger(x)?String(x):Number(x.toFixed(4)).toString();
-const makeTable=(headers,rows,cls)=>'<div class="pd-panel"><table class="pd-table"><thead><tr>'+headers.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr></thead><tbody>'+rows.map((r,i)=>'<tr class="'+(cls?.(r,i)||'')+'">'+r.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
-const setButtons=(wrap,attr,val)=>wrap?.querySelectorAll('button['+attr+']').forEach(b=>b.classList.toggle('active',b.getAttribute(attr)===val));
+medii.to_csv("medii_avocado.csv", index=False)</pre>
+            <details class="pd-quizz">
+                <summary>De ce nu căutăm direct rândul cu Total Volume maxim pentru a găsi regiunea cu cel mai mare
+                    volum total? · Afișează răspunsul
+                </summary>
+                <p>Fiindcă cel mai mare volum al unei singure observații nu garantează cel mai mare total pe întreaga
+                    regiune. Trebuie mai întâi să grupăm toate observațiile după regiune și să calculăm suma fiecărui
+                    grup.</p></details>
+            <div class="pd-note">În arhiva actualizată există un notebook nou,
+                <code>ONIA-Pandas-Ghid-Explicat.ipynb</code>, cu lecția explicată și exerciții executabile.
+                Notebookul-sursă <code>Pandas-Dan-Novischi.ipynb</code> este păstrat nemodificat.
+            </div>
+        </div>
+        <p><a class="btn btn-primary" download="" href="notebooks/ONIA-Pandas-Ghid-Explicat.ipynb">Descarcă notebookul
+            didactic Pandas — explicații și exerciții</a></p></section>
+</div>
+<script data-onia-pandas-interactions="">
+    (() => {
+        'use strict';
+        const root = document.querySelector('.onia-data-lesson[data-lesson="Pandas"]');
+        if (!root) return;
+        const el = id => root.querySelector('#' + id);
+        const esc = t => String(t).replace(/[&<>"']/g, c => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[c]));
+        const fmt = x => Number.isInteger(x) ? String(x) : Number(x.toFixed(4)).toString();
+        const makeTable = (headers, rows, cls) => '<div class="pd-panel"><table class="pd-table"><thead><tr>' + headers.map(x => '<th>' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + rows.map((r, i) => '<tr class="' + (cls?.(r, i) || '') + '">' + r.map(v => '<td>' + esc(v) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+        const setButtons = (wrap, attr, val) => wrap?.querySelectorAll('button[' + attr + ']').forEach(b => b.classList.toggle('active', b.getAttribute(attr) === val));
 // Selectare loc/iloc
-if(el('pd-select-table')){
- const r=[['E01','Ana','7','9'],['E02','Bogdan','8','10'],['E03','Cora','9','8']];
- const view={label:{rows:[1],cols:[2],text:'df.loc["E02", "scor"] = 8 — alegem eticheta E02 și coloana scor. Rezultatul este o singură valoare.'},pos:{rows:[1],cols:[2],text:'df.iloc[1, 1] = 8 — poziția rândului este 1; coloana 1 din df (fără index) este scor.'},col:{rows:[0,1,2],cols:[2],text:'df[["scor"]] — toate cele 3 valori din coloana scor; rezultatul rămâne DataFrame, shape (3, 1).'},slice:{rows:[0,1],cols:[2,3],text:'df.iloc[0:2, 1:3] — rândurile 0 și 1; coloanele 1 și 2 din df, adică scor și proiect. Rezultat 2 × 2.'}};
- const render=m=>{const o=view[m];let html='<div class="pd-panel"><table class="pd-table"><thead><tr>'+['index','nume','scor','proiect'].map((v,j)=>'<th'+(o.cols.includes(j)?' class="pd-col-choice"':'')+'>'+v+'</th>').join('')+'</tr></thead><tbody>';
- r.forEach((row,i)=>{html+='<tr>'+row.map((v,j)=>'<td class="'+(o.rows.includes(i)&&o.cols.includes(j)?'pd-chosen':'')+'">'+v+'</td>').join('')+'</tr>'});html+='</tbody></table></div>';el('pd-select-table').innerHTML=html;el('pd-select-result').textContent=o.text;setButtons(el('pd-select-controls'),'data-pd-select',m)};
- el('pd-select-controls')?.addEventListener('click',e=>{const b=e.target.closest('[data-pd-select]');if(b)render(b.dataset.pdSelect)});render('label');
-}
+        if (el('pd-select-table')) {
+            const r = [['E01', 'Ana', '7', '9'], ['E02', 'Bogdan', '8', '10'], ['E03', 'Cora', '9', '8']];
+            const view = {
+                label: {
+                    rows: [1],
+                    cols: [2],
+                    text: 'df.loc["E02", "scor"] = 8 — alegem eticheta E02 și coloana scor. Rezultatul este o singură valoare.'
+                },
+                pos: {
+                    rows: [1],
+                    cols: [2],
+                    text: 'df.iloc[1, 1] = 8 — poziția rândului este 1; coloana 1 din df (fără index) este scor.'
+                },
+                col: {
+                    rows: [0, 1, 2],
+                    cols: [2],
+                    text: 'df[["scor"]] — toate cele 3 valori din coloana scor; rezultatul rămâne DataFrame, shape (3, 1).'
+                },
+                slice: {
+                    rows: [0, 1],
+                    cols: [2, 3],
+                    text: 'df.iloc[0:2, 1:3] — rândurile 0 și 1; coloanele 1 și 2 din df, adică scor și proiect. Rezultat 2 × 2.'
+                }
+            };
+            const render = m => {
+                const o = view[m];
+                let html = '<div class="pd-panel"><table class="pd-table"><thead><tr>' + ['index', 'nume', 'scor', 'proiect'].map((v, j) => '<th' + (o.cols.includes(j) ? ' class="pd-col-choice"' : '') + '>' + v + '</th>').join('') + '</tr></thead><tbody>';
+                r.forEach((row, i) => {
+                    html += '<tr>' + row.map((v, j) => '<td class="' + (o.rows.includes(i) && o.cols.includes(j) ? 'pd-chosen' : '') + '">' + v + '</td>').join('') + '</tr>'
+                });
+                html += '</tbody></table></div>';
+                el('pd-select-table').innerHTML = html;
+                el('pd-select-result').textContent = o.text;
+                setButtons(el('pd-select-controls'), 'data-pd-select', m)
+            };
+            el('pd-select-controls')?.addEventListener('click', e => {
+                const b = e.target.closest('[data-pd-select]');
+                if (b) render(b.dataset.pdSelect)
+            });
+            render('label');
+        }
 // Filtru boolean și suma True
-if(el('pd-filter-table')){
- const data=[['Ana',7.5],['Bogdan',8],['Cora',9.5],['Daria',6]];
- const render=()=>{let thr=+el('pd-filter-threshold').value;el('pd-filter-threshold-label').textContent=fmt(thr);let mask=data.map(r=>r[1]>=thr);el('pd-filter-table').innerHTML=makeTable(['index','elev','scor','scor >= '+fmt(thr)],data.map((r,i)=>[String(i),r[0],fmt(r[1]),mask[i]?'True':'False']),(r,i)=>mask[i]?'pd-highlight':'pd-muted');el('pd-filter-mask').innerHTML='<strong>masca = ['+mask.map(v=>v?'True':'False').join(', ')+']</strong><div>masca.sum() = '+mask.filter(Boolean).length+'. Pandas numără True ca 1 și False ca 0. Rămân: '+(data.filter((r,i)=>mask[i]).map(x=>esc(x[0])).join(', ')||'niciun elev')+'.</div>'};
- el('pd-filter-threshold').addEventListener('input',render);render();
-}
+        if (el('pd-filter-table')) {
+            const data = [['Ana', 7.5], ['Bogdan', 8], ['Cora', 9.5], ['Daria', 6]];
+            const render = () => {
+                let thr = +el('pd-filter-threshold').value;
+                el('pd-filter-threshold-label').textContent = fmt(thr);
+                let mask = data.map(r => r[1] >= thr);
+                el('pd-filter-table').innerHTML = makeTable(['index', 'elev', 'scor', 'scor >= ' + fmt(thr)], data.map((r, i) => [String(i), r[0], fmt(r[1]), mask[i] ? 'True' : 'False']), (r, i) => mask[i] ? 'pd-highlight' : 'pd-muted');
+                el('pd-filter-mask').innerHTML = '<strong>masca = [' + mask.map(v => v ? 'True' : 'False').join(', ') + ']</strong><div>masca.sum() = ' + mask.filter(Boolean).length + '. Pandas numără True ca 1 și False ca 0. Rămân: ' + (data.filter((r, i) => mask[i]).map(x => esc(x[0])).join(', ') || 'niciun elev') + '.</div>'
+            };
+            el('pd-filter-threshold').addEventListener('input', render);
+            render();
+        }
 // Sortare
-if(el('pd-sort-table')){
- const data=[['E01','A',4],['E02','B',2],['E03','C',5]];let asc=true;
- const render=()=>{let sorted=[...data].sort((a,b)=>asc?a[2]-b[2]:b[2]-a[2]);el('pd-sort-table').innerHTML=makeTable(['index inițial','produs','preț'],sorted.map(x=>[x[0],x[1],x[2]]));el('pd-sort-asc').classList.toggle('active',asc);el('pd-sort-desc').classList.toggle('active',!asc)};
- el('pd-sort-asc').onclick=()=>{asc=true;render()};el('pd-sort-desc').onclick=()=>{asc=false;render()};render();
-}
+        if (el('pd-sort-table')) {
+            const data = [['E01', 'A', 4], ['E02', 'B', 2], ['E03', 'C', 5]];
+            let asc = true;
+            const render = () => {
+                let sorted = [...data].sort((a, b) => asc ? a[2] - b[2] : b[2] - a[2]);
+                el('pd-sort-table').innerHTML = makeTable(['index inițial', 'produs', 'preț'], sorted.map(x => [x[0], x[1], x[2]]));
+                el('pd-sort-asc').classList.toggle('active', asc);
+                el('pd-sort-desc').classList.toggle('active', !asc)
+            };
+            el('pd-sort-asc').onclick = () => {
+                asc = true;
+                render()
+            };
+            el('pd-sort-desc').onclick = () => {
+                asc = false;
+                render()
+            };
+            render();
+        }
 // Cumsum
-if(el('pd-cum-bars')){
- const d=[2,5,1,4],s=[2,7,8,12];let step=0;
- const render=()=>{el('pd-cum-bars').innerHTML=d.map((v,i)=>'<div class="pd-barrow"><span>poziția '+i+'</span><div class="pd-bartrack"><i style="width:'+(i<step?100*s[i]/12:0)+'%"></i></div><b>'+(i<step?s[i]:'—')+'</b></div>').join('');el('pd-cum-result').innerHTML=step?'<strong>Pasul '+step+':</strong> '+d.slice(0,step).join(' + ')+' = '+s[step-1]+'. cumsum()[:'+step+'] → ['+s.slice(0,step).join(', ')+']':'Apasă „Adaugă următoarea valoare” pentru a construi suma cumulativă.';};
- el('pd-cum-next').onclick=()=>{step=Math.min(d.length,step+1);render()};el('pd-cum-reset').onclick=()=>{step=0;render()};render();
-}
+        if (el('pd-cum-bars')) {
+            const d = [2, 5, 1, 4], s = [2, 7, 8, 12];
+            let step = 0;
+            const render = () => {
+                el('pd-cum-bars').innerHTML = d.map((v, i) => '<div class="pd-barrow"><span>poziția ' + i + '</span><div class="pd-bartrack"><i style="width:' + (i < step ? 100 * s[i] / 12 : 0) + '%"></i></div><b>' + (i < step ? s[i] : '—') + '</b></div>').join('');
+                el('pd-cum-result').innerHTML = step ? '<strong>Pasul ' + step + ':</strong> ' + d.slice(0, step).join(' + ') + ' = ' + s[step - 1] + '. cumsum()[:' + step + '] → [' + s.slice(0, step).join(', ') + ']' : 'Apasă „Adaugă următoarea valoare” pentru a construi suma cumulativă.';
+            };
+            el('pd-cum-next').onclick = () => {
+                step = Math.min(d.length, step + 1);
+                render()
+            };
+            el('pd-cum-reset').onclick = () => {
+                step = 0;
+                render()
+            };
+            render();
+        }
 // Groupby
-if(el('pd-group-visual')){
- const data=[['A','organic',4],['A','conventional',2],['B','organic',3],['B','conventional',5],['A','organic',6]];
- const calc={mean:{A:4,B:4},sum:{A:12,B:8},count:{A:3,B:2}};
- const explain={mean:'A: (4+2+6)/3 = 4; B: (3+5)/2 = 4.',sum:'A: 4+2+6 = 12; B: 3+5 = 8.',count:'A are 3 rânduri, B are 2 rânduri.'};
- const render=k=>{el('pd-group-visual').innerHTML='<div class="pd-grid"><div class="pd-card"><strong>Grupul A</strong>'+data.filter(v=>v[0]==='A').map(v=>'<span class="pd-pill">'+v[2]+'</span>').join('')+'</div><div class="pd-card"><strong>Grupul B</strong>'+data.filter(v=>v[0]==='B').map(v=>'<span class="pd-pill">'+v[2]+'</span>').join('')+'</div></div>'+makeTable(['regiune',k+'(pret)'],[['A',fmt(calc[k].A)],['B',fmt(calc[k].B)]]);el('pd-group-result').textContent='Split → Apply → Combine. '+explain[k];['mean','sum','count'].forEach(x=>el('pd-group-'+x).classList.toggle('active',x===k))};
- ['mean','sum','count'].forEach(k=>el('pd-group-'+k).onclick=()=>render(k));render('mean');
-}
+        if (el('pd-group-visual')) {
+            const data = [['A', 'organic', 4], ['A', 'conventional', 2], ['B', 'organic', 3], ['B', 'conventional', 5], ['A', 'organic', 6]];
+            const calc = {mean: {A: 4, B: 4}, sum: {A: 12, B: 8}, count: {A: 3, B: 2}};
+            const explain = {
+                mean: 'A: (4+2+6)/3 = 4; B: (3+5)/2 = 4.',
+                sum: 'A: 4+2+6 = 12; B: 3+5 = 8.',
+                count: 'A are 3 rânduri, B are 2 rânduri.'
+            };
+            const render = k => {
+                el('pd-group-visual').innerHTML = '<div class="pd-grid"><div class="pd-card"><strong>Grupul A</strong>' + data.filter(v => v[0] === 'A').map(v => '<span class="pd-pill">' + v[2] + '</span>').join('') + '</div><div class="pd-card"><strong>Grupul B</strong>' + data.filter(v => v[0] === 'B').map(v => '<span class="pd-pill">' + v[2] + '</span>').join('') + '</div></div>' + makeTable(['regiune', k + '(pret)'], [['A', fmt(calc[k].A)], ['B', fmt(calc[k].B)]]);
+                el('pd-group-result').textContent = 'Split → Apply → Combine. ' + explain[k];
+                ['mean', 'sum', 'count'].forEach(x => el('pd-group-' + x).classList.toggle('active', x === k))
+            };
+            ['mean', 'sum', 'count'].forEach(k => el('pd-group-' + k).onclick = () => render(k));
+            render('mean');
+        }
 // Grafice SVG statice create local, fără biblioteci externe
-if(el('pd-chart-visual')){
- const charts={
-  bar:{t:'Bare: totaluri agregate pe regiuni, exemplu fictiv A: 12, B: 8, C: 15.',s:'<rect x="98" y="114" width="66" height="120" rx="4" fill="#3b86c5"/><rect x="216" y="154" width="66" height="80" rx="4" fill="#3b86c5"/><rect x="334" y="84" width="66" height="150" rx="4" fill="#3b86c5"/><text x="131" y="253">A</text><text x="249" y="253">B</text><text x="367" y="253">C</text><text x="131" y="106">12</text><text x="249" y="146">8</text><text x="367" y="76">15</text>',x:'regiune',y:'volum total'},
-  line:{t:'Linie: prețul la patru date succesive, exemplu fictiv 2 → 3 → 2.5 → 4.',s:'<polyline points="105,186 200,151 295,169 390,116" fill="none" stroke="#1e79bb" stroke-width="4"/><g fill="#1e79bb"><circle cx="105" cy="186" r="6"/><circle cx="200" cy="151" r="6"/><circle cx="295" cy="169" r="6"/><circle cx="390" cy="116" r="6"/></g><text x="98" y="253">t1</text><text x="194" y="253">t2</text><text x="290" y="253">t3</text><text x="383" y="253">t4</text>',x:'data',y:'preț'},
-  hist:{t:'Histogramă: numărul de valori din intervale [0,2), [2,4), [4,6). Exemplu fictiv: 1, 4, 2.',s:'<rect x="105" y="194" width="91" height="40" fill="#3b86c5"/><rect x="196" y="74" width="91" height="160" fill="#3b86c5"/><rect x="287" y="154" width="91" height="80" fill="#3b86c5"/><text x="122" y="253">[0,2)</text><text x="212" y="253">[2,4)</text><text x="304" y="253">[4,6)</text>',x:'intervalul de preț',y:'număr observații'},
-  scatter:{t:'Dispersie: fiecare punct este o observație (volum, preț). Date demonstrative.',s:'<g fill="#3b86c5" opacity=".85"><circle cx="105" cy="195" r="6"/><circle cx="159" cy="142" r="6"/><circle cx="214" cy="184" r="6"/><circle cx="267" cy="117" r="6"/><circle cx="323" cy="138" r="6"/><circle cx="384" cy="85" r="6"/></g>',x:'volum',y:'preț'}
- };
- const render=k=>{const c=charts[k];let svg='<svg class="pd-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 285" role="img" aria-label="Grafic demonstrativ: '+c.t+'"><line x1="72" y1="234" x2="455" y2="234" stroke="#8498b2" stroke-width="2"/><line x1="72" y1="234" x2="72" y2="44" stroke="#8498b2" stroke-width="2"/>'+c.s+'<text x="260" y="280" text-anchor="middle" font-size="12" fill="#456485">'+c.x+'</text><text x="27" y="155" transform="rotate(-90 27 155)" text-anchor="middle" font-size="12" fill="#456485">'+c.y+'</text></svg>';el('pd-chart-visual').innerHTML='<div class="pd-panel">'+svg+'</div>';el('pd-chart-caption').textContent=c.t;['bar','line','hist','scatter'].forEach(x=>el('pd-chart-'+x).classList.toggle('active',x===k))};
- ['bar','line','hist','scatter'].forEach(k=>el('pd-chart-'+k).onclick=()=>render(k));render('bar');
-}
+        if (el('pd-chart-visual')) {
+            const charts = {
+                bar: {
+                    t: 'Bare: totaluri agregate pe regiuni, exemplu fictiv A: 12, B: 8, C: 15.',
+                    s: '<rect x="98" y="114" width="66" height="120" rx="4" fill="#3b86c5"/><rect x="216" y="154" width="66" height="80" rx="4" fill="#3b86c5"/><rect x="334" y="84" width="66" height="150" rx="4" fill="#3b86c5"/><text x="131" y="253">A</text><text x="249" y="253">B</text><text x="367" y="253">C</text><text x="131" y="106">12</text><text x="249" y="146">8</text><text x="367" y="76">15</text>',
+                    x: 'regiune',
+                    y: 'volum total'
+                },
+                line: {
+                    t: 'Linie: prețul la patru date succesive, exemplu fictiv 2 → 3 → 2.5 → 4.',
+                    s: '<polyline points="105,186 200,151 295,169 390,116" fill="none" stroke="#1e79bb" stroke-width="4"/><g fill="#1e79bb"><circle cx="105" cy="186" r="6"/><circle cx="200" cy="151" r="6"/><circle cx="295" cy="169" r="6"/><circle cx="390" cy="116" r="6"/></g><text x="98" y="253">t1</text><text x="194" y="253">t2</text><text x="290" y="253">t3</text><text x="383" y="253">t4</text>',
+                    x: 'data',
+                    y: 'preț'
+                },
+                hist: {
+                    t: 'Histogramă: numărul de valori din intervale [0,2), [2,4), [4,6). Exemplu fictiv: 1, 4, 2.',
+                    s: '<rect x="105" y="194" width="91" height="40" fill="#3b86c5"/><rect x="196" y="74" width="91" height="160" fill="#3b86c5"/><rect x="287" y="154" width="91" height="80" fill="#3b86c5"/><text x="122" y="253">[0,2)</text><text x="212" y="253">[2,4)</text><text x="304" y="253">[4,6)</text>',
+                    x: 'intervalul de preț',
+                    y: 'număr observații'
+                },
+                scatter: {
+                    t: 'Dispersie: fiecare punct este o observație (volum, preț). Date demonstrative.',
+                    s: '<g fill="#3b86c5" opacity=".85"><circle cx="105" cy="195" r="6"/><circle cx="159" cy="142" r="6"/><circle cx="214" cy="184" r="6"/><circle cx="267" cy="117" r="6"/><circle cx="323" cy="138" r="6"/><circle cx="384" cy="85" r="6"/></g>',
+                    x: 'volum',
+                    y: 'preț'
+                }
+            };
+            const render = k => {
+                const c = charts[k];
+                let svg = '<svg class="pd-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 285" role="img" aria-label="Grafic demonstrativ: ' + c.t + '"><line x1="72" y1="234" x2="455" y2="234" stroke="#8498b2" stroke-width="2"/><line x1="72" y1="234" x2="72" y2="44" stroke="#8498b2" stroke-width="2"/>' + c.s + '<text x="260" y="280" text-anchor="middle" font-size="12" fill="#456485">' + c.x + '</text><text x="27" y="155" transform="rotate(-90 27 155)" text-anchor="middle" font-size="12" fill="#456485">' + c.y + '</text></svg>';
+                el('pd-chart-visual').innerHTML = '<div class="pd-panel">' + svg + '</div>';
+                el('pd-chart-caption').textContent = c.t;
+                ['bar', 'line', 'hist', 'scatter'].forEach(x => el('pd-chart-' + x).classList.toggle('active', x === k))
+            };
+            ['bar', 'line', 'hist', 'scatter'].forEach(k => el('pd-chart-' + k).onclick = () => render(k));
+            render('bar');
+        }
 // Rolling
-if(el('pd-rolling-table')){
- const values=[2,4,6,8,10];let pos=0;
- const render=()=>{let w=+el('pd-rolling-w').value;let start=Math.max(0,pos-w+1),items=values.slice(start,pos+1),valid=items.length===w,avg=valid?items.reduce((a,b)=>a+b,0)/w:null;
- let rows=values.map((v,i)=>[String(i),String(v),i>=start&&i<=pos?'în fereastră':'—']);el('pd-rolling-table').innerHTML='<div class="pd-panel"><table class="pd-table"><thead><tr><th>poziția</th><th>preț</th><th>stare</th></tr></thead><tbody>'+rows.map((r,i)=>'<tr class="'+(i>=start&&i<=pos?'pd-highlight':'')+'">'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
- el('pd-rolling-result').innerHTML='<strong>Poziția curentă: '+pos+'</strong>. Fereastra = ['+items.join(', ')+']. '+(valid?'Media = ('+items.join(' + ')+') / '+w+' = '+fmt(avg)+'.':'Încă nu sunt '+w+' observații → rezultat NaN (min_periods implicit = '+w+').');};
- el('pd-rolling-w').onchange=()=>{pos=0;render()};el('pd-rolling-next').onclick=()=>{pos=Math.min(values.length-1,pos+1);render()};el('pd-rolling-reset').onclick=()=>{pos=0;render()};render();
-}
+        if (el('pd-rolling-table')) {
+            const values = [2, 4, 6, 8, 10];
+            let pos = 0;
+            const render = () => {
+                let w = +el('pd-rolling-w').value;
+                let start = Math.max(0, pos - w + 1), items = values.slice(start, pos + 1), valid = items.length === w,
+                    avg = valid ? items.reduce((a, b) => a + b, 0) / w : null;
+                let rows = values.map((v, i) => [String(i), String(v), i >= start && i <= pos ? 'în fereastră' : '—']);
+                el('pd-rolling-table').innerHTML = '<div class="pd-panel"><table class="pd-table"><thead><tr><th>poziția</th><th>preț</th><th>stare</th></tr></thead><tbody>' + rows.map((r, i) => '<tr class="' + (i >= start && i <= pos ? 'pd-highlight' : '') + '">' + r.map(x => '<td>' + x + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+                el('pd-rolling-result').innerHTML = '<strong>Poziția curentă: ' + pos + '</strong>. Fereastra = [' + items.join(', ') + ']. ' + (valid ? 'Media = (' + items.join(' + ') + ') / ' + w + ' = ' + fmt(avg) + '.' : 'Încă nu sunt ' + w + ' observații → rezultat NaN (min_periods implicit = ' + w + ').');
+            };
+            el('pd-rolling-w').onchange = () => {
+                pos = 0;
+                render()
+            };
+            el('pd-rolling-next').onclick = () => {
+                pos = Math.min(values.length - 1, pos + 1);
+                render()
+            };
+            el('pd-rolling-reset').onclick = () => {
+                pos = 0;
+                render()
+            };
+            render();
+        }
 // Missing values
-if(el('pd-missing-visual')){
- const data=[['Ana','8.0'],['Bogdan','NaN'],['Cora','10.0']];
- const views={mask:{rows:[['Ana','False'],['Bogdan','True'],['Cora','False']],txt:'isna() → [False, True, False]. isna().sum() = 1: o valoare lipsă.'},drop:{rows:[['Ana','8.0'],['Cora','10.0']],txt:'dropna() elimină rândul lui Bogdan; rămân doar 2 observații.'},mean:{rows:[['Ana','8.0'],['Bogdan','9.0'],['Cora','10.0']],txt:'Media valorilor cunoscute este (8 + 10)/2 = 9. Bogdan primește o valoare imputată 9.0, care NU era o observație efectivă.'}};
- const render=k=>{const v=views[k];el('pd-missing-visual').innerHTML=makeTable(['elev',k==='mask'?'nota.isna()':'nota'],v.rows,(r,i)=>k==='drop'?'':r[0]==='Bogdan'?'pd-highlight':'');el('pd-missing-result').textContent=v.txt;['mask','drop','mean'].forEach(x=>el('pd-missing-'+x).classList.toggle('active',x===k));};
- ['mask','drop','mean'].forEach(k=>el('pd-missing-'+k).onclick=()=>render(k));render('mask');
-}
-})();
+        if (el('pd-missing-visual')) {
+            const data = [['Ana', '8.0'], ['Bogdan', 'NaN'], ['Cora', '10.0']];
+            const views = {
+                mask: {
+                    rows: [['Ana', 'False'], ['Bogdan', 'True'], ['Cora', 'False']],
+                    txt: 'isna() → [False, True, False]. isna().sum() = 1: o valoare lipsă.'
+                },
+                drop: {
+                    rows: [['Ana', '8.0'], ['Cora', '10.0']],
+                    txt: 'dropna() elimină rândul lui Bogdan; rămân doar 2 observații.'
+                },
+                mean: {
+                    rows: [['Ana', '8.0'], ['Bogdan', '9.0'], ['Cora', '10.0']],
+                    txt: 'Media valorilor cunoscute este (8 + 10)/2 = 9. Bogdan primește o valoare imputată 9.0, care NU era o observație efectivă.'
+                }
+            };
+            const render = k => {
+                const v = views[k];
+                el('pd-missing-visual').innerHTML = makeTable(['elev', k === 'mask' ? 'nota.isna()' : 'nota'], v.rows, (r, i) => k === 'drop' ? '' : r[0] === 'Bogdan' ? 'pd-highlight' : '');
+                el('pd-missing-result').textContent = v.txt;
+                ['mask', 'drop', 'mean'].forEach(x => el('pd-missing-' + x).classList.toggle('active', x === k));
+            };
+            ['mask', 'drop', 'mean'].forEach(k => el('pd-missing-' + k).onclick = () => render(k));
+            render('mask');
+        }
+    })();
 </script>

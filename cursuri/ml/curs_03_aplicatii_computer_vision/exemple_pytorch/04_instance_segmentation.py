@@ -15,17 +15,17 @@ model = maskrcnn_resnet50_fpn(
     weights=weights, box_detections_per_img=100
 ).eval()
 image = Image.open(sys.argv[1]).convert("RGB")
-x = weights.transforms()(image)          # (3, H, W)
+x = weights.transforms()(image)  # (3, H, W)
 
 with torch.inference_mode():
     out = model([x])[0]
 
 keep = out["scores"] >= 0.70
-boxes = out["boxes"][keep]              # (N, 4)
-labels = out["labels"][keep]            # (N,)
-scores = out["scores"][keep]            # (N,)
-mask_probs = out["masks"][keep]         # (N, 1, H, W)
-masks = mask_probs[:, 0] > 0.5          # (N, H, W), boolean
+boxes = out["boxes"][keep]  # (N, 4)
+labels = out["labels"][keep]  # (N,)
+scores = out["scores"][keep]  # (N,)
+mask_probs = out["masks"][keep]  # (N, 1, H, W)
+masks = mask_probs[:, 0] > 0.5  # (N, H, W), boolean
 
 print(f"Instanțe păstrate: {len(boxes)}")
 print("boxes:", tuple(boxes.shape), "masks:", tuple(masks.shape))

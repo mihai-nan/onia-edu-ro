@@ -2,6 +2,7 @@
 import torch
 from torch import nn
 
+
 class SoftDiceLoss(nn.Module):
     def __init__(self, eps=1e-6):
         super().__init__()
@@ -12,11 +13,12 @@ class SoftDiceLoss(nn.Module):
             raise ValueError("logits și target trebuie să aibă aceeași formă")
         probs = torch.sigmoid(logits)
         target = target.to(dtype=probs.dtype)
-        axes = (1, 2, 3)               # agregare per imagine
+        axes = (1, 2, 3)  # agregare per imagine
         intersection = (probs * target).sum(dim=axes)
         denominator = probs.sum(dim=axes) + target.sum(dim=axes)
         dice = (2 * intersection + self.eps) / (denominator + self.eps)
         return (1 - dice).mean()
+
 
 loss_fn = SoftDiceLoss()
 logits = torch.randn(2, 1, 128, 128, requires_grad=True)

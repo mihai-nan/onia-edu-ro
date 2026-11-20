@@ -15,8 +15,8 @@ image = Image.open(sys.argv[1]).convert("RGB")
 x = preprocess(image).unsqueeze(0)  # (1, 3, H, W)
 
 with torch.inference_mode():
-    logits = model(x)                  # (1, 1000)
-    probs = logits.softmax(dim=1)     # softmax doar la inferență
+    logits = model(x)  # (1, 1000)
+    probs = logits.softmax(dim=1)  # softmax doar la inferență
     values, indices = probs[0].topk(5)
 
 categories = weights.meta["categories"]

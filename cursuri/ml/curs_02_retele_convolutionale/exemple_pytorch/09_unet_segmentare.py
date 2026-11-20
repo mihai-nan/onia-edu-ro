@@ -3,6 +3,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
+
 class DoubleConv(nn.Module):
     def __init__(self, ci, co):
         super().__init__()
@@ -11,6 +12,7 @@ class DoubleConv(nn.Module):
 
     def forward(self, x):
         return self.seq(x)
+
 
 class MiniUNet(nn.Module):
     def __init__(self, classes=3):
@@ -27,6 +29,7 @@ class MiniUNet(nn.Module):
         high = F.interpolate(low, size=skip.shape[-2:], mode="bilinear",
                              align_corners=False)
         return self.head(self.dec(torch.cat([high, skip], dim=1)))
+
 
 torch.manual_seed(3)
 model = MiniUNet(classes=3)

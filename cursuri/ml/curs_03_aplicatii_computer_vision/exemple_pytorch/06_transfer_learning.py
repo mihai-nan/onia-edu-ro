@@ -21,7 +21,7 @@ loader = DataLoader(dataset, batch_size=16, shuffle=True, num_workers=0)
 
 model = resnet18(weights=weights)
 for param in model.parameters():
-    param.requires_grad = False        # backbone înghețat
+    param.requires_grad = False  # backbone înghețat
 model.fc = nn.Linear(model.fc.in_features, len(dataset.classes))
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -29,13 +29,13 @@ model = model.to(device)
 optimizer = torch.optim.AdamW(model.fc.parameters(), lr=1e-3)
 criterion = nn.CrossEntropyLoss()
 
-model.eval()                        # păstrează statisticile BatchNorm înghețate
-model.fc.train()                    # antrenează numai noul clasificator
-for images, labels in loader:         # un singur epoch demonstrativ
+model.eval()  # păstrează statisticile BatchNorm înghețate
+model.fc.train()  # antrenează numai noul clasificator
+for images, labels in loader:  # un singur epoch demonstrativ
     images, labels = images.to(device), labels.to(device)
     optimizer.zero_grad(set_to_none=True)
-    logits = model(images)             # (B, num_classes)
-    loss = criterion(logits, labels)   # fără softmax manual
+    logits = model(images)  # (B, num_classes)
+    loss = criterion(logits, labels)  # fără softmax manual
     loss.backward()
     optimizer.step()
 

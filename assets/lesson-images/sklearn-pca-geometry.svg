@@ -1,27 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img">
-<defs><style>
-.ttl{font:700 30px Arial,sans-serif;fill:#163e70}.sub{font:600 17px Arial,sans-serif;fill:#5d7591}
-.lbl{font:700 18px Arial,sans-serif;fill:#183b68}.small{font:500 14px Arial,sans-serif;fill:#4c6683}
-.ax{stroke:#8aa7c6;stroke-width:2}.pc1{stroke:#255f9f;stroke-width:5}.pc2{stroke:#d48a2a;stroke-width:5}
-</style></defs>
-<rect x="12" y="12" width="1176" height="406" rx="22" fill="#fbfdff" stroke="#d7e6f5" stroke-width="2"/>
-<text x="38" y="52" class="ttl">Cum funcționează PCA, intuitiv</text>
-<text x="38" y="80" class="sub">PCA caută o nouă axă PC1 pe direcția cu variație maximă; PC2 este perpendiculară și captează variația rămasă.</text>
-<g transform="translate(120,120)">
-<line x1="0" y1="220" x2="440" y2="220" class="ax"/><line x1="0" y1="220" x2="0" y2="0" class="ax"/>
-<text x="450" y="226" class="small">x₁</text><text x="-18" y="-6" class="small">x₂</text>
-<circle cx="60" cy="180" r="7" fill="#91a6c4"/><circle cx="90" cy="166" r="7" fill="#91a6c4"/><circle cx="120" cy="150" r="7" fill="#91a6c4"/><circle cx="150" cy="145" r="7" fill="#91a6c4"/><circle cx="180" cy="122" r="7" fill="#91a6c4"/><circle cx="210" cy="116" r="7" fill="#91a6c4"/><circle cx="250" cy="94" r="7" fill="#91a6c4"/><circle cx="285" cy="83" r="7" fill="#91a6c4"/><circle cx="325" cy="63" r="7" fill="#91a6c4"/><circle cx="355" cy="58" r="7" fill="#91a6c4"/>
-<line x1="35" y1="196" x2="378" y2="34" class="pc1"/>
-<line x1="210" y1="116" x2="265" y2="232" class="pc2"/>
-<text x="330" y="28" class="lbl">PC1</text><text x="270" y="248" class="lbl">PC2</text>
-</g>
-<g transform="translate(710,120)">
-<rect x="0" y="0" width="360" height="220" rx="16" fill="#eef5ff" stroke="#c4d9f0"/>
-<text x="22" y="42" class="lbl">Ce obținem după PCA?</text>
-<text x="22" y="78" class="small">• coordonate noi pe componentele principale</text>
-<text x="22" y="108" class="small">• componente ortogonale (fără corelație liniară între ele)</text>
-<text x="22" y="138" class="small">• explained_variance_ratio_ pentru fiecare componentă</text>
-<text x="22" y="168" class="small">• posibilitatea de a păstra doar primele k componente</text>
-<text x="22" y="198" class="small">• compresie și vizualizare în 2D/3D</text>
-</g>
+    <defs>
+        <style>
+            .ttl{font:700 30px Arial,sans-serif;fill:#163e70}.sub{font:600 17px Arial,sans-serif;fill:#5d7591}
+            .lbl{font:700 18px Arial,sans-serif;fill:#183b68}.small{font:500 14px Arial,sans-serif;fill:#4c6683}
+            .ax{stroke:#8aa7c6;stroke-width:2}.pc1{stroke:#255f9f;stroke-width:5}.pc2{stroke:#d48a2a;stroke-width:5}
+        </style>
+    </defs>
+    <rect x="12" y="12" width="1176" height="406" rx="22" fill="#fbfdff" stroke="#d7e6f5" stroke-width="2"/>
+    <text x="38" y="52" class="ttl">Cum funcționează PCA, intuitiv</text>
+    <text x="38" y="80" class="sub">PCA caută o nouă axă PC1 pe direcția cu variație maximă; PC2 este perpendiculară și
+        captează variația rămasă.
+    </text>
+    <g transform="translate(120,120)">
+        <line x1="0" y1="220" x2="440" y2="220" class="ax"/>
+        <line x1="0" y1="220" x2="0" y2="0" class="ax"/>
+        <text x="450" y="226" class="small">x₁</text>
+        <text x="-18" y="-6" class="small">x₂</text>
+        <circle cx="60" cy="180" r="7" fill="#91a6c4"/>
+        <circle cx="90" cy="166" r="7" fill="#91a6c4"/>
+        <circle cx="120" cy="150" r="7" fill="#91a6c4"/>
+        <circle cx="150" cy="145" r="7" fill="#91a6c4"/>
+        <circle cx="180" cy="122" r="7" fill="#91a6c4"/>
+        <circle cx="210" cy="116" r="7" fill="#91a6c4"/>
+        <circle cx="250" cy="94" r="7" fill="#91a6c4"/>
+        <circle cx="285" cy="83" r="7" fill="#91a6c4"/>
+        <circle cx="325" cy="63" r="7" fill="#91a6c4"/>
+        <circle cx="355" cy="58" r="7" fill="#91a6c4"/>
+        <line x1="35" y1="196" x2="378" y2="34" class="pc1"/>
+        <line x1="210" y1="116" x2="265" y2="232" class="pc2"/>
+        <text x="330" y="28" class="lbl">PC1</text>
+        <text x="270" y="248" class="lbl">PC2</text>
+    </g>
+    <g transform="translate(710,120)">
+        <rect x="0" y="0" width="360" height="220" rx="16" fill="#eef5ff" stroke="#c4d9f0"/>
+        <text x="22" y="42" class="lbl">Ce obținem după PCA?</text>
+        <text x="22" y="78" class="small">• coordonate noi pe componentele principale</text>
+        <text x="22" y="108" class="small">• componente ortogonale (fără corelație liniară între ele)</text>
+        <text x="22" y="138" class="small">• explained_variance_ratio_ pentru fiecare componentă</text>
+        <text x="22" y="168" class="small">• posibilitatea de a păstra doar primele k componente</text>
+        <text x="22" y="198" class="small">• compresie și vizualizare în 2D/3D</text>
+    </g>
 </svg>

@@ -1,38 +1,397 @@
-<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ONIA · Notebook Metrici de evaluare</title><link rel="stylesheet" href="../assets/styles.css"><link rel="stylesheet" href="../assets/python-lesson.css"><link rel="stylesheet" href="../assets/ds-lessons.css"><style>body{margin:0;background:#fff;padding:20px;font-family:Arial,sans-serif}.onia-python{max-width:1000px;margin:auto}.py-topic{margin-bottom:20px}.ds-micro-meta{font-size:12px}</style></head><body><div class="onia-python"><h2>Notebook: Metrici de evaluare</h2><div class="onia-data-science ds-notebook-math" style="margin:16px 0"><div class="ds-section-kicker">Formule matematice esențiale</div><div class="ds-math-row"><div class="ds-math-card "><div class="ds-math-label">MAE</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula MAE"><mrow><mi>MAE</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo>|</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>|</mo></mrow></mrow></mrow></mrow></math></div><div class="ds-math-card "><div class="ds-math-label">MSE</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula MSE"><mrow><mi>MSE</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow></mrow></mrow></math></div><div class="ds-math-card "><div class="ds-math-label">RMSE</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula RMSE"><mrow><mi>RMSE</mi><mo>=</mo><mrow><msqrt><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow></mrow></msqrt></mrow></mrow></math></div><div class="ds-math-card "><div class="ds-math-label">Precision</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula precision"><mrow><mi>Precision</mi><mo>=</mo><mfrac><mi>TP</mi><mrow><mi>TP</mi><mo>+</mo><mi>FP</mi></mrow></mfrac></mrow></math></div><div class="ds-math-card "><div class="ds-math-label">Recall</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula recall"><mrow><mi>Recall</mi><mo>=</mo><mfrac><mi>TP</mi><mrow><mi>TP</mi><mo>+</mo><mi>FN</mi></mrow></mfrac></mrow></math></div><div class="ds-math-card "><div class="ds-math-label">F1</div><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula F1"><mrow><mi>F1</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>TP</mi></mrow><mrow><mn>2</mn><mi>TP</mi><mo>+</mo><mi>FP</mi><mo>+</mo><mi>FN</mi></mrow></mfrac></mrow></math></div></div><p>Pentru explicații și exemple complete, deschide lecția „Metrici de evaluare”.</p></div><p>Codul poate fi executat în JupyterLab. Aici este afișată o selecție de exemple.</p><h3>Exemplul 1</h3><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button type="button" class="py-copy" data-copy-code> Copiază codul </button></div><div class="codehilite"><pre><span class="n">y_real</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">real</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_real</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;real=</span><span class="si">{</span><span class="n">real</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">, pred=</span><span class="si">{</span><span class="n">pred</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">, eroare=</span><span class="si">{</span><span class="n">real</span><span class="o">-</span><span class="n">pred</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div></div><h3>Exemplul 2</h3><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button type="button" class="py-copy" data-copy-code> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
-<span class="n">X_dev</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ONIA · Notebook Metrici de evaluare</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../assets/python-lesson.css">
+    <link rel="stylesheet" href="../assets/ds-lessons.css">
+    <style>body {
+        margin: 0;
+        background: #fff;
+        padding: 20px;
+        font-family: Arial, sans-serif
+    }
+
+    .onia-python {
+        max-width: 1000px;
+        margin: auto
+    }
+
+    .py-topic {
+        margin-bottom: 20px
+    }
+
+    .ds-micro-meta {
+        font-size: 12px
+    }</style>
+</head>
+<body>
+<div class="onia-python"><h2>Notebook: Metrici de evaluare</h2>
+    <div class="onia-data-science ds-notebook-math" style="margin:16px 0">
+        <div class="ds-section-kicker">Formule matematice esențiale</div>
+        <div class="ds-math-row">
+            <div class="ds-math-card ">
+                <div class="ds-math-label">MAE</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula MAE">
+                    <mrow>
+                        <mi>MAE</mi>
+                        <mo>=</mo>
+                        <mrow>
+                            <mfrac>
+                                <mn>1</mn>
+                                <mi>n</mi>
+                            </mfrac>
+                            <mrow>
+                                <munderover>
+                                    <mo>∑</mo>
+                                    <mrow>
+                                        <mi>i</mi>
+                                        <mo>=</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                    <mi>n</mi>
+                                </munderover>
+                                <mrow>
+                                    <mo>|</mo>
+                                    <mrow>
+                                        <msub>
+                                            <mi>y</mi>
+                                            <mi>i</mi>
+                                        </msub>
+                                        <mo>−</mo>
+                                        <msub>
+                                            <mover accent="true">
+                                                <mi>y</mi>
+                                                <mo>^</mo>
+                                            </mover>
+                                            <mi>i</mi>
+                                        </msub>
+                                    </mrow>
+                                    <mo>|</mo>
+                                </mrow>
+                            </mrow>
+                        </mrow>
+                    </mrow>
+                </math>
+            </div>
+            <div class="ds-math-card ">
+                <div class="ds-math-label">MSE</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula MSE">
+                    <mrow>
+                        <mi>MSE</mi>
+                        <mo>=</mo>
+                        <mrow>
+                            <mfrac>
+                                <mn>1</mn>
+                                <mi>n</mi>
+                            </mfrac>
+                            <mrow>
+                                <munderover>
+                                    <mo>∑</mo>
+                                    <mrow>
+                                        <mi>i</mi>
+                                        <mo>=</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                    <mi>n</mi>
+                                </munderover>
+                                <msup>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <msub>
+                                                <mi>y</mi>
+                                                <mi>i</mi>
+                                            </msub>
+                                            <mo>−</mo>
+                                            <msub>
+                                                <mover accent="true">
+                                                    <mi>y</mi>
+                                                    <mo>^</mo>
+                                                </mover>
+                                                <mi>i</mi>
+                                            </msub>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </msup>
+                            </mrow>
+                        </mrow>
+                    </mrow>
+                </math>
+            </div>
+            <div class="ds-math-card ">
+                <div class="ds-math-label">RMSE</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula RMSE">
+                    <mrow>
+                        <mi>RMSE</mi>
+                        <mo>=</mo>
+                        <mrow>
+                            <msqrt>
+                                <mrow>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mi>n</mi>
+                                    </mfrac>
+                                    <mrow>
+                                        <munderover>
+                                            <mo>∑</mo>
+                                            <mrow>
+                                                <mi>i</mi>
+                                                <mo>=</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                            <mi>n</mi>
+                                        </munderover>
+                                        <msup>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>y</mi>
+                                                        <mi>i</mi>
+                                                    </msub>
+                                                    <mo>−</mo>
+                                                    <msub>
+                                                        <mover accent="true">
+                                                            <mi>y</mi>
+                                                            <mo>^</mo>
+                                                        </mover>
+                                                        <mi>i</mi>
+                                                    </msub>
+                                                </mrow>
+                                                <mo>)</mo>
+                                            </mrow>
+                                            <mn>2</mn>
+                                        </msup>
+                                    </mrow>
+                                </mrow>
+                            </msqrt>
+                        </mrow>
+                    </mrow>
+                </math>
+            </div>
+            <div class="ds-math-card ">
+                <div class="ds-math-label">Precision</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula precision">
+                    <mrow>
+                        <mi>Precision</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mi>TP</mi>
+                            <mrow>
+                                <mi>TP</mi>
+                                <mo>+</mo>
+                                <mi>FP</mi>
+                            </mrow>
+                        </mfrac>
+                    </mrow>
+                </math>
+            </div>
+            <div class="ds-math-card ">
+                <div class="ds-math-label">Recall</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula recall">
+                    <mrow>
+                        <mi>Recall</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mi>TP</mi>
+                            <mrow>
+                                <mi>TP</mi>
+                                <mo>+</mo>
+                                <mi>FN</mi>
+                            </mrow>
+                        </mfrac>
+                    </mrow>
+                </math>
+            </div>
+            <div class="ds-math-card ">
+                <div class="ds-math-label">F1</div>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Formula F1">
+                    <mrow>
+                        <mi>F1</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow>
+                                <mn>2</mn>
+                                <mi>TP</mi>
+                            </mrow>
+                            <mrow>
+                                <mn>2</mn>
+                                <mi>TP</mi>
+                                <mo>+</mo>
+                                <mi>FP</mi>
+                                <mo>+</mo>
+                                <mi>FN</mi>
+                            </mrow>
+                        </mfrac>
+                    </mrow>
+                </math>
+            </div>
+        </div>
+        <p>Pentru explicații și exemple complete, deschide lecția „Metrici de evaluare”.</p></div>
+    <p>Codul poate fi executat în JupyterLab. Aici este afișată o selecție de exemple.</p>
+    <h3>Exemplul 1</h3>
+    <div class="py-code-card">
+        <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+            <button type="button" class="py-copy" data-copy-code> Copiază codul</button>
+        </div>
+        <div class="codehilite"><pre><span class="n">y_real</span> <span class="o">=</span> <span
+                class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span
+                class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span
+                class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.4</span><span
+                    class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span
+                    class="mf">8.8</span><span class="p">,</span> <span class="mf">10.2</span><span
+                    class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">real</span><span class="p">,</span> <span class="n">pred</span> <span
+                    class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span
+                    class="n">y_real</span><span class="p">,</span> <span class="n">y_pred</span><span
+                    class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span
+                    class="s2">&quot;real=</span><span class="si">{</span><span class="n">real</span><span
+                    class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span
+                    class="s2">, pred=</span><span class="si">{</span><span class="n">pred</span><span
+                    class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span
+                    class="s2">, eroare=</span><span class="si">{</span><span class="n">real</span><span
+                    class="o">-</span><span class="n">pred</span><span class="si">:</span><span
+                    class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span
+                    class="p">)</span>
+</pre>
+        </div>
+    </div>
+    <h3>Exemplul 2</h3>
+    <div class="py-code-card">
+        <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+            <button type="button" class="py-copy" data-copy-code> Copiază codul</button>
+        </div>
+        <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span
+                class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span
+                    class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span
+                    class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span
+                    class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span
+                    class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span
+                    class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span
+                    class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span
+                    class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
+<span class="n">X_dev</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span
+                    class="n">y_dev</span><span class="p">,</span> <span class="n">y_test</span> <span
+                    class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span
+                    class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span
+                    class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
 <span class="p">)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X_dev</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span
+                    class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span
+                    class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_dev</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span
+                    class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span
+                    class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span
+                    class="mi">42</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
-</pre></div></div><h3>Exemplul 3</h3><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button type="button" class="py-copy" data-copy-code> Copiază codul </button></div><div class="codehilite"><pre><span class="n">erori</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-</pre></div></div><h3>Exemplul 4</h3><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button type="button" class="py-copy" data-copy-code> Copiază codul </button></div><div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Nu există observații&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span
+                    class="p">),</span> <span class="nb">len</span><span class="p">(</span><span
+                    class="n">X_val</span><span class="p">),</span> <span class="nb">len</span><span
+                    class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</pre>
+        </div>
+    </div>
+    <h3>Exemplul 3</h3>
+    <div class="py-code-card">
+        <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+            <button type="button" class="py-copy" data-copy-code> Copiază codul</button>
+        </div>
+        <div class="codehilite"><pre><span class="n">erori</span> <span class="o">=</span> <span class="p">[</span><span
+                class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span
+                class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">erori</span><span
+                    class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span
+                    class="n">erori</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span
+                    class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span
+                    class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span
+                    class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span
+                    class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span
+                    class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span
+                    class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span
+                    class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span
+                    class="n">erori</span><span class="p">))</span>
+</pre>
+        </div>
+    </div>
+    <h3>Exemplul 4</h3>
+    <div class="py-code-card">
+        <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+            <button type="button" class="py-copy" data-copy-code> Copiază codul</button>
+        </div>
+        <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span
+                class="p">(</span><span class="n">reale</span><span class="p">,</span> <span
+                class="n">prezise</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span
+                    class="n">reale</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span
+                    class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Nu există observații&quot;</span><span
+                    class="p">)</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span
+                    class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span
+                    class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span
+                    class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">n</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">mae</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
-</pre></div></div><h3>Exemplul 5</h3><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button type="button" class="py-copy" data-copy-code> Copiază codul </button></div><div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mae</span><span class="p">([</span><span
+                    class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span
+                    class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span
+                    class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span
+                    class="p">]))</span>
+</pre>
+        </div>
+    </div>
+    <h3>Exemplul 5</h3>
+    <div class="py-code-card">
+        <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+            <button type="button" class="py-copy" data-copy-code> Copiază codul</button>
+        </div>
+        <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span
+                class="p">(</span><span class="n">reale</span><span class="p">,</span> <span
+                class="n">prezise</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span
+                    class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span
+                    class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span
+                    class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span
+                    class="mi">2</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span
+                    class="p">(</span><span class="n">reale</span><span class="p">)</span>
 
-<span class="n">valoare</span> <span class="o">=</span> <span class="n">mse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE = </span><span class="si">{</span><span class="n">valoare</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE = </span><span class="si">{</span><span class="n">valoare</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">0.5</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div></div></div><script>document.addEventListener("click",e=>{let b=e.target.closest("[data-copy-code]");if(b)navigator.clipboard?.writeText(b.closest(".py-code-card").querySelector("pre").textContent)})</script></body></html>
+<span class="n">valoare</span> <span class="o">=</span> <span class="n">mse</span><span class="p">([</span><span
+                    class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span
+                    class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span
+                    class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span
+                    class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE = </span><span
+                    class="si">{</span><span class="n">valoare</span><span class="si">:</span><span
+                    class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE = </span><span
+                    class="si">{</span><span class="n">valoare</span><span class="w"> </span><span
+                    class="o">**</span><span class="w"> </span><span class="mf">0.5</span><span class="si">:</span><span
+                    class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre>
+        </div>
+    </div>
+</div>
+<script>document.addEventListener("click", e => {
+    let b = e.target.closest("[data-copy-code]");
+    if (b) navigator.clipboard?.writeText(b.closest(".py-code-card").querySelector("pre").textContent)
+})</script>
+</body>
+</html>

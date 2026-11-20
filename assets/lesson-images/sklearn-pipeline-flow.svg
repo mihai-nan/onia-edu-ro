@@ -1,1 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="374" viewBox="0 0 1120 374" role="img"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#6585ac" stroke-width="1.6"/></marker><style>.title{font:700 25px 'DejaVu Sans',Arial,sans-serif;fill:#143e70}.subtitle{font:600 14px 'DejaVu Sans',Arial,sans-serif;fill:#4b6888}.stage{font:700 16px 'DejaVu Sans',Arial,sans-serif;fill:#183c68}.small{font:500 13px 'DejaVu Sans',Arial,sans-serif;fill:#496580}.tag{font:700 13px 'DejaVu Sans',Arial,sans-serif;fill:#1c5c99}.line{stroke:#688baa;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.flow{stroke:#567fab;stroke-width:2.3;fill:none;marker-end:url(#arrow)}</style></defs><rect x="3" y="3" width="1114" height="367" rx="17" fill="#fbfdff" stroke="#d9e5f4" stroke-width="1.6"/><text x="28" y="42" text-anchor="start" class="title">Același pipeline, două trasee diferite</text><rect x="22" y="83" width="1075" height="125" rx="14" fill="#eaf3ff" stroke="#b9d3ed" stroke-width="1.6"/><text x="43" y="107" text-anchor="start" class="tag">LA ANTRENARE · fit(X_train, y_train)</text><rect x="40" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/><text x="145.0" y="150" text-anchor="middle" class="stage">X_train / y_train</text><text x="145.0" y="174" text-anchor="middle" class="small">rânduri etichetate</text><path d="M250 161 H304" class="line"/><rect x="314" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/><text x="419.0" y="150" text-anchor="middle" class="stage">StandardScaler</text><text x="419.0" y="174" text-anchor="middle" class="small">fit_transform</text><path d="M524 161 H578" class="line"/><rect x="589" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/><text x="694.0" y="150" text-anchor="middle" class="stage">LogisticRegression</text><text x="694.0" y="174" text-anchor="middle" class="small">fit</text><path d="M799 161 H853" class="line"/><rect x="866" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/><text x="971.0" y="150" text-anchor="middle" class="stage">Model antrenat</text><text x="971.0" y="174" text-anchor="middle" class="small">coeficienți + medii</text><rect x="22" y="235" width="1075" height="125" rx="14" fill="#fff5e8" stroke="#edcd9f" stroke-width="1.6"/><text x="43" y="259" text-anchor="start" class="tag">LA PREDICȚIE · predict(X_test)</text><rect x="40" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/><text x="145.0" y="302" text-anchor="middle" class="stage">X_test</text><text x="145.0" y="326" text-anchor="middle" class="small">rânduri noi</text><path d="M250 313 H304" class="line"/><rect x="314" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/><text x="419.0" y="302" text-anchor="middle" class="stage">StandardScaler</text><text x="419.0" y="326" text-anchor="middle" class="small">transform</text><path d="M524 313 H578" class="line"/><rect x="589" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/><text x="694.0" y="302" text-anchor="middle" class="stage">LogisticRegression</text><text x="694.0" y="326" text-anchor="middle" class="small">predict</text><path d="M799 313 H853" class="line"/><rect x="866" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/><text x="971.0" y="302" text-anchor="middle" class="stage">Predicții</text><text x="971.0" y="326" text-anchor="middle" class="small">y_pred</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="374" viewBox="0 0 1120 374" role="img">
+    <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0 0 L6 3 L0 6" fill="none" stroke="#6585ac" stroke-width="1.6"/>
+        </marker>
+        <style>.title{font:700 25px 'DejaVu Sans',Arial,sans-serif;fill:#143e70}.subtitle{font:600 14px 'DejaVu
+            Sans',Arial,sans-serif;fill:#4b6888}.stage{font:700 16px 'DejaVu
+            Sans',Arial,sans-serif;fill:#183c68}.small{font:500 13px 'DejaVu
+            Sans',Arial,sans-serif;fill:#496580}.tag{font:700 13px 'DejaVu
+            Sans',Arial,sans-serif;fill:#1c5c99}.line{stroke:#688baa;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.flow{stroke:#567fab;stroke-width:2.3;fill:none;marker-end:url(#arrow)}
+        </style>
+    </defs>
+    <rect x="3" y="3" width="1114" height="367" rx="17" fill="#fbfdff" stroke="#d9e5f4" stroke-width="1.6"/>
+    <text x="28" y="42" text-anchor="start" class="title">Același pipeline, două trasee diferite</text>
+    <rect x="22" y="83" width="1075" height="125" rx="14" fill="#eaf3ff" stroke="#b9d3ed" stroke-width="1.6"/>
+    <text x="43" y="107" text-anchor="start" class="tag">LA ANTRENARE · fit(X_train, y_train)</text>
+    <rect x="40" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/>
+    <text x="145.0" y="150" text-anchor="middle" class="stage">X_train / y_train</text>
+    <text x="145.0" y="174" text-anchor="middle" class="small">rânduri etichetate</text>
+    <path d="M250 161 H304" class="line"/>
+    <rect x="314" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/>
+    <text x="419.0" y="150" text-anchor="middle" class="stage">StandardScaler</text>
+    <text x="419.0" y="174" text-anchor="middle" class="small">fit_transform</text>
+    <path d="M524 161 H578" class="line"/>
+    <rect x="589" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/>
+    <text x="694.0" y="150" text-anchor="middle" class="stage">LogisticRegression</text>
+    <text x="694.0" y="174" text-anchor="middle" class="small">fit</text>
+    <path d="M799 161 H853" class="line"/>
+    <rect x="866" y="122" width="210" height="72" rx="13" fill="#fff" stroke="#cbddec" stroke-width="1.6"/>
+    <text x="971.0" y="150" text-anchor="middle" class="stage">Model antrenat</text>
+    <text x="971.0" y="174" text-anchor="middle" class="small">coeficienți + medii</text>
+    <rect x="22" y="235" width="1075" height="125" rx="14" fill="#fff5e8" stroke="#edcd9f" stroke-width="1.6"/>
+    <text x="43" y="259" text-anchor="start" class="tag">LA PREDICȚIE · predict(X_test)</text>
+    <rect x="40" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/>
+    <text x="145.0" y="302" text-anchor="middle" class="stage">X_test</text>
+    <text x="145.0" y="326" text-anchor="middle" class="small">rânduri noi</text>
+    <path d="M250 313 H304" class="line"/>
+    <rect x="314" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/>
+    <text x="419.0" y="302" text-anchor="middle" class="stage">StandardScaler</text>
+    <text x="419.0" y="326" text-anchor="middle" class="small">transform</text>
+    <path d="M524 313 H578" class="line"/>
+    <rect x="589" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/>
+    <text x="694.0" y="302" text-anchor="middle" class="stage">LogisticRegression</text>
+    <text x="694.0" y="326" text-anchor="middle" class="small">predict</text>
+    <path d="M799 313 H853" class="line"/>
+    <rect x="866" y="274" width="210" height="72" rx="13" fill="#fffdf7" stroke="#ecd0a3" stroke-width="1.6"/>
+    <text x="971.0" y="302" text-anchor="middle" class="stage">Predicții</text>
+    <text x="971.0" y="326" text-anchor="middle" class="small">y_pred</text>
+</svg>

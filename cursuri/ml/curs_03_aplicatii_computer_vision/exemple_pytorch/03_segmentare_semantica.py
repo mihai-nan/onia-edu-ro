@@ -13,11 +13,11 @@ from torchvision.models.segmentation import (
 weights = DeepLabV3_ResNet50_Weights.DEFAULT
 model = deeplabv3_resnet50(weights=weights).eval()
 image = Image.open(sys.argv[1]).convert("RGB")
-x = weights.transforms()(image).unsqueeze(0)    # (1, 3, H, W)
+x = weights.transforms()(image).unsqueeze(0)  # (1, 3, H, W)
 
 with torch.inference_mode():
-    logits = model(x)["out"]                  # (1, C, H, W)
-    labels = logits.argmax(dim=1)[0]          # (H, W)
+    logits = model(x)["out"]  # (1, C, H, W)
+    labels = logits.argmax(dim=1)[0]  # (H, W)
 
 print("Logits:", tuple(logits.shape))
 print("Harta claselor:", tuple(labels.shape))

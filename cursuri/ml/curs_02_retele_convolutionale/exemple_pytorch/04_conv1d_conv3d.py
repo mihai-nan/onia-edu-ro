@@ -5,7 +5,7 @@ from torch import nn
 # Conv1d: semnal multicanal cu 500 eșantioane (ECG, audio, vibrații).
 conv1d = nn.Conv1d(in_channels=2, out_channels=8,
                    kernel_size=7, stride=2, padding=3)
-signal = torch.randn(4, 2, 500)      # (B, C, L)
+signal = torch.randn(4, 2, 500)  # (B, C, L)
 features1d = conv1d(signal)
 print("Conv1d:", tuple(features1d.shape))  # (4, 8, 250)
 

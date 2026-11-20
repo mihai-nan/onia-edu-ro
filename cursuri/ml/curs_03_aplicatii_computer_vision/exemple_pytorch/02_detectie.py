@@ -13,16 +13,16 @@ from torchvision.models.detection import (
 weights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT
 model = fasterrcnn_resnet50_fpn(weights=weights).eval()
 image = Image.open(sys.argv[1]).convert("RGB")
-x = weights.transforms()(image)      # tensor (3, H, W)
+x = weights.transforms()(image)  # tensor (3, H, W)
 
 with torch.inference_mode():
-    out = model([x])[0]               # listă de imagini -> dict / imagine
+    out = model([x])[0]  # listă de imagini -> dict / imagine
 
 # Box-uri in coordonatele imaginii: (x1, y1, x2, y2)
 keep = out["scores"] >= 0.60
 categories = weights.meta["categories"]
 for box, label, score in zip(
-    out["boxes"][keep], out["labels"][keep], out["scores"][keep]
+        out["boxes"][keep], out["labels"][keep], out["scores"][keep]
 ):
     print(categories[label.item()], [round(v, 1) for v in box.tolist()],
           round(score.item(), 3))

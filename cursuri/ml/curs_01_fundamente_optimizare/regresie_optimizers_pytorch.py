@@ -7,19 +7,20 @@ import matplotlib.pyplot as plt
 torch.manual_seed(7)
 x = torch.linspace(-3, 3, 64).unsqueeze(1)
 i = torch.arange(64, dtype=x.dtype).unsqueeze(1)
-y = 0.6 * torch.sin(1.35 * x) + 0.15 * x**2 - 0.25 * x
+y = 0.6 * torch.sin(1.35 * x) + 0.15 * x ** 2 - 0.25 * x
 y = y + 0.04 * torch.sin(17 * x + 0.4 * i)
 
 base = nn.Sequential(nn.Linear(1, 4), nn.Tanh(), nn.Linear(4, 1))
 with torch.no_grad():
-    base[0].weight.copy_(torch.tensor([[-.62],[-.20],[.35],[.78]]))
-    base[0].bias.copy_(torch.tensor([.20,-.10,.08,-.27]))
-    base[2].weight.copy_(torch.tensor([[.32,-.40,.30,.16]]))
+    base[0].weight.copy_(torch.tensor([[-.62], [-.20], [.35], [.78]]))
+    base[0].bias.copy_(torch.tensor([.20, -.10, .08, -.27]))
+    base[2].weight.copy_(torch.tensor([[.32, -.40, .30, .16]]))
     base[2].bias.fill_(.05)
 
 models = {'A': copy.deepcopy(base), 'B': copy.deepcopy(base)}
 choices = {'A': 'sgd', 'B': 'momentum'}
 eta, beta, beta2 = 0.02, 0.9, 0.999
+
 
 def make_optim(kind, model):
     params = model.parameters()
@@ -34,6 +35,7 @@ def make_optim(kind, model):
     if kind == 'rmsprop':
         return torch.optim.RMSprop(params, lr=eta, alpha=beta2)
     return torch.optim.Adam(params, lr=eta, betas=(beta, beta2))
+
 
 opt = {k: make_optim(choices[k], models[k]) for k in models}
 vel = {k: [torch.zeros_like(p) for p in models[k].parameters()]
@@ -63,10 +65,10 @@ for epoch in range(12):
                         p.add_(v)
             else:
                 opt[key].zero_grad()
-                predictions = model(xb)       # FORWARD
+                predictions = model(xb)  # FORWARD
                 loss = criterion(predictions, yb)
-                loss.backward()               # BACKWARD
-                opt[key].step()               # UPDATE
+                loss.backward()  # BACKWARD
+                opt[key].step()  # UPDATE
             with torch.no_grad():
                 history[key].append(criterion(model(x), y).item())
 
@@ -75,4 +77,6 @@ for key in models:
     plt.plot(history[key], label=f'{key}: {choices[key]}')
 plt.xlabel('Actualizare de parametri')
 plt.ylabel('MSE pe întreg setul')
-plt.legend(); plt.grid(alpha=0.2); plt.show()
+plt.legend();
+plt.grid(alpha=0.2);
+plt.show()

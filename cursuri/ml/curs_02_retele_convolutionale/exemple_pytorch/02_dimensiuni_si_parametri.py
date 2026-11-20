@@ -13,14 +13,14 @@ layer = nn.Conv2d(cin, cout, kernel_size=kernel, stride=stride,
 x = torch.randn(batch, cin, height, width)
 y = layer(x)
 
-h_out = math.floor((height + 2*padding - dilation*(kernel-1) - 1)/stride + 1)
-w_out = math.floor((width + 2*padding - dilation*(kernel-1) - 1)/stride + 1)
-parameters = cout * ((cin // groups) * kernel**2 + 1)
-macs_per_image = h_out * w_out * cout * (cin // groups) * kernel**2
+h_out = math.floor((height + 2 * padding - dilation * (kernel - 1) - 1) / stride + 1)
+w_out = math.floor((width + 2 * padding - dilation * (kernel - 1) - 1) / stride + 1)
+parameters = cout * ((cin // groups) * kernel ** 2 + 1)
+macs_per_image = h_out * w_out * cout * (cin // groups) * kernel ** 2
 
 assert y.shape == (batch, cout, h_out, w_out)
 assert sum(t.numel() for t in layer.parameters()) == parameters
 print("Intrare:", tuple(x.shape))
-print("Ieșire:", tuple(y.shape))       # (8, 6, 28, 28)
-print("Parametri:", parameters)        # 456
+print("Ieșire:", tuple(y.shape))  # (8, 6, 28, 28)
+print("Parametri:", parameters)  # 456
 print("MACs / imagine:", macs_per_image)

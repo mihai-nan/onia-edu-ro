@@ -2,6 +2,7 @@
 import torch
 from torch import nn
 
+
 class ResidualBlock(nn.Module):
     def __init__(self, cin, cout, stride=1):
         super().__init__()
@@ -18,6 +19,7 @@ class ResidualBlock(nn.Module):
 
     def forward(self, x):
         return self.activation(self.path(x) + self.shortcut(x))
+
 
 block = ResidualBlock(16, 32, stride=2)
 x = torch.randn(2, 16, 28, 28)

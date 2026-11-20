@@ -1,76 +1,1705 @@
-<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ONIA · Metrici de evaluare</title><link rel="stylesheet" href="../assets/styles.css"><link rel="stylesheet" href="../assets/python-lesson.css"><link rel="stylesheet" href="../assets/data-lessons.css"><link rel="stylesheet" href="../assets/ds-lessons.css"><style>body{margin:0;background:#eef3f9}.ds-standalone{max-width:1080px;margin:auto;padding:30px 20px;background:white;min-height:100vh}</style><style id="onia-return-style">.onia-back-bar{position:relative;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;color:#18345b;border:1px solid #d6e5f5;border-radius:13px;margin:12px auto;padding:10px 15px;max-width:1180px;box-shadow:0 3px 15px #1539650b;font:600 14px/1.4 system-ui,sans-serif}.onia-back-bar a{color:#17569e;text-decoration:none;font-weight:700}.onia-back-bar a:first-child{background:#eef5ff;border-radius:9px;padding:9px 12px}.onia-back-bar a:hover{background:#dcecff}.onia-back-bar .onia-back-title{font-weight:600;color:#5b7391;font-size:13px}@media(max-width:600px){.onia-back-bar{margin:8px;padding:8px}.onia-back-title{display:none}}</style></head><body><div class="onia-back-bar"><a href="../index.html#/">← Înapoi la ONIA</a><span class="onia-back-title">Resurse educaționale</span><a href="../cursuri.html">Cursuri recomandate</a></div><main class="ds-standalone"><div class="onia-python onia-data-science" data-ds="metrici"><header class="py-intro ds-lesson-hero"><div class="ds-kicker">ONIA · FUNDAMENTE DE DATA SCIENCE</div><h2>Metrici de evaluare</h2><p>Un model nu este bun fiindcă a fost antrenat, ci fiindcă face predicții utile pe observații pe care nu le-a văzut. În această lecție învățăm să cuantificăm erorile și să alegem metrica potrivită problemei.</p><div class="ds-micro-meta">Explicații pas cu pas · Exemple Python · Aplicații și evaluare</div></header><div class="ds-symbol-guide"><strong>Cum citim notația matematică?</strong><span><b>n</b> — numărul de exemple</span><span><b>yᵢ</b> — valoarea reală</span><span><b>ŷᵢ</b> — predicția modelului</span><span><b>Σ</b> — însumare</span><span><b>TP / FP / FN / TN</b> — tipuri de rezultate în clasificare</span></div><section class="py-topic" id="ds-metrici-01"><div class="py-topic-head"><span class="py-topic-index">01</span><h2>De ce avem nevoie de metrici?</h2></div><div class="ds-topic-body">Imaginăm un program care estimează prețul unor locuințe. Pentru cinci apartamente, modelul oferă predicții. Două modele pot greși în moduri diferite: unul poate avea mai multe greșeli mici, altul poate greși grav pentru un singur apartament. O singură cifră, numită <strong>metrică</strong>, rezumă un anumit aspect al calității predicțiilor. Nicio metrică nu poate descrie perfect toate consecințele unei erori.<p>Înainte să calculezi o metrică, verifică tipul problemei: <strong>regresie</strong> dacă rezultatul este un număr; <strong>clasificare</strong> dacă rezultatul este o etichetă. Pentru clasificare binară pot fi relevante probabilitățile estimate, nu doar clasele prezise.</p><div class="ds-math-explanations"><div class="ds-section-kicker">Ideea matematică</div>
-<div class="ds-two-panel"><div class="ds-soft-panel"><h3>Regresie</h3><p>Comparăm o valoare numerică reală cu estimarea produsă de model: de exemplu prețul real al unui apartament și prețul prezis.</p><div class="ds-inline-math">Valoare reală <strong>y</strong> · predicție <strong>ŷ</strong></div></div><div class="ds-soft-panel"><h3>Clasificare</h3><p>Comparăm eticheta reală cu eticheta prezisă sau cu probabilitatea atribuită fiecărei clase.</p><div class="ds-inline-math">Etichetă: <strong>0 / 1</strong> · probabilitate: <strong>p ∈ [0, 1]</strong></div></div></div>
-<div class="ds-mini-example"><strong>Exemplu intuitiv:</strong> două modele pot avea aceeași eroare medie absolută, dar unul face câteva greșeli foarte mari. Prin urmare, metrica aleasă schimbă ceea ce numim „model mai bun”.</div></div></div><figure class="ds-figure"><img alt="Diagramă: De ce avem nevoie de metrici?" loading="lazy" src="../assets/lesson-images/ds-metrici-reziduuri.png"/><figcaption>Reprezentare vizuală pentru tema: De ce avem nevoie de metrici?.</figcaption></figure><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="n">y_real</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">real</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_real</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"real=</span><span class="si">{</span><span class="n">real</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">, pred=</span><span class="si">{</span><span class="n">pred</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">, eroare=</span><span class="si">{</span><span class="n">real</span><span class="o">-</span><span class="n">pred</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-02"><div class="py-topic-head"><span class="py-topic-index">02</span><h2>Separarea datelor: train, validare și test</h2></div><div class="ds-topic-body">Un set de antrenare este folosit pentru a determina parametrii modelului. Setul de validare servește la alegerea hiperparametrilor și la compararea modelelor, iar <strong>testul final</strong> este păstrat neatins până la evaluarea finală. În competiții, scorul public poate deveni indirect un set de validare dacă este consultat de foarte multe ori. Astfel, putem adapta modelul la particularități ale acelui subset fără să ne dăm seama.<p>Regulă practică: pentru orice preprocesare care învață statistici (medie, deviație standard, vocabular, valori de imputare), utilizează <code>fit</code> doar pe train și <code>transform</code> pe validation/test. În scikit-learn, <code>Pipeline</code> ajută la evitarea acestor erori.</p><div class="ds-math-explanations"><div class="ds-section-kicker">Reprezentare vizuală · 40 observații</div>
-<div aria-label="24 de observații pentru antrenare, 8 pentru validare și 8 pentru test" class="ds-split-diagram" role="img"><div style="flex:24;background:#2866bd">Train · 24</div><div style="flex:8;background:#128a83">Validare · 8</div><div style="flex:8;background:#bf7543">Test · 8</div></div><p class="ds-explainer">Exemplul din cod împarte datele inițial în 32 observații pentru dezvoltare și 8 pentru test. Apoi 25% din cele 32 sunt folosite la validare: <strong>24 train + 8 validare + 8 test</strong>.</p>
-<div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Raportul de antrenare</div><math aria-label="24 din 40 observații pentru train" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Train</mi><mo>=</mo><mfrac><mn>24</mn><mn>40</mn></mfrac></mrow></math><p class="ds-math-caption">60% din date</p></div><div class="ds-math-card"><div class="ds-math-label">Raportul de validare</div><math aria-label="8 din 40 observații pentru validare" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Validare</mi><mo>=</mo><mfrac><mn>8</mn><mn>40</mn></mfrac></mrow></math><p class="ds-math-caption">20% din date</p></div></div><div class="ds-learning-point"><strong>Scurgerea informației (data leakage)</strong><p>Dacă media sau deviația standard sunt calculate pe întregul set <em>înainte</em> de împărțire, informații din validare/test pot influența antrenarea. Operațiile <code>fit</code> se efectuează doar pe train; <code>transform</code> se aplică ulterior și celorlalte subseturi.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
-<span class="n">X_dev</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ONIA · Metrici de evaluare</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../assets/python-lesson.css">
+    <link rel="stylesheet" href="../assets/data-lessons.css">
+    <link rel="stylesheet" href="../assets/ds-lessons.css">
+    <style>body {
+        margin: 0;
+        background: #eef3f9
+    }
+
+    .ds-standalone {
+        max-width: 1080px;
+        margin: auto;
+        padding: 30px 20px;
+        background: white;
+        min-height: 100vh
+    }</style>
+    <style id="onia-return-style">.onia-back-bar {
+        position: relative;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #fff;
+        color: #18345b;
+        border: 1px solid #d6e5f5;
+        border-radius: 13px;
+        margin: 12px auto;
+        padding: 10px 15px;
+        max-width: 1180px;
+        box-shadow: 0 3px 15px #1539650b;
+        font: 600 14px/1.4 system-ui, sans-serif
+    }
+
+    .onia-back-bar a {
+        color: #17569e;
+        text-decoration: none;
+        font-weight: 700
+    }
+
+    .onia-back-bar a:first-child {
+        background: #eef5ff;
+        border-radius: 9px;
+        padding: 9px 12px
+    }
+
+    .onia-back-bar a:hover {
+        background: #dcecff
+    }
+
+    .onia-back-bar .onia-back-title {
+        font-weight: 600;
+        color: #5b7391;
+        font-size: 13px
+    }
+
+    @media (max-width: 600px) {
+        .onia-back-bar {
+            margin: 8px;
+            padding: 8px
+        }
+
+        .onia-back-title {
+            display: none
+        }
+    }</style>
+</head>
+<body>
+<div class="onia-back-bar"><a href="../index.html#/">← Înapoi la ONIA</a><span class="onia-back-title">Resurse educaționale</span><a
+        href="../cursuri.html">Cursuri recomandate</a></div>
+<main class="ds-standalone">
+    <div class="onia-python onia-data-science" data-ds="metrici">
+        <header class="py-intro ds-lesson-hero">
+            <div class="ds-kicker">ONIA · FUNDAMENTE DE DATA SCIENCE</div>
+            <h2>Metrici de evaluare</h2>
+            <p>Un model nu este bun fiindcă a fost antrenat, ci fiindcă face predicții utile pe observații pe care nu
+                le-a văzut. În această lecție învățăm să cuantificăm erorile și să alegem metrica potrivită
+                problemei.</p>
+            <div class="ds-micro-meta">Explicații pas cu pas · Exemple Python · Aplicații și evaluare</div>
+        </header>
+        <div class="ds-symbol-guide"><strong>Cum citim notația
+            matematică?</strong><span><b>n</b> — numărul de exemple</span><span><b>yᵢ</b> — valoarea reală</span><span><b>ŷᵢ</b> — predicția modelului</span><span><b>Σ</b> — însumare</span><span><b>TP / FP / FN / TN</b> — tipuri de rezultate în clasificare</span>
+        </div>
+        <section class="py-topic" id="ds-metrici-01">
+            <div class="py-topic-head"><span class="py-topic-index">01</span>
+                <h2>De ce avem nevoie de metrici?</h2></div>
+            <div class="ds-topic-body">Imaginăm un program care estimează prețul unor locuințe. Pentru cinci
+                apartamente, modelul oferă predicții. Două modele pot greși în moduri diferite: unul poate avea mai
+                multe greșeli mici, altul poate greși grav pentru un singur apartament. O singură cifră, numită <strong>metrică</strong>,
+                rezumă un anumit aspect al calității predicțiilor. Nicio metrică nu poate descrie perfect toate
+                consecințele unei erori.<p>Înainte să calculezi o metrică, verifică tipul problemei:
+                    <strong>regresie</strong> dacă rezultatul este un număr; <strong>clasificare</strong> dacă
+                    rezultatul este o etichetă. Pentru clasificare binară pot fi relevante probabilitățile estimate, nu
+                    doar clasele prezise.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-section-kicker">Ideea matematică</div>
+                    <div class="ds-two-panel">
+                        <div class="ds-soft-panel"><h3>Regresie</h3>
+                            <p>Comparăm o valoare numerică reală cu estimarea produsă de model: de exemplu prețul real
+                                al unui apartament și prețul prezis.</p>
+                            <div class="ds-inline-math">Valoare reală <strong>y</strong> · predicție <strong>ŷ</strong>
+                            </div>
+                        </div>
+                        <div class="ds-soft-panel"><h3>Clasificare</h3>
+                            <p>Comparăm eticheta reală cu eticheta prezisă sau cu probabilitatea atribuită fiecărei
+                                clase.</p>
+                            <div class="ds-inline-math">Etichetă: <strong>0 / 1</strong> · probabilitate: <strong>p ∈
+                                [0, 1]</strong></div>
+                        </div>
+                    </div>
+                    <div class="ds-mini-example"><strong>Exemplu intuitiv:</strong> două modele pot avea aceeași eroare
+                        medie absolută, dar unul face câteva greșeli foarte mari. Prin urmare, metrica aleasă schimbă
+                        ceea ce numim „model mai bun”.
+                    </div>
+                </div>
+            </div>
+            <figure class="ds-figure"><img alt="Diagramă: De ce avem nevoie de metrici?" loading="lazy"
+                                           src="../assets/lesson-images/ds-metrici-reziduuri.png"/>
+                <figcaption>Reprezentare vizuală pentru tema: De ce avem nevoie de metrici?.</figcaption>
+            </figure>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="n">y_real</span> <span class="o">=</span> <span
+                        class="p">[</span><span class="mi">4</span><span class="p">,</span> <span
+                        class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span
+                        class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span
+                        class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.4</span><span
+                            class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span
+                            class="mf">8.8</span><span class="p">,</span> <span class="mf">10.2</span><span
+                            class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">real</span><span class="p">,</span> <span class="n">pred</span> <span
+                            class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_real</span><span
+                            class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"real=</span><span
+                            class="si">{</span><span class="n">real</span><span class="si">:</span><span
+                            class="s2">4.1f</span><span class="si">}</span><span class="s2">, pred=</span><span
+                            class="si">{</span><span class="n">pred</span><span class="si">:</span><span
+                            class="s2">4.1f</span><span class="si">}</span><span class="s2">, eroare=</span><span
+                            class="si">{</span><span class="n">real</span><span class="o">-</span><span
+                            class="n">pred</span><span class="si">:</span><span class="s2">+.1f</span><span
+                            class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-02">
+            <div class="py-topic-head"><span class="py-topic-index">02</span>
+                <h2>Separarea datelor: train, validare și test</h2></div>
+            <div class="ds-topic-body">Un set de antrenare este folosit pentru a determina parametrii modelului. Setul
+                de validare servește la alegerea hiperparametrilor și la compararea modelelor, iar <strong>testul
+                    final</strong> este păstrat neatins până la evaluarea finală. În competiții, scorul public poate
+                deveni indirect un set de validare dacă este consultat de foarte multe ori. Astfel, putem adapta modelul
+                la particularități ale acelui subset fără să ne dăm seama.<p>Regulă practică: pentru orice preprocesare
+                    care învață statistici (medie, deviație standard, vocabular, valori de imputare), utilizează <code>fit</code>
+                    doar pe train și <code>transform</code> pe validation/test. În scikit-learn, <code>Pipeline</code>
+                    ajută la evitarea acestor erori.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-section-kicker">Reprezentare vizuală · 40 observații</div>
+                    <div aria-label="24 de observații pentru antrenare, 8 pentru validare și 8 pentru test"
+                         class="ds-split-diagram" role="img">
+                        <div style="flex:24;background:#2866bd">Train · 24</div>
+                        <div style="flex:8;background:#128a83">Validare · 8</div>
+                        <div style="flex:8;background:#bf7543">Test · 8</div>
+                    </div>
+                    <p class="ds-explainer">Exemplul din cod împarte datele inițial în 32 observații pentru dezvoltare
+                        și 8 pentru test. Apoi 25% din cele 32 sunt folosite la validare: <strong>24 train + 8 validare
+                            + 8 test</strong>.</p>
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Raportul de antrenare</div>
+                            <math aria-label="24 din 40 observații pentru train" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Train</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>24</mn>
+                                        <mn>40</mn>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                            <p class="ds-math-caption">60% din date</p></div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Raportul de validare</div>
+                            <math aria-label="8 din 40 observații pentru validare" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Validare</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>8</mn>
+                                        <mn>40</mn>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                            <p class="ds-math-caption">20% din date</p></div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Scurgerea informației (data leakage)</strong>
+                        <p>Dacă media sau deviația standard sunt calculate pe întregul set <em>înainte</em> de
+                            împărțire, informații din validare/test pot influența antrenarea. Operațiile
+                            <code>fit</code> se efectuează doar pe train; <code>transform</code> se aplică ulterior și
+                            celorlalte subseturi.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span
+                            class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span
+                            class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span
+                            class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span
+                            class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span
+                            class="p">(</span><span class="n">i</span> <span class="o">%</span> <span
+                            class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span
+                            class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span
+                            class="p">(</span><span class="mi">40</span><span class="p">)]</span>
+<span class="n">X_dev</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span
+                            class="n">y_dev</span><span class="p">,</span> <span class="n">y_test</span> <span
+                            class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span
+                            class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span
+                            class="o">=</span><span class="mi">42</span>
 <span class="p">)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X_dev</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span
+                            class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span
+                            class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_dev</span><span class="p">,</span> <span class="n">y_dev</span><span class="p">,</span> <span
+                            class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span
+                            class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span
+                            class="mi">42</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-03"><div class="py-topic-head"><span class="py-topic-index">03</span><h2>Eroare, eroare absolută și eroare pătratică</h2></div><div class="ds-topic-body">Pentru o observație cu valoarea reală <code>y</code> și predicția <code>ŷ</code>, eroarea semnată este <code>e = y − ŷ</code>. Semnul ne arată dacă am supraestimat sau subestimat. Dacă am face media erorilor semnate, cele pozitive și negative s-ar putea anula! De aceea folosim <strong>valoarea absolută</strong> <code>|e|</code> sau <strong>pătratul</strong> <code>e²</code>.<p>Exemplu: erorile +5 și −5 au media 0, dar modelul nu este perfect. MAE va fi 5, iar MSE va fi 25.</p><div class="ds-math-explanations"><div class="ds-math-card"><div class="ds-math-label">Definiția erorii semnate</div><math aria-label="eroarea e indice i egal y indice i minus y estimat indice i" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>eᵢ</mi><mo>=</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow></mrow></math><p class="ds-math-caption">În această lecție folosim convenția <strong>e = valoarea reală − predicția</strong>.</p></div><div class="ds-compare-grid"><div><b>Eroarea semnată</b><div class="ds-numeric">+5  +  (−5) = 0</div><small>Se anulează, deși ambele predicții sunt greșite.</small></div><div><b>Eroarea absolută</b><div class="ds-numeric">|+5| + |−5| = 10</div><small>Toate contribuțiile sunt nenegative.</small></div><div><b>Eroarea pătratică</b><div class="ds-numeric">5² + (−5)² = 50</div><small>Greșelile mari primesc o penalizare mai mare.</small></div></div>
-<div class="ds-learning-point"><strong>Cum interpretăm semnul?</strong><p>Dacă predicția este mai mare decât valoarea reală, eroarea <code>y − ŷ</code> este negativă (supraestimare). Dacă predicția este mai mică, eroarea este pozitivă (subestimare).</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="n">erori</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">erori</span><span class="p">))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-04"><div class="py-topic-head"><span class="py-topic-index">04</span><h2>MAE — Mean Absolute Error</h2></div><div class="ds-topic-body">MAE este media distanțelor absolute dintre rezultate și predicții. Are aceeași unitate de măsură ca ținta: dacă prezicem lei, MAE este în lei; dacă prezicem temperaturi în °C, MAE este în °C. Este mai puțin sensibilă la valori extreme decât MSE, dar nu ne spune dacă modelul supraestimează sau subestimează în medie.<p>Exemplu: pentru erorile 1, −2, 3, MAE = (1+2+3)/3 = 2.</p><div class="ds-math-explanations"><div class="ds-math-card"><div class="ds-math-label">Formula generală · MAE</div><math aria-label="MAE egal unu supra n ori suma de la i egal unu la n din modul de y indice i minus y estimat indice i" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>MAE</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo>|</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>|</mo></mrow></mrow></mrow></mrow></math><p class="ds-math-caption"><strong>n</strong> este numărul observațiilor; <strong>|·|</strong> înseamnă valoare absolută.</p></div><p class="ds-explainer">Pornim de la exact aceleași trei observații din exemplul Python. Calculăm pentru fiecare diferența, apoi modulul acesteia:</p><div class="ds-table-scroll"><table class="ds-math-table"><thead><tr><th>Observația i</th><th>yᵢ (real)</th><th>ŷᵢ (prezis)</th><th>eᵢ = yᵢ − ŷᵢ</th><th>|eᵢ|</th><th>eᵢ²</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td><td>−1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>6</td><td>4</td><td>+2</td><td>2</td><td>4</td></tr><tr><td>3</td><td>7</td><td>10</td><td>−3</td><td>3</td><td>9</td></tr></tbody><tfoot><tr><td colspan="4">Total</td><td>6</td><td>14</td></tr></tfoot></table></div><div class="ds-math-card"><div class="ds-math-label">Calcul numeric, pas cu pas</div><math aria-label="MAE egal paranteză 1 plus 2 plus 3 paranteză împărțit la 3 egal 2" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>MAE</mi><mo>=</mo><mrow><mfrac><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn></mrow><mn>3</mn></mfrac><mo>=</mo><mn>2</mn></mrow></mrow></math></div><div class="ds-learning-point"><strong>Interpretare</strong><p>Predicțiile diferă, în medie, cu <strong>2 unități</strong> de valorile reale. MAE este <strong>0 numai dacă toate predicțiile sunt exacte</strong>.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mae</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Nu există observații"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span
+                            class="p">),</span> <span class="nb">len</span><span class="p">(</span><span
+                            class="n">X_val</span><span class="p">),</span> <span class="nb">len</span><span
+                            class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-03">
+            <div class="py-topic-head"><span class="py-topic-index">03</span>
+                <h2>Eroare, eroare absolută și eroare pătratică</h2></div>
+            <div class="ds-topic-body">Pentru o observație cu valoarea reală <code>y</code> și predicția <code>ŷ</code>,
+                eroarea semnată este <code>e = y − ŷ</code>. Semnul ne arată dacă am supraestimat sau subestimat. Dacă
+                am face media erorilor semnate, cele pozitive și negative s-ar putea anula! De aceea folosim <strong>valoarea
+                    absolută</strong> <code>|e|</code> sau <strong>pătratul</strong> <code>e²</code>.<p>Exemplu: erorile
+                    +5 și −5 au media 0, dar modelul nu este perfect. MAE va fi 5, iar MSE va fi 25.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Definiția erorii semnate</div>
+                        <math aria-label="eroarea e indice i egal y indice i minus y estimat indice i" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>eᵢ</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <msub>
+                                        <mi>y</mi>
+                                        <mi>i</mi>
+                                    </msub>
+                                    <mo>−</mo>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi>y</mi>
+                                            <mo>^</mo>
+                                        </mover>
+                                        <mi>i</mi>
+                                    </msub>
+                                </mrow>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption">În această lecție folosim convenția <strong>e = valoarea reală −
+                            predicția</strong>.</p></div>
+                    <div class="ds-compare-grid">
+                        <div><b>Eroarea semnată</b>
+                            <div class="ds-numeric">+5  +  (−5) = 0</div>
+                            <small>Se anulează, deși ambele predicții sunt greșite.</small></div>
+                        <div><b>Eroarea absolută</b>
+                            <div class="ds-numeric">|+5| + |−5| = 10</div>
+                            <small>Toate contribuțiile sunt nenegative.</small></div>
+                        <div><b>Eroarea pătratică</b>
+                            <div class="ds-numeric">5² + (−5)² = 50</div>
+                            <small>Greșelile mari primesc o penalizare mai mare.</small></div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Cum interpretăm semnul?</strong>
+                        <p>Dacă predicția este mai mare decât valoarea reală, eroarea <code>y − ŷ</code> este negativă
+                            (supraestimare). Dacă predicția este mai mică, eroarea este pozitivă (subestimare).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="n">erori</span> <span class="o">=</span> <span
+                        class="p">[</span><span class="mi">5</span><span class="p">,</span> <span
+                        class="o">-</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">erori</span><span
+                            class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span
+                            class="p">(</span><span class="n">erori</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span
+                            class="nb">abs</span><span class="p">(</span><span class="n">e</span><span
+                            class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span
+                            class="ow">in</span> <span class="n">erori</span><span class="p">)</span> <span
+                            class="o">/</span> <span class="nb">len</span><span class="p">(</span><span
+                            class="n">erori</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span
+                            class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span
+                            class="n">e</span> <span class="ow">in</span> <span class="n">erori</span><span
+                            class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span
+                            class="p">(</span><span class="n">erori</span><span class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-04">
+            <div class="py-topic-head"><span class="py-topic-index">04</span>
+                <h2>MAE — Mean Absolute Error</h2></div>
+            <div class="ds-topic-body">MAE este media distanțelor absolute dintre rezultate și predicții. Are aceeași
+                unitate de măsură ca ținta: dacă prezicem lei, MAE este în lei; dacă prezicem temperaturi în °C, MAE
+                este în °C. Este mai puțin sensibilă la valori extreme decât MSE, dar nu ne spune dacă modelul
+                supraestimează sau subestimează în medie.<p>Exemplu: pentru erorile 1, −2, 3, MAE = (1+2+3)/3 = 2.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Formula generală · MAE</div>
+                        <math aria-label="MAE egal unu supra n ori suma de la i egal unu la n din modul de y indice i minus y estimat indice i"
+                              display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>MAE</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mi>n</mi>
+                                    </mfrac>
+                                    <mrow>
+                                        <munderover>
+                                            <mo>∑</mo>
+                                            <mrow>
+                                                <mi>i</mi>
+                                                <mo>=</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                            <mi>n</mi>
+                                        </munderover>
+                                        <mrow>
+                                            <mo>|</mo>
+                                            <mrow>
+                                                <msub>
+                                                    <mi>y</mi>
+                                                    <mi>i</mi>
+                                                </msub>
+                                                <mo>−</mo>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi>y</mi>
+                                                        <mo>^</mo>
+                                                    </mover>
+                                                    <mi>i</mi>
+                                                </msub>
+                                            </mrow>
+                                            <mo>|</mo>
+                                        </mrow>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption"><strong>n</strong> este numărul observațiilor; <strong>|·|</strong>
+                            înseamnă valoare absolută.</p></div>
+                    <p class="ds-explainer">Pornim de la exact aceleași trei observații din exemplul Python. Calculăm
+                        pentru fiecare diferența, apoi modulul acesteia:</p>
+                    <div class="ds-table-scroll">
+                        <table class="ds-math-table">
+                            <thead>
+                            <tr>
+                                <th>Observația i</th>
+                                <th>yᵢ (real)</th>
+                                <th>ŷᵢ (prezis)</th>
+                                <th>eᵢ = yᵢ − ŷᵢ</th>
+                                <th>|eᵢ|</th>
+                                <th>eᵢ²</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>−1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td>+2</td>
+                                <td>2</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>7</td>
+                                <td>10</td>
+                                <td>−3</td>
+                                <td>3</td>
+                                <td>9</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="4">Total</td>
+                                <td>6</td>
+                                <td>14</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Calcul numeric, pas cu pas</div>
+                        <math aria-label="MAE egal paranteză 1 plus 2 plus 3 paranteză împărțit la 3 egal 2"
+                              display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>MAE</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>1</mn>
+                                            <mo>+</mo>
+                                            <mn>2</mn>
+                                            <mo>+</mo>
+                                            <mn>3</mn>
+                                        </mrow>
+                                        <mn>3</mn>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-learning-point"><strong>Interpretare</strong>
+                        <p>Predicțiile diferă, în medie, cu <strong>2 unități</strong> de valorile reale. MAE este
+                            <strong>0 numai dacă toate predicțiile sunt exacte</strong>.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span
+                        class="nf">mae</span><span class="p">(</span><span class="n">reale</span><span
+                        class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span
+                            class="n">reale</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span
+                            class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Nu există observații"</span><span
+                            class="p">)</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span
+                            class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span
+                            class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span
+                            class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">n</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">mae</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-05"><div class="py-topic-head"><span class="py-topic-index">05</span><h2>MSE și RMSE — penalizarea greșelilor mari</h2></div><div class="ds-topic-body">MSE mărește influența greșelilor mari. O eroare de 4 contribuie cu 16, în timp ce o eroare de 1 contribuie cu 1. RMSE revine la unitatea inițială a țintei, fiind mai ușor de interpretat. Nici MSE, nici RMSE nu pot fi negative.<p>În problemele de regresie din concurs, dacă evaluatorul folosește RMSE, nu alege modelul după MAE doar fiindcă are această metrică mai mică.</p><div class="ds-math-explanations"><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Mean Squared Error</div><math aria-label="MSE egal unu supra n ori suma pătratelor erorilor" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>MSE</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow></mrow></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Root Mean Squared Error</div><math aria-label="RMSE egal radical din media pătratelor erorilor" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>RMSE</mi><mo>=</mo><mrow><msqrt><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow></mrow></msqrt></mrow></mrow></math></div></div><p class="ds-explainer">Folosim tabelul precedent: pătratele erorilor sunt <strong>1, 4, 9</strong>. MSE este media lor, iar RMSE este rădăcina pătrată a rezultatului.</p><div class="ds-math-card"><div class="ds-math-label">Exemplu calculat</div><math aria-label="MSE egal 14 supra 3 aproximativ 4,667" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>MSE</mi><mo>=</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>9</mn></mrow><mn>3</mn></mfrac><mo>=</mo><mfrac><mn>14</mn><mn>3</mn></mfrac><mo>≈</mo><mn>4,667</mn></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Extragerea radicalului</div><math aria-label="RMSE egal radical din 14 supra 3 aproximativ 2,160" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>RMSE</mi><mo>=</mo><msqrt><mfrac><mn>14</mn><mn>3</mn></mfrac></msqrt><mo>≈</mo><mn>2,160</mn></mrow></math></div><div class="ds-compare-grid"><div><b>Eroare de mărime 1</b><div class="ds-numeric">1² = 1</div></div><div><b>Eroare de mărime 2</b><div class="ds-numeric">2² = 4</div></div><div><b>Eroare de mărime 4</b><div class="ds-numeric">4² = 16</div></div></div><div class="ds-learning-point"><strong>Unități de măsură</strong><p>Dacă ținta este măsurată în lei, MSE are unitatea <strong>lei²</strong>, iar RMSE revine la <strong>lei</strong>. Din acest motiv RMSE se interpretează mai ușor în unitatea originală a problemei.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mae</span><span class="p">([</span><span
+                            class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span
+                            class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span
+                            class="p">[</span><span class="mi">3</span><span class="p">,</span> <span
+                            class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span
+                            class="p">]))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-05">
+            <div class="py-topic-head"><span class="py-topic-index">05</span>
+                <h2>MSE și RMSE — penalizarea greșelilor mari</h2></div>
+            <div class="ds-topic-body">MSE mărește influența greșelilor mari. O eroare de 4 contribuie cu 16, în timp ce
+                o eroare de 1 contribuie cu 1. RMSE revine la unitatea inițială a țintei, fiind mai ușor de interpretat.
+                Nici MSE, nici RMSE nu pot fi negative.<p>În problemele de regresie din concurs, dacă evaluatorul
+                    folosește RMSE, nu alege modelul după MAE doar fiindcă are această metrică mai mică.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Mean Squared Error</div>
+                            <math aria-label="MSE egal unu supra n ori suma pătratelor erorilor" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>MSE</mi>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <mfrac>
+                                            <mn>1</mn>
+                                            <mi>n</mi>
+                                        </mfrac>
+                                        <mrow>
+                                            <munderover>
+                                                <mo>∑</mo>
+                                                <mrow>
+                                                    <mi>i</mi>
+                                                    <mo>=</mo>
+                                                    <mn>1</mn>
+                                                </mrow>
+                                                <mi>n</mi>
+                                            </munderover>
+                                            <msup>
+                                                <mrow>
+                                                    <mo>(</mo>
+                                                    <mrow>
+                                                        <msub>
+                                                            <mi>y</mi>
+                                                            <mi>i</mi>
+                                                        </msub>
+                                                        <mo>−</mo>
+                                                        <msub>
+                                                            <mover accent="true">
+                                                                <mi>y</mi>
+                                                                <mo>^</mo>
+                                                            </mover>
+                                                            <mi>i</mi>
+                                                        </msub>
+                                                    </mrow>
+                                                    <mo>)</mo>
+                                                </mrow>
+                                                <mn>2</mn>
+                                            </msup>
+                                        </mrow>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Root Mean Squared Error</div>
+                            <math aria-label="RMSE egal radical din media pătratelor erorilor" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>RMSE</mi>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msqrt>
+                                            <mrow>
+                                                <mfrac>
+                                                    <mn>1</mn>
+                                                    <mi>n</mi>
+                                                </mfrac>
+                                                <mrow>
+                                                    <munderover>
+                                                        <mo>∑</mo>
+                                                        <mrow>
+                                                            <mi>i</mi>
+                                                            <mo>=</mo>
+                                                            <mn>1</mn>
+                                                        </mrow>
+                                                        <mi>n</mi>
+                                                    </munderover>
+                                                    <msup>
+                                                        <mrow>
+                                                            <mo>(</mo>
+                                                            <mrow>
+                                                                <msub>
+                                                                    <mi>y</mi>
+                                                                    <mi>i</mi>
+                                                                </msub>
+                                                                <mo>−</mo>
+                                                                <msub>
+                                                                    <mover accent="true">
+                                                                        <mi>y</mi>
+                                                                        <mo>^</mo>
+                                                                    </mover>
+                                                                    <mi>i</mi>
+                                                                </msub>
+                                                            </mrow>
+                                                            <mo>)</mo>
+                                                        </mrow>
+                                                        <mn>2</mn>
+                                                    </msup>
+                                                </mrow>
+                                            </mrow>
+                                        </msqrt>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <p class="ds-explainer">Folosim tabelul precedent: pătratele erorilor sunt <strong>1, 4, 9</strong>.
+                        MSE este media lor, iar RMSE este rădăcina pătrată a rezultatului.</p>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Exemplu calculat</div>
+                        <math aria-label="MSE egal 14 supra 3 aproximativ 4,667" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>MSE</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>1</mn>
+                                        <mo>+</mo>
+                                        <mn>4</mn>
+                                        <mo>+</mo>
+                                        <mn>9</mn>
+                                    </mrow>
+                                    <mn>3</mn>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>14</mn>
+                                    <mn>3</mn>
+                                </mfrac>
+                                <mo>≈</mo>
+                                <mn>4,667</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Extragerea radicalului</div>
+                        <math aria-label="RMSE egal radical din 14 supra 3 aproximativ 2,160" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>RMSE</mi>
+                                <mo>=</mo>
+                                <msqrt>
+                                    <mfrac>
+                                        <mn>14</mn>
+                                        <mn>3</mn>
+                                    </mfrac>
+                                </msqrt>
+                                <mo>≈</mo>
+                                <mn>2,160</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-compare-grid">
+                        <div><b>Eroare de mărime 1</b>
+                            <div class="ds-numeric">1² = 1</div>
+                        </div>
+                        <div><b>Eroare de mărime 2</b>
+                            <div class="ds-numeric">2² = 4</div>
+                        </div>
+                        <div><b>Eroare de mărime 4</b>
+                            <div class="ds-numeric">4² = 16</div>
+                        </div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Unități de măsură</strong>
+                        <p>Dacă ținta este măsurată în lei, MSE are unitatea <strong>lei²</strong>, iar RMSE revine la
+                            <strong>lei</strong>. Din acest motiv RMSE se interpretează mai ușor în unitatea originală a
+                            problemei.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span
+                        class="nf">mse</span><span class="p">(</span><span class="n">reale</span><span
+                        class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">reale</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span
+                            class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reale</span><span
+                            class="p">,</span> <span class="n">prezise</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y</span> <span
+                            class="o">-</span> <span class="n">p</span><span class="p">)</span> <span
+                            class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span
+                            class="p">(</span><span class="n">reale</span><span class="p">)</span>
 
-<span class="n">valoare</span> <span class="o">=</span> <span class="n">mse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MSE = </span><span class="si">{</span><span class="n">valoare</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RMSE = </span><span class="si">{</span><span class="n">valoare</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">0.5</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-06"><div class="py-topic-head"><span class="py-topic-index">06</span><h2>R² — comparația cu o predicție constantă</h2></div><div class="ds-topic-body">În numitor apare eroarea unui model foarte simplu care prezice mereu media valorilor reale din setul evaluat. Dacă R² = 1, predicțiile sunt perfecte; dacă R² = 0, modelul este la fel de bun, după suma pătratelor, ca această referință constantă. <strong>R² poate fi negativ</strong> atunci când modelul este mai slab decât referința.<p>Atenție: pentru o țintă constantă, expresia matematică standard nu este definită. Instrumentele software pot utiliza convenții explicite pentru acel caz.</p><div class="ds-math-explanations"><div class="ds-math-card"><div class="ds-math-label">Coeficientul de determinare</div><math aria-label="R pătrat egal unu minus suma pătratelor erorilor modelului împărțită la suma pătratelor diferențelor față de media reală" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>R²</mi><mo>=</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^ </mo></mover><mi>i</mi></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo>(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>y</mi><mo>¯</mo></mover><mo>)</mo></mrow><mn>2</mn></msup></mrow></mfrac></mrow></mrow></math><p class="ds-math-caption"><strong>ȳ</strong> este media valorilor reale; numitorul cuantifică variația acestora în raport cu media.</p></div><p class="ds-explainer">Luăm valorile reale <strong>[2, 4, 6]</strong>. Media lor este <strong>4</strong>. Modelul de referință prezice mereu această medie: <strong>[4, 4, 4]</strong>.</p><div class="ds-math-card"><div class="ds-math-label">Suma pătratelor față de medie</div><math aria-label="SST egal 4 plus 0 plus 4 egal 8" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>SST</mi><mo>=</mo><msup><mrow><mo>(</mo><mn>2</mn><mo>−</mo><mn>4</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mn>4</mn><mo>−</mo><mn>4</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mn>6</mn><mo>−</mo><mn>4</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>8</mn></mrow></math></div><div class="ds-compare-grid"><div><b>Predicții perfecte</b><div class="ds-numeric">SSE = 0</div><small>R² = 1</small></div><div><b>Prezicem media</b><div class="ds-numeric">SSE = 8</div><small>R² = 1 − 8/8 = 0</small></div><div><b>Prezicem mereu 10</b><div class="ds-numeric">SSE = 116</div><small>R² = 1 − 116/8 = −13,5</small></div></div><div class="ds-learning-point"><strong>Atenție</strong><p>R² nu este un procent de predicții corecte. Poate fi negativ și nu este, în general, limitat inferior de 0. Dacă toate valorile reale sunt identice, numitorul formulei este 0 și se aplică o convenție explicită în bibliotecă.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-07"><div class="py-topic-head"><span class="py-topic-index">07</span><h2>Accuracy în clasificare</h2></div><div class="ds-topic-body">Pentru zece imagini clasificate, dacă opt etichete au fost prezise corect, accuracy = 0,8. Totuși, dacă 95% dintre imagini sunt dintr-o singură clasă, un model care prezice mereu acea clasă obține 95% accuracy fără să identifice deloc cealaltă clasă.<p>De aceea trebuie analizată distribuția claselor și, la nevoie, alte metrici precum recall sau balanced accuracy.</p><div class="ds-math-explanations"><div class="ds-math-card"><div class="ds-math-label">Formula accuracy pentru clasificare binară</div><math aria-label="Accuracy egal TP plus TN împărțit la TP plus TN plus FP plus FN" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Accuracy</mi><mo>=</mo><mfrac><mrow><mi>TP</mi><mo>+</mo><mi>TN</mi></mrow><mrow><mi>TP</mi><mo>+</mo><mi>TN</mi><mo>+</mo><mi>FP</mi><mo>+</mo><mi>FN</mi></mrow></mfrac></mrow></math><p class="ds-math-caption"><strong>TP</strong> și <strong>TN</strong> sunt predicții corecte; <strong>FP</strong> și <strong>FN</strong> sunt greșeli.</p></div><div aria-label="6 predicții, 5 corecte și una greșită" class="ds-visual-classification" role="img"><div class="ds-class-cell good">0 = 0<br/><small>corect</small></div><div class="ds-class-cell good">0 = 0<br/><small>corect</small></div><div class="ds-class-cell good">0 = 0<br/><small>corect</small></div><div class="ds-class-cell good">0 = 0<br/><small>corect</small></div><div class="ds-class-cell good">0 = 0<br/><small>corect</small></div><div class="ds-class-cell bad">1 ≠ 0<br/><small>greșit</small></div></div><div class="ds-math-card"><div class="ds-math-label">Calcul din exemplul de cod</div><math aria-label="Accuracy egal cinci supra șase egal 83,33 la sută" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Accuracy</mi><mo>=</mo><mfrac><mn>5</mn><mn>6</mn></mfrac><mo>≈</mo><mn>0,8333</mn><mo>=</mo><mn>83,33%</mn></mrow></math></div><div class="ds-learning-point"><strong>De ce poate induce în eroare?</strong><p>Există cinci exemple din clasa 0 și un singur exemplu din clasa 1. Modelul prezice mereu 0: obține <strong>83,33% accuracy</strong>, dar detectează <strong>0% dintre cazurile pozitive</strong>.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">corecte</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy = </span><span class="si">{</span><span class="n">corecte</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-08"><div class="py-topic-head"><span class="py-topic-index">08</span><h2>Precision, recall și F1</h2></div><div class="ds-topic-body">Definim clasa de interes drept „pozitivă”. <strong>TP</strong>: pozitive corecte; <strong>FP</strong>: false alarme; <strong>FN</strong>: pozitive ratate; <strong>TN</strong>: negative corecte.Precision răspunde la „dintre alertele generate, câte sunt corecte?”, iar recall la „din toate cazurile pozitive reale, câte am descoperit?”. F1 este media armonică, folosită când dorim un compromis. La numitor zero, trebuie stabilită o convenție software.<p>Exemplu: într-o problemă de detectare a mesajelor spam, multe alarme false pot fi costisitoare; într-o problemă de detectare a defecțiunilor grave, ratarea cazurilor poate fi mai periculoasă.</p><div class="ds-math-explanations"><div class="ds-section-kicker">Matricea de confuzie · exemplu din cod</div><div class="ds-confusion-wrap"><table class="ds-confusion"><caption>Clase reale pe rânduri · clase prezise pe coloane</caption><thead><tr><th></th><th>Prezicere: pozitiv (1)</th><th>Prezicere: negativ (0)</th></tr></thead><tbody><tr><th>Real: pozitiv (1)</th><td class="cm-tp"><strong>TP = 2</strong><small>detectate corect</small></td><td class="cm-fn"><strong>FN = 2</strong><small>pozitive ratate</small></td></tr><tr><th>Real: negativ (0)</th><td class="cm-fp"><strong>FP = 1</strong><small>alarmă falsă</small></td><td class="cm-tn"><strong>TN = 1</strong><small>negative corecte</small></td></tr></tbody></table></div><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Precision · precizia alarmei</div><math aria-label="Precision egal TP supra TP plus FP" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Precision</mi><mo>=</mo><mfrac><mi>TP</mi><mrow><mi>TP</mi><mo>+</mo><mi>FP</mi></mrow></mfrac></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Recall · acoperirea pozitivelor</div><math aria-label="Recall egal TP supra TP plus FN" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Recall</mi><mo>=</mo><mfrac><mi>TP</mi><mrow><mi>TP</mi><mo>+</mo><mi>FN</mi></mrow></mfrac></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">F1 · media armonică</div><math aria-label="F1 egal doi ori precision ori recall supra precision plus recall" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>F1</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>⋅</mo><mi>Precision</mi><mo>⋅</mo><mi>Recall</mi></mrow><mrow><mi>Precision</mi><mo>+</mo><mi>Recall</mi></mrow></mfrac></mrow></math></div></div><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Calcul precision</div><math aria-label="Precision egal doi supra trei aproximativ 0,667" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>P</mi><mo>=</mo><mfrac><mn>2</mn><mrow><mn>2</mn><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>≈</mo><mn>0,667</mn></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Calcul recall</div><math aria-label="Recall egal doi supra patru egal 0,5" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>R</mi><mo>=</mo><mfrac><mn>2</mn><mrow><mn>2</mn><mo>+</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>=</mo><mn>0,5</mn></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Calcul F1</div><math aria-label="F1 egal 4 supra 7 aproximativ 0,571" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>F1</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>⋅</mo><mn>2</mn></mrow><mrow><mn>4</mn><mo>+</mo><mn>1</mn><mo>+</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mn>4</mn><mn>7</mn></mfrac><mo>≈</mo><mn>0,571</mn></mrow></math></div></div><div class="ds-learning-point"><strong>Interpretare</strong><p><strong>Precision = 2/3</strong>: dintre cele trei exemple semnalate ca pozitive, două chiar sunt pozitive. <strong>Recall = 2/4</strong>: dintre cele patru exemple realmente pozitive, numai două au fost detectate.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
-<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-09"><div class="py-topic-head"><span class="py-topic-index">09</span><h2>Probabilități: log-loss, ROC-AUC și PR-AUC</h2></div><div class="ds-topic-body">Clasificatoarele pot produce probabilități, de exemplu 0,91 pentru clasa pozitivă. Două modele pot prezice aceleași clase, dar cu încredere diferită. <strong>Log-loss</strong> penalizează probabilitățile atribuite insuficient clasei adevărate, în special când modelul este foarte sigur și greșește.<p>ROC-AUC măsoară calitatea ordonării exemplelor pozitive față de negative de-a lungul pragurilor; PR-AUC / Average Precision evidențiază relația precision–recall și poate fi deosebit de informativă când clasa pozitivă este rară. Nu confunda ROC-AUC cu accuracy și nici PR-AUC cu F1 calculat la un singur prag.</p><div class="ds-math-explanations"><div class="ds-math-card"><div class="ds-math-label">Log-loss pentru clasificare binară</div><math aria-label="Minus unu pe n ori suma de la i egal unu la n din y indice i ln p indice i plus unu minus y indice i înmulțit cu ln unu minus p indice i" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Log-loss</mi><mo>=</mo><mrow><mo>−</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo>[</mo><msub><mi>y</mi><mi>i</mi></msub><mo>ln</mo><mrow><mo>(</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow><mo>+</mo><mrow><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo>)</mo></mrow><mo>ln</mo><mrow><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow><mo>]</mo></mrow></mrow></mrow></mrow></math><p class="ds-math-caption"><strong>pᵢ</strong> reprezintă probabilitatea atribuită clasei pozitive, iar <strong>yᵢ ∈ {0, 1}</strong> este eticheta reală. Logaritmul este natural.</p></div><div class="ds-table-scroll"><table class="ds-math-table"><thead><tr><th>Etichetă reală</th><th>Probabilitate p</th><th>Penalizare −ln(prob. clasei adevărate)</th></tr></thead><tbody><tr><td>1</td><td>0,90</td><td>−ln(0,90) ≈ 0,105</td></tr><tr><td>0</td><td>0,20</td><td>−ln(0,80) ≈ 0,223</td></tr></tbody></table></div><div class="ds-math-card"><div class="ds-math-label">Log-loss mediu al celor două exemple</div><math aria-label="Log loss egal 0,105 plus 0,223 supra 2 egal circa 0,164" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>L</mi><mo>=</mo><mfrac><mrow><mn>0,105</mn><mo>+</mo><mn>0,223</mn></mrow><mn>2</mn></mfrac><mo>≈</mo><mn>0,164</mn></mrow></math></div><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Rata pozitivelor detectate (axa ROC verticală)</div><math aria-label="TPR egal TP supra TP plus FN" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>TPR</mi><mo>=</mo><mfrac><mi>TP</mi><mrow><mi>TP</mi><mo>+</mo><mi>FN</mi></mrow></mfrac></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Rata falselor alarme (axa ROC orizontală)</div><math aria-label="FPR egal FP supra FP plus TN" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>FPR</mi><mo>=</mo><mfrac><mi>FP</mi><mrow><mi>FP</mi><mo>+</mo><mi>TN</mi></mrow></mfrac></mrow></math></div></div><div class="ds-learning-point"><strong>ROC-AUC și Average Precision</strong><p><strong>ROC-AUC</strong> rezumă cât de bine ordonează modelul exemplele pozitive înaintea celor negative, folosind toate pragurile. <strong>Average Precision (AP)</strong> rezumă curba precision–recall printr-o sumă ponderată a valorilor precision. AP nu este întotdeauna identică cu aria trapezoidală PR-AUC; verifică implementarea cerută.</p></div><div class="ds-learning-point"><strong>Exemplul din cod</strong><p>Pentru scorurile date, toate exemplele pozitive au probabilități mai mari decât toate negativele: <strong>ROC-AUC = 1</strong> și <strong>AP = 1</strong>, deși <strong>log-loss ≈ 0,3328</strong> nu este zero. Cele trei metrici măsoară aspecte diferite.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">average_precision_score</span>
-<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.31</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.66</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'ROC AUC:'</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'AP:'</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Log-loss:'</span><span class="p">,</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-10"><div class="py-topic-head"><span class="py-topic-index">10</span><h2>Media micro, macro și weighted</h2></div><div class="ds-topic-body">În clasificarea cu trei sau mai multe clase putem calcula F1 pentru fiecare clasă. <strong>Macro</strong> tratează clasele egal, indiferent câte exemple au; <strong>weighted</strong> face media ponderată cu numărul de observații per clasă; <strong>micro</strong> agregă numărul total de TP/FP/FN înainte de calcul. Dacă avem multe exemple „pisică” și puține „câine”, macro-F1 poate dezvălui performanța slabă pe clasa rară care ar fi mascată de accuracy. Pentru problemele multilabel, interpretarea este diferită și trebuie verificată explicit.<div class="ds-math-explanations"><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Macro-F1: fiecare clasă are aceeași pondere</div><math aria-label="Macro F1 egal unu supra K ori suma F1 pentru fiecare clasă" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>F1 macro</mi><mo>=</mo><mrow><mfrac><mn>1</mn><mi>K</mi></mfrac><mrow><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><msub><mi>F1</mi><mi>k</mi></msub></mrow></mrow></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Weighted-F1: pondere după suport</div><math aria-label="Weighted F1 egal suma pentru fiecare clasă n indice k supra n înmulțit cu F1 indice k" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>F1 weighted</mi><mo>=</mo><mrow><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><mfrac><msub><mi>n</mi><mi>k</mi></msub><mi>n</mi></mfrac><msub><mi>F1</mi><mi>k</mi></msub></mrow></mrow></math></div></div><div class="ds-table-scroll"><table class="ds-math-table"><thead><tr><th>Clasă</th><th>Număr exemple (suport)</th><th>F1 pe clasă</th></tr></thead><tbody><tr><td>Clasa A</td><td>90</td><td>0,95</td></tr><tr><td>Clasa B</td><td>10</td><td>0,40</td></tr></tbody></table></div><div class="ds-math-row"><div class="ds-math-card"><div class="ds-math-label">Exemplu macro-F1</div><math aria-label="Macro egal media dintre 0,95 și 0,40, adică 0,675" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Macro</mi><mo>=</mo><mfrac><mrow><mn>0,95</mn><mo>+</mo><mn>0,40</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>0,675</mn></mrow></math></div><div class="ds-math-card"><div class="ds-math-label">Exemplu weighted-F1</div><math aria-label="Weighted egal 90 ori 0,95 plus 10 ori 0,40 împărțit la 100 egal 0,895" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Weighted</mi><mo>=</mo><mfrac><mrow><mn>90</mn><mo>⋅</mo><mn>0,95</mn><mo>+</mo><mn>10</mn><mo>⋅</mo><mn>0,40</mn></mrow><mn>100</mn></mfrac><mo>=</mo><mn>0,895</mn></mrow></math></div></div><div class="ds-learning-point"><strong>Cum funcționează micro?</strong><p>Înainte de a calcula precision și recall, însumăm TP, FP și FN pentru toate clasele. În clasificarea multiclasă obișnuită, cu câte o singură etichetă reală și prezisă pe exemplu, <strong>micro-F1 coincide cu accuracy</strong>. Macro-F1 evidențiază mai bine clasele rare.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
-<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-</pre></div></div></section><section class="py-topic" id="ds-metrici-11"><div class="py-topic-head"><span class="py-topic-index">11</span><h2>Metricile din scikit-learn și scorer-ul competiției</h2></div><div class="ds-topic-body">Metoda <code>model.score(X, y)</code> <strong>nu reprezintă aceeași metrică pentru toate modelele</strong>: deseori este accuracy pentru clasificatori și R² pentru regresori. Când competiția cere MAE, macro-F1 sau log-loss, calculează explicit metrica solicitată.<p>La cross-validation, <code>scoring="neg_mean_absolute_error"</code> returnează valori negative deoarece API-ul de scor maximizează valoarea. O valoare -2 este mai bună decât -5: MAE corespunzător este 2, respectiv 5.</p><div class="ds-math-explanations"><div class="ds-table-scroll"><table class="ds-math-table"><thead><tr><th>Ce evaluăm?</th><th>Funcția scikit-learn</th><th>Direcția bună</th></tr></thead><tbody><tr><td>Regresie · MAE</td><td><code>mean_absolute_error(y, pred)</code></td><td>mai mic ↓</td></tr><tr><td>Regresie · RMSE</td><td><code>root_mean_squared_error(y, pred)</code></td><td>mai mic ↓</td></tr><tr><td>Regresie · R²</td><td><code>r2_score(y, pred)</code></td><td>mai mare ↑</td></tr><tr><td>Clasificare · F1 macro</td><td><code>f1_score(y, pred, average="macro")</code></td><td>mai mare ↑</td></tr><tr><td>Clasificare · log-loss</td><td><code>log_loss(y, probabilitati)</code></td><td>mai mic ↓</td></tr></tbody></table></div><div class="ds-math-card"><div class="ds-math-label">Scorer pentru cross-validation</div><math aria-label="Score egal minus MAE pentru negative mean absolute error" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>score</mi><mo>=</mo><mo>−</mo><mi>MAE</mi></mrow></math><p class="ds-math-caption">În cross-validation, <code>scoring="neg_mean_absolute_error"</code> întoarce un scor care trebuie <strong>maximizat</strong>; o eroare mai mică produce un scor mai mare (mai aproape de zero).</p></div><div class="ds-compare-grid"><div><b>Model A</b><div class="ds-numeric">MAE = 2</div><small>scoring = −2 (mai bun)</small></div><div><b>Model B</b><div class="ds-numeric">MAE = 5</div><small>scoring = −5 (mai slab)</small></div></div><div class="ds-learning-point"><strong>În competiții</strong><p>Respectă exact metrica oficială, tipul ieșirii cerute (clasă sau probabilitate) și modul în care sunt agregate scorurile. Nu compara rezultatele unor modele folosind subseturi ori protocoale diferite.</p></div></div></div><div class="py-code-card"><div class="py-code-top"><span>Python 3 · exemplu explicat</span><button class="py-copy" data-copy-code="" type="button"> Copiază codul </button></div><div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.dummy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyRegressor</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">DummyRegressor</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">]</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'R²:'</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'MAE:'</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pred</span><span class="p">))</span>
-</pre></div></div></section><section class="ds-final-tips"><h2>De reținut pentru ONIA</h2><p>Compară metodele în condiții corecte: același protocol de evaluare, date de validare separate și o metrică relevantă pentru problema rezolvată. Testul final nu trebuie folosit la alegerea hiperparametrilor.</p><p>Exemplele din această lecție sunt didactice; la competiție verifică întotdeauna enunțul, formatul datelor și metrica oficială.</p><p class="ds-sources">Pentru detalii de implementare: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener" target="_blank">Model evaluation — scikit-learn</a> și <a href="https://scikit-learn.org/stable/common_pitfalls.html" rel="noopener" target="_blank">Common pitfalls</a>.</p></section></div></main><script>document.addEventListener('click',function(e){const b=e.target.closest('[data-copy-code]');if(!b)return;const pre=b.closest('.py-code-card').querySelector('pre');if(!pre)return;navigator.clipboard?.writeText(pre.textContent||'');b.textContent='Copiat';setTimeout(()=>b.textContent='Copiază codul',1200);});</script></body></html>
+<span class="n">valoare</span> <span class="o">=</span> <span class="n">mse</span><span class="p">([</span><span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span
+                            class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span
+                            class="p">[</span><span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span
+                            class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MSE = </span><span
+                            class="si">{</span><span class="n">valoare</span><span class="si">:</span><span class="s2">.3f</span><span
+                            class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RMSE = </span><span
+                            class="si">{</span><span class="n">valoare</span><span class="w"> </span><span
+                            class="o">**</span><span class="w"> </span><span class="mf">0.5</span><span
+                            class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span
+                            class="s2">"</span><span class="p">)</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-06">
+            <div class="py-topic-head"><span class="py-topic-index">06</span>
+                <h2>R² — comparația cu o predicție constantă</h2></div>
+            <div class="ds-topic-body">În numitor apare eroarea unui model foarte simplu care prezice mereu media
+                valorilor reale din setul evaluat. Dacă R² = 1, predicțiile sunt perfecte; dacă R² = 0, modelul este la
+                fel de bun, după suma pătratelor, ca această referință constantă. <strong>R² poate fi negativ</strong>
+                atunci când modelul este mai slab decât referința.<p>Atenție: pentru o țintă constantă, expresia
+                    matematică standard nu este definită. Instrumentele software pot utiliza convenții explicite pentru
+                    acel caz.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Coeficientul de determinare</div>
+                        <math aria-label="R pătrat egal unu minus suma pătratelor erorilor modelului împărțită la suma pătratelor diferențelor față de media reală"
+                              display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>R²</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mn>1</mn>
+                                    <mo>−</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <munderover>
+                                                <mo>∑</mo>
+                                                <mrow>
+                                                    <mi>i</mi>
+                                                    <mo>=</mo>
+                                                    <mn>1</mn>
+                                                </mrow>
+                                                <mi>n</mi>
+                                            </munderover>
+                                            <msup>
+                                                <mrow>
+                                                    <mo>(</mo>
+                                                    <mrow>
+                                                        <msub>
+                                                            <mi>y</mi>
+                                                            <mi>i</mi>
+                                                        </msub>
+                                                        <mo>−</mo>
+                                                        <msub>
+                                                            <mover accent="true">
+                                                                <mi>y</mi>
+                                                                <mo>^</mo>
+                                                            </mover>
+                                                            <mi>i</mi>
+                                                        </msub>
+                                                    </mrow>
+                                                    <mo>)</mo>
+                                                </mrow>
+                                                <mn>2</mn>
+                                            </msup>
+                                        </mrow>
+                                        <mrow>
+                                            <munderover>
+                                                <mo>∑</mo>
+                                                <mrow>
+                                                    <mi>i</mi>
+                                                    <mo>=</mo>
+                                                    <mn>1</mn>
+                                                </mrow>
+                                                <mi>n</mi>
+                                            </munderover>
+                                            <msup>
+                                                <mrow>
+                                                    <mo>(</mo>
+                                                    <msub>
+                                                        <mi>y</mi>
+                                                        <mi>i</mi>
+                                                    </msub>
+                                                    <mo>−</mo>
+                                                    <mover accent="true">
+                                                        <mi>y</mi>
+                                                        <mo>¯</mo>
+                                                    </mover>
+                                                    <mo>)</mo>
+                                                </mrow>
+                                                <mn>2</mn>
+                                            </msup>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption"><strong>ȳ</strong> este media valorilor reale; numitorul cuantifică
+                            variația acestora în raport cu media.</p></div>
+                    <p class="ds-explainer">Luăm valorile reale <strong>[2, 4, 6]</strong>. Media lor este
+                        <strong>4</strong>. Modelul de referință prezice mereu această medie: <strong>[4, 4, 4]</strong>.
+                    </p>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Suma pătratelor față de medie</div>
+                        <math aria-label="SST egal 4 plus 0 plus 4 egal 8" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>SST</mi>
+                                <mo>=</mo>
+                                <msup>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>2</mn>
+                                        <mo>−</mo>
+                                        <mn>4</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <msup>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>4</mn>
+                                        <mo>−</mo>
+                                        <mn>4</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <msup>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>6</mn>
+                                        <mo>−</mo>
+                                        <mn>4</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>=</mo>
+                                <mn>8</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-compare-grid">
+                        <div><b>Predicții perfecte</b>
+                            <div class="ds-numeric">SSE = 0</div>
+                            <small>R² = 1</small></div>
+                        <div><b>Prezicem media</b>
+                            <div class="ds-numeric">SSE = 8</div>
+                            <small>R² = 1 − 8/8 = 0</small></div>
+                        <div><b>Prezicem mereu 10</b>
+                            <div class="ds-numeric">SSE = 116</div>
+                            <small>R² = 1 − 116/8 = −13,5</small></div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Atenție</strong>
+                        <p>R² nu este un procent de predicții corecte. Poate fi negativ și nu este, în general, limitat
+                            inferior de 0. Dacă toate valorile reale sunt identice, numitorul formulei este 0 și se
+                            aplică o convenție explicită în bibliotecă.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span
+                            class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span
+                            class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span
+                            class="p">[</span><span class="mi">2</span><span class="p">,</span> <span
+                            class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span
+                            class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span
+                            class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span
+                            class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span
+                            class="p">[</span><span class="mi">4</span><span class="p">,</span> <span
+                            class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span
+                            class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2_score</span><span class="p">([</span><span
+                            class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span
+                            class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span
+                            class="p">[</span><span class="mi">10</span><span class="p">,</span> <span
+                            class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span
+                            class="p">]))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-07">
+            <div class="py-topic-head"><span class="py-topic-index">07</span>
+                <h2>Accuracy în clasificare</h2></div>
+            <div class="ds-topic-body">Pentru zece imagini clasificate, dacă opt etichete au fost prezise corect,
+                accuracy = 0,8. Totuși, dacă 95% dintre imagini sunt dintr-o singură clasă, un model care prezice mereu
+                acea clasă obține 95% accuracy fără să identifice deloc cealaltă clasă.<p>De aceea trebuie analizată
+                    distribuția claselor și, la nevoie, alte metrici precum recall sau balanced accuracy.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Formula accuracy pentru clasificare binară</div>
+                        <math aria-label="Accuracy egal TP plus TN împărțit la TP plus TN plus FP plus FN"
+                              display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>Accuracy</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mi>TP</mi>
+                                        <mo>+</mo>
+                                        <mi>TN</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>TP</mi>
+                                        <mo>+</mo>
+                                        <mi>TN</mi>
+                                        <mo>+</mo>
+                                        <mi>FP</mi>
+                                        <mo>+</mo>
+                                        <mi>FN</mi>
+                                    </mrow>
+                                </mfrac>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption"><strong>TP</strong> și <strong>TN</strong> sunt predicții corecte;
+                            <strong>FP</strong> și <strong>FN</strong> sunt greșeli.</p></div>
+                    <div aria-label="6 predicții, 5 corecte și una greșită" class="ds-visual-classification" role="img">
+                        <div class="ds-class-cell good">0 = 0<br/><small>corect</small></div>
+                        <div class="ds-class-cell good">0 = 0<br/><small>corect</small></div>
+                        <div class="ds-class-cell good">0 = 0<br/><small>corect</small></div>
+                        <div class="ds-class-cell good">0 = 0<br/><small>corect</small></div>
+                        <div class="ds-class-cell good">0 = 0<br/><small>corect</small></div>
+                        <div class="ds-class-cell bad">1 ≠ 0<br/><small>greșit</small></div>
+                    </div>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Calcul din exemplul de cod</div>
+                        <math aria-label="Accuracy egal cinci supra șase egal 83,33 la sută" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>Accuracy</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>5</mn>
+                                    <mn>6</mn>
+                                </mfrac>
+                                <mo>≈</mo>
+                                <mn>0,8333</mn>
+                                <mo>=</mo>
+                                <mn>83,33%</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-learning-point"><strong>De ce poate induce în eroare?</strong>
+                        <p>Există cinci exemple din clasa 0 și un singur exemplu din clasa 1. Modelul prezice mereu 0:
+                            obține <strong>83,33% accuracy</strong>, dar detectează <strong>0% dintre cazurile
+                                pozitive</strong>.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="n">y_true</span> <span class="o">=</span> <span
+                        class="p">[</span><span class="mi">0</span><span class="p">,</span> <span
+                        class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                        class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span
+                        class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">]</span>
+<span class="n">corecte</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span
+                            class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span
+                            class="k">for</span> <span class="n">a</span><span class="p">,</span> <span
+                            class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span
+                            class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span
+                            class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy = </span><span
+                            class="si">{</span><span class="n">corecte</span><span class="w"> </span><span
+                            class="o">/</span><span class="w"> </span><span class="nb">len</span><span
+                            class="p">(</span><span class="n">y_true</span><span class="p">)</span><span
+                            class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span
+                            class="s2">"</span><span class="p">)</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-08">
+            <div class="py-topic-head"><span class="py-topic-index">08</span>
+                <h2>Precision, recall și F1</h2></div>
+            <div class="ds-topic-body">Definim clasa de interes drept „pozitivă”. <strong>TP</strong>: pozitive corecte;
+                <strong>FP</strong>: false alarme; <strong>FN</strong>: pozitive ratate; <strong>TN</strong>: negative
+                corecte.Precision răspunde la „dintre alertele generate, câte sunt corecte?”, iar recall la „din toate
+                cazurile pozitive reale, câte am descoperit?”. F1 este media armonică, folosită când dorim un compromis.
+                La numitor zero, trebuie stabilită o convenție software.<p>Exemplu: într-o problemă de detectare a
+                    mesajelor spam, multe alarme false pot fi costisitoare; într-o problemă de detectare a defecțiunilor
+                    grave, ratarea cazurilor poate fi mai periculoasă.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-section-kicker">Matricea de confuzie · exemplu din cod</div>
+                    <div class="ds-confusion-wrap">
+                        <table class="ds-confusion">
+                            <caption>Clase reale pe rânduri · clase prezise pe coloane</caption>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Prezicere: pozitiv (1)</th>
+                                <th>Prezicere: negativ (0)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>Real: pozitiv (1)</th>
+                                <td class="cm-tp"><strong>TP = 2</strong><small>detectate corect</small></td>
+                                <td class="cm-fn"><strong>FN = 2</strong><small>pozitive ratate</small></td>
+                            </tr>
+                            <tr>
+                                <th>Real: negativ (0)</th>
+                                <td class="cm-fp"><strong>FP = 1</strong><small>alarmă falsă</small></td>
+                                <td class="cm-tn"><strong>TN = 1</strong><small>negative corecte</small></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Precision · precizia alarmei</div>
+                            <math aria-label="Precision egal TP supra TP plus FP" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Precision</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>TP</mi>
+                                        <mrow>
+                                            <mi>TP</mi>
+                                            <mo>+</mo>
+                                            <mi>FP</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Recall · acoperirea pozitivelor</div>
+                            <math aria-label="Recall egal TP supra TP plus FN" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Recall</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>TP</mi>
+                                        <mrow>
+                                            <mi>TP</mi>
+                                            <mo>+</mo>
+                                            <mi>FN</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">F1 · media armonică</div>
+                            <math aria-label="F1 egal doi ori precision ori recall supra precision plus recall"
+                                  display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>F1</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>⋅</mo>
+                                            <mi>Precision</mi>
+                                            <mo>⋅</mo>
+                                            <mi>Recall</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>Precision</mi>
+                                            <mo>+</mo>
+                                            <mi>Recall</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Calcul precision</div>
+                            <math aria-label="Precision egal doi supra trei aproximativ 0,667" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>P</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>2</mn>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>2</mn>
+                                        <mn>3</mn>
+                                    </mfrac>
+                                    <mo>≈</mo>
+                                    <mn>0,667</mn>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Calcul recall</div>
+                            <math aria-label="Recall egal doi supra patru egal 0,5" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>R</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>2</mn>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>+</mo>
+                                            <mn>2</mn>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mn>0,5</mn>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Calcul F1</div>
+                            <math aria-label="F1 egal 4 supra 7 aproximativ 0,571" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>F1</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>⋅</mo>
+                                            <mn>2</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>4</mn>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                            <mo>+</mo>
+                                            <mn>2</mn>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>4</mn>
+                                        <mn>7</mn>
+                                    </mfrac>
+                                    <mo>≈</mo>
+                                    <mn>0,571</mn>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Interpretare</strong>
+                        <p><strong>Precision = 2/3</strong>: dintre cele trei exemple semnalate ca pozitive, două chiar
+                            sunt pozitive. <strong>Recall = 2/4</strong>: dintre cele patru exemple realmente pozitive,
+                            numai două au fost detectate.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">precision_score</span><span
+                        class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span
+                            class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span
+                            class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span
+                            class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span
+                            class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span
+                            class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span
+                            class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span
+                            class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-09">
+            <div class="py-topic-head"><span class="py-topic-index">09</span>
+                <h2>Probabilități: log-loss, ROC-AUC și PR-AUC</h2></div>
+            <div class="ds-topic-body">Clasificatoarele pot produce probabilități, de exemplu 0,91 pentru clasa
+                pozitivă. Două modele pot prezice aceleași clase, dar cu încredere diferită. <strong>Log-loss</strong>
+                penalizează probabilitățile atribuite insuficient clasei adevărate, în special când modelul este foarte
+                sigur și greșește.<p>ROC-AUC măsoară calitatea ordonării exemplelor pozitive față de negative de-a
+                    lungul pragurilor; PR-AUC / Average Precision evidențiază relația precision–recall și poate fi
+                    deosebit de informativă când clasa pozitivă este rară. Nu confunda ROC-AUC cu accuracy și nici
+                    PR-AUC cu F1 calculat la un singur prag.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Log-loss pentru clasificare binară</div>
+                        <math aria-label="Minus unu pe n ori suma de la i egal unu la n din y indice i ln p indice i plus unu minus y indice i înmulțit cu ln unu minus p indice i"
+                              display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>Log-loss</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mo>−</mo>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mi>n</mi>
+                                    </mfrac>
+                                    <mrow>
+                                        <munderover>
+                                            <mo>∑</mo>
+                                            <mrow>
+                                                <mi>i</mi>
+                                                <mo>=</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                            <mi>n</mi>
+                                        </munderover>
+                                        <mrow>
+                                            <mo>[</mo>
+                                            <msub>
+                                                <mi>y</mi>
+                                                <mi>i</mi>
+                                            </msub>
+                                            <mo>ln</mo>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <msub>
+                                                    <mi>p</mi>
+                                                    <mi>i</mi>
+                                                </msub>
+                                                <mo>)</mo>
+                                            </mrow>
+                                            <mo>+</mo>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <mn>1</mn>
+                                                <mo>−</mo>
+                                                <msub>
+                                                    <mi>y</mi>
+                                                    <mi>i</mi>
+                                                </msub>
+                                                <mo>)</mo>
+                                            </mrow>
+                                            <mo>ln</mo>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <mn>1</mn>
+                                                <mo>−</mo>
+                                                <msub>
+                                                    <mi>p</mi>
+                                                    <mi>i</mi>
+                                                </msub>
+                                                <mo>)</mo>
+                                            </mrow>
+                                            <mo>]</mo>
+                                        </mrow>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption"><strong>pᵢ</strong> reprezintă probabilitatea atribuită clasei
+                            pozitive, iar <strong>yᵢ ∈ {0, 1}</strong> este eticheta reală. Logaritmul este natural.</p>
+                    </div>
+                    <div class="ds-table-scroll">
+                        <table class="ds-math-table">
+                            <thead>
+                            <tr>
+                                <th>Etichetă reală</th>
+                                <th>Probabilitate p</th>
+                                <th>Penalizare −ln(prob. clasei adevărate)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>0,90</td>
+                                <td>−ln(0,90) ≈ 0,105</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0,20</td>
+                                <td>−ln(0,80) ≈ 0,223</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Log-loss mediu al celor două exemple</div>
+                        <math aria-label="Log loss egal 0,105 plus 0,223 supra 2 egal circa 0,164" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>L</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>0,105</mn>
+                                        <mo>+</mo>
+                                        <mn>0,223</mn>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mo>≈</mo>
+                                <mn>0,164</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Rata pozitivelor detectate (axa ROC verticală)</div>
+                            <math aria-label="TPR egal TP supra TP plus FN" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>TPR</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>TP</mi>
+                                        <mrow>
+                                            <mi>TP</mi>
+                                            <mo>+</mo>
+                                            <mi>FN</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Rata falselor alarme (axa ROC orizontală)</div>
+                            <math aria-label="FPR egal FP supra FP plus TN" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>FPR</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>FP</mi>
+                                        <mrow>
+                                            <mi>FP</mi>
+                                            <mo>+</mo>
+                                            <mi>TN</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="ds-learning-point"><strong>ROC-AUC și Average Precision</strong>
+                        <p><strong>ROC-AUC</strong> rezumă cât de bine ordonează modelul exemplele pozitive înaintea
+                            celor negative, folosind toate pragurile. <strong>Average Precision (AP)</strong> rezumă
+                            curba precision–recall printr-o sumă ponderată a valorilor precision. AP nu este întotdeauna
+                            identică cu aria trapezoidală PR-AUC; verifică implementarea cerută.</p></div>
+                    <div class="ds-learning-point"><strong>Exemplul din cod</strong>
+                        <p>Pentru scorurile date, toate exemplele pozitive au probabilități mai mari decât toate
+                            negativele: <strong>ROC-AUC = 1</strong> și <strong>AP = 1</strong>, deși <strong>log-loss ≈
+                                0,3328</strong> nu este zero. Cele trei metrici măsoară aspecte diferite.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span
+                        class="p">,</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">average_precision_score</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span
+                            class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.12</span><span
+                            class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.31</span><span
+                            class="p">,</span> <span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.45</span><span
+                            class="p">,</span> <span class="mf">0.66</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ROC AUC:'</span><span class="p">,</span> <span
+                            class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span
+                            class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'AP:'</span><span class="p">,</span> <span
+                            class="n">average_precision_score</span><span class="p">(</span><span
+                            class="n">y_true</span><span class="p">,</span> <span class="n">p</span><span
+                            class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Log-loss:'</span><span class="p">,</span> <span
+                            class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span
+                            class="p">,</span> <span class="n">p</span><span class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-10">
+            <div class="py-topic-head"><span class="py-topic-index">10</span>
+                <h2>Media micro, macro și weighted</h2></div>
+            <div class="ds-topic-body">În clasificarea cu trei sau mai multe clase putem calcula F1 pentru fiecare
+                clasă. <strong>Macro</strong> tratează clasele egal, indiferent câte exemple au;
+                <strong>weighted</strong> face media ponderată cu numărul de observații per clasă;
+                <strong>micro</strong> agregă numărul total de TP/FP/FN înainte de calcul. Dacă avem multe exemple
+                „pisică” și puține „câine”, macro-F1 poate dezvălui performanța slabă pe clasa rară care ar fi mascată
+                de accuracy. Pentru problemele multilabel, interpretarea este diferită și trebuie verificată explicit.
+                <div class="ds-math-explanations">
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Macro-F1: fiecare clasă are aceeași pondere</div>
+                            <math aria-label="Macro F1 egal unu supra K ori suma F1 pentru fiecare clasă"
+                                  display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>F1 macro</mi>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <mfrac>
+                                            <mn>1</mn>
+                                            <mi>K</mi>
+                                        </mfrac>
+                                        <mrow>
+                                            <munderover>
+                                                <mo>∑</mo>
+                                                <mrow>
+                                                    <mi>k</mi>
+                                                    <mo>=</mo>
+                                                    <mn>1</mn>
+                                                </mrow>
+                                                <mi>K</mi>
+                                            </munderover>
+                                            <msub>
+                                                <mi>F1</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Weighted-F1: pondere după suport</div>
+                            <math aria-label="Weighted F1 egal suma pentru fiecare clasă n indice k supra n înmulțit cu F1 indice k"
+                                  display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>F1 weighted</mi>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <munderover>
+                                            <mo>∑</mo>
+                                            <mrow>
+                                                <mi>k</mi>
+                                                <mo>=</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                            <mi>K</mi>
+                                        </munderover>
+                                        <mfrac>
+                                            <msub>
+                                                <mi>n</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                            <mi>n</mi>
+                                        </mfrac>
+                                        <msub>
+                                            <mi>F1</mi>
+                                            <mi>k</mi>
+                                        </msub>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="ds-table-scroll">
+                        <table class="ds-math-table">
+                            <thead>
+                            <tr>
+                                <th>Clasă</th>
+                                <th>Număr exemple (suport)</th>
+                                <th>F1 pe clasă</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Clasa A</td>
+                                <td>90</td>
+                                <td>0,95</td>
+                            </tr>
+                            <tr>
+                                <td>Clasa B</td>
+                                <td>10</td>
+                                <td>0,40</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ds-math-row">
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Exemplu macro-F1</div>
+                            <math aria-label="Macro egal media dintre 0,95 și 0,40, adică 0,675" display="block"
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Macro</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>0,95</mn>
+                                            <mo>+</mo>
+                                            <mn>0,40</mn>
+                                        </mrow>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mn>0,675</mn>
+                                </mrow>
+                            </math>
+                        </div>
+                        <div class="ds-math-card">
+                            <div class="ds-math-label">Exemplu weighted-F1</div>
+                            <math aria-label="Weighted egal 90 ori 0,95 plus 10 ori 0,40 împărțit la 100 egal 0,895"
+                                  display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Weighted</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>90</mn>
+                                            <mo>⋅</mo>
+                                            <mn>0,95</mn>
+                                            <mo>+</mo>
+                                            <mn>10</mn>
+                                            <mo>⋅</mo>
+                                            <mn>0,40</mn>
+                                        </mrow>
+                                        <mn>100</mn>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mn>0,895</mn>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="ds-learning-point"><strong>Cum funcționează micro?</strong>
+                        <p>Înainte de a calcula precision și recall, însumăm TP, FP și FN pentru toate clasele. În
+                            clasificarea multiclasă obișnuită, cu câte o singură etichetă reală și prezisă pe exemplu,
+                            <strong>micro-F1 coincide cu accuracy</strong>. Macro-F1 evidențiază mai bine clasele rare.
+                        </p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span
+                            class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span
+                            class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span
+                            class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span
+                            class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span
+                            class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span
+                            class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span
+                            class="mi">0</span><span class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="py-topic" id="ds-metrici-11">
+            <div class="py-topic-head"><span class="py-topic-index">11</span>
+                <h2>Metricile din scikit-learn și scorer-ul competiției</h2></div>
+            <div class="ds-topic-body">Metoda <code>model.score(X, y)</code> <strong>nu reprezintă aceeași metrică
+                pentru toate modelele</strong>: deseori este accuracy pentru clasificatori și R² pentru regresori. Când
+                competiția cere MAE, macro-F1 sau log-loss, calculează explicit metrica solicitată.<p>La
+                    cross-validation, <code>scoring="neg_mean_absolute_error"</code> returnează valori negative deoarece
+                    API-ul de scor maximizează valoarea. O valoare -2 este mai bună decât -5: MAE corespunzător este 2,
+                    respectiv 5.</p>
+                <div class="ds-math-explanations">
+                    <div class="ds-table-scroll">
+                        <table class="ds-math-table">
+                            <thead>
+                            <tr>
+                                <th>Ce evaluăm?</th>
+                                <th>Funcția scikit-learn</th>
+                                <th>Direcția bună</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Regresie · MAE</td>
+                                <td><code>mean_absolute_error(y, pred)</code></td>
+                                <td>mai mic ↓</td>
+                            </tr>
+                            <tr>
+                                <td>Regresie · RMSE</td>
+                                <td><code>root_mean_squared_error(y, pred)</code></td>
+                                <td>mai mic ↓</td>
+                            </tr>
+                            <tr>
+                                <td>Regresie · R²</td>
+                                <td><code>r2_score(y, pred)</code></td>
+                                <td>mai mare ↑</td>
+                            </tr>
+                            <tr>
+                                <td>Clasificare · F1 macro</td>
+                                <td><code>f1_score(y, pred, average="macro")</code></td>
+                                <td>mai mare ↑</td>
+                            </tr>
+                            <tr>
+                                <td>Clasificare · log-loss</td>
+                                <td><code>log_loss(y, probabilitati)</code></td>
+                                <td>mai mic ↓</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ds-math-card">
+                        <div class="ds-math-label">Scorer pentru cross-validation</div>
+                        <math aria-label="Score egal minus MAE pentru negative mean absolute error" display="block"
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>score</mi>
+                                <mo>=</mo>
+                                <mo>−</mo>
+                                <mi>MAE</mi>
+                            </mrow>
+                        </math>
+                        <p class="ds-math-caption">În cross-validation, <code>scoring="neg_mean_absolute_error"</code>
+                            întoarce un scor care trebuie <strong>maximizat</strong>; o eroare mai mică produce un scor
+                            mai mare (mai aproape de zero).</p></div>
+                    <div class="ds-compare-grid">
+                        <div><b>Model A</b>
+                            <div class="ds-numeric">MAE = 2</div>
+                            <small>scoring = −2 (mai bun)</small></div>
+                        <div><b>Model B</b>
+                            <div class="ds-numeric">MAE = 5</div>
+                            <small>scoring = −5 (mai slab)</small></div>
+                    </div>
+                    <div class="ds-learning-point"><strong>În competiții</strong>
+                        <p>Respectă exact metrica oficială, tipul ieșirii cerute (clasă sau probabilitate) și modul în
+                            care sunt agregate scorurile. Nu compara rezultatele unor modele folosind subseturi ori
+                            protocoale diferite.</p></div>
+                </div>
+            </div>
+            <div class="py-code-card">
+                <div class="py-code-top"><span>Python 3 · exemplu explicat</span>
+                    <button class="py-copy" data-copy-code="" type="button"> Copiază codul</button>
+                </div>
+                <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span
+                        class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.dummy</span><span class="w"> </span><span
+                            class="kn">import</span> <span class="n">DummyRegressor</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DummyRegressor</span><span class="p">(</span><span
+                            class="n">strategy</span><span class="o">=</span><span class="s1">'mean'</span><span
+                            class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span
+                            class="p">],</span> <span class="p">[</span><span class="mi">2</span><span
+                            class="p">],</span> <span class="p">[</span><span class="mi">3</span><span
+                            class="p">],</span> <span class="p">[</span><span class="mi">4</span><span
+                            class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span
+                            class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span
+                            class="mf">4.</span><span class="p">,</span> <span class="mf">9.</span><span
+                            class="p">]</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span
+                            class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span
+                            class="n">predict</span><span class="p">(</span><span class="n">X</span><span
+                            class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'R²:'</span><span class="p">,</span> <span
+                            class="n">model</span><span class="o">.</span><span class="n">score</span><span
+                            class="p">(</span><span class="n">X</span><span class="p">,</span> <span
+                            class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'MAE:'</span><span class="p">,</span> <span
+                            class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span
+                            class="p">,</span> <span class="n">pred</span><span class="p">))</span>
+</pre>
+                </div>
+            </div>
+        </section>
+        <section class="ds-final-tips"><h2>De reținut pentru ONIA</h2>
+            <p>Compară metodele în condiții corecte: același protocol de evaluare, date de validare separate și o
+                metrică relevantă pentru problema rezolvată. Testul final nu trebuie folosit la alegerea
+                hiperparametrilor.</p>
+            <p>Exemplele din această lecție sunt didactice; la competiție verifică întotdeauna enunțul, formatul datelor
+                și metrica oficială.</p>
+            <p class="ds-sources">Pentru detalii de implementare: <a
+                    href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener" target="_blank">Model
+                evaluation — scikit-learn</a> și <a href="https://scikit-learn.org/stable/common_pitfalls.html"
+                                                    rel="noopener" target="_blank">Common pitfalls</a>.</p></section>
+    </div>
+</main>
+<script>document.addEventListener('click', function (e) {
+    const b = e.target.closest('[data-copy-code]');
+    if (!b) return;
+    const pre = b.closest('.py-code-card').querySelector('pre');
+    if (!pre) return;
+    navigator.clipboard?.writeText(pre.textContent || '');
+    b.textContent = 'Copiat';
+    setTimeout(() => b.textContent = 'Copiază codul', 1200);
+});</script>
+</body>
+</html>

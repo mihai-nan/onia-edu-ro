@@ -1,11 +1,537 @@
-<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0a1d31"><meta name="description" content="Seria de trei cursuri Învățare Automată, anul IV, Facultatea de Automatică și Calculatoare, 2026–2027: optimizare, rețele convoluționale și aplicații Computer Vision."><title>Învățare Automată · Seria cursurilor · AC 2026–2027</title>
-<style>
-:root{--deep:#0a1d31;--blue:#12324b;--accent:#4f95ff;--ink:#142b41;--muted:#667d90;--line:#deebf1}*{box-sizing:border-box}html{scroll-behavior:smooth}body{font:16px/1.7 Inter,"Segoe UI",Arial,sans-serif;background:#f6f9fc;color:var(--ink);margin:0;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}.top{background:linear-gradient(123deg,#0b1a2e 0%,#0d2b42 67%,#163f7b 100%);color:#edf2f9;position:relative;overflow:hidden}.top:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 84% 19%,rgba(75,218,199,.15),transparent 36%),linear-gradient(90deg,transparent 0%,rgba(99,210,222,.02) 100%);pointer-events:none}.top .inner{max-width:1250px;margin:auto;padding:26px 28px 85px;position:relative}.brand{display:flex;align-items:center;gap:13px;padding-bottom:55px}.sigil{width:44px;height:44px;border:1px solid rgba(105,238,219,.55);border-radius:13px;color:#81ace4;background:rgba(67,203,195,.11);display:grid;place-items:center;font:bold 24px Georgia,serif}.brand strong{display:block;font-size:12px;letter-spacing:.12em}.brand small{font-size:11px;color:#a9c0d1}.year{font-weight:780;font-size:12px;letter-spacing:.17em;color:#729fda}.hero{max-width:900px}.hero h1{font-size:clamp(46px,6vw,86px);line-height:1.06;letter-spacing:-.064em;margin:18px 0 25px;font-weight:820}.hero h1 em{font-style:normal;color:#8ab9ff}.hero p{font-size:clamp(16px,1.7vw,20px);line-height:1.8;color:#bdd0e0;max-width:780px}.summary{display:flex;gap:30px;flex-wrap:wrap;margin-top:39px}.summary span{display:flex;gap:9px;align-items:center;border-left:2px solid #629dff;padding-left:15px;font-size:13px;font-weight:650;color:#c7d4e4}.summary b{color:#f3f7fd;font-size:23px}.area{max-width:1250px;margin:0 auto;padding:48px 28px 90px;position:relative}.heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:0 0 22px}.heading .eyebrow{letter-spacing:.14em;font-size:11px;color:#1d5fb6;font-weight:850}.heading h2{font-size:30px;letter-spacing:-.04em;margin:5px 0 0}.heading p{color:#6d8194;font-size:14px;margin:0}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}.course{display:flex;flex-direction:column;background:white;border:1px solid #dce7ee;border-radius:24px;overflow:hidden;box-shadow:0 19px 56px rgba(12,45,76,.06);transition:transform .2s,box-shadow .2s}.course:hover{transform:translateY(-4px);box-shadow:0 25px 70px rgba(12,45,76,.11)}.visual{height:205px;position:relative;display:grid;place-items:center;overflow:hidden}.visual svg{width:88%;max-height:165px}.visual.one{background:linear-gradient(145deg,#0a263b,#1a3a64)}.visual.two{background:linear-gradient(145deg,#e3f5ff,#bdddec)}.visual.three{background:linear-gradient(140deg,#edf2f7,#e3e9f0)}.num{position:absolute;left:20px;top:17px;font:800 11px ui-monospace,monospace;letter-spacing:.08em;padding:7px 10px;border-radius:9px;background:#ffffff22;color:#deebfb}.two .num,.three .num{color:#295a9a;background:#ffffffa9}.course-body{padding:24px 25px 27px;display:flex;flex-direction:column;flex:1}.status{display:inline-flex;align-self:start;font-weight:800;font-size:11px;letter-spacing:.055em;padding:6px 10px;border-radius:999px;color:#1c5fb8;background:#edf4ff}.status.soon{color:#795f31;background:#f8eedc}.course h3{font-size:22px;letter-spacing:-.035em;line-height:1.25;margin:15px 0 11px}.course p{font-size:14px;line-height:1.7;color:#63798e;margin:0}.course .topics{font-size:12px;color:#70879a;padding:14px 0 0;border-top:1px solid #eaf0f4;margin-top:18px;line-height:1.7}.course .action{margin-top:auto;padding-top:22px;display:flex;align-items:center;justify-content:space-between;color:#1c5fb8;font-size:14px;font-weight:800}.course .action span:last-child{font-size:20px}.course.three{background:#fbfcfd}.course.three .action{color:#708698}.more{margin-top:36px;display:flex;gap:26px;justify-content:space-between;align-items:center;border:1px solid #dce8ee;background:#fff;border-radius:21px;padding:25px 30px}.more strong{font-size:17px}.more p{font-size:14px;margin:6px 0 0;color:#718296}.more a{border:1px solid #c8d2df;border-radius:10px;padding:10px 15px;color:#1c5fb8;font-size:13px;font-weight:800;white-space:nowrap}.foot{max-width:1250px;margin:0 auto;padding:0 28px 50px;color:#8599ac;font-size:12px}.foot:before{content:"";display:block;border-top:1px solid #e0e7ef;margin-bottom:20px}@media(max-width:1000px){.cards{grid-template-columns:1fr 1fr}.course.three{grid-column:1 / -1}.course.three .visual{height:165px}.hero h1{font-size:clamp(44px,6vw,70px)}}@media(max-width:650px){.top .inner{padding:22px 20px 65px}.brand{padding-bottom:38px}.area{padding:42px 18px 65px}.cards{grid-template-columns:1fr}.course.three{grid-column:auto}.heading{display:block}.heading p{margin-top:7px}.visual{height:185px}.more{display:block;padding:23px}.more a{display:inline-flex;margin-top:18px}.summary{gap:18px}.foot{padding:0 20px 32px}}
-</style></head><body>
-<header class="top"><div class="inner"><div class="brand"><span class="sigil">∑</span><div><strong>FACULTATEA DE AUTOMATICĂ ȘI CALCULATOARE</strong><small>Învățare Automată · Materiale interactive asociate cursului · 2026–2027</small></div></div><div class="hero"><div class="year">ANUL IV · SERIA DE CURSURI</div><h1>Învățare Automată<br><em>De la fundamente la viziune</em></h1><p>Un parcurs în trei module, cu explicații matematice, demonstrații vizuale, simulatoare interactive și exemple Python/PyTorch, construite într-o identitate vizuală unitară.</p></div><div class="summary"><span><b>03</b> cursuri în serie</span><span><b>03</b> materiale disponibile</span></div></div></header>
-<main class="area"><div class="heading"><div><div class="eyebrow">ALEGE CURSUL</div><h2>Materialele cursului</h2></div><p>Selectează unul dintre cele trei materiale interactive asociate cursului.</p></div><div class="cards">
-<a class="course" href="curs_01_fundamente_optimizare/index.html"><div class="visual one"><div class="num">CURS 01</div><svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 136C86 136 69 49 137 55S207 146 262 103 325 35 363 34" stroke="#5b8ed1" stroke-width="5" stroke-linecap="round"/><path d="M24 135L360 135M30 142V25" stroke="#c2d2e7" stroke-opacity=".3" stroke-width="2"/><circle cx="138" cy="55" r="8" fill="#f2be78"/><circle cx="260" cy="105" r="8" fill="#f2be78"/><circle cx="338" cy="43" r="6" fill="#6b9fe3"/><path d="M52 46L320 46M52 92L320 92" stroke="#89a8d0" stroke-opacity=".16" stroke-width="1"/></svg></div><div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span><h3>Activări, funcții de pierdere și optimizare</h3><p>Gradienți, backpropagation, SGD/Momentum/Nesterov/Adam și comparații de antrenare pe o rețea de regresie.</p><div class="topics">12 secțiuni · simulări numerice · simulator de regresie · cod PyTorch</div><div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div></div></a>
-<a class="course" href="curs_02_retele_convolutionale/index.html"><div class="visual two"><div class="num">CURS 02</div><svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg"><g fill="#2b71ae"><rect x="52" y="27" width="115" height="115" rx="13" fill="#fff" stroke="#3d84ba" stroke-width="2"/><path d="M90 27V142M128 27V142M52 65H167M52 103H167" stroke="#527fb9"/><rect x="90" y="65" width="38" height="38" fill="#4a7ec1" opacity=".8"/></g><path d="M180 85H221M207 73L221 85L207 97" stroke="#285998" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="234" y="48" width="84" height="84" rx="12" fill="#fff" stroke="#3d84ba" stroke-width="2"/><g fill="#2c7fa9"><rect x="249" y="63" width="17" height="17" rx="3"/><rect x="286" y="100" width="17" height="17" rx="3"/></g><g fill="#4f80c1"><rect x="286" y="63" width="17" height="17" rx="3"/><rect x="249" y="100" width="17" height="17" rx="3"/></g></svg></div><div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span><h3>Rețele neuronale convoluționale</h3><p>Kerneluri și filtre, convoluție, canale, pooling, câmp receptiv, arhitecturi CNN și aplicații.</p><div class="topics">15 module · simulator de convoluție · 11 exemple PyTorch · autoevaluare</div><div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div></div></a>
-<a class="course three" href="curs_03_aplicatii_computer_vision/index.html"><div class="visual three"><div class="num">CURS 03</div><svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="74" y="23" width="230" height="124" rx="16" stroke="#7d9eca" stroke-width="2"/><rect x="135" y="46" width="111" height="78" rx="9" stroke="#537fb9" stroke-width="3" stroke-dasharray="8 5"/><circle cx="191" cy="85" r="20" stroke="#3c659a" stroke-width="3"/><circle cx="191" cy="85" r="6" fill="#4774af"/><path d="M191 42V30M191 139V127M132 86H117M267 86H252" stroke="#4672ab" stroke-width="3" stroke-linecap="round"/></svg></div><div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span><h3>Aplicații de Computer Vision</h3><p>Clasificare, detecție, segmentare semantică, instance și panoptică, cu suport vizual extins, arhitecturi moderne și exemple PyTorch.</p><div class="topics">12 capitole · galerii vizuale · arhitecturi YOLO/DETR/Mask2Former · autoevaluare</div><div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div></div></a>
-</div><section class="more"><div><strong>Despre serie</strong><p>Fiecare curs include explicații teoretice, reprezentări vizuale, simulări interactive și exemple Python/PyTorch.</p></div></section></main><footer class="foot">Învățare Automată · Facultatea de Automatică și Calculatoare · 2026–2027</footer>
-</body></html>
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a1d31">
+    <meta name="description"
+          content="Seria de trei cursuri Învățare Automată, anul IV, Facultatea de Automatică și Calculatoare, 2026–2027: optimizare, rețele convoluționale și aplicații Computer Vision.">
+    <title>Învățare Automată · Seria cursurilor · AC 2026–2027</title>
+    <style>
+        :root {
+            --deep: #0a1d31;
+            --blue: #12324b;
+            --accent: #4f95ff;
+            --ink: #142b41;
+            --muted: #667d90;
+            --line: #deebf1
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font: 16px/1.7 Inter, "Segoe UI", Arial, sans-serif;
+            background: #f6f9fc;
+            color: var(--ink);
+            margin: 0;
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .top {
+            background: linear-gradient(123deg, #0b1a2e 0%, #0d2b42 67%, #163f7b 100%);
+            color: #edf2f9;
+            position: relative;
+            overflow: hidden
+        }
+
+        .top:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 84% 19%, rgba(75, 218, 199, .15), transparent 36%), linear-gradient(90deg, transparent 0%, rgba(99, 210, 222, .02) 100%);
+            pointer-events: none
+        }
+
+        .top .inner {
+            max-width: 1250px;
+            margin: auto;
+            padding: 26px 28px 85px;
+            position: relative
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding-bottom: 55px
+        }
+
+        .sigil {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(105, 238, 219, .55);
+            border-radius: 13px;
+            color: #81ace4;
+            background: rgba(67, 203, 195, .11);
+            display: grid;
+            place-items: center;
+            font: bold 24px Georgia, serif
+        }
+
+        .brand strong {
+            display: block;
+            font-size: 12px;
+            letter-spacing: .12em
+        }
+
+        .brand small {
+            font-size: 11px;
+            color: #a9c0d1
+        }
+
+        .year {
+            font-weight: 780;
+            font-size: 12px;
+            letter-spacing: .17em;
+            color: #729fda
+        }
+
+        .hero {
+            max-width: 900px
+        }
+
+        .hero h1 {
+            font-size: clamp(46px, 6vw, 86px);
+            line-height: 1.06;
+            letter-spacing: -.064em;
+            margin: 18px 0 25px;
+            font-weight: 820
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: #8ab9ff
+        }
+
+        .hero p {
+            font-size: clamp(16px, 1.7vw, 20px);
+            line-height: 1.8;
+            color: #bdd0e0;
+            max-width: 780px
+        }
+
+        .summary {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 39px
+        }
+
+        .summary span {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            border-left: 2px solid #629dff;
+            padding-left: 15px;
+            font-size: 13px;
+            font-weight: 650;
+            color: #c7d4e4
+        }
+
+        .summary b {
+            color: #f3f7fd;
+            font-size: 23px
+        }
+
+        .area {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 48px 28px 90px;
+            position: relative
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin: 0 0 22px
+        }
+
+        .heading .eyebrow {
+            letter-spacing: .14em;
+            font-size: 11px;
+            color: #1d5fb6;
+            font-weight: 850
+        }
+
+        .heading h2 {
+            font-size: 30px;
+            letter-spacing: -.04em;
+            margin: 5px 0 0
+        }
+
+        .heading p {
+            color: #6d8194;
+            font-size: 14px;
+            margin: 0
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns:repeat(3, minmax(0, 1fr));
+            gap: 19px
+        }
+
+        .course {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border: 1px solid #dce7ee;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 19px 56px rgba(12, 45, 76, .06);
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .course:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 70px rgba(12, 45, 76, .11)
+        }
+
+        .visual {
+            height: 205px;
+            position: relative;
+            display: grid;
+            place-items: center;
+            overflow: hidden
+        }
+
+        .visual svg {
+            width: 88%;
+            max-height: 165px
+        }
+
+        .visual.one {
+            background: linear-gradient(145deg, #0a263b, #1a3a64)
+        }
+
+        .visual.two {
+            background: linear-gradient(145deg, #e3f5ff, #bdddec)
+        }
+
+        .visual.three {
+            background: linear-gradient(140deg, #edf2f7, #e3e9f0)
+        }
+
+        .num {
+            position: absolute;
+            left: 20px;
+            top: 17px;
+            font: 800 11px ui-monospace, monospace;
+            letter-spacing: .08em;
+            padding: 7px 10px;
+            border-radius: 9px;
+            background: #ffffff22;
+            color: #deebfb
+        }
+
+        .two .num, .three .num {
+            color: #295a9a;
+            background: #ffffffa9
+        }
+
+        .course-body {
+            padding: 24px 25px 27px;
+            display: flex;
+            flex-direction: column;
+            flex: 1
+        }
+
+        .status {
+            display: inline-flex;
+            align-self: start;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: .055em;
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: #1c5fb8;
+            background: #edf4ff
+        }
+
+        .status.soon {
+            color: #795f31;
+            background: #f8eedc
+        }
+
+        .course h3 {
+            font-size: 22px;
+            letter-spacing: -.035em;
+            line-height: 1.25;
+            margin: 15px 0 11px
+        }
+
+        .course p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #63798e;
+            margin: 0
+        }
+
+        .course .topics {
+            font-size: 12px;
+            color: #70879a;
+            padding: 14px 0 0;
+            border-top: 1px solid #eaf0f4;
+            margin-top: 18px;
+            line-height: 1.7
+        }
+
+        .course .action {
+            margin-top: auto;
+            padding-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #1c5fb8;
+            font-size: 14px;
+            font-weight: 800
+        }
+
+        .course .action span:last-child {
+            font-size: 20px
+        }
+
+        .course.three {
+            background: #fbfcfd
+        }
+
+        .course.three .action {
+            color: #708698
+        }
+
+        .more {
+            margin-top: 36px;
+            display: flex;
+            gap: 26px;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #dce8ee;
+            background: #fff;
+            border-radius: 21px;
+            padding: 25px 30px
+        }
+
+        .more strong {
+            font-size: 17px
+        }
+
+        .more p {
+            font-size: 14px;
+            margin: 6px 0 0;
+            color: #718296
+        }
+
+        .more a {
+            border: 1px solid #c8d2df;
+            border-radius: 10px;
+            padding: 10px 15px;
+            color: #1c5fb8;
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap
+        }
+
+        .foot {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 28px 50px;
+            color: #8599ac;
+            font-size: 12px
+        }
+
+        .foot:before {
+            content: "";
+            display: block;
+            border-top: 1px solid #e0e7ef;
+            margin-bottom: 20px
+        }
+
+        @media (max-width: 1000px) {
+            .cards {
+                grid-template-columns:1fr 1fr
+            }
+
+            .course.three {
+                grid-column: 1 / -1
+            }
+
+            .course.three .visual {
+                height: 165px
+            }
+
+            .hero h1 {
+                font-size: clamp(44px, 6vw, 70px)
+            }
+        }
+
+        @media (max-width: 650px) {
+            .top .inner {
+                padding: 22px 20px 65px
+            }
+
+            .brand {
+                padding-bottom: 38px
+            }
+
+            .area {
+                padding: 42px 18px 65px
+            }
+
+            .cards {
+                grid-template-columns:1fr
+            }
+
+            .course.three {
+                grid-column: auto
+            }
+
+            .heading {
+                display: block
+            }
+
+            .heading p {
+                margin-top: 7px
+            }
+
+            .visual {
+                height: 185px
+            }
+
+            .more {
+                display: block;
+                padding: 23px
+            }
+
+            .more a {
+                display: inline-flex;
+                margin-top: 18px
+            }
+
+            .summary {
+                gap: 18px
+            }
+
+            .foot {
+                padding: 0 20px 32px
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="top">
+    <div class="inner">
+        <div class="brand"><span class="sigil">∑</span>
+            <div><strong>FACULTATEA DE AUTOMATICĂ ȘI CALCULATOARE</strong><small>Învățare Automată · Materiale
+                interactive asociate cursului · 2026–2027</small></div>
+        </div>
+        <div class="hero">
+            <div class="year">ANUL IV · SERIA DE CURSURI</div>
+            <h1>Învățare Automată<br><em>De la fundamente la viziune</em></h1>
+            <p>Un parcurs în trei module, cu explicații matematice, demonstrații vizuale, simulatoare interactive și
+                exemple Python/PyTorch, construite într-o identitate vizuală unitară.</p></div>
+        <div class="summary"><span><b>03</b> cursuri în serie</span><span><b>03</b> materiale disponibile</span></div>
+    </div>
+</header>
+<main class="area">
+    <div class="heading">
+        <div>
+            <div class="eyebrow">ALEGE CURSUL</div>
+            <h2>Materialele cursului</h2></div>
+        <p>Selectează unul dintre cele trei materiale interactive asociate cursului.</p></div>
+    <div class="cards">
+        <a class="course" href="curs_01_fundamente_optimizare/index.html">
+            <div class="visual one">
+                <div class="num">CURS 01</div>
+                <svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 136C86 136 69 49 137 55S207 146 262 103 325 35 363 34" stroke="#5b8ed1"
+                          stroke-width="5" stroke-linecap="round"/>
+                    <path d="M24 135L360 135M30 142V25" stroke="#c2d2e7" stroke-opacity=".3" stroke-width="2"/>
+                    <circle cx="138" cy="55" r="8" fill="#f2be78"/>
+                    <circle cx="260" cy="105" r="8" fill="#f2be78"/>
+                    <circle cx="338" cy="43" r="6" fill="#6b9fe3"/>
+                    <path d="M52 46L320 46M52 92L320 92" stroke="#89a8d0" stroke-opacity=".16" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span>
+                <h3>Activări, funcții de pierdere și optimizare</h3>
+                <p>Gradienți, backpropagation, SGD/Momentum/Nesterov/Adam și comparații de antrenare pe o rețea de
+                    regresie.</p>
+                <div class="topics">12 secțiuni · simulări numerice · simulator de regresie · cod PyTorch</div>
+                <div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div>
+            </div>
+        </a>
+        <a class="course" href="curs_02_retele_convolutionale/index.html">
+            <div class="visual two">
+                <div class="num">CURS 02</div>
+                <svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#2b71ae">
+                        <rect x="52" y="27" width="115" height="115" rx="13" fill="#fff" stroke="#3d84ba"
+                              stroke-width="2"/>
+                        <path d="M90 27V142M128 27V142M52 65H167M52 103H167" stroke="#527fb9"/>
+                        <rect x="90" y="65" width="38" height="38" fill="#4a7ec1" opacity=".8"/>
+                    </g>
+                    <path d="M180 85H221M207 73L221 85L207 97" stroke="#285998" stroke-width="4" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                    <rect x="234" y="48" width="84" height="84" rx="12" fill="#fff" stroke="#3d84ba" stroke-width="2"/>
+                    <g fill="#2c7fa9">
+                        <rect x="249" y="63" width="17" height="17" rx="3"/>
+                        <rect x="286" y="100" width="17" height="17" rx="3"/>
+                    </g>
+                    <g fill="#4f80c1">
+                        <rect x="286" y="63" width="17" height="17" rx="3"/>
+                        <rect x="249" y="100" width="17" height="17" rx="3"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span>
+                <h3>Rețele neuronale convoluționale</h3>
+                <p>Kerneluri și filtre, convoluție, canale, pooling, câmp receptiv, arhitecturi CNN și aplicații.</p>
+                <div class="topics">15 module · simulator de convoluție · 11 exemple PyTorch · autoevaluare</div>
+                <div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div>
+            </div>
+        </a>
+        <a class="course three" href="curs_03_aplicatii_computer_vision/index.html">
+            <div class="visual three">
+                <div class="num">CURS 03</div>
+                <svg viewBox="0 0 380 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="74" y="23" width="230" height="124" rx="16" stroke="#7d9eca" stroke-width="2"/>
+                    <rect x="135" y="46" width="111" height="78" rx="9" stroke="#537fb9" stroke-width="3"
+                          stroke-dasharray="8 5"/>
+                    <circle cx="191" cy="85" r="20" stroke="#3c659a" stroke-width="3"/>
+                    <circle cx="191" cy="85" r="6" fill="#4774af"/>
+                    <path d="M191 42V30M191 139V127M132 86H117M267 86H252" stroke="#4672ab" stroke-width="3"
+                          stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="course-body"><span class="status">DISPONIBIL · INTERACTIV</span>
+                <h3>Aplicații de Computer Vision</h3>
+                <p>Clasificare, detecție, segmentare semantică, instance și panoptică, cu suport vizual extins,
+                    arhitecturi moderne și exemple PyTorch.</p>
+                <div class="topics">12 capitole · galerii vizuale · arhitecturi YOLO/DETR/Mask2Former · autoevaluare
+                </div>
+                <div class="action"><span>Deschide cursul</span><span aria-hidden="true">↗</span></div>
+            </div>
+        </a>
+    </div>
+    <section class="more">
+        <div><strong>Despre serie</strong>
+            <p>Fiecare curs include explicații teoretice, reprezentări vizuale, simulări interactive și exemple
+                Python/PyTorch.</p></div>
+    </section>
+</main>
+<footer class="foot">Învățare Automată · Facultatea de Automatică și Calculatoare · 2026–2027</footer>
+</body>
+</html>
