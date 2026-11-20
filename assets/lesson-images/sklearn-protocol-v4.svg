@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="665" viewBox="0 0 1040 665" role="img" aria-label="Protocol corect: de la date la evaluare">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#6487ac"/></marker></defs>
+<style>.ttl{font:700 26px Arial,sans-serif;fill:#173c6a}.sub{font:400 15px Arial,sans-serif;fill:#536e8e}.lane{font:700 15px Arial,sans-serif;fill:#275f9e;letter-spacing:.02em}.main{font:700 19px Arial,sans-serif;fill:#1c456f}.minor{font:400 15px Arial,sans-serif;fill:#4b6482}.foot{font:600 14px Arial,sans-serif;fill:#4c6683}</style>
+<rect x="3" y="3" width="1034" height="659" rx="20" fill="#fcfdff" stroke="#d5e6f5" stroke-width="2"/>
+<text x="32" y="43" class="ttl">Protocol corect: de la date la evaluare</text><text x="32" y="72" class="sub">Trei rânduri distincte. Săgețile arată ordinea operațiilor, fără suprapuneri.</text>
+<text x="55" y="127" class="lane">1 · ÎMPĂRȚIRE</text>
+<rect x="56" y="143" rx="14" width="268" height="102" fill="#edf4ff" stroke="#b8d4f1" stroke-width="2"/>
+<text x="190.0" y="177" class="main" text-anchor="middle">Date etichetate</text>
+<text x="190.0" y="205" class="minor" text-anchor="middle">Caracteristici X + ținte y</text>
+<path d="M328 194.0 H366" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="382" y="143" rx="14" width="268" height="102" fill="#edf4ff" stroke="#b8d4f1" stroke-width="2"/>
+<text x="516.0" y="177" class="main" text-anchor="middle">Separare inițială</text>
+<text x="516.0" y="205" class="minor" text-anchor="middle">înainte de orice fit</text>
+<path d="M654 194.0 H692" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="708" y="143" rx="14" width="268" height="102" fill="#edf4ff" stroke="#b8d4f1" stroke-width="2"/>
+<text x="842.0" y="177" class="main" text-anchor="middle">Submulțimi disjuncte</text>
+<text x="842.0" y="205" class="minor" text-anchor="middle">dezvoltare + test final</text>
+<line x1="54" y1="279" x2="986" y2="279" stroke="#e4edf7" stroke-dasharray="4 7"/>
+<text x="55" y="303" class="lane">2 · DEZVOLTARE</text>
+<rect x="56" y="319" rx="14" width="268" height="102" fill="#e8f4fc" stroke="#abd7e0" stroke-width="2"/>
+<text x="190.0" y="353" class="main" text-anchor="middle">Date de dezvoltare</text>
+<text x="190.0" y="381" class="minor" text-anchor="middle">train + validare / CV</text>
+<path d="M328 370.0 H366" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="382" y="319" rx="14" width="268" height="102" fill="#e8f4fc" stroke="#abd7e0" stroke-width="2"/>
+<text x="516.0" y="353" class="main" text-anchor="middle">Selecție și antrenare</text>
+<text x="516.0" y="381" class="minor" text-anchor="middle">transformări + model</text>
+<path d="M654 370.0 H692" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="708" y="319" rx="14" width="268" height="102" fill="#e8f4fc" stroke="#abd7e0" stroke-width="2"/>
+<text x="842.0" y="353" class="main" text-anchor="middle">Pipeline finală</text>
+<text x="842.0" y="381" class="minor" text-anchor="middle">configurație deja aleasă</text>
+<line x1="54" y1="455" x2="986" y2="455" stroke="#e4edf7" stroke-dasharray="4 7"/>
+<text x="55" y="479" class="lane">3 · EVALUARE FINALĂ</text>
+<rect x="56" y="495" rx="14" width="268" height="102" fill="#fdf3e6" stroke="#e8c48a" stroke-width="2"/>
+<text x="190.0" y="529" class="main" text-anchor="middle">Date de test final</text>
+<text x="190.0" y="557" class="minor" text-anchor="middle">păstrate independente</text>
+<path d="M328 546.0 H366" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="382" y="495" rx="14" width="268" height="102" fill="#fdf3e6" stroke="#e8c48a" stroke-width="2"/>
+<text x="516.0" y="529" class="main" text-anchor="middle">Aplicare pipeline</text>
+<text x="516.0" y="557" class="minor" text-anchor="middle">transform + predict</text>
+<text x="516.0" y="581" class="minor" text-anchor="middle">fără fit nou</text>
+<path d="M654 546.0 H692" fill="none" stroke="#6487ac" stroke-width="3.3" marker-end="url(#arrow)"/>
+<rect x="708" y="495" rx="14" width="268" height="102" fill="#fdf3e6" stroke="#e8c48a" stroke-width="2"/>
+<text x="842.0" y="529" class="main" text-anchor="middle">Predicții și metrici</text>
+<text x="842.0" y="557" class="minor" text-anchor="middle">comparare cu etichetele</text>
+<text x="842.0" y="581" class="minor" text-anchor="middle">dacă sunt disponibile</text>
+<text x="40" y="630" class="foot">Nu folosim testul final pentru alegerea repetată a modelului sau pentru estimarea statisticilor.</text></svg>

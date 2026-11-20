@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="420" viewBox="0 0 1220 420" role="img">
+<defs>
+  <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#6788ab"/></marker>
+  <style>
+    .ttl{font:700 28px 'DejaVu Sans',Arial,sans-serif;fill:#163e70}
+    .sub{font:600 15px 'DejaVu Sans',Arial,sans-serif;fill:#58718b}
+    .box{font:700 18px 'DejaVu Sans',Arial,sans-serif;fill:#183b68}
+    .small{font:500 14px 'DejaVu Sans',Arial,sans-serif;fill:#496580}
+    .tag{font:700 13px 'DejaVu Sans',Arial,sans-serif;fill:#1c5f9e}
+    .ln{stroke:#688bab;stroke-width:3;fill:none;marker-end:url(#arr2)}
+  </style>
+</defs>
+<rect x="8" y="8" width="1204" height="404" rx="18" fill="#fbfdff" stroke="#d5e5f3" stroke-width="1.8"/>
+<text x="32" y="42" class="ttl">Ce înseamnă preprocesarea, explicat separat</text>
+<text x="32" y="68" class="sub">Pasul critic este acesta: statisticile se învață din train, apoi aceeași regulă este aplicată și pe validare/test/date noi.</text>
+<rect x="38" y="120" width="180" height="92" rx="15" fill="#e8f2ff" stroke="#bfd5ef" stroke-width="1.7"/>
+<text x="128" y="154" text-anchor="middle" class="box">TRAIN brut</text>
+<text x="128" y="181" text-anchor="middle" class="small">coloane numerice/categorice</text>
+<rect x="290" y="120" width="230" height="92" rx="15" fill="#e8f2ff" stroke="#bfd5ef" stroke-width="1.7"/>
+<text x="405" y="154" text-anchor="middle" class="box">fit(transformator)</text>
+<text x="405" y="181" text-anchor="middle" class="small">învață media, σ, categorii, mediană etc.</text>
+<rect x="585" y="120" width="240" height="92" rx="15" fill="#e2f4ee" stroke="#9ccec7" stroke-width="1.7"/>
+<text x="705" y="154" text-anchor="middle" class="box">fit_transform(TRAIN)</text>
+<text x="705" y="181" text-anchor="middle" class="small">produce X_train procesat</text>
+<rect x="890" y="120" width="250" height="92" rx="15" fill="#eef5ff" stroke="#bfd5ef" stroke-width="1.7"/>
+<text x="1015" y="154" text-anchor="middle" class="box">fit(model)</text>
+<text x="1015" y="181" text-anchor="middle" class="small">învață coeficienții / parametrii modelului</text>
+<path d="M218 166 H286" class="ln"/><path d="M520 166 H581" class="ln"/><path d="M825 166 H886" class="ln"/>
+<rect x="38" y="270" width="180" height="92" rx="15" fill="#fff4e6" stroke="#efcb93" stroke-width="1.7"/>
+<text x="128" y="304" text-anchor="middle" class="box">VALIDARE / TEST</text>
+<text x="128" y="331" text-anchor="middle" class="small">date nevăzute la fit</text>
+<rect x="290" y="270" width="230" height="92" rx="15" fill="#fff4e6" stroke="#efcb93" stroke-width="1.7"/>
+<text x="405" y="304" text-anchor="middle" class="box">transform(X_test)</text>
+<text x="405" y="331" text-anchor="middle" class="small">fără recalculul statisticilor</text>
+<rect x="585" y="270" width="240" height="92" rx="15" fill="#fff4e6" stroke="#efcb93" stroke-width="1.7"/>
+<text x="705" y="304" text-anchor="middle" class="box">predict(X_test proc.)</text>
+<text x="705" y="331" text-anchor="middle" class="small">folosește modelul deja antrenat</text>
+<rect x="890" y="270" width="250" height="92" rx="15" fill="#eef5ff" stroke="#bfd5ef" stroke-width="1.7"/>
+<text x="1015" y="304" text-anchor="middle" class="box">Evaluare</text>
+<text x="1015" y="331" text-anchor="middle" class="small">comparăm y_pred cu y_true</text>
+<path d="M218 316 H286" class="ln"/><path d="M520 316 H581" class="ln"/><path d="M825 316 H886" class="ln"/>
+<path d="M405 212 V256" class="ln"/><text x="445" y="243" class="tag">aceeași regulă</text>
+<text x="34" y="390" class="sub">Exemplu: dacă StandardScaler a învățat μ_train și σ_train, atunci x_test devine (x_test − μ_train) / σ_train.</text>
+</svg>

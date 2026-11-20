@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="460" viewBox="0 0 1280 460" role="img">
+<defs>
+  <marker id="arrB" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#6a86aa"/></marker>
+  <style>
+    .ttl{font:700 32px Arial,sans-serif;fill:#163e70}.sub{font:600 17px Arial,sans-serif;fill:#5d7591}
+    .box{font:700 20px Arial,sans-serif;fill:#183b68}.small{font:500 15px Arial,sans-serif;fill:#4c6683}.tag{font:700 15px Arial,sans-serif;fill:#225e9d}
+    .ln{stroke:#6a86aa;stroke-width:4;fill:none;marker-end:url(#arrB)}
+  </style>
+</defs>
+<rect x="12" y="12" width="1256" height="436" rx="22" fill="#fbfdff" stroke="#d7e6f5" stroke-width="2"/>
+<text x="42" y="54" class="ttl">Ce înseamnă preprocesarea, separat și clar</text>
+<text x="42" y="82" class="sub">Figura 2. Transformatorul învață regula doar din train; apoi exact aceeași regulă este aplicată pe train, validare, test și exemple noi.</text>
+<rect x="55" y="150" width="175" height="96" rx="16" fill="#eef5ff" stroke="#c4d9f0" stroke-width="2"/>
+<text x="142" y="188" text-anchor="middle" class="box">TRAIN brut</text>
+<text x="142" y="218" text-anchor="middle" class="small">ex.: [2, 4, 6]</text>
+<rect x="325" y="150" width="255" height="96" rx="16" fill="#eef5ff" stroke="#a9c7ea" stroke-width="2.4"/>
+<text x="452" y="186" text-anchor="middle" class="box">fit(transformator)</text>
+<text x="452" y="214" text-anchor="middle" class="small">învață media, σ, categorii, mediane etc.</text>
+<text x="452" y="236" text-anchor="middle" class="tag">doar din train</text>
+<path d="M230 198 H315" class="ln"/>
+<rect x="680" y="84" width="228" height="100" rx="18" fill="#e9f8f4" stroke="#94d4c6" stroke-width="2.4"/>
+<text x="794" y="124" text-anchor="middle" class="box">transform(X_train)</text>
+<text x="794" y="154" text-anchor="middle" class="small">aplic aceeași regulă pe train</text>
+<rect x="680" y="232" width="228" height="100" rx="18" fill="#fff7ec" stroke="#efc37f" stroke-width="2.4"/>
+<text x="794" y="272" text-anchor="middle" class="box">transform(X_test)</text>
+<text x="794" y="302" text-anchor="middle" class="small">aplic aceeași regulă pe test</text>
+<rect x="1018" y="84" width="185" height="100" rx="18" fill="#eef5ff" stroke="#c4d9f0" stroke-width="2"/>
+<text x="1110" y="124" text-anchor="middle" class="box">TRAIN transformat</text>
+<text x="1110" y="154" text-anchor="middle" class="small">ex.: z-score</text>
+<rect x="1018" y="232" width="185" height="100" rx="18" fill="#eef5ff" stroke="#c4d9f0" stroke-width="2"/>
+<text x="1110" y="272" text-anchor="middle" class="box">TEST transformat</text>
+<text x="1110" y="302" text-anchor="middle" class="small">fără fit nou</text>
+<path d="M580 198 H632 V134 H670" class="ln"/>
+<path d="M580 198 H632 V282 H670" class="ln"/>
+<path d="M908 134 H1008" class="ln"/>
+<path d="M908 282 H1008" class="ln"/>
+<text x="52" y="386" class="tag">Exemplu StandardScaler:</text>
+<text x="290" y="386" class="small">μ_train = 4, σ_train ≈ 1.633. Pentru x_test = 3, folosim z = (3 - 4)/1.633 ≈ -0.612.</text>
+<text x="52" y="414" class="tag">Regulă de aur:</text>
+<text x="205" y="414" class="small">pe test folosim transform, nu fit_transform. Altfel introducem informație din test în procesul de antrenare.</text>
+</svg>

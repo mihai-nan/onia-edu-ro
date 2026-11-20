@@ -5,3 +5,269 @@
 .onia-sklearn-lesson .onia-figure figcaption{font-size:13px;color:var(--muted);padding:9px 4px 0;line-height:1.55}
 .onia-sklearn-lesson .sklearn-download{display:inline-flex;padding:11px 16px;border:1px solid #c3d4f2;border-radius:10px;background:#ebf3ff;color:#2153a4;font-weight:700;text-decoration:none}
 .onia-sklearn-lesson .py-code-card pre{white-space:pre!important;tab-size:4!important}
+
+/* ONIA 1.4 · Ghid vizual și interactiv (stiluri izolate de celelalte lecții) */
+.onia-sklearn-lesson{--sk-ink:#19304c;--sk-navy:#193f6e;--sk-blue:#2770c3;--sk-blue-pale:#eaf3ff;--sk-teal:#057f83;--sk-amber:#a65a0b;--sk-orange:#e99939;--sk-outline:#d6e2f0;--sk-soft:#f7faff;--sk-monospace:'SFMono-Regular',Consolas,'Liberation Mono',monospace;font-family:'DM Sans',system-ui,sans-serif;color:var(--text);font-size:14px;line-height:1.76}
+.onia-sklearn-lesson .py-topic{font-family:'DM Sans',system-ui,sans-serif}
+.onia-sklearn-lesson .py-topic > p,.onia-sklearn-lesson .py-topic > ul,.onia-sklearn-lesson .py-topic > ol,.onia-sklearn-lesson .sk-demo p,.onia-sklearn-lesson .sk-info-card p,.onia-sklearn-lesson .sk-callout p,.onia-sklearn-lesson .sk-steps li,.onia-sklearn-lesson .sk-summary p{font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.8;color:var(--text)}
+.onia-sklearn-lesson .py-topic h3,.onia-sklearn-lesson .sk-demo h3{font-family:'Space Grotesk','DM Sans',system-ui,sans-serif;color:var(--text);letter-spacing:-.025em;line-height:1.35}
+.onia-sklearn-lesson .py-topic > h3{font-size:19px;margin:32px 0 13px;font-weight:700}
+.onia-sklearn-lesson .sk-info-card h3,.onia-sklearn-lesson .sk-demo h3{font-size:17px;margin:2px 0 10px}
+.onia-sklearn-lesson .onia-figure figcaption{font-size:12px;line-height:1.6;color:var(--sub)}
+.onia-sklearn-lesson code:not(pre code){font-family:var(--sk-monospace);font-size:.88em;overflow-wrap:anywhere}
+.onia-sklearn-lesson .py-code-card pre{font-size:12.5px;line-height:1.65;overflow-x:auto}
+.onia-sklearn-lesson .sk-code{margin:22px 0}
+.onia-sklearn-lesson .sk-hero-figure{margin-top:22px}
+.onia-sklearn-lesson .sk-eyebrow{display:block;text-transform:uppercase;font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--sk-blue);margin-bottom:6px}
+.onia-sklearn-lesson .sk-callout{padding:18px 21px;border:1px solid var(--sk-outline);border-left:4px solid var(--sk-blue);border-radius:12px;margin:22px 0;background:var(--sk-blue-pale)}
+.onia-sklearn-lesson .sk-callout-amber{border-left-color:#c68a3f;background:#fff6e7;border-color:#efdfc5}
+.onia-sklearn-lesson .sk-callout strong{font-size:15px;display:block;margin-bottom:6px;color:#16446e}
+.onia-sklearn-lesson .sk-callout-amber strong{color:#7b4b12}
+.onia-sklearn-lesson .sk-callout p{margin:6px 0;color:#243d58}
+.onia-sklearn-lesson .sk-instruction-chain{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;align-items:center}
+.onia-sklearn-lesson .sk-instruction-chain span{background:#fff;border:1px solid #cbddef;color:#1c4f85;padding:7px 10px;border-radius:9px;font-weight:700;font-size:12px}
+.onia-sklearn-lesson .sk-columns,.onia-sklearn-lesson .sk-context-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:20px 0}
+.onia-sklearn-lesson .sk-info-card{padding:19px 20px;background:var(--panel-alt);border:1px solid var(--line);border-radius:13px;min-width:0}
+.onia-sklearn-lesson .sk-info-card p{margin:0 0 9px}
+.onia-sklearn-lesson .sk-demo{background:var(--panel);border:1px solid var(--sk-outline);box-shadow:0 3px 17px #244d790b;border-radius:16px;margin:23px 0 28px;padding:20px 21px;min-width:0}
+.onia-sklearn-lesson .sk-demo-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px}
+.onia-sklearn-lesson .sk-demo-heading h3{margin:0}
+.onia-sklearn-lesson .sk-demo-heading p{margin:0}
+.onia-sklearn-lesson .sk-demo .sk-help{color:var(--sub);font-size:13px}
+.onia-sklearn-lesson .sk-segment{display:flex;background:var(--panel-alt);border:1px solid var(--line);border-radius:10px;padding:4px;gap:3px;flex-wrap:wrap}
+.onia-sklearn-lesson .sk-segment button,.onia-sklearn-lesson .sk-demo-controls button,.onia-sklearn-lesson .sk-quiz button{cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;border:1px solid transparent;border-radius:8px;background:transparent;padding:9px 12px;font-size:12.5px;font-weight:750;color:var(--text);transition:background .16s,outline-color .16s}
+.onia-sklearn-lesson .sk-segment button.is-active{background:#dceaff;border-color:#91b7e7;color:#174c91}
+.onia-sklearn-lesson .sk-demo-controls{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.onia-sklearn-lesson .sk-demo-controls button,.onia-sklearn-lesson .sk-quiz button{background:var(--panel-alt);border-color:var(--line)}
+.onia-sklearn-lesson button:focus-visible,.onia-sklearn-lesson select:focus-visible,.onia-sklearn-lesson input:focus-visible{outline:3px solid #8db4f1;outline-offset:2px}
+.onia-sklearn-lesson .sk-demo-controls button:hover,.onia-sklearn-lesson .sk-quiz button:hover{border-color:#669bd5;background:#edf5ff}
+.onia-sklearn-lesson .sk-demo-result{padding:12px 14px;border-radius:10px;border:1px solid #d0e0f1;background:#f2f7ff;color:#21456d;min-height:40px;margin:15px 0 0!important;font-size:13px!important;line-height:1.65!important}
+.onia-sklearn-lesson .sk-stratify-legend{display:flex;flex-wrap:wrap;gap:15px;align-items:center;font-weight:600;font-size:12px;color:var(--sub);margin:12px 0 18px}
+.onia-sklearn-lesson .sk-stratify-legend span{display:inline-flex;align-items:center;gap:6px}
+.onia-sklearn-lesson .sk-dot{width:13px;height:13px;display:inline-block;border-radius:50%;border:1px solid #fff;box-shadow:0 0 0 1px #9cb3cd}
+.onia-sklearn-lesson .sk-class0{background:#2f76c1}.onia-sklearn-lesson .sk-class1{background:#eb9b42}
+.onia-sklearn-lesson .sk-split-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin:14px 0}
+.onia-sklearn-lesson .sk-split-row>div{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--panel-alt)}
+.onia-sklearn-lesson .sk-split-row strong{display:block;font-size:12px;color:var(--sub);margin-bottom:12px}
+.onia-sklearn-lesson .sk-sample-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.onia-sklearn-lesson .sk-sample{border-radius:10px;padding:8px 4px;text-align:center;color:white;font-weight:800;line-height:1.35;font-size:12px;position:relative}
+.onia-sklearn-lesson .sk-sample small{display:block;font-size:10px;font-weight:600;color:#fff}
+.onia-sklearn-lesson .sk-sample.sk-class0{background:#2f76c1}.onia-sklearn-lesson .sk-sample.sk-class1{background:#cc7726}
+.onia-sklearn-lesson .sk-workflow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;margin:20px 0}
+.onia-sklearn-lesson .sk-workflow-step{flex:1 1 150px;border:1px solid #ccdaeb;border-radius:12px;padding:14px;background:#f0f6ff;display:flex;flex-direction:column;gap:4px}
+.onia-sklearn-lesson .sk-workflow-step strong{font-family:'Space Grotesk';color:#3978bc;font-size:11px;letter-spacing:.12em}
+.onia-sklearn-lesson .sk-workflow-step b{font-size:13px;color:#20528c}
+.onia-sklearn-lesson .sk-workflow-step small{font-size:11px;color:#4b6685;line-height:1.4}
+.onia-sklearn-lesson .sk-flow-arrow{align-self:center;color:#1e69ab;font-size:23px;font-weight:900}
+.onia-sklearn-lesson .sk-field{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--sub);font-weight:700;max-width:100%}
+.onia-sklearn-lesson .sk-field select,.onia-sklearn-lesson .sk-field input[type=number]{font:inherit;max-width:100%;padding:9px 12px;color:var(--text);background:var(--panel);border:1px solid var(--sk-outline);border-radius:9px}
+.onia-sklearn-lesson .sk-field input[type=range]{accent-color:#2878bc;width:170px}
+.onia-sklearn-lesson .sk-prep-visual{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch;margin:17px 0}
+.onia-sklearn-lesson .sk-prep-panel{border:1px solid var(--line);padding:16px;border-radius:12px;background:var(--panel-alt);min-width:0}
+.onia-sklearn-lesson .sk-prep-panel strong{display:block;font-size:12px;margin-bottom:10px;color:var(--sub)}
+.onia-sklearn-lesson .sk-number-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.onia-sklearn-lesson .sk-num{min-width:44px;border-radius:8px;padding:9px 6px;text-align:center;background:#d9eaff;border:1px solid #a8cbed;font-weight:750;color:#144a84;font-size:12px}
+.onia-sklearn-lesson .sk-num.test{background:#fff1d7;border-color:#eec57d;color:#825004}
+.onia-sklearn-lesson .sk-prep-formula{background:var(--panel-alt);border:1px dashed #b6cae3;border-radius:10px;padding:13px 15px;margin:16px 0;color:var(--text);font-size:13px;overflow-wrap:anywhere}
+.onia-sklearn-lesson .sk-prep-formula strong{color:var(--sk-blue)}
+.onia-sklearn-lesson .sk-prep-plot{margin:14px 0 5px;border:1px solid var(--line);border-radius:10px;padding:15px;background:var(--panel-alt)}
+.onia-sklearn-lesson .sk-prep-track{position:relative;height:60px;background:linear-gradient(90deg,#eaf3ff,#f8fbff);border-radius:9px;border:1px solid #c7dbee;overflow:hidden;margin:10px 0 5px}
+.onia-sklearn-lesson .sk-prep-axis{position:absolute;left:4%;right:4%;top:31px;height:1px;background:#829eb9}
+.onia-sklearn-lesson .sk-prep-mark{position:absolute;top:12px;transform:translateX(-50%);min-width:20px;height:18px;border-radius:6px;font-weight:800;color:white;font-size:11px;text-align:center;line-height:18px;background:#236cb1}
+.onia-sklearn-lesson .sk-prep-mark.test{background:#cc7b1e;top:33px}
+.onia-sklearn-lesson .sk-prep-plot-note{font-size:11px;color:var(--sub)}
+.onia-sklearn-lesson .sk-table-wrap{overflow-x:auto;margin:16px 0 28px;border:1px solid var(--line);border-radius:12px}
+.onia-sklearn-lesson .sk-comparison{border-collapse:collapse;width:100%;font-size:12.5px;line-height:1.6;background:var(--panel)}
+.onia-sklearn-lesson .sk-comparison th,.onia-sklearn-lesson .sk-comparison td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:var(--text)}
+.onia-sklearn-lesson .sk-comparison th{font-weight:750}
+.onia-sklearn-lesson .sk-comparison thead{background:#e8f1fc;color:#174970}
+.onia-sklearn-lesson .sk-comparison tbody tr:nth-child(even){background:var(--panel-alt)}
+.onia-sklearn-lesson .sk-pipeline-stages{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1.05fr) 20px minmax(0,1.2fr) 20px minmax(0,.9fr);align-items:center;gap:8px;margin:20px 0}
+.onia-sklearn-lesson .sk-pipeline-stages>b{text-align:center;color:var(--sk-blue);font-size:23px}
+.onia-sklearn-lesson .sk-stage{border:1px solid var(--line);border-radius:10px;background:var(--panel-alt);padding:12px 10px;min-height:112px;display:flex;flex-direction:column;gap:6px;transition:background .18s}
+.onia-sklearn-lesson .sk-stage>span{display:grid;place-items:center;height:24px;width:24px;border-radius:50%;background:#d8e9fd;color:#18559a;font-size:11px;font-weight:900}
+.onia-sklearn-lesson .sk-stage strong{font-size:12.5px;line-height:1.3}
+.onia-sklearn-lesson .sk-stage small{font-size:11px;line-height:1.45;color:var(--sub)}
+.onia-sklearn-lesson .sk-stage.is-active{background:#dcecff;border:2px solid #347eca;box-shadow:0 0 0 3px #c4e2fc80}
+.onia-sklearn-lesson .sk-cm-plot{display:grid;grid-template-columns:35px minmax(0,1fr) 64px;gap:10px;max-width:700px;margin:18px auto;align-items:stretch}
+.onia-sklearn-lesson .sk-cm-axis-y{display:flex;align-items:center;justify-content:center}
+.onia-sklearn-lesson .sk-cm-axis-y span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:800;letter-spacing:.05em;color:#35699b}
+.onia-sklearn-lesson .sk-cm-axis-y b{font-size:20px}
+.onia-sklearn-lesson .sk-cm-axis-x{text-align:center;font-size:11px;letter-spacing:.05em;font-weight:800;color:#35699b;margin-bottom:9px}
+.onia-sklearn-lesson .sk-cm-axis-x b{font-size:18px}
+.onia-sklearn-lesson .sk-cm-matrix{display:grid;gap:4px;min-width:0;max-width:540px;margin:auto;width:100%}
+.onia-sklearn-lesson .sk-cm-cell{cursor:pointer;border:1px solid #93b0cf;border-radius:5px;display:flex;flex-direction:column;justify-content:center;align-items:center;aspect-ratio:1.32;min-width:0;min-height:33px;font-size:clamp(11px,2vw,17px);font-family:'Space Grotesk',sans-serif;font-weight:800;transition:outline-color .1s,transform .12s}
+.onia-sklearn-lesson .sk-cm-cell small{font-size:9px;font-weight:700;opacity:.9}
+.onia-sklearn-lesson .sk-cm-cell.is-selected{outline:3px solid #f2a83c;outline-offset:1px;z-index:1}
+.onia-sklearn-lesson .sk-cm-cell:hover{outline:2px solid #da8e26}
+.onia-sklearn-lesson .sk-cm-cell.is-related{box-shadow:inset 0 0 0 2px #f2a83c99}
+.onia-sklearn-lesson .sk-cm-label{font-family:'DM Sans';font-size:11px;font-weight:800;text-align:center;color:var(--text);padding:7px 3px;align-self:center}
+.onia-sklearn-lesson .sk-cm-color{display:flex;gap:6px;flex-direction:column;align-items:center;justify-content:center;font-size:10px;text-align:center;color:var(--sub)}
+.onia-sklearn-lesson .sk-color-bar{height:145px;width:15px;background:linear-gradient(to top,#eef5fd,#bbd7f4,#5f9ddb,#174d93);border:1px solid #aac3df;border-radius:5px}
+.onia-sklearn-lesson .sk-cv-rows{display:grid;gap:9px;margin:17px 0}
+.onia-sklearn-lesson .sk-cv-row{display:flex;align-items:center;gap:7px;min-width:0;opacity:.58}
+.onia-sklearn-lesson .sk-cv-row.is-active{opacity:1}
+.onia-sklearn-lesson .sk-cv-label{min-width:65px;font-size:11px;font-weight:750;color:var(--text)}
+.onia-sklearn-lesson .sk-cv-bars{display:flex;flex:1;gap:3px;min-width:0}
+.onia-sklearn-lesson .sk-cv-bar{display:grid;place-items:center;min-height:31px;border-radius:5px;flex:1;font-size:11px;font-weight:800;background:#cfe5fa;color:#20548a;min-width:0}
+.onia-sklearn-lesson .sk-cv-bar.val{background:#efba71;color:#663c0b}
+.onia-sklearn-lesson .sk-cv-row.is-active .sk-cv-bar.val{outline:2px solid #b46d09;outline-offset:-2px}
+.onia-sklearn-lesson .sk-legend-train,.onia-sklearn-lesson .sk-legend-val,.onia-sklearn-lesson .sk-legend-active{display:inline-block;width:12px;height:12px;border-radius:3px}
+.onia-sklearn-lesson .sk-legend-train{background:#cfe5fa}.onia-sklearn-lesson .sk-legend-val{background:#efba71}.onia-sklearn-lesson .sk-legend-active{border:2px solid #b46d09;background:#fff}
+.onia-sklearn-lesson .sk-steps{margin:19px 0 28px;padding:0;counter-reset:steps;list-style:none;display:grid;gap:10px}
+.onia-sklearn-lesson .sk-steps li{border-left:3px solid #64a6e0;background:var(--panel-alt);padding:11px 15px 11px 19px;border-radius:0 9px 9px 0}
+.onia-sklearn-lesson .sk-grid-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:18px;margin:16px 0;align-items:start}
+.onia-sklearn-lesson .sk-grid-table{display:grid;grid-template-columns:85px repeat(3,minmax(0,1fr));gap:5px}
+.onia-sklearn-lesson .sk-grid-cell{background:var(--panel-alt);border:1px solid var(--line);border-radius:7px;min-height:53px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:750;padding:5px;min-width:0}
+.onia-sklearn-lesson button.sk-grid-cell{cursor:pointer;font-size:14px;font-weight:850;color:#123b63}
+.onia-sklearn-lesson button.sk-grid-cell.is-selected{outline:3px solid #ec9735;outline-offset:1px}
+.onia-sklearn-lesson .sk-grid-cell.header{background:#dceafa;color:#144571;font-size:11px;letter-spacing:.02em}
+.onia-sklearn-lesson .sk-heat-legend{margin:14px 0;display:flex;gap:8px;align-items:center;font-size:10px;color:var(--sub);flex-wrap:wrap}
+.onia-sklearn-lesson .sk-heatbar{display:inline-block;height:11px;flex:1;min-width:60px;border-radius:8px;background:linear-gradient(90deg,#eaf3fe,#90bee9,#2667b5)}
+.onia-sklearn-lesson .sk-grid-inspector{background:var(--panel-alt);border:1px solid var(--line);border-radius:11px;padding:15px;min-height:200px;font-size:13px}
+.onia-sklearn-lesson .sk-grid-inspector h4{font-size:15px;margin:0 0 7px;color:var(--text)}
+.onia-sklearn-lesson .sk-grid-inspector p{font-size:12px;line-height:1.65;margin:5px 0}
+.onia-sklearn-lesson .sk-fold-scores{display:flex;gap:4px;flex-wrap:wrap;margin:12px 0}
+.onia-sklearn-lesson .sk-fold-scores span{border:1px solid #b8d2ed;background:#e4f0fd;color:#19568f;border-radius:5px;padding:5px 7px;font-size:11px;font-weight:800}
+.onia-sklearn-lesson .sk-math-count{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center;padding:15px;border-radius:12px;background:#eaf3fe;border:1px solid #c7dff8;margin:18px 0 25px}
+.onia-sklearn-lesson .sk-math-count>span{display:flex;flex-direction:column;text-align:center}
+.onia-sklearn-lesson .sk-math-count strong{color:#195993;font-size:13px}
+.onia-sklearn-lesson .sk-math-count small{font-size:10px;color:#557594}
+.onia-sklearn-lesson .sk-math-count>b{font-size:20px;color:#3a78b3}
+.onia-sklearn-lesson .sk-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0}
+.onia-sklearn-lesson .sk-summary>div{border:1px solid var(--line);border-radius:10px;background:var(--panel-alt);padding:14px}
+.onia-sklearn-lesson .sk-summary strong{color:#2366a0;font-size:12px}
+.onia-sklearn-lesson .sk-summary p{margin:7px 0 0;font-size:12.5px}
+.onia-sklearn-lesson .sk-quiz{margin:22px 0;border:1px solid var(--line);border-radius:13px;padding:20px;background:var(--panel-alt)}
+.onia-sklearn-lesson .sk-quiz button{display:block;margin:7px 0;width:100%;text-align:left}
+.onia-sklearn-lesson #sk-quiz-feedback{padding:8px 0;font-weight:800;font-size:13px}
+@media(max-width:800px){.onia-sklearn-lesson .sk-grid-layout{grid-template-columns:1fr}.onia-sklearn-lesson .sk-pipeline-stages{display:flex;flex-direction:column;align-items:stretch}.onia-sklearn-lesson .sk-pipeline-stages>b{transform:rotate(90deg)}.onia-sklearn-lesson .sk-stage{min-height:74px}.onia-sklearn-lesson .sk-cm-color{font-size:9px}}
+@media(max-width:600px){.onia-sklearn-lesson .sk-columns,.onia-sklearn-lesson .sk-context-compare,.onia-sklearn-lesson .sk-split-row,.onia-sklearn-lesson .sk-prep-visual,.onia-sklearn-lesson .sk-summary{grid-template-columns:1fr}.onia-sklearn-lesson .sk-demo{padding:14px}.onia-sklearn-lesson .sk-demo-heading{gap:10px}.onia-sklearn-lesson .sk-cm-plot{grid-template-columns:22px minmax(0,1fr) 34px;gap:3px}.onia-sklearn-lesson .sk-cm-label{font-size:9px}.onia-sklearn-lesson .sk-cm-cell{font-size:11px;min-height:23px}.onia-sklearn-lesson .sk-cm-cell small{font-size:7px}.onia-sklearn-lesson .sk-color-bar{width:10px}.onia-sklearn-lesson .sk-workflow-step{flex-basis:100%}.onia-sklearn-lesson .sk-flow-arrow{transform:rotate(90deg)}.onia-sklearn-lesson .sk-grid-table{grid-template-columns:75px repeat(3,minmax(0,1fr))}}
+/* Tema întunecată: contraste potrivite și aceeași familie tipografică. */
+:root[data-theme=dark] .onia-sklearn-lesson{--sk-outline:#3e5672;--sk-blue-pale:#1b3250;--sk-blue:#9ecbff}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-callout,:root[data-theme=dark] .onia-sklearn-lesson .sk-workflow-step,:root[data-theme=dark] .onia-sklearn-lesson .sk-demo-result,:root[data-theme=dark] .onia-sklearn-lesson .sk-math-count{background:#1d3551;border-color:#425c7b}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-callout-amber{background:#342a22;border-color:#755338}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-callout strong,:root[data-theme=dark] .onia-sklearn-lesson .sk-callout p,:root[data-theme=dark] .onia-sklearn-lesson .sk-demo-result,:root[data-theme=dark] .onia-sklearn-lesson .sk-workflow-step b,:root[data-theme=dark] .onia-sklearn-lesson .sk-workflow-step small,:root[data-theme=dark] .onia-sklearn-lesson .sk-math-count strong{color:#d5e7ff}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-segment button.is-active,:root[data-theme=dark] .onia-sklearn-lesson .sk-stage.is-active{background:#25486f;color:#fff}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-comparison thead,:root[data-theme=dark] .onia-sklearn-lesson .sk-grid-cell.header{background:#26415f;color:#e3efff}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-num{background:#20466e;color:#eaf4ff}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-num.test{background:#533f22;color:#ffdfa7}
+:root[data-theme=dark] .onia-sklearn-lesson .sk-instruction-chain span{background:#203a57;color:#e3efff;border-color:#3c5f84}
+
+
+/* sklearn lesson: revizia a doua */
+.onia-sklearn-lesson .sk-formula-box{display:grid;gap:8px;margin:18px 0;padding:16px 18px;border:1px dashed #b3cae6;border-radius:12px;background:#f8fbff;color:var(--text)}
+.onia-sklearn-lesson .sk-formula-box strong{color:var(--sk-blue);font-size:14px}
+.onia-sklearn-lesson .sk-formula-box span{font-size:15px;font-weight:650;letter-spacing:.01em}
+.onia-sklearn-lesson .sk-formula-box small{font-size:12px;color:var(--sub);line-height:1.65}
+.onia-sklearn-lesson .sk-comparison td:first-child,.onia-sklearn-lesson .sk-comparison th:first-child{width:190px}
+.onia-sklearn-lesson .sk-comparison td:first-child code{font-size:.97em;white-space:nowrap;overflow-wrap:normal}
+.onia-sklearn-lesson .sk-param-detail{margin:10px 0;border:1px solid var(--line);background:var(--panel-alt);border-radius:12px;padding:0 14px}
+.onia-sklearn-lesson .sk-param-detail summary{cursor:pointer;list-style:none;font-weight:800;padding:14px 0;color:#1b4b7f}
+.onia-sklearn-lesson .sk-param-detail summary::-webkit-details-marker{display:none}
+.onia-sklearn-lesson .sk-param-detail p{margin:0 0 14px;font-size:14px;line-height:1.75}
+.onia-sklearn-lesson .sk-bullets-compact{margin:8px 0 0 22px;padding:0;display:grid;gap:8px}
+.onia-sklearn-lesson .sk-bullets-compact li{line-height:1.7}
+.onia-sklearn-lesson .sk-exercises-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
+.onia-sklearn-lesson .sk-ex-card{border:1px solid var(--line);border-radius:14px;background:var(--panel-alt);padding:16px;min-width:0}
+.onia-sklearn-lesson .sk-ex-card h4{margin:0 0 10px;font-size:17px;color:var(--text);font-family:'Space Grotesk','DM Sans',system-ui,sans-serif}
+.onia-sklearn-lesson .sk-ex-card p{margin:0 0 12px}
+.onia-sklearn-lesson .sk-choice-group{display:grid;gap:8px}
+.onia-sklearn-lesson .sk-choice-group button,.onia-sklearn-lesson .sk-check-btn{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:10px 12px;text-align:left;font:inherit;font-weight:700;color:var(--text)}
+.onia-sklearn-lesson .sk-choice-group button:hover,.onia-sklearn-lesson .sk-check-btn:hover{background:#edf5ff;border-color:#7faad9}
+.onia-sklearn-lesson .sk-ex-feedback{margin:11px 0 0;font-size:13px;font-weight:800;min-height:22px}
+.onia-sklearn-lesson .sk-match-grid{display:grid;gap:10px}
+.onia-sklearn-lesson .sk-match-grid label{display:grid;gap:6px;font-weight:700;color:var(--text)}
+.onia-sklearn-lesson .sk-match-grid select{padding:10px 12px;border-radius:9px;border:1px solid var(--sk-outline);background:var(--panel);font:inherit;color:var(--text)}
+.onia-sklearn-lesson .sk-reg-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:14px;align-items:start}
+.onia-sklearn-lesson .sk-reg-points{border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fbfdff,#f4f8fd);padding:14px;min-height:220px;position:relative;overflow:hidden}
+.onia-sklearn-lesson .sk-reg-svg{display:block;width:100%;height:auto}
+@media(max-width:800px){.onia-sklearn-lesson .sk-exercises-grid,.onia-sklearn-lesson .sk-reg-grid{grid-template-columns:1fr}}
+
+
+/* Ajustări suplimentare după revizie */
+.onia-sklearn-lesson .sk-exercises-stack{grid-template-columns:1fr}
+.onia-sklearn-lesson .sk-prep-plot{margin:14px 0 5px;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel-alt)}
+.onia-sklearn-lesson .sk-prep-axis-ends{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:800;color:#58718b;margin:10px 0 8px}
+.onia-sklearn-lesson .sk-prep-axis-ends span:nth-child(2){font-weight:700;color:#35699b}
+.onia-sklearn-lesson .sk-prep-track{position:relative;height:108px;background:linear-gradient(90deg,#eef5ff,#fbfdff);border-radius:11px;border:1px solid #c7dbee;overflow:hidden;margin:0 0 8px}
+.onia-sklearn-lesson .sk-prep-axis-line{position:absolute;left:34px;right:34px;top:54px;height:2px;background:#7da0c7}
+.onia-sklearn-lesson .sk-prep-axis-arrow{position:absolute;top:49px;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.onia-sklearn-lesson .sk-prep-axis-arrow.left{left:24px;border-right:10px solid #7da0c7}
+.onia-sklearn-lesson .sk-prep-axis-arrow.right{right:24px;border-left:10px solid #7da0c7}
+.onia-sklearn-lesson .sk-prep-zero{position:absolute;top:22px;transform:translateX(-50%);font-size:12px;font-weight:900;color:#215f9e;background:#e8f2ff;border:1px solid #9ec2e8;border-radius:8px;padding:2px 7px}
+.onia-sklearn-lesson .sk-prep-zero::after{content:'';position:absolute;left:50%;transform:translateX(-50%);top:24px;width:2px;height:30px;background:#9ec2e8}
+.onia-sklearn-lesson .sk-prep-marker{position:absolute;top:10px;transform:translateX(-50%);display:grid;justify-items:center;gap:2px}
+.onia-sklearn-lesson .sk-prep-marker.test{top:58px}
+.onia-sklearn-lesson .sk-prep-mark{display:inline-flex;align-items:center;justify-content:center;min-width:58px;min-height:28px;padding:3px 8px;border-radius:9px;font-weight:800;color:white;font-size:11px;text-align:center;line-height:1.15;background:#236cb1;box-shadow:0 5px 10px rgba(35,108,177,.16)}
+.onia-sklearn-lesson .sk-prep-mark.test{background:#cc7b1e}
+.onia-sklearn-lesson .sk-prep-marker i{display:block;width:2px;height:20px;background:#7da0c7}
+.onia-sklearn-lesson .sk-prep-marker small{font-size:11px;font-weight:700;color:var(--sub);white-space:nowrap}
+.onia-sklearn-lesson .sk-prep-plot-note{font-size:11px;color:var(--sub)}
+.onia-sklearn-lesson .sk-cm-plot{max-width:860px;width:100%;margin:18px auto 0}
+.onia-sklearn-lesson .sk-cm-matrix{max-width:none}
+.onia-sklearn-lesson .sk-demo .sk-cm-detail{margin-top:12px}
+.onia-sklearn-lesson .sk-info-card code,.onia-sklearn-lesson .sk-ex-card code,.onia-sklearn-lesson .sk-callout code{white-space:nowrap}
+
+/* V4: diagrame legibile, axă numerică proiectată în SVG, formule MathML și PCA interactiv. */
+.onia-sklearn-lesson figure.onia-figure{overflow:hidden;min-width:0;padding:16px 18px;margin:24px 0;background:#f8fbff;border:1px solid #d9e6f4;border-radius:15px}
+.onia-sklearn-lesson figure.onia-figure img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border-radius:9px;margin:0 auto}
+.onia-sklearn-lesson figure.onia-figure figcaption{margin-top:12px;padding:0;text-align:center;font-size:12px;line-height:1.55}
+.onia-sklearn-lesson .sk-prep-plot{padding:16px;border-radius:13px;background:#f7faff;border:1px solid #dce8f5}
+.onia-sklearn-lesson .sk-prep-chart{display:block;width:100%;height:auto;max-width:100%;overflow:visible;margin-top:10px}
+.onia-sklearn-lesson .sk-axis-mini{font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:800;fill:#355977}
+.onia-sklearn-lesson .sk-axis-value{font-family:'DM Sans',Arial,sans-serif;font-size:16px;font-weight:800;fill:#fff}
+.onia-sklearn-lesson .sk-axis-name{font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:700;fill:#45688e}
+.onia-sklearn-lesson .sk-axis-infty{font-family:'DM Sans',Arial,sans-serif;font-size:19px;font-weight:800;fill:#275e96}
+.onia-sklearn-lesson .sk-prep-plot-note{display:block;margin-top:8px;font-size:12px;line-height:1.65;color:var(--sub)}
+.onia-sklearn-lesson .sk-math-collection{background:#f8fbff;border:1px solid #cee0f5;border-radius:15px;padding:20px 22px;margin:24px 0;overflow:hidden}
+.onia-sklearn-lesson .sk-math-collection>h3{margin:2px 0 17px!important;font-size:19px!important}
+.onia-sklearn-lesson .sk-math-collection>h4{margin:0 0 13px;font-size:16px}
+.onia-sklearn-lesson .sk-math-collection>p{line-height:1.72}
+.onia-sklearn-lesson .sk-math-line{background:var(--panel);border:1px solid #e0eaf7;border-radius:12px;padding:13px 15px;margin:10px 0;min-width:0}
+.onia-sklearn-lesson .sk-math-label{font:750 13px/1.5 'DM Sans',Arial,sans-serif;color:#235f9d;margin-bottom:4px}
+.onia-sklearn-lesson .sk-math-content{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0 7px}
+.onia-sklearn-lesson .sk-math-content math{display:block;font-size:clamp(16px,1.7vw,23px);width:max-content;max-width:none;margin:4px auto 8px;color:#192d47}
+.onia-sklearn-lesson .sk-math-line>p{font-size:13px;line-height:1.6;color:var(--sub);margin:3px 0 0}
+.onia-sklearn-lesson .sk-pca-controls{display:flex;gap:22px;align-items:end;flex-wrap:wrap;padding:16px 18px;background:#f1f6fd;border:1px solid #d7e5f5;border-radius:12px;margin:10px 0 17px}
+.onia-sklearn-lesson .sk-pca-controls>.sk-field{min-width:190px;max-width:360px;flex:1}
+.onia-sklearn-lesson .sk-pca-controls input[type=range]{width:100%;max-width:360px;accent-color:#236faf}
+.onia-sklearn-lesson .sk-pca-visuals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.onia-sklearn-lesson .sk-pca-panel{border:1px solid #dbe7f5;background:#fbfdff;border-radius:14px;padding:13px;min-width:0}
+.onia-sklearn-lesson .sk-pca-panel h4{font-size:15px;margin:4px 0 12px;color:#173f71}
+.onia-sklearn-lesson .sk-pca-panel>p{font-size:12px;line-height:1.65;margin:11px 3px 0;color:#526a87}
+.onia-sklearn-lesson .sk-pca-chart{min-height:100px;width:100%;min-width:0}
+.onia-sklearn-lesson .sk-pca-svg{width:100%;max-width:100%;height:auto;display:block;border-radius:9px}
+.onia-sklearn-lesson .sk-pca-tick{font-size:11px;fill:#607b99;font-weight:600;font-family:'DM Sans',Arial,sans-serif}
+.onia-sklearn-lesson .sk-pca-axis{font-size:14px;fill:#284f77;font-weight:700;font-family:'DM Sans',Arial,sans-serif}
+.onia-sklearn-lesson .sk-pca-label{font-size:14px;font-weight:800;font-family:'DM Sans',Arial,sans-serif}
+.onia-sklearn-lesson .sk-demo .sk-pca-demo,.onia-sklearn-lesson .sk-pca-demo{margin-top:23px}
+.onia-sklearn-lesson .sk-prep-track{display:none!important} /* diagramă veche eliminată */
+@media(max-width:930px){.onia-sklearn-lesson .sk-pca-visuals{grid-template-columns:1fr}}
+@media(max-width:600px){.onia-sklearn-lesson figure.onia-figure{padding:8px;margin:15px 0}.onia-sklearn-lesson .sk-math-collection{padding:12px}.onia-sklearn-lesson .sk-math-line{padding:10px}.onia-sklearn-lesson .sk-pca-panel{padding:9px}.onia-sklearn-lesson .sk-pca-controls{padding:12px;gap:12px}}
+/* V4 completion: no historic max-height or figure centering constraints. */
+.onia-sklearn-lesson figure.onia-figure img[src*="sklearn-protocol-v4"],
+.onia-sklearn-lesson figure.onia-figure img[src*="sklearn-preprocessing-v4"]{
+  max-height:none!important; width:100%!important; height:auto!important; object-fit:fill!important;max-width:100%!important;
+}
+.onia-sklearn-lesson .sk-math-content .sk-math-img{display:block;width:auto;max-width:100%;height:auto;max-height:none;margin:8px auto 12px;object-fit:contain}
+.onia-sklearn-lesson .sk-native-matrix{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto;font:600 20px/1.6 Georgia,'Times New Roman',serif;color:#1b314d}
+.onia-sklearn-lesson .sk-bracket{font-size:66px;line-height:1;font-weight:300}
+.onia-sklearn-lesson .sk-matrix-values{display:grid;grid-template-columns:repeat(2,minmax(100px,auto));column-gap:30px;row-gap:1px;text-align:center}
+.onia-sklearn-lesson .sk-mobile-flow{display:none}
+@media(max-width:630px){
+ .onia-sklearn-lesson figure.onia-figure img[src*="sklearn-protocol-v4"],
+ .onia-sklearn-lesson figure.onia-figure img[src*="sklearn-preprocessing-v4"]{display:none!important}
+ .onia-sklearn-lesson figure.onia-figure .sk-mobile-flow{display:grid;gap:12px;padding:8px}
+ .onia-sklearn-lesson .sk-mobile-lane{background:#fff;border:1px solid #d8e5f4;border-radius:12px;padding:12px;display:grid;gap:4px}
+ .onia-sklearn-lesson .sk-mobile-lane h4{font:750 14px/1.45 'DM Sans',Arial,sans-serif;color:#1d578d;margin:0 0 5px}
+ .onia-sklearn-lesson .sk-mobile-flow-box{display:grid;gap:3px;border:1px solid #bbd4ed;background:#edf5ff;padding:11px 14px;border-radius:9px;color:#1b4776;text-align:center}
+ .onia-sklearn-lesson .sk-mobile-lane:nth-child(2) .sk-mobile-flow-box{background:#e8f6f4;border-color:#acd7d0}
+ .onia-sklearn-lesson .sk-mobile-lane:nth-child(3) .sk-mobile-flow-box{background:#fff5e8;border-color:#e8c997}
+ .onia-sklearn-lesson .sk-mobile-flow-box strong{font-size:14px}
+ .onia-sklearn-lesson .sk-mobile-flow-box span{font-size:12px}
+ .onia-sklearn-lesson .sk-mobile-arrow{text-align:center;font-size:21px;line-height:1.2;font-weight:800;color:#4681b5}
+}
+/* Diagramele ocupă complet lățimea disponibilă, independent de URL-ul imaginii. */
+.onia-sklearn-lesson figure.sk-flow-figure > img{max-height:none!important;width:100%!important;height:auto!important;object-fit:contain!important}
+@media(max-width:630px){.onia-sklearn-lesson figure.sk-flow-figure > img{display:none!important}}

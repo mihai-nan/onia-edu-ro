@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img">
+<defs><style>.ttl{font:700 30px Arial,sans-serif;fill:#163e70}.sub{font:600 17px Arial,sans-serif;fill:#5d7591}.head{font:700 22px Arial,sans-serif;fill:#183b68}.txt{font:500 15px Arial,sans-serif;fill:#4c6683}</style></defs>
+<rect x="12" y="12" width="1176" height="336" rx="22" fill="#fbfdff" stroke="#d7e6f5" stroke-width="2"/>
+<text x="38" y="52" class="ttl">Matrice de corelație vs. PCA</text>
+<text x="38" y="80" class="sub">Ambele analizează structura caracteristicilor, dar răspund la întrebări diferite.</text>
+<rect x="50" y="118" width="500" height="180" rx="18" fill="#eef5ff" stroke="#c4d9f0"/>
+<text x="76" y="156" class="head">Matrice de corelație / analiza feature-urilor</text>
+<text x="76" y="190" class="txt">• lucrează cu caracteristicile originale</text>
+<text x="76" y="220" class="txt">• arată perechi puternic corelate / redundante</text>
+<text x="76" y="250" class="txt">• foarte utilă pentru interpretare și selecție manuală</text>
+<text x="76" y="280" class="txt">• nu creează caracteristici noi</text>
+<rect x="650" y="118" width="500" height="180" rx="18" fill="#e9f8f4" stroke="#94d4c6"/>
+<text x="676" y="156" class="head">PCA</text>
+<text x="676" y="190" class="txt">• construiește componente noi = combinații liniare</text>
+<text x="676" y="220" class="txt">• comprimă dimensiunea și elimină redundanța liniară</text>
+<text x="676" y="250" class="txt">• util pentru vizualizare, denoising și accelerarea modelelor</text>
+<text x="676" y="280" class="txt">• interpretarea directă este mai dificilă</text>
+</svg>

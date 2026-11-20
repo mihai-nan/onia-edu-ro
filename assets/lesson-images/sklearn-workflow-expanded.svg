@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="380" viewBox="0 0 1220 380" role="img">
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#6788ab"/></marker>
+  <style>
+    .ttl{font:700 30px 'DejaVu Sans',Arial,sans-serif;fill:#163e70}
+    .sub{font:600 15px 'DejaVu Sans',Arial,sans-serif;fill:#58718b}
+    .box{font:700 18px 'DejaVu Sans',Arial,sans-serif;fill:#183b68}
+    .small{font:500 14px 'DejaVu Sans',Arial,sans-serif;fill:#496580}
+    .tag{font:700 13px 'DejaVu Sans',Arial,sans-serif;fill:#1c5f9e}
+    .ln{stroke:#688bab;stroke-width:3;fill:none;marker-end:url(#arr)}
+  </style>
+</defs>
+<rect x="8" y="8" width="1204" height="364" rx="18" fill="#fbfdff" stroke="#d5e5f3" stroke-width="1.8"/>
+<text x="34" y="44" class="ttl">Protocol corect: dezvoltare, selecție și test final</text>
+<text x="34" y="70" class="sub">Diagrama de mai jos rămâne intenționat generică: „procesare” include preprocesare, alegerea caracteristicilor și modelul.</text>
+<rect x="30" y="145" width="190" height="88" rx="14" fill="#eef5ff" stroke="#c6daf0" stroke-width="1.8"/>
+<text x="125" y="178" text-anchor="middle" class="box">Date etichetate</text>
+<text x="125" y="206" text-anchor="middle" class="small">X și y</text>
+<rect x="270" y="145" width="190" height="88" rx="14" fill="#eef5ff" stroke="#c6daf0" stroke-width="1.8"/>
+<text x="365" y="178" text-anchor="middle" class="box">Separare inițială</text>
+<text x="365" y="206" text-anchor="middle" class="small">înainte de orice fit</text>
+<path d="M220 189 H266" class="ln"/>
+<rect x="515" y="92" width="240" height="105" rx="16" fill="#e6f2ff" stroke="#aac8e6" stroke-width="1.8"/>
+<text x="635" y="126" text-anchor="middle" class="box">Date de dezvoltare</text>
+<text x="635" y="154" text-anchor="middle" class="small">train + eventual validare / CV</text>
+<text x="635" y="178" text-anchor="middle" class="tag">alegere model și hiperparametri</text>
+<rect x="515" y="235" width="240" height="95" rx="16" fill="#fff4e6" stroke="#efcb93" stroke-width="1.8"/>
+<text x="635" y="269" text-anchor="middle" class="box">Test final</text>
+<text x="635" y="297" text-anchor="middle" class="small">rezervat evaluării finale</text>
+<path d="M460 189 H490 V145 H511" class="ln"/>
+<path d="M490 189 V282 H511" class="ln"/>
+<rect x="825" y="92" width="230" height="105" rx="16" fill="#dff4f1" stroke="#9ccec7" stroke-width="1.8"/>
+<text x="940" y="126" text-anchor="middle" class="box">Procesare + model</text>
+<text x="940" y="154" text-anchor="middle" class="small">fit doar pe datele de dezvoltare</text>
+<text x="940" y="178" text-anchor="middle" class="tag">transformări + antrenare</text>
+<rect x="1080" y="147" width="106" height="86" rx="14" fill="#eef5ff" stroke="#b6d0ed" stroke-width="1.8"/>
+<text x="1133" y="181" text-anchor="middle" class="box" font-size="16">Predicții</text>
+<text x="1133" y="208" text-anchor="middle" class="small">și scoruri</text>
+<path d="M755 145 H821" class="ln"/>
+<path d="M1055 145 H1076" class="ln"/>
+<path d="M755 282 H790 V230 H1076" class="ln"/>
+<text x="636" y="214" text-anchor="middle" class="sub">Pe datele finale nu alegem modelul și nu recalculăm statistici.</text>
+<text x="34" y="345" class="sub">Mesaj-cheie: orice decizie repetată pe baza testului final transformă testul într-un pseudo-set de validare și strică estimarea independentă.</text>
+</svg>

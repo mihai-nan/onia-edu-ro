@@ -742,12 +742,14 @@ window.OLYMPIAD_DATA = {
           "number": "1.4",
           "title": "Introducere în scikit-learn",
           "stage": "general",
-          "summary": "Introducere practică în scikit-learn: date X/y, estimatori, antrenare, predicție, preprocesare, pipeline, evaluare și validare încrucișată.",
+          "summary": "Scikit-learn explicat pas cu pas: stratify, preprocesare pe train/test, simulatoare interactive, pipeline-uri, matrice de confuzie, cross-validation și GridSearchCV.",
           "objectives": [
-            "Reprezinți corect matricea X și vectorul țintă y.",
-            "Antrenezi un estimator folosind fit și obții predicții cu predict.",
-            "Construiești fluxuri cu train_test_split, StandardScaler și Pipeline fără scurgere de date.",
-            "Interpretezi metrici elementare și experimentezi cu validare încrucișată."
+            "Reprezinți corect matricea X și vectorul țintă y și înțelegi stratificarea după y sau după o caracteristică.",
+            "Diferențiezi fit, fit_transform și transform și eviți scurgerea de date între train și test.",
+            "Construiești make_pipeline și ColumnTransformer pentru date numerice și categorice.",
+            "Interpretezi matricea de confuzie, rândurile, coloanele și scala culorilor.",
+            "Explici validarea încrucișată, reantrenarea de la zero și evaluarea pe setul de test final.",
+            "Folosești GridSearchCV, cv, best_params_, best_score_ și best_estimator_."
           ],
           "blocks": [
             {

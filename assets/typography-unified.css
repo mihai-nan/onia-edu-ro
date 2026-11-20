@@ -1,0 +1,22 @@
+/* Titluri, corp și cod: familie, mărimi și culori consecvente între lecțiile ONIA.
+   Nu afectează interfața de navigare și nu forțează mărirea etichetelor de grafic. */
+.onia-python, .onia-python .py-topic, .onia-python .py-intro{font-family:'DM Sans',system-ui,sans-serif;color:var(--text)}
+.onia-python .py-topic > p, .onia-python .py-topic > ul > li,
+.onia-python .py-topic > ol > li, .onia-python .py-intro > p,
+.onia-data-lesson .py-topic > p, .onia-data-lesson .py-topic > ul > li,
+.onia-data-lesson .py-topic > ol > li{font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.78;color:var(--text)}
+.onia-python .py-topic h2,.onia-python .py-topic h3,.onia-python .py-topic-head h2{
+  font-family:'Space Grotesk','DM Sans',system-ui,sans-serif;color:var(--text)}
+.onia-python .py-code-card pre,.onia-python .py-code-card pre span{
+  font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;font-size:12.5px;line-height:1.64}
+.onia-python .onia-figure figcaption,.onia-data-lesson .onia-figure figcaption{font-family:'DM Sans',system-ui,sans-serif;font-size:12px;line-height:1.6;color:var(--sub)}
+/* Alinierea familiilor și mărimilor de bază și în lecțiile NLP/nesupervizate. */
+.onia-nlp,.onia-unsup,.ch-overview{
+  font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.78;color:var(--text)}
+.onia-nlp .nlp-topic > p,.onia-nlp .nlp-topic > ul > li,
+.onia-unsup .uns-topic > p,.onia-unsup .uns-topic > ul > li,
+.onia-data-science .ds-topic-body > p{
+  font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.78;color:var(--text)}
+.onia-nlp .nlp-topic h2,.onia-unsup .uns-head h2,
+.onia-data-science .ds-topic-head h2{
+  font-family:'Space Grotesk','DM Sans',system-ui,sans-serif;color:var(--text)}
