@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<meta content="Computer Vision: applications, architectures, metrics and PyTorch. Interactive machine learning material for Year IV students, 2026–2027." name="description"/>
+<title>Computer Vision · Interactive course companion | Machine Learning · AC</title>
+<link href="styles.css" rel="stylesheet"/>
+<style id="ma-navigation-material-style">
+        .ma-material-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 11px clamp(18px, 3vw, 43px);
+            background: #eef5ff;
+            border-bottom: 1px solid #d8e6f6;
+            font: 700 12px/1.4 Inter, "Segoe UI", Arial, sans-serif;
+            color: #234b80
+        }
+
+        .ma-material-strip .ma-material-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        .ma-material-strip .ma-material-return {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            border: 1px solid #bad4ef;
+            background: #fff;
+            color: #1c518a;
+            padding: 8px 15px;
+            border-radius: 999px;
+            min-height: 36px;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap
+        }
+
+        .ma-material-strip .ma-material-return:hover {
+            background: #e1efff;
+            border-color: #78a8df
+        }
+
+        .ma-material-strip .ma-material-return:focus-visible, .ma-side-home:focus-visible {
+            outline: 3px solid #4677b6;
+            outline-offset: 3px
+        }
+
+        .ma-side-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #d7eeff;
+            font: 750 12px/1.5 Inter, "Segoe UI", Arial, sans-serif;
+            padding: 11px 13px;
+            margin: 13px 10px 16px;
+            background: rgba(103, 162, 215, .14);
+            border: 1px solid rgba(142, 193, 234, .22);
+            border-radius: 11px
+        }
+
+        .ma-side-home:hover {
+            background: rgba(103, 162, 215, .24);
+            color: #fff;
+            border-color: #79a1d5
+        }
+
+        body.dark .ma-material-strip {
+            background: #142c48;
+            border-color: #284861;
+            color: #e4f0ff
+        }
+
+        body.dark .ma-material-strip .ma-material-return {
+            background: #254664;
+            color: #fff;
+            border-color: #447395
+        }
+
+        @media (max-width: 620px) {
+            .ma-material-strip {
+                gap: 10px;
+                padding: 10px 14px
+            }
+
+            .ma-material-strip .ma-material-label {
+                font-size: 10px
+            }
+
+            .ma-side-home {
+                margin: 12px 8px
+            }
+        }
+
+        @media print {
+            .ma-material-strip, .ma-side-home {
+                display: none !important
+            }
+        }
+    </style>
+<link href="../resurse/identitate_unitara_albastra.css" rel="stylesheet"/>
+<link href="../resurse/language.css" rel="stylesheet"/><script src="../resurse/language.js"></script></head>
+<body class="ia-course-three">
+<div class="app-shell" id="top">
+<aside aria-label="Course navigation" class="sidebar">
+<a aria-label="Home page" class="brand" href="#top"><span class="brand-emblem">AC<span class="emblem-dot"></span></span><span><strong>Machine Learning</strong><small>Interactive material · 2026–2027</small></span></a>
+<a class="ma-side-home" href="../index.en.html">← Home</a>
+<div class="sidebar-label">COMPUTER VISION APPLICATIONS</div>
+<nav id="toc">
+<a class="nav-link active" href="#intro"><span>01</span> Overview</a>
+<a class="nav-link" href="#clasificare"><span>02</span> Classification</a>
+<a class="nav-link" href="#convolutii"><span>03</span> Convolutions and architectures</a>
+<a class="nav-link" href="#detectie"><span>04</span> Object detection</a>
+<a class="nav-link" href="#segmentare"><span>05</span> Semantic segmentation</a>
+<a class="nav-link" href="#instante"><span>06</span> Instance &amp; panoptic segmentation</a>
+<a class="nav-link" href="#metrici"><span>07</span> Metrics and evaluation</a>
+<a class="nav-link" href="#antrenare"><span>08</span> Training and robustness</a>
+<a class="nav-link" href="#pytorch"><span>09</span> Python &amp; PyTorch</a>
+<a class="nav-link" href="#studiu"><span>10</span> Case study</a>
+<a class="nav-link" href="#autoevaluare"><span>11</span> Self-assessment</a>
+<a class="nav-link" href="#referinte"><span>12</span> References</a>
+</nav>
+<div class="sidebar-bottom">
+<div class="progress-label"><span>Reading progress</span><strong id="course-progress">0%</strong></div>
+<div class="progress-track">
+<div id="progress-fill"></div>
+</div>
+<p>Faculty of Automatic Control and Computers<br/>POLITEHNICA University of Bucharest</p>
+<button class="quiet-btn" id="print-button" type="button">Print material <span>↗</span></button>
+</div>
+</aside>
+<div class="work-area">
+<nav aria-label="Navigate between the three Machine Learning courses" class="ma-course-switcher">
+<a class="ma-series-home" href="../index.en.html" title="Back to the course series">
+<span aria-hidden="true" class="ma-logo">∑</span>
+<span class="ma-brand-lines"><strong>MACHINE LEARNING</strong><small>AC · Year IV · 2026–2027</small></span>
+</a>
+<div class="ma-course-tabs">
+<a class="ma-tab" href="../curs_01_fundamente_optimizare/index.en.html"><span class="ma-n">01</span>
+                    Activations &amp; optimization</a>
+<a class="ma-tab" href="../curs_02_retele_convolutionale/index.en.html"><span class="ma-n">02</span> Convolutional networks</a>
+<a aria-current="page" class="ma-tab" href="../curs_03_aplicatii_computer_vision/index.en.html"><span class="ma-n">03</span> Computer Vision applications</a>
+</div>
+</nav>
+<div aria-label="Navigate to home" class="ma-material-strip" role="navigation"><span class="ma-material-label">Interactive course companion · Machine Learning · 2026–2027</span><div class="ml-language-row"><nav aria-label="Language / Language" class="ml-language"><span class="ml-language-label">Language</span><a data-ml-language="ro" href="index.html?lang=ro" hreflang="ro" lang="ro">RO</a><a aria-current="true" data-ml-language="en" href="index.en.html?lang=en" hreflang="en" lang="en">EN</a></nav><a class="ma-material-return" href="../index.en.html">← Home</a></div></div>
+<header class="topbar">
+<div class="breadcrumb">MACHINE LEARNING <span>/</span> YEAR IV <span>/</span> COMPUTER VISION</div>
+<div class="topbar-right"><span class="tag tag-online">12 chapters</span><span class="tag">classification · detection · segmentation</span><span class="tag">2026–2027 edition</span></div>
+</header>
+<main>
+<section class="hero section-anchor" id="intro">
+<div class="hero-copy">
+<div class="overline">INTERACTIVE COURSE COMPANION / COMPUTER VISION</div>
+<h1>From pixels to<br/><span>understanding images</span></h1>
+<p>A rigorous perspective on image classification, detection and segmentation: mathematical representations, neural architectures, controlled experiments and Python + PyTorch implementations.</p>
+<div class="hero-meta"><span>YEAR IV</span><span>MACHINE LEARNING</span><span>2026–2027</span>
+</div>
+<a class="primary-cta" href="#harta">Explore applications <span>↓</span></a></div>
+<div class="hero-visual">
+<div class="visual-toolbar"><span><i></i> URBAN SCENE · ILLUSTRATIVE EXPLANATIONS</span><span id="scene-mode-label">CLASSIFICATION</span></div>
+<div aria-label="Realistic urban example for classification, detection and segmentation" class="cv-real-hero" data-mode="classification" id="cv-scene" role="img">
+<img alt="Realistic urban scene with two cars, a pedestrian, buildings and vegetation" class="cv-photo" src="assets/urban/street_original.webp"/>
+<img alt="" class="cv-hero-tint cv-hero-semantic" src="assets/urban/preview_semantic.webp"/>
+<img alt="" class="cv-hero-tint cv-hero-instance" src="assets/urban/preview_instance.webp"/>
+<svg aria-hidden="true" class="cv-hero-boxes" viewbox="0 0 1536 1024">
+<rect height="276" rx="18" width="694" x="135" y="536"></rect>
+<rect height="182" rx="16" width="318" x="965" y="524"></rect>
+<rect height="300" rx="14" transform="translate(-150 0)" width="104" x="1528" y="502"></rect>
+<g>
+<rect height="40" rx="8" width="254" x="137" y="492"></rect>
+<text x="153" y="518">car · 0.97</text>
+<rect height="40" rx="8" width="248" x="965" y="478"></rect>
+<text x="981" y="504">taxi · 0.94</text>
+<rect height="42" rx="8" width="264" x="1218" y="455"></rect>
+<text x="1234" y="482">person · 0.91</text>
+</g>
+</svg>
+<div class="cv-hero-label cv-hero-classify">Prediction: urban traffic scene</div>
+</div>
+<div aria-label="Image display mode" class="scene-controls" role="group">
+<button class="scene-btn active" data-scene="classification">Classification</button>
+<button class="scene-btn" data-scene="detection">Detection</button>
+<button class="scene-btn" data-scene="semantic">Semantic</button>
+<button class="scene-btn" data-scene="instance">Instance</button>
+</div>
+<div class="scene-output">
+<div><span>OUTPUT SHAPE</span><strong id="scene-shape">(B, C)</strong></div>
+<div><span>PREDICTION UNIT</span><strong id="scene-unit">the image</strong></div>
+<div><span>INTERPRETATION</span><strong id="scene-description">a distribution over classes</strong>
+</div>
+</div>
+</div>
+</section>
+<div class="content">
+<section class="section-anchor module" id="harta">
+<div class="chapter-title">
+<div><span class="section-count">01 / FUNDAMENTALS</span>
+<h2>What question does each task answer?</h2>
+<p>For the same input, changing the problem formulation changes the architecture, label representation, loss function and evaluation metric.</p></div>
+</div>
+<div class="cv-top-visual">
+<div class="cv-top-visual-img"><img alt="Photorealistic urban scene with objects, road and buildings" src="assets/urban/street_original.webp"/><span>THE SAME VISUAL DATA</span>
+</div>
+<div class="cv-top-visual-explain"><h3>One image · four levels of understanding</h3>
+<p>We start with a scene containing two cars, a pedestrian, buildings, vegetation and road surfaces. Depending on the problem formulation, we choose a different output: image labels, boxes, per-pixel classes or instance identities.</p>
+<div class="cv-top-visual-grid">
+<span><b>01</b> Classification</span><span><b>02</b> Detection</span><span><b>03</b> Segmentation</span><span><b>04</b> Panoptic</span>
+</div>
+</div>
+</div>
+<div class="task-grid">
+<article class="task-card"><span class="task-number">01</span>
+<div class="task-symbol">
+<svg viewbox="0 0 64 56">
+<rect fill="#e4efff" height="42" rx="7" width="50" x="7" y="7"></rect>
+<path d="M14 39l10-12 9 8 9-15 10 19" fill="none" stroke="#2968c0" stroke-width="3"></path>
+<circle cx="22" cy="20" fill="#ffb14b" r="4"></circle>
+</svg>
+</div>
+<h3>Classification</h3>
+<p>Which category describes the image?</p><code>(B, C)</code></article>
+<article class="task-card"><span class="task-number">02</span>
+<div class="task-symbol">
+<svg viewbox="0 0 64 56">
+<rect fill="#e4efff" height="40" rx="5" width="54" x="5" y="8"></rect>
+<path d="M12 17h23v24H12z" fill="none" stroke="#2968c0" stroke-width="3"></path>
+<path d="M37 22h15v20H37z" fill="none" stroke="#e19a48" stroke-width="3"></path>
+</svg>
+</div>
+<h3>Detection</h3>
+<p>Where are the objects and what are their classes?</p><code>boxes, labels, scores</code></article>
+<article class="task-card"><span class="task-number">03</span>
+<div class="task-symbol">
+<svg viewbox="0 0 64 56">
+<rect fill="#d9edfc" height="42" rx="5" width="50" x="7" y="7"></rect>
+<path d="M7 35h50v14H7z" fill="#8a65d1"></path>
+<path d="M18 35V18h19v17z" fill="#ffb14b"></path>
+<circle cx="46" cy="26" fill="#3970b8" r="7"></circle>
+</svg>
+</div>
+<h3>Semantic segmentation</h3>
+<p>Which class does each pixel belong to?</p><code>(B, C, H, W)</code></article>
+<article class="task-card"><span class="task-number">04</span>
+<div class="task-symbol">
+<svg viewbox="0 0 64 56">
+<rect fill="#e4efff" height="40" rx="5" width="54" x="5" y="8"></rect>
+<circle cx="20" cy="25" fill="#438eee" r="11"></circle>
+<circle cx="43" cy="31" fill="#ffa54a" r="11"></circle>
+<circle cx="43" cy="14" fill="#608bc3" r="5"></circle>
+</svg>
+</div>
+<h3>Instance segmentation</h3>
+<p>Which pixels belong to each instance?</p><code>N măști + clase + scoruri</code></article>
+</div>
+<div class="insight"><strong>Fundamental distinction</strong><span>Detection and instance segmentation generally return a <em>variable</em> number of objects after filtering. Intermediate tensors, however, may have fixed capacity: proposals, anchors or object queries.</span>
+</div>
+<div class="rich-figure overview-figure">
+<div class="panel-heading"><h3>Comparative example: same image, different tasks</h3><span class="pill subtle">VISUAL SUPPORT</span></div>
+<p class="muted">The image below clearly illustrates the difference between
+                            <strong>classification</strong>, <strong>detection</strong>, <strong>semantic segmentation</strong> and <strong>instance segmentation</strong>.</p>
+<figure>
+<img alt="Comparison of computer vision tasks: categorization, detection, segmentation and instance segmentation" src="assets/figs/fig1.png"/>
+</figure>
+<div class="figure-kpis">
+<article><strong>Classification</strong><span>one image-level output or a set of labels</span>
+</article>
+<article>
+<strong>Detection</strong><span>boxes + classes + scores for each object</span>
+</article>
+<article><strong>Semantic</strong><span>one class per pixel, without separating instances</span>
+</article>
+<article><strong>Instance</strong><span>separate masks for each individual object</span></article>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="clasificare">
+<div class="chapter-title">
+<div><span class="section-count">02 / CLASSIFICATION</span>
+<h2>From logits to probabilities</h2>
+<p>The network returns <em>logits</em>, not probabilities. Softmax normalizes them, and cross-entropy penalizes insufficient probability assigned to the correct class.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Experiment · Softmax and temperature</h3><span class="pill">INTERACTIVE</span>
+</div>
+<p class="muted">Change the raw scores and temperature. Observe how the distribution changes without necessarily changing the winning class.</p>
+<div class="form-grid"><label>“Car” logit <strong id="logit-a-val">2,5</strong><input id="logit-a" max="5" min="-3" step="0.1" type="range" value="2.5"/></label><label>“Person” logit <strong id="logit-b-val">1,0</strong><input id="logit-b" max="5" min="-3" step="0.1" type="range" value="1"/></label><label>“Building” logit <strong id="logit-c-val">0,0</strong><input id="logit-c" max="5" min="-3" step="0.1" type="range" value="0"/></label><label>Temperature
+                                <em>T</em> <strong id="temperature-val">1,0</strong><input id="temperature" max="3" min="0.3" step="0.1" type="range" value="1"/></label></div>
+<div aria-live="polite" class="bars" id="softmax-bars"></div>
+<div class="mini-stats">
+<div><span>Estimated class</span><strong id="softmax-class">—</strong></div>
+<div><span>Entropy [nats]</span><strong id="softmax-entropy">—</strong></div>
+<div><span>Σ probabilities</span><strong id="softmax-sum">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Mathematical model</h3><span class="pill subtle">THEORY</span>
+</div>
+<div class="equation"><span class="eq-num">(1)</span>
+<math display="block">
+<msub>
+<mi>p</mi>
+<mi>k</mi>
+</msub>
+<mo>=</mo>
+<mfrac>
+<msup>
+<mi>e</mi>
+<mrow>
+<msub>
+<mi>z</mi>
+<mi>k</mi>
+</msub>
+<mo>/</mo>
+<mi>T</mi>
+</mrow>
+</msup>
+<mrow>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>j</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>C</mi>
+</munderover>
+<msup>
+<mi>e</mi>
+<mrow>
+<msub>
+<mi>z</mi>
+<mi>j</mi>
+</msub>
+<mo>/</mo>
+<mi>T</mi>
+</mrow>
+</msup>
+</mrow>
+</mfrac>
+</math>
+</div>
+<p><strong>z<sub>k</sub></strong> is the logit of class <em>k</em>; <strong>T</strong> is the temperature. When <em>T → 0⁺</em>, the distribution becomes more concentrated; when <em>T</em>
+                                increases, it becomes more uniform.</p>
+<div class="equation"><span class="eq-num">(2)</span>
+<math display="block">
+<msub>
+<mi>ℒ</mi>
+<mtext>CE</mtext>
+</msub>
+<mo>=</mo>
+<mo>−</mo>
+<mi>log</mi>
+<mo>⁡</mo>
+<msub>
+<mi>p</mi>
+<mi>y</mi>
+</msub>
+<mo>=</mo>
+<mo>−</mo>
+<msub>
+<mi>z</mi>
+<mi>y</mi>
+</msub>
+<mo>+</mo>
+<mi>log</mi>
+<mo>⁡</mo>
+<mrow>
+<mo>(</mo>
+<munder>
+<mo>∑</mo>
+<mi>j</mi>
+</munder>
+<msup>
+<mi>e</mi>
+<msub>
+<mi>z</mi>
+<mi>j</mi>
+</msub>
+</msup>
+<mo>)</mo>
+</mrow>
+</math>
+</div>
+<p>The formula on the right is for <em>T = 1</em>. In PyTorch,
+                                <code>nn.CrossEntropyLoss</code> receives logits directly and internally computes <em>log-softmax
+                                    + NLL</em>.</p>
+<div class="note-note">The temperature in the experiment is a prediction transformation; it should not be confused with changing network parameters.
+                            </div>
+</div>
+</div>
+<div class="three-cards">
+<article class="concept-card"><span>ARCHITECTURE</span><h4>Backbone</h4>
+<p>ResNet, EfficientNet or ViT extract visual representations.</p></article>
+<article class="concept-card"><span>OUTPUT</span><h4>Logits <code>ℝ<sup>B×C</sup></code></h4>
+<p>One score per class; softmax is used for multiclass classification.</p></article>
+<article class="concept-card"><span>METRIC</span><h4>Accuracy, F1, AUROC</h4>
+<p>The choice depends on class imbalance and the cost of errors.</p></article>
+</div>
+<div class="panel family-panel classifier-family-panel">
+<div class="panel-heading"><h3>Single-label, multi-label and other formulations</h3><span class="pill">INTERACTIVE</span></div>
+<p class="muted">The same image can be used for different problems, depending on label type. Select a formulation and observe output shape, activation function, loss and final decision.</p>
+<div aria-label="Visual classification formulations" class="family-tabs" id="cls-tabs" role="tablist">
+<button class="family-tab active" data-cls="single" type="button">Single-label / multiclass
+                            </button>
+<button class="family-tab" data-cls="multilabel" type="button">Multi-label</button>
+<button class="family-tab" data-cls="ovr" type="button">K one-vs-rest classifiers
+                            </button>
+<button class="family-tab" data-cls="twologits" type="button">2 logits per class</button>
+</div>
+<div class="family-layout">
+<div class="family-main">
+<h4 id="cls-title">—</h4>
+<p class="family-lead" id="cls-problem">—</p>
+<div class="equation family-eq" id="cls-formula"></div>
+<div class="mini-stats family-stats">
+<div><span>Activation</span><strong id="cls-activation">—</strong></div>
+<div><span>Typical loss</span><strong id="cls-loss">—</strong></div>
+<div><span>Output model</span><strong id="cls-output">—</strong></div>
+<div><span>Target</span><strong id="cls-target">—</strong></div>
+</div>
+<div class="approach-note" id="cls-notes">—</div>
+</div>
+<aside class="family-side">
+<div class="head-diagram" id="cls-diagram"></div>
+<div class="family-bullets" id="cls-bullets"></div>
+</aside>
+</div>
+<div class="three-cards alt-three-cards">
+<article class="concept-card"><span>ARCHITECTURE EXAMPLES</span><h4>ResNet / EfficientNet /
+                                ConvNeXt</h4>
+<p>Classical CNN backbone, usually followed by <em>global average pooling</em> and a linear layer.</p></article>
+<article class="concept-card"><span>FOR LARGE DATASETS</span><h4>ViT / DeiT / Swin</h4>
+<p>Image patches become tokens; the classification head produces class logits or independent scores.</p></article>
+<article class="concept-card"><span>DECISION</span><h4>argmax vs. per-class threshold</h4>
+<p>Single-label classification chooses the highest-scoring class; multi-label classification applies individual thresholds, because several labels may be true simultaneously.</p></article>
+</div>
+</div>
+<div class="visual-board classification-visual-board">
+<div class="panel-heading"><h3>Architecture diagram and output formulation</h3><span class="pill subtle">VISUAL</span></div>
+<div class="image-gallery two-up">
+<figure class="figure-card">
+<img alt="Visual pipeline example for image classification or localization" src="assets/figs/fig10.png"/>
+<figcaption><strong>Basic classification workflow.</strong> The image is transformed into feature maps and then into a score vector (<em>logits</em>) for classes.
+                                </figcaption>
+</figure>
+<figure class="figure-card">
+<img alt="Visual example with a region of interest and final classification" src="assets/figs/fig12.png"/>
+<figcaption><strong>Classification output for a region.</strong> In practice, the backbone may be shared while the output head differs by formulation: multiclass, multi-label, one-vs-rest or two logits per class.
+                                </figcaption>
+</figure>
+</div>
+<div class="figure-kpis compact">
+<article><strong>Multiclass</strong><span>softmax over <em>C</em> classes, one correct class</span>
+</article>
+<article><strong>Multi-label</strong><span>independent sigmoid for each class</span>
+</article>
+<article><strong>One-vs-rest</strong><span><em>K</em> binary classifiers or a shared head with <em>K</em> outputs</span>
+</article>
+<article><strong>2 logits / class</strong><span>a local “absent / present” competition for each label</span>
+</article>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="convolutii">
+<div class="chapter-title">
+<div><span class="section-count">03 / ARCHITECTURES</span>
+<h2>Convolutions, feature maps and receptive fields</h2>
+<p>Explore numerically the operation used in <code>Conv2d</code>. In standard deep learning implementations, the operation is <em>cross-correlation</em> (the kernel is not flipped), although the layer is called convolutional.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Explorer · 3×3 filter</h3><span class="pill">INTERACTIVE</span></div>
+<div class="input-row"><label for="kernel-select">Filter</label><select id="kernel-select">
+<option value="edge">Vertical edge detection</option>
+<option value="blur">Smoothing (blur)</option>
+<option value="sharp">Edge enhancement</option>
+<option value="identity">Identity</option>
+</select></div>
+<div class="matrix-grid">
+<div>
+<div class="matrix-caption">INPUT IMAGE · 7 × 7</div>
+<div aria-label="Input matrix; select the filter position" class="pixel-grid conv-input" id="conv-input"></div>
+</div>
+<div class="matrix-middle"><span>⊛</span>
+<div class="matrix-caption">KERNEL 3 × 3</div>
+<div class="pixel-grid conv-kernel" id="conv-kernel"></div>
+</div>
+<div>
+<div class="matrix-caption">FEATURE MAP · 5 × 5</div>
+<div class="pixel-grid conv-output" id="conv-output"></div>
+</div>
+</div>
+<p class="micro-text">Select a feature map cell to highlight the 3 × 3 window and compute the dot product.</p>
+<div class="result-strip"><span>Response at the selected position</span><strong id="conv-value">—</strong><span id="conv-operation">—</span></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Dimensions, parameters, cost</h3></div>
+<div class="equation"><span class="eq-num">(3)</span>
+<math display="block">
+<msub>
+<mi>H</mi>
+<mtext>out</mtext>
+</msub>
+<mo>=</mo>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>+</mo>
+<mn>2</mn>
+<mi>P</mi>
+<mo>−</mo>
+<mi>D</mi>
+<mo>(</mo>
+<mi>K</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+<mi>S</mi>
+</mfrac>
+<mo>⌋</mo>
+<mo>+</mo>
+<mn>1</mn>
+</math>
+</div>
+<p>Analogous for width. <strong>K</strong> = filter size, <strong>P</strong> =
+                                padding, <strong>D</strong> = dilation, <strong>S</strong> = stride.</p>
+<div class="shape-demo">
+<div class="shape-block">(B, C<sub>in</sub>, H, W)</div>
+<span>→</span>
+<div class="shape-block accent">Conv2d</div>
+<span>→</span>
+<div class="shape-block">(B, C<sub>out</sub>, H′, W′)</div>
+</div>
+<div class="equation">
+<math display="block">
+<mi>#</mi>
+<mtext>parametri</mtext>
+<mo>=</mo>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<mo>(</mo>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msup>
+<mi>K</mi>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<mn>1</mn>
+<mo>)</mo>
+</math>
+</div>
+<p class="micro-text">The formula assumes a square kernel, <code>groups=1</code> and bias enabled. For depthwise or grouped convolutions, the parameter count differs.</p>
+<div class="note-note">Residual connections <strong>ResNet</strong> learns <em>F(x) +
+                                x</em>; <strong>U-Net</strong> combines deep semantic information with spatial detail through <em>skip connections</em>.
+                            </div>
+</div>
+</div>
+<div class="panel architecture-panel">
+<div class="panel-heading"><h3>From classification to segmentation · two architecture families</h3></div>
+<div class="diagram-flow">
+<div class="flow-box"><strong>Input</strong><small>H × W × 3</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-box blue"><strong>Backbone</strong><small>ResNet / ViT</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-box"><strong>Feature maps</strong><small>semantics + space</small>
+</div>
+<span class="flow-arrow">→</span>
+<div class="flow-stack">
+<div class="flow-box green"><strong>Classification head</strong><small>logits C</small>
+</div>
+<div class="flow-box orange"><strong>Detection head</strong><small>boxes + classes</small>
+</div>
+<div class="flow-box violet"><strong>Segmentation head</strong><small>H × W masks</small></div>
+</div>
+</div>
+<div class="mini-compare">
+<div><strong>CNN</strong><span>Local inductive bias, translation, feature pyramids.</span>
+</div>
+<div>
+<strong>ViT</strong><span>The image is divided into patches, treated as tokens.</span>
+</div>
+<div class="vit-control"><label for="patch-size">Patch size <strong id="patch-label">16</strong></label><select id="patch-size">
+<option value="8">8 × 8</option>
+<option selected="" value="16">16 × 16</option>
+<option value="32">32 × 32</option>
+</select><strong id="patch-count">196 patches + CLS token</strong><span>for 224 × 224 input; ViT with CLS token</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="detectie">
+<div class="chapter-title">
+<div><span class="section-count">04 / OBJECT DETECTION</span>
+<h2>From candidate boxes to final objects</h2>
+<p>A detector may produce many overlapping hypotheses. The confidence threshold and Non-Maximum Suppression (NMS) determine which detections remain.</p></div>
+</div>
+<div class="two-cols detection-layout">
+<div class="panel">
+<div class="panel-heading"><h3>Experiment · class-wise greedy NMS</h3><span class="pill">INTERACTIVE</span>
+</div>
+<svg aria-label="Four overlapping candidate regions for object detection" id="nms-svg" role="img" viewbox="0 0 560 330">
+<defs>
+<lineargradient id="nms-bg" x1="0" x2="1" y1="0" y2="1">
+<stop stop-color="#f1f7ff"></stop>
+<stop offset="1" stop-color="#dbeafa"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#nms-bg)" height="330" rx="10" width="560"></rect>
+<rect fill="#d5e0eb" height="76" width="560" x="0" y="254"></rect>
+<g transform="translate(48 80)">
+<path d="M20 160l20-70q12-25 46-25h116q27 0 48 29l26 66 25 12v36H7v-33z" fill="#3979be"></path>
+<path d="M57 144l17-50h75v50zm109-50h42q12 0 24 17l16 33h-82z" fill="#b8dffa"></path>
+<circle cx="66" cy="205" fill="#2b4561" r="19"></circle>
+<circle cx="242" cy="205" fill="#2b4561" r="19"></circle>
+</g>
+<g id="nms-boxes"></g>
+</svg>
+<div class="form-grid"><label>Score threshold <strong id="nms-score-val">0,50</strong><input id="nms-score" max="0.95" min="0" step="0.05" type="range" value="0.5"/></label><label>IoU threshold for NMS <strong id="nms-iou-val">0,50</strong><input id="nms-iou" max="0.95" min="0.1" step="0.05" type="range" value="0.5"/></label></div>
+<div class="result-strip"><span>Retained detections</span><strong id="nms-count">—</strong><span id="nms-explanation">—</span></div>
+<div class="legend"><span><i style="background:#1d6fd2"></i> retained</span><span><i style="background:#dc8b52"></i> suppressed (IoU)</span><span><i style="background:#aab6c6"></i> below score threshold</span></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Inference pipeline</h3></div>
+<ol class="steps">
+<li><strong>Candidate predictions</strong>
+<p>Regions, confidence scores and class distributions; several hypotheses may describe the same object.</p></li>
+<li><strong>Score filtering</strong>
+<p>Hypotheses with insufficient scores are removed; in practice there may also be top-K limits.</p></li>
+<li><strong>NMS</strong>
+<p>The highest-scoring detection is selected and detections with excessive overlap are removed, usually within the same class.</p></li>
+<li><strong>The result</strong>
+<p><code>boxes[N,4]</code>, <code>labels[N]</code>, <code>scores[N]</code>;
+                                        <em>N</em> depends on the image and filtering.</p></li>
+</ol>
+<div class="note-note"><strong>Important detail:</strong> NMS is a post-processing heuristic. DETR-style models use set prediction through a different mechanism and do not require NMS in their original formulation.
+                            </div>
+</div>
+</div>
+<div class="panel cv-detection-lab" id="cvDetectionLab">
+<div class="cv-lab-eyebrow"><span class="cv-dot"></span> ANIMATED WALKTHROUGH · OBJECT DETECTION
+                        </div>
+<div class="cv-lab-head">
+<div><h3>From the RGB image to boxes and scores</h3>
+<p>Follow a detector's process: feature extraction, candidate generation, NMS selection and final objects. Step through manually or start the animation.</p></div>
+<span class="cv-lab-mark">DEMO 03.4</span></div>
+<div class="cv-pipeline-steps" id="cvDetSteps">
+<button class="active" data-detstep="0" type="button"><b>01</b><strong>Input</strong><small>RGB</small>
+</button>
+<button data-detstep="1" type="button"><b>02</b><strong>Features</strong><small>backbone +
+                                neck</small></button>
+<button data-detstep="2" type="button"><b>03</b><strong>Candidate</strong><small>dense boxes</small></button>
+<button data-detstep="3" type="button"><b>04</b><strong>NMS</strong><small>suppression</small>
+</button>
+<button data-detstep="4" type="button"><b>05</b><strong>Output</strong><small>N detections</small></button>
+</div>
+<div class="cv-det-main">
+<div class="cv-det-picture" data-stage="0" id="cvDetPicture"><img alt="Photorealistic scene used for the detection demonstration" src="assets/urban/street_original.webp"/>
+<div class="cv-det-feature-overlay"></div>
+<svg aria-hidden="true" class="cv-det-box-svg" viewbox="0 0 1536 1024">
+<g class="cv-det-candidates" fill="none" stroke="#f5bd6e" stroke-dasharray="14 11" stroke-width="5">
+<rect height="293" rx="15" width="738" x="115" y="526"></rect>
+<rect height="264" rx="12" width="704" x="139" y="541"></rect>
+<rect height="285" rx="14" width="647" x="185" y="554"></rect>
+<rect height="211" rx="12" width="333" x="961" y="516"></rect>
+<rect height="181" rx="12" width="314" x="974" y="529"></rect>
+<rect height="154" rx="12" width="327" x="981" y="541"></rect>
+<rect height="286" rx="12" width="135" x="1354" y="495"></rect>
+<rect height="248" rx="12" width="122" x="1372" y="519"></rect>
+</g>
+<g class="cv-det-final" fill="none" stroke-width="6">
+<rect height="284" rx="14" stroke="#4888dc" width="692" x="144" y="532"></rect>
+<rect height="193" rx="14" stroke="#ffc369" width="319" x="969" y="528"></rect>
+<rect height="264" rx="14" stroke="#fd728c" width="128" x="1363" y="515"></rect>
+</g>
+</svg>
+<div class="cv-det-final-labels">
+<span>car · 0.97</span><span>taxi · 0.94</span><span>person · 0.91</span>
+</div>
+<div class="cv-det-image-stamp" id="cvDetImageStamp">INPUT: RGB IMAGE</div>
+</div>
+<aside class="cv-det-explain"><span>CURRENT STAGE</span><h4 id="cvDetTitle">RGB image</h4>
+<p id="cvDetDesc">The detector receives an RGB image. It extracts features at several resolutions before generating predictions.</p>
+<div class="cv-det-tensor" id="cvDetTensor">Input tensor: (B,3,H,W)</div>
+<div class="cv-det-output" id="cvDetOutput"><strong>Illustrative output</strong><code>image.shape
+                                    = (3, H, W)</code></div>
+<div class="cv-seg-stepbtns">
+<button id="cvDetPrev" type="button">‹ Previous</button>
+<button id="cvDetNext" type="button">Next ›</button>
+<button id="cvDetPlay" type="button">▶ Animate</button>
+</div>
+</aside>
+</div>
+<div class="cv-det-foot"><strong>Interpretation note:</strong> illustrative coordinates, scores and masks show the format of the result. They are not measurements from a detector trained on the photograph above.
+                        </div>
+</div>
+<div class="panel arch-panel advanced-arch-panel">
+<div class="panel-heading"><h3>Modern detection architectures</h3><span class="pill">INTERACTIVE EXPLORER</span>
+</div>
+<p class="muted">Compare four widely used detector families: <strong>YOLO</strong>,
+                            <strong>Faster R-CNN</strong>, <strong>DETR</strong> and <strong>Deformable DETR</strong>. For each, observe how predictions are generated, what post-processing is used and in which scenarios it is advantageous.</p>
+<div aria-label="Modern detection architectures" class="family-tabs" id="det-arch-tabs" role="tablist">
+<button class="family-tab active" data-det="yolo" type="button">YOLO</button>
+<button class="family-tab" data-det="faster" type="button">Faster R-CNN</button>
+<button class="family-tab" data-det="detr" type="button">DETR</button>
+<button class="family-tab" data-det="deformable" type="button">Deformable DETR</button>
+</div>
+<div class="family-layout arch-layout">
+<div class="family-main">
+<h4 id="det-arch-title">—</h4>
+<p class="family-lead" id="det-arch-problem">—</p>
+<div class="mini-stats family-stats">
+<div><span>Intermediate predictions</span><strong id="det-arch-output">—</strong>
+</div>
+<div><span>Post-processing</span><strong id="det-arch-post">—</strong></div>
+<div><span>Strength</span><strong id="det-arch-strength">—</strong></div>
+<div><span>Trade-off</span><strong id="det-arch-tradeoff">—</strong></div>
+</div>
+<div class="approach-note" id="det-arch-notes">—</div>
+<div class="pipeline-steps" id="det-arch-steps"></div>
+</div>
+<aside class="family-side">
+<div class="detector-diagram" id="det-arch-diagram"></div>
+<div class="family-bullets" id="det-arch-bullets"></div>
+</aside>
+</div>
+</div>
+<div class="visual-board detection-gallery">
+<div class="panel-heading"><h3>Visual pipeline for region-based detectors</h3><span class="pill subtle">PIPELINE</span></div>
+<div class="image-gallery three-up">
+<figure class="figure-card"><img alt="Regions of Interest from an image" src="assets/figs/fig15.png"/>
+<figcaption><strong>1. Region proposals.</strong> Candidate regions that may contain objects are generated.
+                                </figcaption>
+</figure>
+<figure class="figure-card"><img alt="RoI pooling and processing the whole image through a CNN" src="assets/figs/fig24.png"/>
+<figcaption><strong>2. Feature sharing.</strong> The whole image passes through the CNN, then features are extracted for each ROI.
+                                </figcaption>
+</figure>
+<figure class="figure-card"><img alt="Classification and bounding box regression heads" src="assets/figs/fig25.png"/>
+<figcaption><strong>3. Final heads.</strong> For each region, the class, box and, in extensions, the mask are predicted.
+                                </figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="segmentare">
+<div class="chapter-title">
+<div><span class="section-count">05 / SEMANTIC SEGMENTATION</span>
+<h2>Classifying each pixel</h2>
+<p>In semantic segmentation, the model produces class scores for each spatial position: <code>(B,C,H,W)</code>. After <code>argmax(dim=1)</code> a label map is obtained <code>(B,H,W)</code>.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Segmentation editor · correct the prediction</h3><span class="pill">INTERACTIVE</span></div>
+<div class="seg-legend"><span><i style="background:#dae8fa"></i> Background</span><span><i style="background:#8f73df"></i> Road</span><span><i style="background:#2c8eca"></i> Building</span><span><i style="background:#2bb99a"></i> Person</span></div>
+<div class="seg-pair">
+<div>
+<div class="matrix-caption">GROUND TRUTH</div>
+<div aria-label="Reference map" class="pixel-grid seg-grid" id="gt-grid"></div>
+</div>
+<div>
+<div class="matrix-caption">EDITABLE PREDICTION</div>
+<div aria-label="Prediction map; click to modify the pixel label" class="pixel-grid seg-grid" id="pred-grid" role="group"></div>
+</div>
+</div>
+<div class="input-row"><label for="paint-class">Class to apply on click</label><select id="paint-class">
+<option value="0">Background</option>
+<option value="1">Road</option>
+<option value="2">Building</option>
+<option value="3">Person</option>
+</select>
+<button class="secondary-btn" id="seg-reset">Reset</button>
+</div>
+<div class="mini-stats">
+<div><span>mIoU · present classes</span><strong id="seg-miou">—</strong></div>
+<div><span>Pixel accuracy</span><strong id="seg-acc">—</strong></div>
+<div><span>Modified pixels</span><strong id="seg-changes">0</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Segmentation: representation and loss</h3></div>
+<div class="equation">
+<math display="block">
+<mi>Z</mi>
+<mo>∈</mo>
+<msup>
+<mi>ℝ</mi>
+<mrow>
+<mi>B</mi>
+<mo>×</mo>
+<mi>C</mi>
+<mo>×</mo>
+<mi>H</mi>
+<mo>×</mo>
+<mi>W</mi>
+</mrow>
+</msup>
+<mo>,</mo>
+<mspace width=".6em"></mspace>
+<msub>
+<mover>
+<mi>y</mi>
+<mo>^</mo>
+</mover>
+<mrow>
+<mi>h</mi>
+<mi>w</mi>
+</mrow>
+</msub>
+<mo>=</mo>
+<munder>
+<mo>argmax</mo>
+<mi>c</mi>
+</munder>
+<msub>
+<mi>Z</mi>
+<mrow>
+<mi>c</mi>
+<mi>h</mi>
+<mi>w</mi>
+</mrow>
+</msub>
+</math>
+</div>
+<p>Cross-entropy is computed for each pixel, then aggregated. For an ignored class, use <code>ignore_index</code> with a value that is not a valid class.</p>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>IoU</mi>
+<mi>c</mi>
+</msub>
+<mo>=</mo>
+<mfrac>
+<msub>
+<mi>TP</mi>
+<mi>c</mi>
+</msub>
+<mrow>
+<msub>
+<mi>TP</mi>
+<mi>c</mi>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>FP</mi>
+<mi>c</mi>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>FN</mi>
+<mi>c</mi>
+</msub>
+</mrow>
+</mfrac>
+</math>
+</div>
+<p><strong>mIoU</strong> is the mean IoU across classes, according to the evaluation protocol. Classes absent from both masks must be handled explicitly (do not automatically assume IoU = 1).</p>
+<div class="note-note">If there are three people, all three may have the same semantic label “person.” Separating them requires <em>instance segmentation</em>.
+                            </div>
+</div>
+</div>
+<div class="architecture-strip">
+<div class="architecture-parts">
+<div><strong>Encoder</strong><span>downsampling</span></div>
+<div class="bridge"><span>feature maps</span></div>
+<div><strong>Decoder</strong><span>upsampling</span></div>
+<div><strong>Final map</strong><span>H × W × C</span></div>
+</div>
+<p>Examples: U-Net combines features at different resolutions through skip connections; DeepLabV3 uses atrous convolution and multiscale pooling. Not every segmenter has a symmetric decoder.</p></div>
+</section>
+<section class="section-anchor module" id="instante">
+<div class="chapter-title">
+<div><span class="section-count">06 / INSTANCE AND PANOPTIC SEGMENTATION</span>
+<h2>From individual masks to a fully explained scene</h2>
+<p>Instance segmentation distinguishes individual objects; panoptic segmentation unifies both <em>stuff</em> (road, sky, buildings) regions and
+                                <em>things</em> with their own identities.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Simulator · query-based instance segmentation</h3><span class="pill">INTERACTIVE</span></div>
+<div class="form-grid"><label>Number of queries <strong id="query-count-val">6</strong><input id="query-count" max="8" min="1" step="1" type="range" value="6"/></label><label>Object threshold <strong id="query-score-val">0,50</strong><input id="query-score" max="0.95" min="0.05" step="0.05" type="range" value="0.5"/></label></div>
+<div class="query-tiles" id="query-tiles"></div>
+<div class="result-strip"><span>Instances returned in the example</span><strong id="query-result">—</strong><span id="query-shape">—</span></div>
+<p class="micro-text">Educational simulation with predefined scores. Each query may predict a class/no-object and a mask; the example does not run a real model.</p></div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Two distinct paradigms</h3></div>
+<div class="comparison">
+<div><span class="model-type">REGION-BASED</span><h4>Mask R-CNN</h4>
+<p>Region proposals → classification/box regression → mask head; the number of detections is limited by candidates and post-processing settings.</p><code>masks:
+                                        (N, 1, H, W)</code><small>typical shape returned by Torchvision at inference; values are probabilities</small></div>
+<div><span class="model-type">QUERY-BASED</span><h4>Mask2Former and related models</h4>
+<p>A fixed set <em>Q</em> of queries generates class and mask predictions; only some are used as final instances.</p><code>class:
+                                        (Q,C+1), masks: (Q,h,w)</code><small>conceptual representation; exact details depend on the implementation</small></div>
+</div>
+<div class="note-note"><strong>Do not confuse:</strong> <em>Q</em> is decoder capacity, while <code>box_detections_per_img</code> is an inference limit in a Mask R-CNN configuration.
+                            </div>
+</div>
+</div>
+<div class="panel output-architecture">
+<div class="panel-heading"><h3>Output contract for a single image</h3></div>
+<div class="output-pills"><span><strong>boxes</strong><code>(N,4)</code></span><span><strong>labels</strong><code>(N,)</code></span><span><strong>scores</strong><code>(N,)</code></span><span><strong>masks</strong><code>(N,1,H,W)</code></span>
+</div>
+<p>In Torchvision Mask R-CNN, each returned mask contains probabilities for that instance; a binary mask is obtained after applying a threshold (for example, <code>masks &gt;
+                                0.5</code>). For another model or library, the shape may differ.</p>
+</div>
+<div class="panel cv-segment-premium seg-family-panel">
+<div class="cv-lab-eyebrow"><span class="cv-dot"></span> INTERACTIVE VISUALIZATION · SAME SCENE, THREE FORMULATIONS
+                        </div>
+<div class="cv-lab-head">
+<div><h3>Semantic, instance and panoptic segmentation</h3>
+<p>Compare the original photograph directly with the output map. The masks follow the outlines of cars, a pedestrian, trees, road and buildings; we no longer use schematic blocks.</p>
+</div>
+<span class="cv-lab-mark">DEMO 03.6</span>
+</div>
+<div aria-label="Choose segmentation type" class="family-tabs cv-mode-tabs" id="seg-tabs" role="tablist">
+<button class="family-tab active" data-seg="semantic" type="button">01 · Semantic</button>
+<button class="family-tab" data-seg="instance" type="button">02 · Instance</button>
+<button class="family-tab" data-seg="panoptic" type="button">03 · Panoptic</button>
+</div>
+<div class="cv-seg-tools">
+<div class="cv-seg-control"><label for="cvSegOpacity">Mask visibility: <strong id="cvSegOpacityText">100%</strong></label><input id="cvSegOpacity" max="100" min="0" step="5" type="range" value="100"/></div>
+<label class="cv-seg-check"><input checked="" id="cvSegLabels" type="checkbox"/> Show classes and identities</label>
+<div class="cv-seg-stepbtns">
+<button id="cvSegPrev" type="button">‹ Previous</button>
+<button id="cvSegNext" type="button">Next step ›</button>
+<button id="cvSegPlay" type="button">▶ Animate</button>
+</div>
+</div>
+<div class="cv-seg-compare" data-seg-mode="semantic" data-step="3" id="cvSegDemo">
+<div class="cv-photo-card">
+<div class="cv-photo-cap"><span><i>01</i> INPUT / RGB</span><em>1536 × 1024</em></div>
+<div class="cv-photo-frame"><img alt="Realistic input photograph with two cars, a person and buildings" src="assets/urban/street_original.webp"/><span class="cv-photo-caption">Input image · urban scene</span>
+</div>
+</div>
+<div class="cv-photo-card cv-output-card">
+<div class="cv-photo-cap"><span><i>02</i> <span id="cvSegOutputTitle">SEMANTIC MAP</span></span><em id="cvSegOutDim">H ×
+                                    W</em></div>
+<div class="cv-photo-frame"><img alt="" src="assets/urban/street_original.webp"/><img alt="Illustrative segmentation result overlaid on a photograph" class="cv-seg-mask-layer" id="cvSegOverlay" src="assets/urban/preview_semantic.webp"/>
+<div class="cv-seg-id-layer" id="cvSegLabelLayer">
+<span class="cv-seg-id car1" data-label="car1">car</span><span class="cv-seg-id car2" data-label="car2">car</span><span class="cv-seg-id person" data-label="person">person</span><span class="cv-seg-id road" data-label="road">road</span><span class="cv-seg-id building" data-label="building">buildings</span><span class="cv-seg-id tree" data-label="tree">vegetation</span>
+</div>
+<span class="cv-photo-caption cv-photo-caption-right" id="cvSegFrameCaption">Step 4 · final labels and masks</span>
+</div>
+</div>
+</div>
+<div aria-label="Segmentation stages" class="cv-flow-track" id="cvSegSteps">
+<button data-step="0" type="button">
+<strong>01</strong><span>Image</span><small>RGB</small></button>
+<button data-step="1" type="button"><strong>02</strong><span>Logits</span><small>per-pixel scores</small></button>
+<button data-step="2" type="button"><strong>03</strong><span>Decoding</span><small>masks / classes</small></button>
+<button class="active" data-step="3" type="button">
+<strong>04</strong><span>Result</span><small>classes + instances</small></button>
+</div>
+<div class="cv-lab-readout">
+<div class="cv-seg-legend" id="cvSegLegend"></div>
+<p id="seg-caption">In semantic segmentation, each pixel receives a class. Cars have the same class, without distinct identities.</p>
+</div>
+<div class="cv-seg-insights">
+<div><span>OUTPUT TYPE</span><strong id="seg-output">logits (B,C,H,W) → argmax</strong>
+</div>
+<div><span>LOSS FUNCTION</span><strong id="seg-loss">CrossEntropy / Dice</strong>
+</div>
+<div><span>METRICS</span><strong id="seg-metric">mIoU, Dice</strong></div>
+<div><span>ARCHITECTURES</span><strong id="seg-arch">DeepLab, U-Net, SegFormer</strong></div>
+</div>
+<div class="cv-seg-explainer">
+<div class="cv-seg-explain-left"><h4>What information does the model preserve and lose?</h4>
+<p id="seg-notes"></p></div>
+<div class="cv-seg-explain-right" id="seg-bullets"></div>
+</div>
+<p class="cv-demo-disclaimer">Photorealistic scene generated for this material; the segmentation maps are <strong>illustrative teaching masks</strong>, not evaluated predictions from a real model. They illustrate the structure and interpretation of results.</p>
+</div>
+<div class="panel arch-panel advanced-arch-panel">
+<div class="panel-heading"><h3>Modern families for segmentation and scene understanding</h3><span class="pill">ARCHITECTURES</span></div>
+<p class="muted">Here we compare three complementary directions: <strong>U-Net / DeepLab</strong>
+                            for semantic segmentation, <strong>Mask R-CNN</strong> for instance segmentation, and <strong>Mask2Former /
+                                OneFormer</strong> for universal segmentation.</p>
+<div aria-label="Modern segmentation architectures" class="family-tabs" id="seg-arch-tabs" role="tablist">
+<button class="family-tab active" data-sarch="unet" type="button">U-Net / DeepLab</button>
+<button class="family-tab" data-sarch="maskrcnn" type="button">Mask R-CNN</button>
+<button class="family-tab" data-sarch="mask2former" type="button">Mask2Former</button>
+<button class="family-tab" data-sarch="oneformer" type="button">OneFormer</button>
+</div>
+<div class="family-layout arch-layout">
+<div class="family-main">
+<h4 id="seg-arch-title">—</h4>
+<p class="family-lead" id="seg-arch-problem">—</p>
+<div class="mini-stats family-stats">
+<div><span>Typical output</span><strong id="seg-arch-output">—</strong></div>
+<div><span>Task type</span><strong id="seg-arch-task">—</strong></div>
+<div><span>Major advantage</span><strong id="seg-arch-strength">—</strong></div>
+<div><span>Where the cost arises</span><strong id="seg-arch-cost">—</strong></div>
+</div>
+<div class="approach-note" id="seg-arch-notes">—</div>
+<div class="pipeline-steps" id="seg-arch-steps"></div>
+</div>
+<aside class="family-side">
+<div class="detector-diagram" id="seg-arch-diagram"></div>
+<div class="family-bullets" id="seg-arch-bullets"></div>
+</aside>
+</div>
+</div>
+<div class="deep-dive-single">
+<section class="panel unet-master" id="unet-interactiv">
+<div class="panel-heading"><h3>U-Net architecture · interactive explorer</h3><span class="pill">SELECT A BLOCK</span></div>
+<p class="muted unet-intro">U-Net combines two seemingly contradictory objectives: <strong>semantic context</strong> by reducing resolution, and <strong>spatial precision</strong> by reconstructing it. The diagram shows an educational variant with three downsampling levels, padding to preserve dimensions and a 512 × 512 pixel input. Select any block or blue connection to learn exactly what operation it performs.
+                            </p>
+<div class="unet-controls">
+<button class="secondary-btn" id="unet-prev" type="button">← Back</button>
+<div aria-live="polite" class="unet-progress"><strong id="unet-current">1 /
+                                    10</strong><span id="unet-phase">Input image</span></div>
+<button class="secondary-btn" id="unet-next" type="button">Next →</button>
+<button aria-pressed="false" class="secondary-btn" id="unet-play" type="button">▶ Play stages
+                                </button>
+</div>
+<div aria-label="U-Net architecture diagram; scroll horizontally on small screens" class="unet-diagram-scroll">
+<svg aria-label="U-Net architecture with three downsampling stages, bottleneck, three upsampling stages and three skip connections" id="unet-svg" role="group" viewbox="0 0 1400 640">
+<defs>
+<lineargradient id="u-enc" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#f0f7ff"></stop>
+<stop offset="1" stop-color="#bfdbfe"></stop>
+</lineargradient>
+<lineargradient id="u-bot" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#fff8df"></stop>
+<stop offset="1" stop-color="#ffe2a3"></stop>
+</lineargradient>
+<lineargradient id="u-dec" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#ebf2fb"></stop>
+<stop offset="1" stop-color="#bcd0ea"></stop>
+</lineargradient>
+<lineargradient id="u-input" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#f4f7ff"></stop>
+<stop offset="1" stop-color="#dbeafe"></stop>
+</lineargradient>
+<lineargradient id="u-out" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#f7f0ff"></stop>
+<stop offset="1" stop-color="#e8d5ff"></stop>
+</lineargradient>
+<marker id="u-arrowhead" markerheight="8" markerunits="strokeWidth" markerwidth="8" orient="auto" refx="6" refy="4">
+<path d="M0 0 L8 4 L0 8 Z" fill="#6689ae"></path>
+</marker>
+</defs>
+<rect fill="#f9fcff" height="636" rx="24" stroke="#dfeaf4" stroke-width="2" width="1396" x="2" y="2"></rect>
+<rect fill="#f2f8ff" height="552" opacity=".78" rx="20" width="610" x="16" y="61"></rect>
+<rect fill="#f2f5fa" height="552" opacity=".8" rx="20" width="577" x="807" y="61"></rect>
+<text class="u-topline" x="32" y="39">ENCODER · CONTRACTION</text>
+<text class="u-topline" text-anchor="middle" x="704" y="39">BOTTLENECK</text>
+<text class="u-topline" text-anchor="end" x="1380" y="39">DECODER · EXPANSION
+                                    </text>
+<g class="u-skip-group">
+<path class="u-skip-path" d="M 243 138 V 119 H 1203 V 135" data-route="skip"></path>
+<g aria-label="Explain skip connection 1" class="unet-node u-skip-pick" data-stage="skip" role="button" tabindex="0">
+<rect class="u-skip-label-bg" height="25" rx="12" width="166" x="640" y="88"></rect>
+<text class="u-skip-label" text-anchor="middle" x="723" y="105">skip 1 · 512
+                                                × 512
+                                            </text>
+</g>
+<path class="u-skip-path" d="M 402 263 V 245 H 1044 V 260" data-route="skip"></path>
+<g aria-label="Explain skip connection 2" class="unet-node u-skip-pick" data-stage="skip" role="button" tabindex="0">
+<rect class="u-skip-label-bg" height="25" rx="12" width="166" x="640" y="214"></rect>
+<text class="u-skip-label" text-anchor="middle" x="723" y="231">skip 2 · 256
+                                                × 256
+                                            </text>
+</g>
+<path class="u-skip-path" d="M 561 388 V 371 H 885 V 385" data-route="skip"></path>
+<g aria-label="Explain skip connection 3" class="unet-node u-skip-pick" data-stage="skip" role="button" tabindex="0">
+<rect class="u-skip-label-bg" height="25" rx="12" width="166" x="640" y="340"></rect>
+<text class="u-skip-label" text-anchor="middle" x="723" y="357">skip 3 · 128
+                                                × 128
+                                            </text>
+</g>
+</g>
+<g class="u-forward-group">
+<path class="u-forward-route" d="M126 195 L165 195" data-route="input" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M292 240 L359 265" data-route="enc1" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M451 365 L518 390" data-route="enc2" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M611 490 L673 500" data-route="enc3" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M771 500 L834 490" data-route="bottleneck" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M925 390 L992 365" data-route="dec3" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M1084 265 L1151 240" data-route="dec2" marker-end="url(#u-arrowhead)"></path>
+<path class="u-forward-route" d="M1278 195 L1292 195" data-route="dec1" marker-end="url(#u-arrowhead)"></path>
+</g>
+<g class="u-node-group">
+<g aria-label="Image stage: RGB" class="unet-node u-input" data-stage="input" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="90" rx="15" width="108" x="26" y="143"></rect>
+<rect class="u-stack u-stack1" height="90" rx="15" width="108" x="22" y="147"></rect>
+<rect class="u-block" fill="url(#u-input)" height="90" rx="16" width="108" x="18" y="151"></rect>
+<text class="u-name" text-anchor="middle" x="72.0" y="186">Image</text>
+<text class="u-desc" text-anchor="middle" x="72.0" y="214">RGB</text>
+<text class="u-dim" text-anchor="middle" x="72.0" y="234">512² × 3</text>
+</g>
+<g aria-label="Encoder stage 1: Conv ×2" class="unet-node u-enc" data-stage="enc1" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="176" y="132"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="172" y="136"></rect>
+<rect class="u-block" fill="url(#u-enc)" height="100" rx="16" width="150" x="168" y="140"></rect>
+<text class="u-name" text-anchor="middle" x="243.0" y="175">Encoder 1</text>
+<text class="u-desc" text-anchor="middle" x="243.0" y="203">Conv ×2</text>
+<text class="u-dim" text-anchor="middle" x="243.0" y="223">512² · 64 ch
+                                            </text>
+</g>
+<g aria-label="Encoder stage 2: Pool + Conv" class="unet-node u-enc" data-stage="enc2" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="335" y="257"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="331" y="261"></rect>
+<rect class="u-block" fill="url(#u-enc)" height="100" rx="16" width="150" x="327" y="265"></rect>
+<text class="u-name" text-anchor="middle" x="402.0" y="300">Encoder 2</text>
+<text class="u-desc" text-anchor="middle" x="402.0" y="328">Pool + Conv
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="402.0" y="348">256² · 128 ch
+                                            </text>
+</g>
+<g aria-label="Encoder stage 3: Pool + Conv" class="unet-node u-enc" data-stage="enc3" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="494" y="382"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="490" y="386"></rect>
+<rect class="u-block" fill="url(#u-enc)" height="100" rx="16" width="150" x="486" y="390"></rect>
+<text class="u-name" text-anchor="middle" x="561.0" y="425">Encoder 3</text>
+<text class="u-desc" text-anchor="middle" x="561.0" y="453">Pool + Conv
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="561.0" y="473">128² · 256 ch
+                                            </text>
+</g>
+<g aria-label="Bottleneck stage: Pool + Conv" class="unet-node u-bot" data-stage="bottleneck" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="156" x="652" y="492"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="156" x="648" y="496"></rect>
+<rect class="u-block" fill="url(#u-bot)" height="100" rx="16" width="156" x="644" y="500"></rect>
+<text class="u-name" text-anchor="middle" x="722.0" y="535">Bottleneck
+                                            </text>
+<text class="u-desc" text-anchor="middle" x="722.0" y="563">Pool + Conv
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="722.0" y="583">64² · 512 ch
+                                            </text>
+</g>
+<g aria-label="Decoder stage 3: Up + concat" class="unet-node u-dec" data-stage="dec3" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="818" y="382"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="814" y="386"></rect>
+<rect class="u-block" fill="url(#u-dec)" height="100" rx="16" width="150" x="810" y="390"></rect>
+<text class="u-name" text-anchor="middle" x="885.0" y="425">Decoder 3</text>
+<text class="u-desc" text-anchor="middle" x="885.0" y="453">Up + concat
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="885.0" y="473">128² · 256 ch
+                                            </text>
+</g>
+<g aria-label="Decoder stage 2: Up + concat" class="unet-node u-dec" data-stage="dec2" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="977" y="257"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="973" y="261"></rect>
+<rect class="u-block" fill="url(#u-dec)" height="100" rx="16" width="150" x="969" y="265"></rect>
+<text class="u-name" text-anchor="middle" x="1044.0" y="300">Decoder 2
+                                            </text>
+<text class="u-desc" text-anchor="middle" x="1044.0" y="328">Up + concat
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="1044.0" y="348">256² · 128 ch
+                                            </text>
+</g>
+<g aria-label="Decoder stage 1: Up + concat" class="unet-node u-dec" data-stage="dec1" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="100" rx="15" width="150" x="1136" y="132"></rect>
+<rect class="u-stack u-stack1" height="100" rx="15" width="150" x="1132" y="136"></rect>
+<rect class="u-block" fill="url(#u-dec)" height="100" rx="16" width="150" x="1128" y="140"></rect>
+<text class="u-name" text-anchor="middle" x="1203.0" y="175">Decoder 1
+                                            </text>
+<text class="u-desc" text-anchor="middle" x="1203.0" y="203">Up + concat
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="1203.0" y="223">512² · 64 ch
+                                            </text>
+</g>
+<g aria-label="Mask stage: Conv 1 × 1" class="unet-node u-output" data-stage="output" role="button" tabindex="0">
+<rect class="u-stack u-stack2" height="90" rx="15" width="100" x="1302" y="143"></rect>
+<rect class="u-stack u-stack1" height="90" rx="15" width="100" x="1298" y="147"></rect>
+<rect class="u-block" fill="url(#u-out)" height="90" rx="16" width="100" x="1294" y="151"></rect>
+<text class="u-name" text-anchor="middle" x="1344.0" y="186">Mask</text>
+<text class="u-desc" text-anchor="middle" x="1344.0" y="214">Conv 1 × 1
+                                            </text>
+<text class="u-dim" text-anchor="middle" x="1344.0" y="234">512² × C</text>
+</g>
+</g>
+<text class="u-footer" text-anchor="middle" x="360" y="616">↓ Downsampling ×2 at each level
+                                    </text>
+<text class="u-footer" text-anchor="middle" x="1058" y="616">↑ Upsampling ×2 at each level
+                                    </text>
+</svg>
+</div>
+<div aria-label="Diagram legend" class="unet-legend">
+<span><i class="legend-line arrow"></i>Processing flow</span>
+<span><i class="legend-line bridge"></i>Skip connections (concatenation)</span>
+<span><i class="legend-square encoder"></i>Encoder</span>
+<span><i class="legend-square decoder"></i>Decoder</span>
+<span><i class="legend-square center"></i>Bottleneck</span>
+</div>
+<div aria-label="Select stages" class="unet-selection">
+<button class="unet-stage-chip active" data-stage="input" type="button">Image</button>
+<button class="unet-stage-chip" data-stage="enc1" type="button">Encoder 1</button>
+<button class="unet-stage-chip" data-stage="enc2" type="button">Encoder 2</button>
+<button class="unet-stage-chip" data-stage="enc3" type="button">Encoder 3</button>
+<button class="unet-stage-chip" data-stage="bottleneck" type="button">Bottleneck
+                                </button>
+<button class="unet-stage-chip" data-stage="dec3" type="button">Decoder 3</button>
+<button class="unet-stage-chip" data-stage="dec2" type="button">Decoder 2</button>
+<button class="unet-stage-chip" data-stage="dec1" type="button">Decoder 1</button>
+<button class="unet-stage-chip" data-stage="output" type="button">Output</button>
+<button class="unet-stage-chip" data-stage="skip" type="button">Skip connections
+                                </button>
+</div>
+<div aria-live="polite" class="unet-explainer">
+<div class="unet-explainer-head"><span>SELECTED STAGE</span><h4 id="unet-stage-title">
+                                    Input image</h4>
+<p id="unet-stage-text">The original image is fed into the network and normalized</p></div>
+<div class="unet-facts">
+<div><span>Tensor shape</span><strong id="unet-stage-shape">(B, 3, 512,
+                                        512)</strong></div>
+<div><span>Operation</span><strong id="unet-stage-op">Preprocessing</strong></div>
+<div><span>Role</span><strong id="unet-stage-gain">Spatial information</strong>
+</div>
+</div>
+<div class="unet-explainer-section"><strong>What happens and why</strong>
+<p id="unet-stage-why">—</p></div>
+<div class="unet-explainer-section"><strong>What is passed forward</strong>
+<p id="unet-stage-takeaway">—</p></div>
+<div class="unet-meta-list" id="unet-stage-meta"></div>
+</div>
+<div class="unet-summary"><strong>Why the architecture is shaped like the letter “U”</strong>
+<p><strong>The left arm</strong> increases the receptive field, usually doubling the channels at each resolution reduction. <strong>The bottleneck</strong> aggregates semantic information. <strong>The right arm</strong> increases resolution and concatenates representations from the corresponding encoder levels. The result can preserve the context needed for classification and the fine boundaries needed to localize each pixel. Dimensions and channel counts in the diagram are illustrative; the original U-Net may use different padding details and numbers of levels.</p>
+</div>
+</section>
+<div class="panel">
+<div class="panel-heading"><h3>DeepLabV3+ · anatomy of the pipeline</h3><span class="pill">CLICK THE REGIONS</span>
+</div>
+<p class="muted">DeepLabV3+ combines a <strong>encoder</strong> semantically rich encoder, a
+                                <strong>ASPP</strong> module for multiscale context and a <strong>decoder</strong> lightweight decoder that reintroduces local detail. Click the highlighted regions for explanations or go directly to the atrous convolution section.</p>
+<figure class="figure-card zoomable-figure deeplab-figure" data-lightbox-caption="DeepLabV3+ · encoder, ASPP, decoder și ieșirea finală">
+<div class="deeplab-diagram" id="deeplab-figure">
+<img alt="DeepLabV3+ diagram with encoder, Atrous Convolution block, ASPP, decoder and final prediction" src="assets/architectures/deeplabv3plus_reference.png"/>
+<button class="hotspot hs-atrous" data-scroll-target="atrous-lab" type="button">
+                                        Atrous convolution
+                                    </button>
+<button class="hotspot hs-aspp" data-preview-panel="aspp" type="button">ASPP
+                                    </button>
+<button class="hotspot hs-decoder" data-preview-panel="decoder" type="button">
+                                        Decoder
+                                    </button>
+</div>
+<figcaption><strong>Click to zoom or see explanations</strong> The preview can be opened directly from the image; the topic buttons update the explanation on the right and, for <em>Atrous Convolution</em>, scroll to the dedicated section.
+                                </figcaption>
+</figure>
+<div class="deeplab-inline-card" id="deeplab-inline-card">
+<span>EXPLANATORY PANEL</span>
+<h4 id="deeplab-inline-title">Encoder + atrous convolution</h4>
+<p id="deeplab-inline-text">In the encoder, DeepLab replaces some downsampling with dilated convolutions. This preserves better spatial resolution without sacrificing the receptive field.</p>
+<div class="deeplab-mini-points" id="deeplab-inline-points"></div>
+</div>
+</div>
+</div>
+<div class="panel atrous-panel section-anchor" id="atrous-lab">
+<div class="panel-heading"><h3>Atrous convolution explained visually</h3><span class="pill">INTERACTIVE</span>
+</div>
+<p class="muted">The following section breaks the mechanism into steps: first the standard kernel, then dilation, effective receptive field, parallel use in ASPP and its final role in DeepLabV3+. You can change both the <strong>dilation rate</strong>, and the <strong>explanation step</strong>.</p>
+<div class="atrous-stepper" id="atrous-stepper">
+<button class="family-tab active" data-step="1" type="button">1. Standard kernel</button>
+<button class="family-tab" data-step="2" type="button">2. Dilation</button>
+<button class="family-tab" data-step="3" type="button">3. Receptive field</button>
+<button class="family-tab" data-step="4" type="button">4. Multiscale ASPP</button>
+<button class="family-tab" data-step="5" type="button">5. Decoder fusion</button>
+</div>
+<div class="two-cols atrous-layout deluxe">
+<div>
+<div class="dilation-controls" id="dilation-controls">
+<button class="family-tab active" data-rate="1" type="button">r = 1</button>
+<button class="family-tab" data-rate="2" type="button">r = 2</button>
+<button class="family-tab" data-rate="3" type="button">r = 3</button>
+<button class="family-tab" data-rate="6" type="button">r = 6</button>
+</div>
+<div class="atrous-visual deluxe">
+<div class="atrous-grid-wrap">
+<div aria-label="Visualization of kernel-sampled positions" class="atrous-grid" id="atrous-grid" role="img"></div>
+<div class="atrous-overlay-note" id="atrous-overlay-note">The kernel reads 9 positions from the feature map
+                                        </div>
+</div>
+<div class="atrous-readout">
+<div><span>DILATION RATE</span><strong id="atrous-rate">1</strong></div>
+<div><span>EFFECTIVE KERNEL</span><strong id="atrous-effective">3 × 3</strong>
+</div>
+<div><span>SPACING BETWEEN SAMPLES</span><strong id="atrous-spacing">0 pixels between neighbors</strong></div>
+<div><span>PARAMETERS</span><strong>9 values / channel</strong></div>
+</div>
+</div>
+<div class="atrous-kernel-strip">
+<div class="kernel-card">
+<span>3 × 3 MASK</span>
+<div class="kernel-preview" id="kernel-preview"></div>
+</div>
+<div class="kernel-card wide">
+<span>EXPLANATION PATH</span>
+<div class="atrous-sequence" id="atrous-sequence"></div>
+</div>
+</div>
+<div class="note-note" id="atrous-caption">With r = 1 we obtain standard convolution. All positions in the 3 × 3 neighborhood are sampled without gaps.
+                                </div>
+<div class="aspp-strip deluxe" id="atrous-aspp-strip">
+<div data-branch="b1"><strong>Ramura r = 1</strong><span>local details, boundaries and short textures</span>
+</div>
+<div data-branch="b6"><strong>Ramura r = 6</strong><span>intermediate context for moderate-sized objects</span>
+</div>
+<div data-branch="b12"><strong>Ramura r = 12</strong><span>broad context, large shapes and “stuff” regions</span>
+</div>
+<div data-branch="pool"><strong>Image pooling</strong><span>almost global context, useful for large homogeneous regions</span>
+</div>
+</div>
+</div>
+<div class="theory-panel atrous-theory deluxe">
+<div class="deep-note">
+<span>CURRENT STEP</span>
+<h4 id="atrous-step-title">Step 1 · standard kernel</h4>
+<p id="atrous-step-text">We start with a classical 3 × 3 convolution. The kernel reads nine adjacent positions and produces an output value for the center pixel.</p>
+</div>
+<div class="equation"><span class="eq-num">(6)</span>
+<math display="block">
+<mi>y</mi>
+<mo>(</mo>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>)</mo>
+<mo>=</mo>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+</mrow>
+</munder>
+<mi>x</mi>
+<mo>(</mo>
+<mi>i</mi>
+<mo>+</mo>
+<mi>r</mi>
+<mi>m</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>+</mo>
+<mi>r</mi>
+<mi>n</mi>
+<mo>)</mo>
+<mi>w</mi>
+<mo>(</mo>
+<mi>m</mi>
+<mo>,</mo>
+<mi>n</mi>
+<mo>)</mo>
+</math>
+</div>
+<div class="equation"><span class="eq-num">(7)</span>
+<math display="block">
+<msub>
+<mi>K</mi>
+<mtext>ef</mtext>
+</msub>
+<mo>=</mo>
+<mi>K</mi>
+<mo>+</mo>
+<mo>(</mo>
+<mi>K</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>(</mo>
+<mi>r</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+</math>
+</div>
+<div class="atrous-points" id="atrous-step-points"></div>
+<div class="subtle-box"><strong>What to look for</strong>
+<p id="atrous-step-extra">Notice that the number of parameters remains unchanged: still 9 weights per input channel. Only the positions in the feature map that the kernel reads change.</p></div>
+<div class="subtle-box"><strong>Connection to DeepLabV3+</strong>
+<p id="atrous-step-link">In the backbone, dilated convolutions maintain better spatial resolution than a long sequence of pooling layers. ASPP exploits this very property by running several branches with different rates in parallel.</p></div>
+</div>
+</div>
+</div>
+<div class="visual-board instance-gallery">
+<div class="panel-heading"><h3>Visual examples for semantic and instance segmentation and dense architectures</h3><span class="pill subtle">VISUAL SUPPORT</span></div>
+<div class="image-gallery three-up">
+<figure class="figure-card"><img alt="Example of semantic segmentation on images with cats and cows" src="assets/figs/fig27.png"/>
+<figcaption><strong>Semantic segmentation.</strong> Each pixel receives a class, without separate identities for two objects of the same class.
+                                </figcaption>
+</figure>
+<figure class="figure-card"><img alt="Comparison of semantic and instance segmentation" src="assets/figs/fig26.png"/>
+<figcaption><strong>Instance segmentation.</strong> Two objects of the same class receive separate masks.
+                                </figcaption>
+</figure>
+<figure class="figure-card"><img alt="Semantic segmentation pipeline with convolutions and argmax" src="assets/figs/fig28.png"/>
+<figcaption><strong>Semantic pipeline.</strong> The model produces class scores for each pixel, then applies <code>argmax</code>.
+                                </figcaption>
+</figure>
+</div>
+<div class="image-gallery two-up">
+<figure class="figure-card"><img alt="Encoder-decoder architecture for segmentation" src="assets/figs/fig29.png"/>
+<figcaption><strong>Encoder–decoder.</strong> Downsampling for context, then upsampling to reconstruct the dense map.
+                                </figcaption>
+</figure>
+<figure class="figure-card"><img alt="Max pooling and max unpooling in segmentation architectures" src="assets/figs/fig30.png"/>
+<figcaption><strong>Pooling and unpooling.</strong> A clear illustration of how spatial resolution can be recovered.
+                                </figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="metrici">
+<div class="chapter-title">
+<div><span class="section-count">07 / EVALUATION</span>
+<h2>Intersection over Union, Dice and Average Precision</h2>
+<p>A metric must be chosen according to the prediction unit: image-level class, detected object or pixel region.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Geometric experiment · IoU and Dice</h3><span class="pill">INTERACTIVE</span>
+</div>
+<svg aria-label="Two overlapping rectangles, one representing ground truth and one prediction" id="iou-svg" role="img" viewbox="0 0 480 270">
+<rect fill="#f5f9ff" height="270" rx="11" width="480"></rect>
+<path d="M0 45H480M0 90H480M0 135H480M0 180H480M0 225H480M60 0V270M120 0V270M180 0V270M240 0V270M300 0V270M360 0V270M420 0V270" stroke="#e4ebf5" stroke-width="1"></path>
+<rect fill="#327fe6" fill-opacity=".32" height="142" id="gt-box" stroke="#286bb9" stroke-width="2.5" width="205" x="75" y="55"></rect>
+<rect fill="#f2a345" fill-opacity=".31" height="142" id="pred-box" stroke="#d88628" stroke-width="2.5" width="205" x="158" y="100"></rect>
+<rect fill="#4876b3" fill-opacity=".55" height="97" id="intersection-box" width="122" x="158" y="100"></rect>
+<text fill="#2364ad" font-size="13" font-weight="700" x="90" y="45">Ground truth</text>
+<text fill="#b96e1e" font-size="13" font-weight="700" id="pred-label" x="290" y="255">
+                                    Prediction
+                                </text>
+</svg>
+<div class="form-grid"><label>Horizontal displacement <strong id="box-dx-val">83
+                                px</strong><input id="box-dx" max="240" min="-100" step="1" type="range" value="83"/></label><label>Vertical displacement <strong id="box-dy-val">45 px</strong><input id="box-dy" max="150" min="-45" step="1" type="range" value="45"/></label></div>
+<div class="mini-stats">
+<div><span>IoU</span><strong id="iou-value">—</strong></div>
+<div><span>Dice</span><strong id="dice-value">—</strong></div>
+<div><span>Intersection [px²]</span><strong id="intersection-value">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Definitions and interpretation</h3></div>
+<div class="equation"><span class="eq-num">(4)</span>
+<math display="block">
+<mi>IoU</mi>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mo>|</mo>
+<mi>A</mi>
+<mo>∩</mo>
+<mi>B</mi>
+<mo>|</mo>
+</mrow>
+<mrow>
+<mo>|</mo>
+<mi>A</mi>
+<mo>∪</mo>
+<mi>B</mi>
+<mo>|</mo>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mi>TP</mi>
+<mrow>
+<mi>TP</mi>
+<mo>+</mo>
+<mi>FP</mi>
+<mo>+</mo>
+<mi>FN</mi>
+</mrow>
+</mfrac>
+</math>
+</div>
+<div class="equation"><span class="eq-num">(5)</span>
+<math display="block">
+<mi>Dice</mi>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mn>2</mn>
+<mo>|</mo>
+<mi>A</mi>
+<mo>∩</mo>
+<mi>B</mi>
+<mo>|</mo>
+</mrow>
+<mrow>
+<mo>|</mo>
+<mi>A</mi>
+<mo>|</mo>
+<mo>+</mo>
+<mo>|</mo>
+<mi>B</mi>
+<mo>|</mo>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mn>2</mn>
+<mo>·</mo>
+<mi>IoU</mi>
+</mrow>
+<mrow>
+<mn>1</mn>
+<mo>+</mo>
+<mi>IoU</mi>
+</mrow>
+</mfrac>
+</math>
+</div>
+<p>The relationship between Dice and IoU is exact for the same two sets when the union is nonempty. For metrics averaged across classes/images, the transformation generally does not apply after averaging.</p>
+<div class="subtle-box"><strong>Detection: AP and mAP</strong>
+<p>Detections are sorted by score; at an IoU threshold, TP/FP are determined and the precision–recall curve is constructed. AP summarizes this curve; the COCO protocol reports the mean over IoU thresholds from 0.50 to 0.95 in steps of 0.05 and across categories.</p>
+</div>
+</div>
+</div>
+<div class="metric-table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th>Task</th>
+<th>Recommended metrics</th>
+<th>What not to omit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classification</td>
+<td>Accuracy, macro-F1, AUROC</td>
+<td>Class imbalance and calibration</td>
+</tr>
+<tr>
+<td>Detection</td>
+<td>AP / mAP, object recall</td>
+<td>IoU threshold, score, object size</td>
+</tr>
+<tr>
+<td>Semantic segmentation</td>
+<td>mIoU, per-class Dice</td>
+<td>Absent classes, ignore_index, boundaries</td>
+</tr>
+<tr>
+<td>Instance segmentation</td>
+<td>Mask AP, mask IoU</td>
+<td>Instance matching, false positives</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="section-anchor module" id="antrenare">
+<div class="chapter-title">
+<div><span class="section-count">08 / TRAINING</span>
+<h2>A good model starts with a sound experimental protocol</h2>
+<p>Augmentation, annotation and evaluation strategies can affect results more than choosing another architecture.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Augmentations: what changes and what remains invariant?</h3><span class="pill">INTERACTIVE</span></div>
+<div class="augmentation-layout">
+<div class="aug-preview">
+<svg id="aug-svg" viewbox="0 0 300 220">
+<rect fill="#cfe4fa" height="220" rx="9" width="300"></rect>
+<g id="aug-world">
+<rect fill="#8396ad" height="70" width="300" x="0" y="150"></rect>
+<path d="M0 186H300" stroke="#fff" stroke-dasharray="26 16" stroke-width="4"></path>
+<rect fill="#c0cddf" height="85" width="80" x="20" y="65"></rect>
+<path d="M35 88h18v20H35zm32 0h18v20H67z" fill="#e9f4ff"></path>
+<g>
+<path d="M103 156l18-39q7-14 22-14h57q16 0 25 17l16 36 12 8v19H93v-19z" fill="#2469ba"></path>
+<path d="M125 149l11-28h37v28zm58-28h17l17 28h-34z" fill="#afd7ef"></path>
+<circle cx="126" cy="182" fill="#253851" r="13"></circle>
+<circle cx="223" cy="182" fill="#253851" r="13"></circle>
+</g>
+</g>
+<rect fill="#fff" height="220" id="aug-brightness" opacity="0" width="300"></rect>
+</svg>
+</div>
+<div class="aug-buttons"><label class="toggle"><input id="aug-flip" type="checkbox"/><span>Horizontal flip</span></label><label class="toggle"><input id="aug-bright" type="checkbox"/><span>Brightness adjustment</span></label><label class="toggle"><input id="aug-crop" type="checkbox"/><span>Central crop (illustrative)</span></label>
+<button class="secondary-btn" id="aug-reset">Restore image</button>
+</div>
+</div>
+<div class="note-note" id="aug-explanation">No transformations: the image and annotations remain unchanged.
+                            </div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Rules for reproducible evaluation</h3></div>
+<ol class="steps">
+<li><strong>Split before augmentation</strong>
+<p>Separate train / validation / test; for medical data, avoid putting the same patient in different splits. For video, separate related sequences.</p></li>
+<li><strong>Consistent transformations</strong>
+<p>Flip/crop must also be applied to bounding boxes and masks. Brightness changes the image, not the geometric label.</p></li>
+<li><strong>Preprocessing appropriate to the backbone</strong>
+<p>Use the normalization, resizing and channel convention associated with the pretrained weights.</p></li>
+<li><strong>Fixed inference protocol</strong>
+<p>Report thresholds, resolution, hardware, latency, seed and library versions.</p></li>
+</ol>
+</div>
+</div>
+<div class="risk-grid">
+<div><span>01 / DATA</span><h4>Data leakage</h4>
+<p>Near-duplicates or images of the same subject across train and test overestimate performance.</p></div>
+<div><span>02 / GENERALIZATION</span><h4>Distribution shift</h4>
+<p>Camera, season, lighting, hospital or population may change the data distribution.</p>
+</div>
+<div><span>03 / CONFIDENCE</span><h4>Calibration</h4>
+<p>A score of 0.9 does not automatically guarantee a 90% correctness rate.</p></div>
+<div><span>04 / SYSTEM</span><h4>Resources and latency</h4>
+<p>High AP may be insufficient if inference exceeds the time or memory budget.</p>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="pytorch">
+<div class="chapter-title">
+<div><span class="section-count">09 / IMPLEMENTATION</span>
+<h2>Python + PyTorch · from theory to inference</h2>
+<p>Complete, commented examples that explain tensor shape, preprocessing and interpretation of results. The code uses the modern weights API from <code>torchvision</code>.
+                            </p></div>
+</div>
+<div class="panel code-panel">
+<div class="panel-heading"><h3>Library of executable examples</h3><span class="pill">PYTORCH / TORCHVISION</span>
+</div>
+<div aria-label="Choose the PyTorch example" class="code-tabs" role="tablist">
+<button aria-selected="true" class="code-tab active" data-code="classification" role="tab">
+                                Classification
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="multilabel" role="tab">
+                                Multi-label
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="detector" role="tab">Faster
+                                R-CNN
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="segmentation" role="tab">
+                                DeepLabV3
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="instance" role="tab">Mask R-CNN
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="loss" role="tab">Soft Dice Loss
+                            </button>
+<button aria-selected="false" class="code-tab" data-code="training" role="tab">Transfer
+                                learning
+                            </button>
+</div>
+<div class="code-explain" id="code-description"></div>
+<div class="code-toolbar"><span id="code-filename">—</span>
+<button class="copy-btn" id="copy-code" type="button">Copy code</button>
+</div>
+<div class="code-window">
+<pre id="code-content" tabindex="0"><code></code></pre>
+</div>
+<div class="code-footer"><span>Requires installation of packages <code>torch</code>, <code>torchvision</code> and <code>Pillow</code>.</span><span>The first run with pretrained weights may download model files.</span>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="studiu">
+<div class="chapter-title">
+<div><span class="section-count">10 / CASE STUDY</span>
+<h2>How do we choose the right approach?</h2>
+<p>The operational requirement determines which annotations must be collected and which output must be trained.</p></div>
+</div>
+<div class="case-selector enriched-case-selector">
+<div aria-label="Application scenarios" class="case-tabs" role="tablist">
+<button class="case-tab active" data-case="traffic">Urban traffic</button>
+<button class="case-tab" data-case="medical">Medical imaging</button>
+<button class="case-tab" data-case="industrial">Industrial inspection</button>
+<button class="case-tab" data-case="retail">Smart retail</button>
+<button class="case-tab" data-case="satellite">Aerial imaging</button>
+</div>
+<div class="case-body">
+<div class="case-mark" id="case-mark">01</div>
+<div><h3 id="case-title">Counting cars at an intersection</h3>
+<p id="case-intro">The requirement is to identify each vehicle separately and estimate its position in the current frame.</p>
+<div class="case-details">
+<div><span>TASK</span><strong id="case-task">Object detection</strong></div>
+<div><span>ANNOTATIONS</span><strong id="case-labels">Bounding boxes + classes</strong>
+</div>
+<div><span>MAIN METRIC</span><strong id="case-metric">mAP + recall</strong>
+</div>
+<div><span>SUITABLE ARCHITECTURES</span><strong id="case-arch">YOLO / DETR</strong>
+</div>
+</div>
+<div class="case-prompt" id="case-prompt">Year IV extension: if we want the number of distinct cars throughout a video, we need tracking and temporal association.
+                                </div>
+</div>
+</div>
+</div>
+<div class="panel decision-panel">
+<div class="panel-heading"><h3>Solution design assistant</h3><span class="pill">INTERACTIVE GUIDE</span>
+</div>
+<p class="muted">Select the desired output type and application constraints. The material recommends a problem formulation, annotation type, model family and relevant metrics.</p>
+<div class="decision-grid">
+<label>What do you want to predict?<select id="wiz-output">
+<option value="one">one label per image</option>
+<option value="many">multiple labels per image</option>
+<option value="boxes">objects localized by boxes</option>
+<option value="pixels">the class of each pixel</option>
+<option value="instances">masks for each object</option>
+<option value="scene">complete scene: stuff + things</option>
+</select></label>
+<label>How important is latency?<select id="wiz-speed">
+<option value="high">very important</option>
+<option value="medium">balance</option>
+<option value="low">not critical</option>
+</select></label>
+<label>What kind of annotations can you obtain?<select id="wiz-labels">
+<option value="image">image-level labels only</option>
+<option value="boxes">bounding boxes</option>
+<option value="masks">precise masks</option>
+</select></label>
+</div>
+<div class="decision-result">
+<div><span>FORMULATION</span><strong id="wiz-task">—</strong></div>
+<div><span>ANNOTATIONS</span><strong id="wiz-annotation">—</strong></div>
+<div><span>ARCHITECTURES</span><strong id="wiz-architecture">—</strong></div>
+<div><span>METRICS</span><strong id="wiz-metrics">—</strong></div>
+</div>
+<div class="approach-note" id="wiz-explanation">—</div>
+</div>
+<div class="two-cols case-study-grid">
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Case study A · chest radiograph</h3></div>
+<p><strong>Objective:</strong> an image may simultaneously contain <em>infiltrate</em>, <em>effusion</em>,
+                                <em>cardiomegaly</em> etc. The natural formulation is <strong>multi-label</strong>.</p>
+<ul class="compact-list">
+<li><strong>Target:</strong> multi-hot vector.</li>
+<li><strong>Loss:</strong> BCEWithLogitsLoss, optionally weighted.</li>
+<li><strong>Metrics:</strong> Per-class AUROC, macro-F1, calibration.</li>
+<li><strong>Caution:</strong> patient-level split and class imbalance analysis.
+                                </li>
+</ul>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Case study B · urban autonomous driving</h3></div>
+<p><strong>Objective:</strong> road and sidewalk are <em>stuff</em>regions, while cars and pedestrians are <em>things</em>. For complete scene understanding, the appropriate formulation is <strong>panoptic</strong>.</p>
+<ul class="compact-list">
+<li><strong>Target:</strong> class + instance map.</li>
+<li><strong>Architectures:</strong> Panoptic FPN, Mask2Former, OneFormer.</li>
+<li><strong>Metric:</strong> PQ, plus instance AP / stuff mIoU.</li>
+<li><strong>Caution:</strong> robustness to weather, lighting and domain shift.</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="autoevaluare">
+<div class="chapter-title">
+<div><span class="section-count">11 / SELF-ASSESSMENT</span>
+<h2>Check your understanding</h2>
+<p>14 conceptual questions at Year IV level: tensor shapes, loss functions, NMS, modern architectures, segmentation and experimental protocol.</p></div>
+</div>
+<div class="panel quiz-panel">
+<div class="quiz-top">
+<div><span>QUESTION <strong id="quiz-number">1</strong> OF 14</span>
+<h3 id="quiz-question">—</h3></div>
+<div class="quiz-score">Score <strong id="quiz-score">0 / 0</strong></div>
+</div>
+<div class="quiz-answers" id="quiz-answers"></div>
+<div aria-live="polite" class="quiz-feedback" id="quiz-feedback"></div>
+<div class="quiz-bottom">
+<div class="quiz-progress">
+<div id="quiz-progress-fill"></div>
+</div>
+<div>
+<button class="secondary-btn" id="quiz-restart" type="button">Restart quiz</button>
+<button class="primary-btn" disabled="" id="quiz-next" type="button">Next question →
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<section class="section-anchor module" id="referinte">
+<div class="chapter-title">
+<div><span class="section-count">12 / FURTHER READING</span>
+<h2>References, resources and study path</h2>
+<p>Foundational papers, relevant documentation and starting points for further study of image classification, detection and segmentation.</p></div>
+</div>
+<div class="reference-grid"><a href="https://docs.pytorch.org/vision/stable/models.html" rel="noopener noreferrer" target="_blank"><strong>PyTorch /
+                        Torchvision</strong><span>Models, preprocessing, classification, detection and segmentation ↗</span></a><a href="https://arxiv.org/abs/1512.03385" rel="noopener noreferrer" target="_blank"><strong>He
+                        et al. — ResNet</strong><span>Deep Residual Learning for Image Recognition ↗</span></a><a href="https://arxiv.org/abs/1505.04597" rel="noopener noreferrer" target="_blank"><strong>Ronneberger
+                        et al. —
+                        U-Net</strong><span>Convolutional Networks for Biomedical Image Segmentation ↗</span></a><a href="https://arxiv.org/abs/1703.06870" rel="noopener noreferrer" target="_blank"><strong>He
+                        et al. — Mask R-CNN</strong><span>Instance segmentation through a mask head ↗</span></a><a href="https://arxiv.org/abs/2005.12872" rel="noopener noreferrer" target="_blank"><strong>Carion
+                        et al. — DETR</strong><span>End-to-End Object Detection with Transformers ↗</span></a><a href="https://arxiv.org/abs/2112.01527" rel="noopener noreferrer" target="_blank"><strong>Cheng
+                        et al. — Mask2Former</strong><span>Masked-attention Mask Transformer ↗</span></a><a href="https://arxiv.org/abs/1901.02446" rel="noopener noreferrer" target="_blank"><strong>Kirillov
+                        et al. — Panoptic Segmentation</strong><span>Unifying semantic and instance segmentation ↗</span></a><a href="https://arxiv.org/abs/2107.06278" rel="noopener noreferrer" target="_blank"><strong>Jain
+                        et al. — OneFormer</strong><span>Transformers for universal segmentation ↗</span></a></div>
+<div class="footer-note">Machine Learning · Faculty of Automatic Control and Computers · POLITEHNICA University of Bucharest · 2026–2027
+                    </div>
+</section>
+</div>
+</main>
+</div>
+</div>
+<div aria-hidden="true" class="image-lightbox" id="image-lightbox">
+<div class="image-lightbox-backdrop" data-close-lightbox="true"></div>
+<div aria-label="Image preview" aria-modal="true" class="image-lightbox-dialog" role="dialog">
+<button aria-label="Close preview" class="image-lightbox-close" id="image-lightbox-close" type="button">×
+        </button>
+<figure>
+<img alt="Image preview" id="image-lightbox-img" src=""/>
+<figcaption id="image-lightbox-caption"></figcaption>
+</figure>
+<div class="image-lightbox-hint">Click outside the image or press Esc to close</div>
+</div>
+</div>
+<script defer="" src="app.en.js"></script>
+</body>
+</html>

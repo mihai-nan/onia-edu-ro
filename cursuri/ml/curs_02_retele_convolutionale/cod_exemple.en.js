@@ -1,0 +1,68 @@
+const CNN_CODE_EXAMPLES = [
+    {
+        "file": "01_corelatie_si_convolutie.py",
+        "title": "Correlation vs. convolution",
+        "description": "Verify the dot product by hand and observe the effect of flipping the kernel. The assertion checks the manual result against the PyTorch operator.",
+        "code": "\"\"\"Numerical check: Conv2d computes cross-correlation; it does not flip the kernel.\"\"\"\nimport torch\nimport torch.nn.functional as F\n\ntorch.set_printoptions(sci_mode=False)\nx = torch.tensor([\n    [1., 2., 3., 4.],\n    [5., 6., 7., 8.],\n    [9., 1., 2., 3.],\n    [4., 5., 6., 7.],\n]).reshape(1, 1, 4, 4)  # (batch, in_channels, H, W)\nk = torch.tensor([[1., 0., -1.],\n                  [2., 0., -2.],\n                  [1., 0., -1.]]).reshape(1, 1, 3, 3)\n\n# In PyTorch, the kernel is not rotated when applying conv2d.\ny = F.conv2d(x, k, stride=1, padding=0)\n\n# Manual calculation for output (0, 0): elementwise sum of products.\nmanual = (x[0, 0, :3, :3] * k[0, 0]).sum()\nassert torch.allclose(y[0, 0, 0, 0], manual)\n\n# Mathematical convolution uses the kernel rotated by 180°.\nconv_math = F.conv2d(x, torch.flip(k, dims=(-2, -1)))\nprint(\"Kernelul original:\\n\", k[0, 0])\nprint(\"Cross-correlation:\\n\", y[0, 0])\nprint(\"Primul element, calcul manual:\", manual.item())\nprint(\"Mathematical convolution:\\n\", conv_math[0, 0])\n"
+    },
+    {
+        "file": "02_dimensiuni_si_parametri.py",
+        "title": "Shapes / parametri",
+        "description": "Classic 32×32×3 → 28×28×6 example: parameters, MACs and shape for the entire batch are calculated separately.",
+        "code": "\"\"\"Compute shape, number of weights and MACs for a 2D convolution.\"\"\"\nimport math\nimport torch\nfrom torch import nn\n\n# B=8, 32x32 RGB image, 6 filters of size 5x5, no padding.\nbatch, cin, cout = 8, 3, 6\nheight, width = 32, 32\nkernel, stride, padding, dilation, groups = 5, 1, 0, 1, 1\n\nlayer = nn.Conv2d(cin, cout, kernel_size=kernel, stride=stride,\n                  padding=padding, dilation=dilation, groups=groups, bias=True)\nx = torch.randn(batch, cin, height, width)\ny = layer(x)\n\nh_out = math.floor((height + 2*padding - dilation*(kernel-1) - 1)/stride + 1)\nw_out = math.floor((width + 2*padding - dilation*(kernel-1) - 1)/stride + 1)\nparameters = cout * ((cin // groups) * kernel**2 + 1)\nmacs_per_image = h_out * w_out * cout * (cin // groups) * kernel**2\n\nassert y.shape == (batch, cout, h_out, w_out)\nassert sum(t.numel() for t in layer.parameters()) == parameters\nprint(\"Intrare:\", tuple(x.shape))\nprint(\"Output:\", tuple(y.shape))       # (8, 6, 28, 28)\nprint(\"Parametri:\", parameters)        # 456\nprint(\"MACs / imagine:\", macs_per_image)\n"
+    },
+    {
+        "file": "03_multicanal_rgb.py",
+        "title": "RGB and channels",
+        "description": "Two filters across three channels, weight shape and decomposition of each channel's contribution.",
+        "code": "\"\"\"A standard filter combines all three RGB channels.\"\"\"\nimport torch\nfrom torch import nn\n\ntorch.manual_seed(7)\nx = torch.arange(1, 28, dtype=torch.float32).reshape(1, 3, 3, 3)\nconv = nn.Conv2d(in_channels=3, out_channels=2, kernel_size=2, bias=False)\nwith torch.no_grad():\n    conv.weight[0].fill_(1.0)    # First filter: sums all terms.\n    conv.weight[1].fill_(0.5)    # Second filter: half the first.\n\ny = conv(x)\nmanual = sum((x[0, c, :2, :2] * conv.weight[0, c]).sum()\n             for c in range(3))\nassert torch.allclose(manual, y[0, 0, 0, 0])\nprint(\"Input:\", tuple(x.shape))               # (1, 3, 3, 3)\nprint(\"Weights:\", tuple(conv.weight.shape)) # (2, 3, 2, 2)\nprint(\"Output:\", tuple(y.shape))            # (1, 2, 2, 2)\nprint(\"Y[0,0,0,0]:\", y[0, 0, 0, 0].item())\n"
+    },
+    {
+        "file": "04_conv1d_conv3d.py",
+        "title": "Conv1d + Conv3d",
+        "description": "Convolutions for 1D signals and 3D volumes, with tensor formats and application explanations.",
+        "code": "\"\"\"The same local kernel idea applies to sequences and volumes.\"\"\"\nimport torch\nfrom torch import nn\n\n# Conv1d: multichannel signal with 500 samples (ECG, audio, vibrations).\nconv1d = nn.Conv1d(in_channels=2, out_channels=8,\n                   kernel_size=7, stride=2, padding=3)\nsignal = torch.randn(4, 2, 500)      # (B, C, L)\nfeatures1d = conv1d(signal)\nprint(\"Conv1d:\", tuple(features1d.shape))  # (4, 8, 250)\n\n# Conv3d: medical volume or video sequence (B, C, D, H, W).\nconv3d = nn.Conv3d(in_channels=1, out_channels=4,\n                   kernel_size=3, stride=1, padding=1)\nvolume = torch.randn(2, 1, 12, 32, 32)\nfeatures3d = conv3d(volume)\nprint(\"Conv3d:\", tuple(features3d.shape))  # (2, 4, 12, 32, 32)\n\n# D can represent spatial depth or time, depending on the data.\n"
+    },
+    {
+        "file": "05_pooling_si_gradient.py",
+        "title": "Pooling and gradients",
+        "description": "The max pooling gradient propagates to the maximum positions in each window (for unique maxima).",
+        "code": "\"\"\"MaxPool2d passes gradients to maxima only (unique maxima in this example).\"\"\"\nimport torch\nimport torch.nn.functional as F\n\nx = torch.tensor([[[[1., 3., 2., 1.],\n                    [2., 9., 0., 4.],\n                    [4., 3., 6., 2.],\n                    [1., 0., 5., 7.]]]], requires_grad=True)\ny_max = F.max_pool2d(x, kernel_size=2, stride=2)\nprint(\"Max pooling:\\n\", y_max)\ny_max.sum().backward()\nprint(\"Gradient d sum(y)/dx:\\n\", x.grad)\n\n# Average pooling retains the mean, not just the maximum.\ny_avg = F.avg_pool2d(x.detach(), kernel_size=2, stride=2)\nprint(\"Average pooling:\\n\", y_avg)\n"
+    },
+    {
+        "file": "06_cnn_clasificator.py",
+        "title": "CNN complet",
+        "description": "An educational CNN: two convolutional blocks, BatchNorm, ReLU, MaxPool, global average pooling and a training step.",
+        "code": "\"\"\"A small CNN and a PyTorch training step on synthetic data.\"\"\"\nimport torch\nfrom torch import nn\n\ntorch.manual_seed(42)\n\nclass SmallCNN(nn.Module):\n    def __init__(self, n_classes=4):\n        super().__init__()\n        self.features = nn.Sequential(\n            nn.Conv2d(3, 16, 3, padding=1),\n            nn.BatchNorm2d(16),\n            nn.ReLU(inplace=True),\n            nn.MaxPool2d(2),                # 32 -> 16\n            nn.Conv2d(16, 32, 3, padding=1),\n            nn.BatchNorm2d(32),\n            nn.ReLU(inplace=True),\n            nn.MaxPool2d(2),                # 16 -> 8\n        )\n        self.classifier = nn.Sequential(\n            nn.AdaptiveAvgPool2d(1),       # (B,32,1,1)\n            nn.Flatten(),\n            nn.Linear(32, n_classes),\n        )\n\n    def forward(self, x):\n        return self.classifier(self.features(x))  # logits, no softmax\n\nmodel = SmallCNN(n_classes=4)\noptimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)\ncriterion = nn.CrossEntropyLoss()\n\nx = torch.randn(8, 3, 32, 32)  # date artificiale, NU un set real\nlabels = torch.randint(0, 4, size=(8,))\nmodel.train()\noptimizer.zero_grad(set_to_none=True)\nlogits = model(x)\nloss = criterion(logits, labels)\nloss.backward()\noptimizer.step()\n\nprint(\"Logits:\", tuple(logits.shape), \"Loss:\", round(loss.item(), 4))\n# Pentru evaluare: model.eval() + torch.no_grad() + date independente.\n"
+    },
+    {
+        "file": "07_bloc_rezidual.py",
+        "title": "Bloc rezidual",
+        "description": "Residual block with 1×1 projection when stride or channels prevent direct addition.",
+        "code": "\"\"\"A residual block with projection when the shape changes.\"\"\"\nimport torch\nfrom torch import nn\n\nclass ResidualBlock(nn.Module):\n    def __init__(self, cin, cout, stride=1):\n        super().__init__()\n        self.path = nn.Sequential(\n            nn.Conv2d(cin, cout, 3, stride=stride, padding=1, bias=False),\n            nn.BatchNorm2d(cout), nn.ReLU(inplace=True),\n            nn.Conv2d(cout, cout, 3, padding=1, bias=False),\n            nn.BatchNorm2d(cout),\n        )\n        self.shortcut = (nn.Identity() if cin == cout and stride == 1 else\n                         nn.Sequential(nn.Conv2d(cin, cout, 1, stride=stride, bias=False),\n                                       nn.BatchNorm2d(cout)))\n        self.activation = nn.ReLU(inplace=True)\n\n    def forward(self, x):\n        return self.activation(self.path(x) + self.shortcut(x))\n\nblock = ResidualBlock(16, 32, stride=2)\nx = torch.randn(2, 16, 28, 28)\ny = block(x)\nprint(tuple(x.shape), '->', tuple(y.shape))  # (2, 32, 14, 14)\n"
+    },
+    {
+        "file": "08_depthwise_separable.py",
+        "title": "Depthwise separable",
+        "description": "Compare weight counts for standard and depthwise separable convolutions while preserving output shape.",
+        "code": "\"\"\"Factorarea MobileNet: depthwise spatial + pointwise 1x1.\"\"\"\nimport torch\nfrom torch import nn\n\nclass DepthwiseSeparable(nn.Module):\n    def __init__(self, cin, cout, kernel_size=3):\n        super().__init__()\n        self.layers = nn.Sequential(\n            nn.Conv2d(cin, cin, kernel_size, padding=kernel_size//2,\n                      groups=cin, bias=False),  # 1 filtru/canal\n            nn.BatchNorm2d(cin), nn.ReLU(inplace=True),\n            nn.Conv2d(cin, cout, 1, bias=False),   # mixes the channels\n            nn.BatchNorm2d(cout), nn.ReLU(inplace=True),\n        )\n\n    def forward(self, x):\n        return self.layers(x)\n\ncin, cout = 32, 64\nstandard = nn.Conv2d(cin, cout, kernel_size=3, padding=1, bias=False)\nseparable = DepthwiseSeparable(cin, cout, kernel_size=3)\nx = torch.randn(2, cin, 28, 28)\nprint(\"Shapes:\", tuple(standard(x).shape), tuple(separable(x).shape))\n# Number of convolutional weights, excluding BatchNorm:\nprint(\"Standard weights:\", cin*cout*9)\nprint(\"DW+PW weights:\", cin*9 + cin*cout)\n"
+    },
+    {
+        "file": "09_unet_segmentare.py",
+        "title": "Mini U-Net",
+        "description": "Dimensionally consistent mini U-Net, including odd resolutions, with CrossEntropyLoss on logits.",
+        "code": "\"\"\"Mini U-Net for multiclass segmentation with skip connections and odd dimensions.\"\"\"\nimport torch\nimport torch.nn.functional as F\nfrom torch import nn\n\nclass DoubleConv(nn.Module):\n    def __init__(self, ci, co):\n        super().__init__()\n        self.seq = nn.Sequential(nn.Conv2d(ci, co, 3, padding=1), nn.ReLU(),\n                                 nn.Conv2d(co, co, 3, padding=1), nn.ReLU())\n\n    def forward(self, x):\n        return self.seq(x)\n\nclass MiniUNet(nn.Module):\n    def __init__(self, classes=3):\n        super().__init__()\n        self.enc = DoubleConv(1, 16)\n        self.bottleneck = DoubleConv(16, 32)\n        self.dec = DoubleConv(32 + 16, 16)\n        self.head = nn.Conv2d(16, classes, kernel_size=1)\n\n    def forward(self, x):\n        skip = self.enc(x)\n        low = F.max_pool2d(skip, 2)\n        low = self.bottleneck(low)\n        high = F.interpolate(low, size=skip.shape[-2:], mode=\"bilinear\",\n                             align_corners=False)\n        return self.head(self.dec(torch.cat([high, skip], dim=1)))\n\ntorch.manual_seed(3)\nmodel = MiniUNet(classes=3)\nx = torch.randn(2, 1, 65, 65)\ntarget = torch.randint(0, 3, (2, 65, 65), dtype=torch.long)\nlogits = model(x)\nloss = F.cross_entropy(logits, target)\nloss.backward()\nprint(\"Logits:\", tuple(logits.shape))  # (2, 3, 65, 65)\nprint(\"Loss:\", loss.item())\n# At inference: mask = logits.argmax(dim=1); do not apply softmax before CE.\n"
+    },
+    {
+        "file": "10_conv_transpusa.py",
+        "title": "ConvTranspose2d",
+        "description": "Numerical ConvTranspose2d example with 6×6 output from 3×3 input.",
+        "code": "\"\"\"ConvTranspose2d is associated with a transposed linear operation, not an inverse.\"\"\"\nimport torch\nfrom torch import nn\n\nx = torch.tensor([[[[1., 0., 0.],\n                    [0., 2., 0.],\n                    [0., 0., 3.]]]])  # (1,1,3,3)\nlayer = nn.ConvTranspose2d(1, 1, kernel_size=2, stride=2,\n                           padding=0, output_padding=0, bias=False)\nwith torch.no_grad():\n    layer.weight.fill_(1.0)\ny = layer(x)\nprint(\"Shape:\", tuple(y.shape))  # (1, 1, 6, 6)\nprint(y[0, 0])\n\n# The output is computed by overlapping contributions from each\n# position in the input tensor, summing at overlapping positions.\n"
+    },
+    {
+        "file": "11_transfer_learning.py",
+        "title": "Transfer learning",
+        "description": "Replace the final ResNet-18 layer and apply the official pretrained weight transforms. Requires downloading on first use.",
+        "code": "\"\"\"Replacing the classification head on a ResNet-18 backbone.\"\"\"\nimport torch\nfrom torch import nn\nfrom torchvision.models import resnet18, ResNet18_Weights\n\n# For pretrained weights, the first run may DOWNLOAD the model.\n# Use weights=None in an offline environment, but this is not transfer learning.\nweights = ResNet18_Weights.DEFAULT\nmodel = resnet18(weights=weights)\n\n# Freeze the backbone and train the output head for 4 classes.\nfor p in model.parameters():\n    p.requires_grad = False\nmodel.fc = nn.Linear(model.fc.in_features, 4)\noptimizer = torch.optim.AdamW(model.fc.parameters(), lr=1e-3)\n\n# IMPORTANT: use the pretrained weights' preprocessing during inference.\npreprocess = weights.transforms()\nprint(\"Output classes:\", model.fc.out_features)\nprint(\"Trainable parameters:\", sum(p.numel() for p in model.parameters()\n                                    if p.requires_grad))\nprint(\"Preprocessing:\", preprocess)\n"
+    }
+];

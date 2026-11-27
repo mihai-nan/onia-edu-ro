@@ -31,26 +31,11 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span
-                    class="nf">scor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span
-                    class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span
-                        class="p">[</span><span class="n">i</span><span class="p">]</span> <span
-                        class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span
-                        class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span
-                        class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span
-                        class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span
-                        class="o">+</span> <span class="n">b</span>
+            <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">scor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">+</span> <span class="n">b</span>
 
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[[</span><span
-                        class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span
-                        class="p">],</span> <span class="p">[</span><span class="mi">1</span><span
-                        class="p">,</span> <span class="mi">3</span><span class="p">]]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span
-                        class="n">scor</span><span class="p">(</span><span class="n">x</span><span
-                        class="p">,</span> <span class="p">[</span><span class="mi">2</span><span
-                        class="p">,</span> <span class="o">-</span><span class="mi">1</span><span
-                        class="p">],</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span>
 </pre>
             </div>
         </div>
@@ -62,23 +47,9 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span
-                    class="nf">hinge</span><span class="p">(</span><span class="n">y</span><span
-                    class="p">,</span> <span class="n">f</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span
-                        class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span
-                        class="n">y</span> <span class="o">*</span> <span class="n">f</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">([</span><span class="n">hinge</span><span class="p">(</span><span
-                        class="n">y</span><span class="p">,</span> <span class="n">f</span><span
-                        class="p">)</span> <span class="k">for</span> <span class="n">y</span><span
-                        class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[(</span><span
-                        class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span
-                        class="p">),</span> <span class="p">(</span><span class="mi">1</span><span
-                        class="p">,</span> <span class="mf">.4</span><span class="p">),</span> <span
-                        class="p">(</span><span class="o">-</span><span class="mi">1</span><span
-                        class="p">,</span> <span class="mf">.5</span><span class="p">),</span> <span
-                        class="p">(</span><span class="o">-</span><span class="mi">1</span><span
-                        class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)]])</span>
+            <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">hinge</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">*</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">hinge</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">.4</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)]])</span>
 </pre>
             </div>
         </div>
@@ -90,69 +61,22 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="k">def</span><span class="w"> </span><span
-                    class="nf">antreneaza</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span
-                    class="n">y</span><span class="p">,</span> <span class="n">epoci</span><span class="o">=</span><span
-                    class="mi">300</span><span class="p">,</span> <span class="n">pas</span><span
-                    class="o">=</span><span class="mf">.02</span><span class="p">,</span> <span class="n">C</span><span
-                    class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span
-                        class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span
-                        class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span
-                        class="p">]);</span> <span class="n">b</span> <span class="o">=</span> <span
-                        class="mf">0.0</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span
-                        class="p">(</span><span class="n">epoci</span><span class="p">):</span>
-        <span class="n">dw</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span
-                        class="n">copy</span><span class="p">();</span> <span class="n">db</span> <span
-                        class="o">=</span> <span class="mf">0.0</span>
-        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">et</span> <span
-                        class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span
-                        class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">et</span> <span class="o">*</span> <span class="p">(</span><span
-                        class="nb">sum</span><span class="p">(</span><span class="n">w</span><span
-                        class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span
-                        class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span
-                        class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span
-                        class="nb">range</span><span class="p">(</span><span class="nb">len</span><span
-                        class="p">(</span><span class="n">w</span><span class="p">)))</span> <span
-                        class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span
-                        class="mi">1</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span
-                        class="nb">range</span><span class="p">(</span><span class="nb">len</span><span
-                        class="p">(</span><span class="n">w</span><span class="p">)):</span>
-                    <span class="n">dw</span><span class="p">[</span><span class="n">j</span><span
-                        class="p">]</span> <span class="o">-=</span> <span class="n">C</span> <span
-                        class="o">*</span> <span class="n">et</span> <span class="o">*</span> <span
-                        class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span
-                        class="o">/</span> <span class="nb">len</span><span class="p">(</span><span
-                        class="n">X</span><span class="p">)</span>
-                <span class="n">db</span> <span class="o">-=</span> <span class="n">C</span> <span
-                        class="o">*</span> <span class="n">et</span> <span class="o">/</span> <span
-                        class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span
-                        class="nb">range</span><span class="p">(</span><span class="nb">len</span><span
-                        class="p">(</span><span class="n">w</span><span class="p">)):</span>
-            <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span
-                        class="o">-=</span> <span class="n">pas</span> <span class="o">*</span> <span
-                        class="n">dw</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-        <span class="n">b</span> <span class="o">-=</span> <span class="n">pas</span> <span class="o">*</span> <span
-                        class="n">db</span>
+            <div class="codehilite"><pre><span class="k">def</span><span class="w"> </span><span class="nf">antreneaza</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epoci</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">pas</span><span class="o">=</span><span class="mf">.02</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epoci</span><span class="p">):</span>
+        <span class="n">dw</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">db</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">et</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">et</span> <span class="o">*</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)))</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)):</span>
+                    <span class="n">dw</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">et</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+                <span class="n">db</span> <span class="o">-=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">et</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)):</span>
+            <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">pas</span> <span class="o">*</span> <span class="n">dw</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">-=</span> <span class="n">pas</span> <span class="o">*</span> <span class="n">db</span>
     <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span>
-<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span
-                        class="mi">2</span><span class="p">,</span><span class="o">-</span><span
-                        class="mi">1</span><span class="p">],</span> <span class="p">[</span><span
-                        class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span
-                        class="mi">2</span><span class="p">],</span> <span class="p">[</span><span
-                        class="mi">1</span><span class="p">,</span><span class="mi">2</span><span
-                        class="p">],</span> <span class="p">[</span><span class="mi">2</span><span
-                        class="p">,</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span
-                        class="mi">1</span><span class="p">,</span><span class="o">-</span><span
-                        class="mi">1</span><span class="p">,</span><span class="mi">1</span><span
-                        class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">antreneaza</span><span class="p">(</span><span
-                        class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">antreneaza</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 </pre>
             </div>
         </div>
@@ -164,44 +88,17 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span
-                    class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span
-                    class="n">make_moons</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span
-                        class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span
-                        class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span
-                        class="w"> </span><span class="kn">import</span> <span class="n">make_pipeline</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span
-                        class="kn">import</span> <span class="n">SVC</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span
-                        class="kn">import</span> <span class="n">accuracy_score</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span
-                        class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span
-                        class="mi">220</span><span class="p">,</span> <span class="n">noise</span><span
-                        class="o">=</span><span class="mf">.18</span><span class="p">,</span> <span class="n">random_state</span><span
-                        class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">Xt</span><span class="p">,</span> <span class="n">Xv</span><span class="p">,</span> <span
-                        class="n">yt</span><span class="p">,</span> <span class="n">yv</span> <span
-                        class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span
-                        class="n">X</span><span class="p">,</span> <span class="n">y</span><span
-                        class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span
-                        class="mi">4</span><span class="p">,</span> <span class="n">stratify</span><span
-                        class="o">=</span><span class="n">y</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span
-                        class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span
-                        class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span
-                        class="p">,</span> <span class="n">C</span><span class="o">=</span><span
-                        class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span
-                        class="s1">&#39;scale&#39;</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span
-                        class="n">Xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy test:&#39;</span><span
-                        class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">yv</span><span
-                        class="p">,</span> <span class="n">model</span><span class="o">.</span><span
-                        class="n">predict</span><span class="p">(</span><span class="n">Xv</span><span
-                        class="p">)))</span>
+            <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">220</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">.18</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">Xt</span><span class="p">,</span> <span class="n">Xv</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy test:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">yv</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xv</span><span class="p">)))</span>
 </pre>
             </div>
         </div>
@@ -213,24 +110,11 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span
-                    class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
-<span class="k">for</span> <span class="n">kernel</span> <span class="ow">in</span> <span class="p">[</span><span
-                        class="s1">&#39;linear&#39;</span><span class="p">,</span><span
-                        class="s1">&#39;rbf&#39;</span><span class="p">]:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span
-                        class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span
-                        class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span
-                        class="o">=</span><span class="n">kernel</span><span class="p">,</span><span
-                        class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span
-                        class="n">Xt</span><span class="p">,</span><span class="n">yt</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span
-                        class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span
-                        class="p">(</span><span class="n">yv</span><span class="p">,</span><span
-                        class="n">model</span><span class="o">.</span><span class="n">predict</span><span
-                        class="p">(</span><span class="n">Xv</span><span class="p">)),</span><span
-                        class="mi">3</span><span class="p">))</span>
+            <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="k">for</span> <span class="n">kernel</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;rbf&#39;</span><span class="p">]:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xt</span><span class="p">,</span><span class="n">yt</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">yv</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xv</span><span class="p">)),</span><span class="mi">3</span><span class="p">))</span>
 </pre>
             </div>
         </div>
@@ -242,19 +126,9 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span
-                    class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span
-                    class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span
-                    class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xt</span><span
-                    class="p">,</span><span class="n">yt</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Număr vectori suport:&#39;</span><span
-                        class="p">,</span> <span class="nb">len</span><span class="p">(</span><span
-                        class="n">model</span><span class="o">.</span><span class="n">support_</span><span
-                        class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Primii indici:&#39;</span><span
-                        class="p">,</span> <span class="n">model</span><span class="o">.</span><span
-                        class="n">support_</span><span class="p">[:</span><span class="mi">10</span><span
-                        class="p">])</span>
+            <div class="codehilite"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xt</span><span class="p">,</span><span class="n">yt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Număr vectori suport:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">support_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Primii indici:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">support_</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre>
             </div>
         </div>
@@ -266,32 +140,12 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span
-                    class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span
-                    class="n">load_iris</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span
-                        class="kn">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span>
-<span class="n">Xi</span><span class="p">,</span> <span class="n">yi</span> <span class="o">=</span> <span class="n">load_iris</span><span
-                        class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span
-                        class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">est</span> <span class="ow">in</span> <span class="p">[</span><span
-                        class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span
-                        class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">),</span><span class="n">LinearSVC</span><span
-                        class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span
-                        class="mi">10000</span><span class="p">)]:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span
-                        class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span><span
-                        class="n">est</span><span class="p">)</span><span class="o">.</span><span
-                        class="n">fit</span><span class="p">(</span><span class="n">Xi</span><span
-                        class="p">,</span> <span class="n">yi</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span
-                        class="n">est</span><span class="p">)</span><span class="o">.</span><span
-                        class="vm">__name__</span><span class="p">,</span><span class="n">model</span><span
-                        class="o">.</span><span class="n">predict</span><span class="p">([</span><span
-                        class="n">Xi</span><span class="p">[</span><span class="mi">0</span><span
-                        class="p">],</span><span class="n">Xi</span><span class="p">[</span><span
-                        class="mi">70</span><span class="p">],</span><span class="n">Xi</span><span
-                        class="p">[</span><span class="mi">140</span><span class="p">]]))</span>
+            <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span>
+<span class="n">Xi</span><span class="p">,</span> <span class="n">yi</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">est</span> <span class="ow">in</span> <span class="p">[</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">),</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)]:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span><span class="n">est</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">est</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">Xi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">Xi</span><span class="p">[</span><span class="mi">70</span><span class="p">],</span><span class="n">Xi</span><span class="p">[</span><span class="mi">140</span><span class="p">]]))</span>
 </pre>
             </div>
         </div>
@@ -303,15 +157,8 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span
-                    class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span
-                    class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span
-                        class="s1">&#39;clase: OvO=&#39;</span><span class="p">,</span><span class="n">k</span><span
-                        class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span
-                        class="mi">1</span><span class="p">)</span><span class="o">//</span><span
-                        class="mi">2</span><span class="p">,</span><span class="s1">&#39;OvR=&#39;</span><span
-                        class="p">,</span><span class="n">k</span><span class="p">)</span>
+            <div class="codehilite"><pre><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;clase: OvO=&#39;</span><span class="p">,</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;OvR=&#39;</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
 </pre>
             </div>
         </div>
@@ -323,34 +170,13 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span
-                    class="nn">sklearn.model_selection</span><span class="w"> </span><span
-                    class="kn">import</span> <span class="n">GridSearchCV</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span
-                        class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span
-                        class="s1">&#39;scaler&#39;</span><span class="p">,</span><span
-                        class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span
-                        class="s1">&#39;svc&#39;</span><span class="p">,</span> <span class="n">SVC</span><span
-                        class="p">())])</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span
-                        class="n">pipe</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;svc__C&#39;</span><span
-                        class="p">:[</span><span class="mf">.1</span><span class="p">,</span><span
-                        class="mi">1</span><span class="p">,</span><span class="mi">10</span><span
-                        class="p">],</span> <span class="s1">&#39;svc__gamma&#39;</span><span class="p">:[</span><span
-                        class="mf">.01</span><span class="p">,</span><span class="mf">.1</span><span
-                        class="p">,</span><span class="mi">1</span><span class="p">]},</span> <span
-                        class="n">cv</span><span class="o">=</span><span class="mi">3</span><span
-                        class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span
-                        class="p">)</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span
-                        class="n">Xt</span><span class="p">,</span><span class="n">yt</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span
-                        class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 test:&#39;</span><span
-                        class="p">,</span><span class="n">grid</span><span class="o">.</span><span
-                        class="n">score</span><span class="p">(</span><span class="n">Xv</span><span
-                        class="p">,</span><span class="n">yv</span><span class="p">))</span>
+            <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;svc&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())])</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;svc__C&#39;</span><span class="p">:[</span><span class="mf">.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;svc__gamma&#39;</span><span class="p">:[</span><span class="mf">.01</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">1</span><span class="p">]},</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xt</span><span class="p">,</span><span class="n">yt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 test:&#39;</span><span class="p">,</span><span class="n">grid</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xv</span><span class="p">,</span><span class="n">yv</span><span class="p">))</span>
 </pre>
             </div>
         </div>
@@ -362,19 +188,10 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span
-                    class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span
-                    class="n">confusion_matrix</span><span class="p">,</span> <span
-                    class="n">classification_report</span>
+            <div class="codehilite"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
 <span class="n">best</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span
-                        class="p">(</span><span class="n">yv</span><span class="p">,</span><span
-                        class="n">best</span><span class="o">.</span><span class="n">predict</span><span
-                        class="p">(</span><span class="n">Xv</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span
-                        class="p">(</span><span class="n">yv</span><span class="p">,</span><span
-                        class="n">best</span><span class="o">.</span><span class="n">predict</span><span
-                        class="p">(</span><span class="n">Xv</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">yv</span><span class="p">,</span><span class="n">best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xv</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">yv</span><span class="p">,</span><span class="n">best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xv</span><span class="p">)))</span>
 </pre>
             </div>
         </div>
@@ -386,31 +203,13 @@
             <div class="py-code-top"><span>Python · Notebook</span>
                 <button type="button" class="py-copy" data-copy-code="">Copiază codul</button>
             </div>
-            <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span
-                    class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span
-                    class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span
-                        class="kn">import</span> <span class="n">SVR</span>
-<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span
-                        class="p">(</span><span class="mi">1</span><span class="p">,</span><span
-                        class="mi">9</span><span class="p">)</span><span class="o">.</span><span
-                        class="n">reshape</span><span class="p">(</span><span class="o">-</span><span
-                        class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">yr</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span
-                        class="p">,</span><span class="mf">1.8</span><span class="p">,</span><span class="mf">3.2</span><span
-                        class="p">,</span><span class="mf">3.1</span><span class="p">,</span><span class="mf">4.7</span><span
-                        class="p">,</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.1</span><span
-                        class="p">,</span><span class="mf">6.8</span><span class="p">]</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span
-                        class="n">StandardScaler</span><span class="p">(),</span><span class="n">SVR</span><span
-                        class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span
-                        class="p">,</span><span class="n">C</span><span class="o">=</span><span
-                        class="mi">10</span><span class="p">,</span><span class="n">epsilon</span><span
-                        class="o">=</span><span class="mf">.2</span><span class="p">))</span>
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span
-                        class="n">xr</span><span class="p">,</span><span class="n">yr</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span
-                        class="p">([[</span><span class="mf">4.5</span><span class="p">]]))</span>
+            <div class="codehilite"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVR</span>
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.8</span><span class="p">,</span><span class="mf">3.2</span><span class="p">,</span><span class="mf">3.1</span><span class="p">,</span><span class="mf">4.7</span><span class="p">,</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">6.8</span><span class="p">]</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span><span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">.2</span><span class="p">))</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">yr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">4.5</span><span class="p">]]))</span>
 </pre>
             </div>
         </div>

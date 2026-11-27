@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<meta content="Convolutional neural networks: interactive course companion with mathematics, controllable animations, architectures, applications and PyTorch for Year IV – Machine Learning, AC, 2026–2027." name="description"/>
+<title>Convolutional networks · Interactive course companion | Machine Learning · AC</title>
+<link href="styles.css" rel="stylesheet"/>
+<style id="ma-navigation-material-style">
+        .ma-material-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 11px clamp(18px, 3vw, 43px);
+            background: #eef5ff;
+            border-bottom: 1px solid #d8e6f6;
+            font: 700 12px/1.4 Inter, "Segoe UI", Arial, sans-serif;
+            color: #234b80
+        }
+
+        .ma-material-strip .ma-material-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        .ma-material-strip .ma-material-return {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            border: 1px solid #bad4ef;
+            background: #fff;
+            color: #1c518a;
+            padding: 8px 15px;
+            border-radius: 999px;
+            min-height: 36px;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap
+        }
+
+        .ma-material-strip .ma-material-return:hover {
+            background: #e1efff;
+            border-color: #78a8df
+        }
+
+        .ma-material-strip .ma-material-return:focus-visible, .ma-side-home:focus-visible {
+            outline: 3px solid #4677b6;
+            outline-offset: 3px
+        }
+
+        .ma-side-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #d7eeff;
+            font: 750 12px/1.5 Inter, "Segoe UI", Arial, sans-serif;
+            padding: 11px 13px;
+            margin: 13px 10px 16px;
+            background: rgba(103, 162, 215, .14);
+            border: 1px solid rgba(142, 193, 234, .22);
+            border-radius: 11px
+        }
+
+        .ma-side-home:hover {
+            background: rgba(103, 162, 215, .24);
+            color: #fff;
+            border-color: #79a1d5
+        }
+
+        body.dark .ma-material-strip {
+            background: #142c48;
+            border-color: #284861;
+            color: #e4f0ff
+        }
+
+        body.dark .ma-material-strip .ma-material-return {
+            background: #254664;
+            color: #fff;
+            border-color: #447395
+        }
+
+        @media (max-width: 620px) {
+            .ma-material-strip {
+                gap: 10px;
+                padding: 10px 14px
+            }
+
+            .ma-material-strip .ma-material-label {
+                font-size: 10px
+            }
+
+            .ma-side-home {
+                margin: 12px 8px
+            }
+        }
+
+        @media print {
+            .ma-material-strip, .ma-side-home {
+                display: none !important
+            }
+        }
+    </style>
+<link href="../resurse/identitate_unitara_albastra.css" rel="stylesheet"/>
+<link href="../resurse/language.css" rel="stylesheet"/><script src="../resurse/language.js"></script></head>
+<body class="ia-course-two">
+<div class="app-shell" id="top">
+<aside aria-label="Material navigation" class="sidebar">
+<a class="brand" href="#top"><span class="brand-emblem">AC<span class="emblem-dot"></span></span><span><strong>Machine Learning</strong><small>Interactive material · 2026–2027</small></span></a>
+<a class="ma-side-home" href="../index.en.html">← Home</a>
+<div class="sidebar-label">CONVOLUTIONAL NETWORKS</div>
+<nav id="toc">
+<a class="nav-link active" href="#introducere"><span>01</span> Intuition and motivation</a>
+<a class="nav-link" href="#convolutie"><span>02</span> Convolution step by step</a>
+<a class="nav-link" href="#filtre"><span>03</span> Filters and features</a>
+<a class="nav-link" href="#geometrie"><span>04</span> Dimensions and parameters</a>
+<a class="nav-link" href="#canale"><span>05</span> Channels and feature maps</a>
+<a class="nav-link" href="#pooling"><span>06</span> Pooling and downsampling</a>
+<a class="nav-link" href="#receptiv"><span>07</span> Receptive field</a>
+<a class="nav-link" href="#eficienta"><span>08</span> Efficient convolutions</a>
+<a class="nav-link" href="#rezidual"><span>09</span> Residual connections</a>
+<a class="nav-link" href="#decodor"><span>10</span> Upsampling and U-Net</a>
+<a class="nav-link" href="#arhitecturi"><span>11</span> Architectures and papers</a>
+<a class="nav-link" href="#aplicatii"><span>12</span> Applications: choosing a CNN</a>
+<a class="nav-link" href="#pytorch"><span>13</span> Python + PyTorch</a>
+<a class="nav-link" href="#exercitii"><span>14</span> Exercises and assessment</a>
+<a class="nav-link" href="#bibliografie"><span>15</span> References</a>
+</nav>
+<div class="sidebar-bottom">
+<div class="progress-label"><span>Reading progress</span><strong id="course-progress">0%</strong></div>
+<div class="progress-track">
+<div id="progress-fill"></div>
+</div>
+<p>Faculty of Automatic Control and Computers<br/>POLITEHNICA University of Bucharest</p>
+<button class="quiet-btn" id="print-button" type="button">Print material ↗</button>
+</div>
+</aside>
+<div class="work-area">
+<nav aria-label="Navigate between the three Machine Learning courses" class="ma-course-switcher">
+<a class="ma-series-home" href="../index.en.html" title="Back to the course series">
+<span aria-hidden="true" class="ma-logo">∑</span>
+<span class="ma-brand-lines"><strong>MACHINE LEARNING</strong><small>AC · Year IV · 2026–2027</small></span>
+</a>
+<div class="ma-course-tabs">
+<a class="ma-tab" data-ma-course="1" href="../curs_01_fundamente_optimizare/index.en.html"><span class="ma-n">01</span> Activations &amp; optimization</a>
+<a aria-current="page" class="ma-tab" data-ma-course="2" href="../curs_02_retele_convolutionale/index.en.html"><span class="ma-n">02</span> Convolutional networks</a>
+<a class="ma-tab ma-next" data-ma-course="3" href="../curs_03_aplicatii_computer_vision/index.en.html"><span class="ma-n">03</span> Computer Vision applications</a>
+</div>
+</nav>
+<div aria-label="Navigate to home" class="ma-material-strip" role="navigation"><span class="ma-material-label">Interactive course companion · Machine Learning · 2026–2027</span><div class="ml-language-row"><nav aria-label="Language / Language" class="ml-language"><span class="ml-language-label">Language</span><a data-ml-language="ro" href="index.html?lang=ro" hreflang="ro" lang="ro">RO</a><a aria-current="true" data-ml-language="en" href="index.en.html?lang=en" hreflang="en" lang="en">EN</a></nav><a class="ma-material-return" href="../index.en.html">← Home</a></div></div>
+<header class="topbar">
+<div class="breadcrumb">MACHINE LEARNING <span>/</span> YEAR IV <span>/</span> CNN</div>
+<div class="topbar-right"><span class="tag tag-online">Interactive course companion</span><span class="tag">2026–2027</span></div>
+</header>
+<main>
+<section class="hero section-anchor" id="introducere">
+<div class="hero-copy">
+<div class="overline">DEEP LEARNING / COMPUTER VISION FUNDAMENTALS</div>
+<h1>Understand every<br/><span>convolution operation</span></h1>
+<p>From the dot product of a filter and a pixel window to ResNet, U-Net and MobileNet. The experiments let you change real values, follow every step and check dimensions and calculations.</p>
+<div class="hero-meta"><span>YEAR IV</span><span>MATHEMATICS + PYTORCH</span><span>15 MODULES</span>
+</div>
+<a class="primary-cta" href="#convolutie">Explore the material <span>↓</span></a></div>
+<div class="hero-visual">
+<div class="visual-toolbar"><span><i></i> LIVE DEMO · 3 × 3 FILTER</span><span>INPUT → KERNEL → OUTPUT</span>
+</div>
+<svg aria-label="Demonstration animation of a filter moving across an image and its activation map" id="hero-cnn" role="img" viewbox="0 0 780 420">
+<defs>
+<lineargradient id="heroBlue" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#d9edff"></stop>
+<stop offset="1" stop-color="#4a91e4"></stop>
+</lineargradient>
+</defs>
+<rect fill="#f4f8ff" height="420" width="780"></rect>
+<g id="hero-grid"></g>
+<g id="hero-kernel"></g>
+<g id="hero-result"></g>
+<path d="M325 200 L386 200 M374 190 L386 200 L374 210" fill="none" stroke="#527fb8" stroke-width="3"></path>
+<text fill="#294e7f" font-size="16" font-weight="800" x="30" y="38">IMAGE (7 × 7)</text>
+<text fill="#294e7f" font-size="16" font-weight="800" x="418" y="38">ACTIVATION MAP</text>
+<text fill="#4e709d" font-size="14" id="hero-step" text-anchor="middle" x="390" y="390">The operation updates automatically
+                        </text>
+</svg>
+<div class="scene-output">
+<div><span>INPUT</span><strong>7 × 7 × 1</strong></div>
+<div><span>KERNEL</span><strong>3 × 3 · stride 1</strong></div>
+<div><span>OUTPUT</span><strong>5 × 5 × 1 · computed values</strong></div>
+</div>
+</div>
+</section>
+<div class="content">
+<section class="module section-anchor" id="harta">
+<div class="chapter-title">
+<div>
+<div class="section-count">MODULE MAP</div>
+<h2>Why do convolutional networks work?</h2>
+<p>Image processing, the convolution operator, stride, padding, dilation, Conv1d–Conv3d, pooling and classical and modern architectures together provide the foundation for understanding a complete convolutional network.</p></div>
+</div>
+<div class="task-grid">
+<div class="task-card"><span class="task-number">01 / LOCALITY</span>
+<div class="simple-symbol"><span class="squares-icon">▦</span></div>
+<h3>Local connections</h3>
+<p>Each neuron processes a neighborhood, not the entire image at once.</p><code>receptive
+                                field</code></div>
+<div class="task-card"><span class="task-number">02 / SHARING</span>
+<div class="simple-symbol"><span class="squares-icon">▤</span></div>
+<h3>Reused parameters</h3>
+<p>The same filter is applied at every spatial position.</p><code>weight sharing</code>
+</div>
+<div class="task-card"><span class="task-number">03 / HIERARCHY</span>
+<div class="simple-symbol"><span class="squares-icon">▥</span></div>
+<h3>Hierarchical features</h3>
+<p>Edges → textures → object parts → semantic representations.</p><code>feature
+                                hierarchy</code></div>
+<div class="task-card"><span class="task-number">04 / GEOMETRY</span>
+<div class="simple-symbol"><span class="squares-icon">▧</span></div>
+<h3>Spatial structure</h3>
+<p>Outputs retain information about the location of features.</p><code>H × W × C</code>
+</div>
+</div>
+<div class="insight"><strong>Essential observation</strong><span>In <code>torch.nn.Conv2d</code> cross-correlation is computed (the kernel is not flipped); in deep learning literature, the operation is conventionally called “convolution.” The simulators below explicitly distinguish the two conventions.</span>
+</div>
+</section>
+<section class="module section-anchor" id="convolutie">
+<div class="chapter-title">
+<div><span class="section-count">01 / MAIN NUMERICAL EXPERIMENT</span>
+<h2>Convolution explained, pixel by pixel</h2>
+<p>Change the image, the nine weights, stride, padding and dilation. Each change automatically recalculates the activation map. Follow the window and its contributions to the weighted sum.</p></div>
+</div>
+<div class="panel conv-lab">
+<div class="lab-head">
+<div><h3>Complete simulator · cross-correlation / convolution</h3>
+<p>Click any pixel or coefficient to modify it. Padding pixels are zero.</p></div>
+<span class="pill">REAL CALCULATIONS, NOT A PRERECORDED ANIMATION</span></div>
+<div class="control-strip"><label>Image pattern<select id="conv-image">
+<option value="edge">Vertical edge</option>
+<option value="cross">Cross</option>
+<option value="ramp">Gradient</option>
+<option value="checker">Checkerboard</option>
+<option value="custom">Custom</option>
+</select></label><label>Filter<select id="conv-filter">
+<option value="edge">Vertical Sobel</option>
+<option value="horiz">Horizontal Sobel</option>
+<option value="blur">3×3 mean</option>
+<option value="sharpen">Sharpen</option>
+<option value="laplace">Laplacian</option>
+<option value="identity">Identity</option>
+<option value="custom">Custom</option>
+</select></label><label>Convention<select id="conv-mode">
+<option value="corr">Correlation (PyTorch)</option>
+<option value="true">Mathematical convolution (flip kernel)</option>
+</select></label><label>Value on click<select id="conv-brush">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="4">4</option>
+<option value="6">6</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select></label></div>
+<div class="control-strip slim"><label>Stride <strong id="conv-stride-val">1</strong><input id="conv-stride" max="3" min="1" step="1" type="range" value="1"/></label><label>Padding
+                            <strong id="conv-padding-val">0</strong><input id="conv-padding" max="2" min="0" step="1" type="range" value="0"/></label><label>Dilation
+                            <strong id="conv-dilation-val">1</strong><input id="conv-dilation" max="2" min="1" step="1" type="range" value="1"/></label><label>Bias
+                            <strong id="conv-bias-val">0</strong><input id="conv-bias" max="4" min="-4" step="1" type="range" value="0"/></label></div>
+<div class="three-matrix">
+<div class="matrix-box">
+<div class="matrix-head"><strong>Input <span id="conv-in-shape">7 × 7</span></strong><small>including the padding border</small></div>
+<div class="matrix-component" id="conv-input-grid"></div>
+<div class="legend-inline"><span><i class="legend-swatch" style="background:#c7e2ff"></i> image values</span><span><i class="legend-swatch" style="background:#eef2f7"></i> padding</span></div>
+</div>
+<div class="matrix-box">
+<div class="matrix-head"><strong>Kernel <span>3 × 3</span></strong><small>editable coefficients</small></div>
+<div class="matrix-component kernel-edit" id="conv-kernel-grid"></div>
+<div class="kernel-hint">Click a coefficient to enter any numerical value between −20 and 20. Fractional coefficients are accepted.
+                                </div>
+<div class="effective-kernel" id="conv-effective-kernel"></div>
+</div>
+<div class="matrix-box">
+<div class="matrix-head"><strong>Output <span id="conv-output-shape">5 × 5</span></strong><small>real values, without ReLU activation</small></div>
+<div class="matrix-component" id="conv-output-grid"></div>
+<div class="matrix-legend">Blue = positive · orange = negative · gray = zero</div>
+</div>
+</div>
+<div class="lab-timeline">
+<div class="timeline-buttons">
+<button class="secondary-btn" id="conv-first">⟲ Reset</button>
+<button class="secondary-btn" id="conv-prev">← Previous step</button>
+<button class="primary-btn" id="conv-play">▶ Play</button>
+<button class="secondary-btn" id="conv-next">Next step →</button>
+<button class="secondary-btn" id="conv-last">Last ⇥</button>
+</div>
+<label class="speed-control">Speed <input id="conv-speed" max="1300" min="150" step="50" type="range" value="650"/>
+<output id="conv-speed-val">650 ms</output>
+</label>
+<div class="timeline-track"><input id="conv-step-range" max="24" min="0" step="1" type="range" value="0"/><span id="conv-step-label">Step 1 / 25</span></div>
+</div>
+<div class="calc-panel">
+<div class="calc-eyebrow">FULL CALCULATION FOR THE CURRENT POSITION</div>
+<div class="math-calc" id="conv-current-formula"></div>
+<div class="step-explain" id="conv-current-explain"></div>
+</div>
+<div class="mini-stats">
+<div><span>EFFECTIVE KERNEL</span><strong id="conv-effective">3 × 3</strong></div>
+<div><span>OUTPUT SIZE</span><strong id="conv-shape-stat">5 × 5</strong></div>
+<div><span>OPERATIONS (MACs) / MAP</span><strong id="conv-macs">225</strong></div>
+</div>
+</div>
+<div class="two-cols support-after">
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Mathematical model and conventions</h3></div>
+<div class="equation"><span class="eq-num">(1)</span>
+<math display="block">
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+</mrow>
+</msub>
+<mo>=</mo>
+<mi>b</mi>
+<mo>+</mo>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>u</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>v</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<msub>
+<mi>K</mi>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</msub>
+<msub>
+<mover>
+<mi>X</mi>
+<mo>~</mo>
+</mover>
+<mrow>
+<mi>is</mi>
+<mo>+</mo>
+<mi>ud</mi>
+<mo>,</mo>
+<mi>js</mi>
+<mo>+</mo>
+<mi>vd</mi>
+</mrow>
+</msub>
+</math>
+</div>
+<p>Here <em>X̃</em> is the zero-padded input, <em>s</em> is stride, <em>d</em>
+                                is dilation, and <em>b</em> is bias. The equation describes the operation performed by
+                                <code>Conv2d</code> for a single channel and one filter.</p>
+<p>Discrete mathematical convolution flips the kernel along both axes. For symmetric filters the result can remain unchanged; for directional detectors, the sign or orientation may change.</p></div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>How do you interpret a filter?</h3></div>
+<div class="concept-rows">
+<div><strong>Blur / averaging</strong>
+<p>Reduces local variations and high-frequency noise; also attenuates fine details. In modern models, filters are usually learned from data.</p></div>
+<div><strong>Sobel / gradient</strong>
+<p>Highlights intensity transitions in a particular direction; useful for understanding edge detection and the first convolutional layers.</p>
+</div>
+<div><strong>Laplacian / sharpen</strong>
+<p>Responds to rapid changes or amplifies detail; may increase sensitivity to noise.</p></div>
+<div><strong>Feature map ≠ RGB image</strong>
+<p>Activations may be negative, exceed the interval [0, 255] and require normalization only for visualization.</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="filtre">
+<div class="chapter-title">
+<div><span class="section-count">02 / FILTERS AND FEATURE EXTRACTION</span>
+<h2>What does each kernel “see”?</h2>
+<p>A synthetic scene is filtered with different operators. Compare the input, signed response and response after ReLU; values and scales are displayed explicitly.</p></div>
+</div>
+<div class="panel">
+<div class="control-strip"><label>Scene<select id="feature-scene">
+<option value="geometry">Geometric shapes</option>
+<option value="grid">Grid and contours</option>
+<option value="diagonal">Diagonal</option>
+<option value="texture">Periodic texture</option>
+</select></label><label>Operator<select id="feature-kernel">
+<option value="sobelx">Sobel X</option>
+<option value="sobely">Sobel Y</option>
+<option value="laplace">Laplacian</option>
+<option value="blur">Blur</option>
+<option value="sharpen">Sharpen</option>
+</select></label><label>Representation<select id="feature-show">
+<option value="signed">Signed response</option>
+<option value="relu">After ReLU</option>
+<option value="abs">Magnitude |Y|</option>
+</select></label><label>Scale<select id="feature-scale">
+<option value="auto">Auto (for visualization)</option>
+<option value="fixed">Fixed (±8)</option>
+</select></label></div>
+<div class="feature-triptych">
+<div><h3>Input image</h3>
+<canvas height="288" id="feature-input" width="288"></canvas>
+<small>24 × 24 discrete synthetic scene</small></div>
+<div><h3>Filter response</h3>
+<canvas height="288" id="feature-output" width="288"></canvas>
+<small id="feature-range">Activation range: —</small></div>
+<div><h3>Numerical representation</h3>
+<div class="feature-metrics" id="feature-metrics"></div>
+<div id="feature-kernel-preview"></div>
+<p class="micro-text">The visualizations use a color transformation; colors are not predicted classes. Filters are fixed and manually defined.</p></div>
+</div>
+</div>
+<div class="three-cards">
+<div class="concept-card"><span>EARLY NETWORK LAYERS</span><h4>Edges and contrast</h4>
+<p>In early layers, learned filters may respond to orientations, frequencies and textures. There is no mandatory one-filter-to-one-concept correspondence.</p></div>
+<div class="concept-card"><span>INTERMEDIATE LAYERS</span><h4>Feature composition</h4>
+<p>Successive convolutions combine local patterns into a larger receptive field.</p></div>
+<div class="concept-card"><span>DEEP LAYERS</span><h4>Task-dependent semantics</h4>
+<p>Classification relies on global evidence; segmentation must also preserve or reconstruct spatial detail.</p></div>
+</div>
+</section>
+<section class="module section-anchor" id="geometrie">
+<div class="chapter-title">
+<div><span class="section-count">03 / DIMENSIONS AND COMPUTATIONAL COST</span>
+<h2>How large will the output tensor be?</h2>
+<p>A calculator for any <code>Conv2d</code> with symmetric parameters and configurable numbers of channels and groups. We no longer assume that padding preserves dimensions.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Conv2d configurator</h3><span class="pill">AUTOMATIC VALIDATION</span></div>
+<div class="number-controls" id="shape-controls"><label>Height H<input id="sh-h" max="4096" min="1" type="number" value="32"/></label><label>Width W<input id="sh-w" max="4096" min="1" type="number" value="32"/></label><label>Input channels<input id="sh-cin" max="2048" min="1" type="number" value="3"/></label><label>Filters / output channels<input id="sh-cout" max="2048" min="1" type="number" value="16"/></label><label>Kernel k<input id="sh-k" max="31" min="1" type="number" value="3"/></label><label>Stride
+                                s<input id="sh-s" max="16" min="1" type="number" value="1"/></label><label>Padding
+                                p<input id="sh-p" max="64" min="0" type="number" value="1"/></label><label>Dilation
+                                d<input id="sh-d" max="16" min="1" type="number" value="1"/></label><label>Groups g<input id="sh-g" max="2048" min="1" type="number" value="1"/></label><label>Bias<select id="sh-bias">
+<option value="1">Yes</option>
+<option value="0">No</option>
+</select></label></div>
+<div class="input-row">
+<button class="secondary-btn" id="shape-preset-image">RGB example</button>
+<button class="secondary-btn" id="shape-preset-depthwise">Depthwise</button>
+<button class="secondary-btn" id="shape-preset-down">Downsampling</button>
+</div>
+<div class="form-error" id="shape-error" role="status"></div>
+<div class="mini-stats">
+<div><span>OUTPUT NCHW</span><strong id="sh-out">—</strong></div>
+<div><span>PARAMETERS</span><strong id="sh-params">—</strong></div>
+<div><span>MACs / IMAGE</span><strong id="sh-macs">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Deriving the formula</h3></div>
+<div class="equation"><span class="eq-num">(2)</span>
+<math display="block">
+<msub>
+<mi>H</mi>
+<mtext>out</mtext>
+</msub>
+<mo>=</mo>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>+</mo>
+<mn>2</mn>
+<mi>p</mi>
+<mo>−</mo>
+<mi>d</mi>
+<mo>(</mo>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+<mi>s</mi>
+</mfrac>
+<mo>⌋</mo>
+<mo>+</mo>
+<mn>1</mn>
+</math>
+</div>
+<p>The width formula is identical, replacing H with W. Here it applies to equal parameters on both axes and symmetric padding.</p>
+<div class="equation"><span class="eq-num">(3)</span>
+<math display="block">
+<msub>
+<mi>P</mi>
+<mtext>conv</mtext>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<mo>(</mo>
+<mfrac>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<mi>g</mi>
+</mfrac>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<mi>δ</mi>
+<mo>)</mo>
+</math>
+</div>
+<p><em>δ=1</em> if bias is included, otherwise 0. The MAC count excludes bias and other elementwise operations; it does not automatically represent actual GPU time.</p>
+<div class="tensor-journey" id="shape-journey">
+<div><span>INPUT</span><strong id="sh-journey-in">—</strong></div>
+<div class="journey-arrow">→</div>
+<div><span>CONV2D</span><strong id="sh-journey-k">—</strong></div>
+<div class="journey-arrow">→</div>
+<div><span>OUTPUT</span><strong id="sh-journey-out">—</strong></div>
+</div>
+<div class="note-note"><strong>Classic lecture example:</strong> a 32×32×3 input and six 5×5×3 filters without padding and with stride=1 produce 28×28×6. The number of parameters with bias is 6×(3×5×5+1)=456.
+                            </div>
+</div>
+</div>
+<div class="three-cards">
+<div class="concept-card"><span>CONV1D</span><h4>Signals and sequences</h4>
+<p>Audio, ECG/EEG, industrial vibrations and time series; the PyTorch input has shape
+                                <code>(B, C, L)</code>.</p></div>
+<div class="concept-card"><span>CONV2D</span><h4>Images and spatial features</h4>
+<p>Photographs, radiographs, satellite maps and video frames processed individually; <code>(B, C,
+                                H, W)</code>.</p></div>
+<div class="concept-card"><span>CONV3D</span><h4>Volumes and spatiotemporal data</h4>
+<p>3D CT/MRI or video clips, if dimensions are arranged appropriately; <code>(B, C,
+                                D, H, W)</code>.</p></div>
+</div>
+</section>
+<section class="module section-anchor" id="canale">
+<div class="chapter-title">
+<div><span class="section-count">04 / THE 3D FEATURE VOLUME</span>
+<h2>A filter operates simultaneously on all its input channels</h2>
+<p>An RGB convolution does not apply an independent kernel to each channel and then concatenate the results: a standard filter has weights across all three channels and sums their contributions.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Multichannel simulator · 3 channels, 2 filters</h3><span class="pill">INTERACTIVE</span></div>
+<div class="form-grid"><label>Active filter <select id="multi-filter">
+<option value="0">Filter 1 – contrast</option>
+<option value="1">Filter 2 – combination</option>
+</select></label><label>Window position <select id="multi-pos">
+<option value="0">(0, 0)</option>
+<option value="1">(0, 1)</option>
+<option value="2">(1, 0)</option>
+<option value="3">(1, 1)</option>
+</select></label></div>
+<div class="channel-visual" id="channel-visual"></div>
+<div class="multi-sums" id="multi-sums"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Where does the C_out dimension come from?</h3></div>
+<div class="equation">
+<math display="block">
+<mi>Y</mi>
+<mo>[</mo>
+<mi>o</mi>
+<mo>,</mo>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>]</mo>
+<mo>=</mo>
+<msub>
+<mi>b</mi>
+<mi>o</mi>
+</msub>
+<mo>+</mo>
+<munder>
+<mo>∑</mo>
+<mi>c</mi>
+</munder>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</munder>
+<mi>W</mi>
+<mo>[</mo>
+<mi>o</mi>
+<mo>,</mo>
+<mi>c</mi>
+<mo>,</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>]</mo>
+<mi>X</mi>
+<mo>[</mo>
+<mi>c</mi>
+<mo>,</mo>
+<mi>i</mi>
+<mo>+</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>+</mo>
+<mi>v</mi>
+<mo>]</mo>
+</math>
+</div>
+<p>Each index <em>o</em> denotes a distinct filter spanning all
+                                <em>C_in</em> channels in standard convolution. <em>C_out</em> filters produce <em>C_out</em>
+                                feature maps.</p>
+<div class="shape-facts">
+<div><small>Input</small><strong>(1, 3, 3, 3)</strong></div>
+<div><small>Weight</small><strong>(2, 3, 2, 2)</strong></div>
+<div><small>Output</small><strong>(1, 2, 2, 2)</strong></div>
+</div>
+<div class="note-note">The expression in the simulator shows each channel's contribution and their sum. Values and weights are synthetic, but the arithmetic is the same as in a PyTorch network.
+                            </div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="pooling">
+<div class="chapter-title">
+<div><span class="section-count">05 / REDUCING RESOLUTION</span>
+<h2>Max Pooling versus Average Pooling</h2>
+<p>Compare what information each strategy preserves. A maximum can highlight a strong activation; an average integrates the responses in the window.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="control-strip"><label>Pooling type<select id="pool-mode">
+<option value="max">Max pooling</option>
+<option value="avg">Average pooling</option>
+</select></label><label>Example<select id="pool-data">
+<option value="spots">Isolated activations</option>
+<option value="pattern">Gradual texture</option>
+<option value="negative">Negative activations</option>
+</select></label><label>Window size<select id="pool-k">
+<option value="2">2 × 2</option>
+<option value="3">3 × 3</option>
+</select></label><label>Stride<select id="pool-s">
+<option value="2">2</option>
+<option value="1">1</option>
+</select></label></div>
+<div class="pool-pair">
+<div><h3>6 × 6 input</h3>
+<div class="matrix-component" id="pool-input"></div>
+</div>
+<div><h3>Output <span id="pool-out-shape"></span></h3>
+<div class="matrix-component" id="pool-output"></div>
+</div>
+</div>
+<div class="timeline-buttons">
+<button class="secondary-btn" id="pool-prev">← Back</button>
+<button class="primary-btn" id="pool-play">▶ Play</button>
+<button class="secondary-btn" id="pool-next">Next →</button>
+</div>
+<div class="calc-panel compact" id="pool-calc"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Properties and limitations</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+</mrow>
+</msub>
+<mo>=</mo>
+<munder>
+<mi>max</mi>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>∈</mo>
+<mi>Ω</mi>
+</mrow>
+</munder>
+<mi>X</mi>
+<mo>[</mo>
+<mi>is</mi>
+<mo>+</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>js</mi>
+<mo>+</mo>
+<mi>v</mi>
+<mo>]</mo>
+</math>
+</div>
+<p>Max pooling is a local aggregation <strong>without learnable weights</strong>. For a fixed k×k window, average pooling uses the arithmetic mean. The examples assume no padding and <code>ceil_mode=False</code>.</p>
+<div class="concept-rows">
+<div><strong>When to use max pooling?</strong>
+<p>When the strongest activation is informative and reduced resolution is acceptable.</p></div>
+<div><strong>When to use average pooling?</strong>
+<p>When context aggregation and reducing local variation are important; global average pooling compresses each channel into a single value.</p></div>
+<div><strong>Alternative</strong>
+<p>Stride-2 convolutions, adaptive pooling or specialized downsampling mechanisms. Pooling is not mandatory in every CNN.</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="receptiv">
+<div class="chapter-title">
+<div><span class="section-count">06 / SPATIAL COVERAGE</span>
+<h2>Understand the theoretical receptive field</h2>
+<p>Add convolutions in sequence. A neuron in a deep layer may depend on increasingly large input regions, and stride changes the jump between neighboring receptive positions.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Three-layer calculator</h3><span class="pill">INTERACTIVE</span></div>
+<div class="rf-editor" id="rf-editor"></div>
+<div class="rf-visual" id="rf-visual"></div>
+<div class="mini-stats">
+<div><span>RECEPTIVE FIELD</span><strong id="rf-total">—</strong></div>
+<div><span>EFFECTIVE JUMP</span><strong id="rf-jump">—</strong></div>
+<div><span>LAYERS</span><strong>3</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Receptive field recurrence</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>r</mi>
+<mi>l</mi>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>r</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>+</mo>
+<mo>(</mo>
+<msub>
+<mi>k</mi>
+<mi>l</mi>
+</msub>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<msub>
+<mi>d</mi>
+<mi>l</mi>
+</msub>
+<msub>
+<mi>j</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+</math>
+</div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>j</mi>
+<mi>l</mi>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>j</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<msub>
+<mi>s</mi>
+<mi>l</mi>
+</msub>
+<mspace width="1em"></mspace>
+<msub>
+<mi>r</mi>
+<mn>0</mn>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>j</mi>
+<mn>0</mn>
+</msub>
+<mo>=</mo>
+<mn>1</mn>
+</math>
+</div>
+<p><em>r</em>: theoretical receptive field; <em>j</em>: distance between the centers of two adjacent receptive positions, measured in input pixels. Padding shifts the centers but does not change the size of the theoretical receptive field.</p>
+<p>In practice, <strong>the effective receptive field</strong> may be smaller than the theoretical support of the architecture.</p>
+<div class="note-note"><strong>Usefulness:</strong> for segmentation, dilated/atrous convolution increases context without further reducing feature map resolution; for large images, the balance between context and detail matters.
+                            </div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="eficienta">
+<div class="chapter-title">
+<div><span class="section-count">07 / EFFICIENCY AND DEPLOYMENT</span>
+<h2>Standard, grouped and depthwise separable convolution</h2>
+<p>Not all convolutions have the same cost. Change channel counts, filter size and resolution to compare approximate MAC and parameter counts.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="form-grid"><label>Input channels <strong id="eff-cin-v">32</strong><input id="eff-cin" max="128" min="8" step="8" type="range" value="32"/></label><label>Output channels <strong id="eff-cout-v">64</strong><input id="eff-cout" max="192" min="8" step="8" type="range" value="64"/></label><label>Kernel<select id="eff-k">
+<option value="3">3 × 3</option>
+<option value="5">5 × 5</option>
+<option value="7">7 × 7</option>
+</select></label><label>Feature map size<select id="eff-h">
+<option value="14">14 × 14</option>
+<option selected="" value="28">28 × 28</option>
+<option value="56">56 × 56</option>
+<option value="112">112 × 112</option>
+</select></label></div>
+<div class="eff-chart" id="eff-chart"></div>
+<div class="mini-stats">
+<div><span>MAC RATIO</span><strong id="eff-ratio">—</strong></div>
+<div><span>STANDARD PARAMS</span><strong id="eff-standard">—</strong></div>
+<div><span>DEPTHWISE + PW</span><strong id="eff-dw">—</strong></div>
+</div>
+<p class="micro-text">We compare standard convolution with depthwise k×k + pointwise 1×1, without bias, at the same output resolution. MACs are not measured latency.</p></div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Why does factorization help?</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>MAC</mi>
+<mtext>standard</mtext>
+</msub>
+<mo>=</mo>
+<mi>H</mi>
+<mi>W</mi>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+</math>
+</div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>MAC</mi>
+<mtext>separable</mtext>
+</msub>
+<mo>=</mo>
+<mi>H</mi>
+<mi>W</mi>
+<mo>(</mo>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<mo>)</mo>
+</math>
+</div>
+<div class="architecture-schematic">
+<div class="arch-stage accent">Standard k×k<br/><small>spatial + channel mixing</small>
+</div>
+<span>versus</span>
+<div class="arch-stage">Depthwise k×k<br/><small>per channel</small></div>
+<span>→</span>
+<div class="arch-stage">Pointwise 1×1<br/><small>mixes channels</small></div>
+</div>
+<div class="note-note"><strong>Where is it used?</strong> MobileNet, edge/embedded models, mobile classification and efficient detectors. The theoretical advantage must be verified by measurements on the target hardware.
+                            </div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="rezidual">
+<div class="chapter-title">
+<div><span class="section-count">08 / DEEP NETWORKS</span>
+<h2>Why does a residual connection help?</h2>
+<p>In a residual block, we do not learn H(x) directly alone, but the transformation F(x) added to the input. Observe the effect on the value and derivative of an educational scalar example.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Controlled scalar experiment</h3><span class="pill">MATHEMATICAL DEMONSTRATION</span>
+</div>
+<svg aria-label="Residual block that adds x to F(x)" id="residual-svg" role="img" viewbox="0 0 640 250">
+<rect fill="#d8eaff" height="60" rx="9" stroke="#8bb7ea" width="96" x="17" y="94"></rect>
+<text fill="#184781" font-size="23" font-weight="800" text-anchor="middle" x="65" y="130">x
+                                </text>
+<path d="M113 124H185M185 124V55H433V100M185 124H234" fill="none" stroke="#4786ce" stroke-width="4"></path>
+<rect fill="#154a9b" height="52" rx="9" width="146" x="234" y="99"></rect>
+<text fill="white" font-size="19" font-weight="700" text-anchor="middle" x="307" y="132">F(x)
+                                </text>
+<path d="M380 124H444" stroke="#4786ce" stroke-width="4"></path>
+<circle cx="460" cy="123" fill="white" r="23" stroke="#438cc9" stroke-width="3"></circle>
+<path d="M447 123H473M460 110V136" stroke="#438cc9" stroke-width="3"></path>
+<path d="M483 123H523" stroke="#4786ce" stroke-width="4"></path>
+<rect fill="#d7e2f0" height="60" rx="9" stroke="#7699c7" width="102" x="523" y="94"></rect>
+<text fill="#1c3d68" font-size="20" font-weight="800" text-anchor="middle" x="574" y="130">y
+                                </text>
+<text fill="#6180aa" font-size="13" font-weight="700" text-anchor="middle" x="325" y="37">SKIP / IDENTITY
+                                </text>
+<text fill="#6180aa" font-size="13" text-anchor="middle" x="307" y="183">RESIDUAL PATH
+                                </text>
+</svg>
+<div class="form-grid"><label>Input x <strong id="res-x-v">2,0</strong><input id="res-x" max="5" min="-5" step="0.25" type="range" value="2"/></label><label>Parameter a in F(x)=a·x <strong id="res-a-v">−0,8</strong><input id="res-a" max="1.5" min="-1.5" step="0.05" type="range" value="-0.8"/></label></div>
+<div class="mini-stats">
+<div><span>F(x)</span><strong id="res-f">—</strong></div>
+<div><span>x + F(x)</span><strong id="res-y">—</strong></div>
+<div><span>d(x+F)/dx</span><strong id="res-grad">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Identity + residual</h3></div>
+<div class="equation">
+<math display="block">
+<mi>y</mi>
+<mo>=</mo>
+<mi>F</mi>
+<mo>(</mo>
+<mi>x</mi>
+<mo>;</mo>
+<mi>W</mi>
+<mo>)</mo>
+<mo>+</mo>
+<mi>x</mi>
+<mspace width="1em"></mspace>
+<mfrac>
+<mrow>
+<mi>∂</mi>
+<mi>y</mi>
+</mrow>
+<mrow>
+<mi>∂</mi>
+<mi>x</mi>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mi>∂</mi>
+<mi>F</mi>
+</mrow>
+<mrow>
+<mi>∂</mi>
+<mi>x</mi>
+</mrow>
+</mfrac>
+<mo>+</mo>
+<mi>I</mi>
+</math>
+</div>
+<p>The identity term provides a direct path for signal and gradient propagation. It does not guarantee that the gradient cannot vanish in any configuration; in real models, normalization, activations and dimensional projections also matter.</p>
+<p><strong>When is it useful?</strong> Very deep networks and backbones for classification, detection or segmentation (ResNet-18/34/50/101).</p>
+<div class="note-note">The scalar example <code>F(x)=a·x</code> explains the derivative exactly, but does not represent a complete ResNet or simulate training.
+                            </div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="decodor">
+<div class="chapter-title">
+<div><span class="section-count">09 / SPATIAL RECONSTRUCTION</span>
+<h2>Transposed convolution and U-Net connections</h2>
+<p>Segmentation requires dense predictions, not just a class vector. Explore transposed convolution and then encoder–decoder information flow with skip connections.</p></div>
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Transposed convolution · step-by-step accumulation</h3><span class="pill">INTERACTIVE</span></div>
+<div class="control-strip"><label>Stride<select id="trans-stride">
+<option value="2">2</option>
+<option value="1">1</option>
+</select></label><label>Kernel<select id="trans-kernel">
+<option value="ones">All elements equal to 1</option>
+<option value="checker">Signed filter</option>
+<option value="avg">Values 0.25</option>
+</select></label><label>Input<select id="trans-input">
+<option value="diag">Diagonal</option>
+<option value="spots">Central impulse</option>
+</select></label></div>
+<div class="pool-pair trans-pair">
+<div><h3>Input (3×3)</h3>
+<div class="matrix-component" id="trans-source"></div>
+</div>
+<div><h3>Accumulated output <span id="trans-output-shape"></span></h3>
+<div class="matrix-component" id="trans-target"></div>
+</div>
+</div>
+<div class="timeline-buttons">
+<button class="secondary-btn" id="trans-prev">← Back</button>
+<button class="primary-btn" id="trans-play">▶ Play</button>
+<button class="secondary-btn" id="trans-next">Next →</button>
+</div>
+<div class="calc-panel compact" id="trans-note"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>How do we choose upsampling?</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>H</mi>
+<mtext>out</mtext>
+</msub>
+<mo>=</mo>
+<mo>(</mo>
+<msub>
+<mi>H</mi>
+<mtext>in</mtext>
+</msub>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mi>s</mi>
+<mo>−</mo>
+<mn>2</mn>
+<mi>p</mi>
+<mo>+</mo>
+<mi>d</mi>
+<mo>(</mo>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>+</mo>
+<msub>
+<mi>p</mi>
+<mtext>out</mtext>
+</msub>
+<mo>+</mo>
+<mn>1</mn>
+</math>
+</div>
+<p>Transposed convolution is the linear operation associated with the transpose of a convolution matrix (in a matrix representation). <strong>It is not an inverse</strong> that automatically recovers the original image.</p>
+<p>In the simulator: kernel 2×2, padding=0, output_padding=0, dilation=1. For stride=1, contributions overlap and are summed; for stride=2, coverage differs.</p>
+<div class="concept-rows">
+<div><strong>Upsampling + Conv2d</strong>
+<p>Interpolation (nearest/bilinear) followed by convolution; a common alternative when checkerboard artifacts occur.</p></div>
+<div><strong>ConvTranspose2d</strong>
+<p>Learns the resolution-increasing operation; used in decoders, segmentation and image generation.</p></div>
+</div>
+</div>
+</div>
+<div class="panel unet-panel">
+<div class="panel-heading"><h3>U-Net · follow the information path</h3><span class="pill">ENCODER → BOTTLENECK → DECODER</span>
+</div>
+<div class="unet-diagram" id="unet-diagram"></div>
+<div class="unet-controls"><label>Highlighted stage<select id="unet-step">
+<option value="0">1. Input</option>
+<option value="1">2. Encoder</option>
+<option value="2">3. Bottleneck</option>
+<option value="3">4. Decoder + skip</option>
+<option value="4">5. Segmentation</option>
+</select></label>
+<button class="secondary-btn" id="unet-prev">← Back</button>
+<button class="secondary-btn" id="unet-next">Next →</button>
+</div>
+<p class="muted" id="unet-explain"></p></div>
+</section>
+<section class="module section-anchor" id="arhitecturi">
+<div class="chapter-title">
+<div><span class="section-count">10 / ARCHITECTURE EVOLUTION</span>
+<h2>From LeNet to ConvNeXt: what problem does each idea solve?</h2>
+<p>Memorizing architecture names is not enough. For each model: the innovation, trade-off and appropriate practical scenario. Papers link directly to their original publications.</p></div>
+</div>
+<div class="architectures" id="architecture-list"></div>
+<div class="note-note"><strong>Clarification:</strong> the examples of use are educational recommendations derived from architecture properties, not guarantees that a model is always superior. Real comparisons require the same dataset and evaluation protocol.
+                    </div>
+</section>
+<section class="module section-anchor" id="aplicatii">
+<div class="chapter-title">
+<div><span class="section-count">11 / DESIGN DECISIONS</span>
+<h2>Which CNN variant should we choose for a real application?</h2>
+<p>Choose a model based on data structure, output type, latency requirements and dataset size. Explore concrete scenarios.</p></div>
+</div>
+<div class="case-selector" id="case-tabs">
+<button class="case-tab active" data-case="medical" type="button">Medical imaging</button>
+<button class="case-tab" data-case="mobile" type="button">Edge / mobile</button>
+<button class="case-tab" data-case="satellite" type="button">Satellite images</button>
+<button class="case-tab" data-case="industrial" type="button">Industrial inspection</button>
+<button class="case-tab" data-case="signal" type="button">ECG / vibrations</button>
+</div>
+<div class="panel case-rich" id="case-details"></div>
+<div class="three-cards">
+<div class="concept-card"><span>TRANSFER LEARNING</span><h4>When data is scarce</h4>
+<p>Start with pretrained weights, adapt the classification head and then fine-tune carefully. Check the domain difference.</p></div>
+<div class="concept-card"><span>EVALUATION</span><h4>Suitable metric</h4>
+<p>Classification: macro-F1/AUROC; segmentation: Dice/mIoU; detection: AP/mAP. Split by patient or relevant entity, where appropriate.</p></div>
+<div class="concept-card"><span>ROBUSTNESS</span><h4>More than accuracy</h4>
+<p>Analyze calibration, subgroups, distribution shifts, errors on rare objects and degradation in real conditions.</p></div>
+</div>
+</section>
+<section class="module section-anchor" id="pytorch">
+<div class="chapter-title">
+<div><span class="section-count">12 / REPRODUCIBLE IMPLEMENTATION</span>
+<h2>Convolutional networks in Python + PyTorch</h2>
+<p>Commented examples for numerical computations, tensors and shapes, multichannel filters, CNNs, residual blocks, depthwise convolutions and segmentation.</p></div>
+</div>
+<div class="panel code-module">
+<div class="panel-heading"><h3>Explained examples</h3><span class="pill">PYTORCH · RUN SEPARATELY</span>
+</div>
+<div class="code-tabs" id="cnn-code-tabs"></div>
+<div class="code-stage">
+<div class="code-header"><span id="cnn-code-file">exemplu.py</span>
+<button class="secondary-btn copy-btn" id="cnn-copy">Copy code</button>
+</div>
+<pre class="code-window"><code id="cnn-code"></code></pre>
+</div>
+<div class="code-explain" id="cnn-code-info"></div>
+<div class="code-footer">The code examples illustrate implementation steps and can be adapted directly for your own experiments in Python and PyTorch.
+                        </div>
+</div>
+<div class="panel">
+<div class="panel-heading"><h3>Correct training workflow · classification</h3></div>
+<div class="training-steps">
+<div><span>01</span><strong>Dataset &amp; split</strong><small>train / validation / test, without leakage</small></div>
+<div><span>02</span><strong>Preprocessing</strong><small>normalization compatible with the backbone</small></div>
+<div><span>03</span><strong>Model + loss</strong><small>logits, CrossEntropyLoss, correct classes</small></div>
+<div><span>04</span><strong>Optimization</strong><small>AdamW / SGD + schedulers</small></div>
+<div><span>05</span><strong>Validation</strong><small>eval(), no_grad(), relevant metrics</small></div>
+<div><span>06</span><strong>Generalization</strong><small>independent test, ablations, robustness</small></div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="exercitii">
+<div class="chapter-title">
+<div><span class="section-count">13 / CONSOLIDATION AND SELF-ASSESSMENT</span>
+<h2>Check whether you can explain and calculate</h2>
+<p>Questions with reasoning, concrete values and feedback. Includes both theoretical interpretations and exact output dimensions.</p></div>
+</div>
+<div class="panel quiz-panel">
+<div class="quiz-top">
+<div><span class="section-count">SELF-ASSESSMENT · 10 QUESTIONS</span>
+<h3 id="cnn-quiz-question">—</h3></div>
+<div class="quiz-counter" id="cnn-quiz-counter">1 / 10</div>
+</div>
+<div class="quiz-answers" id="cnn-quiz-answers"></div>
+<div aria-live="polite" class="quiz-feedback" id="cnn-quiz-feedback" role="status"></div>
+<div class="quiz-bottom">
+<div class="quiz-progress">
+<div class="progress-track">
+<div id="cnn-quiz-progress"></div>
+</div>
+<small id="cnn-quiz-score">Correct answers: 0</small></div>
+<div>
+<button class="secondary-btn" id="cnn-quiz-prev">← Previous</button>
+<button class="primary-btn" id="cnn-quiz-next">Next →</button>
+<button class="secondary-btn" id="cnn-quiz-restart">Restart quiz</button>
+</div>
+</div>
+</div>
+<div class="panel theory-panel" style="margin-top:18px">
+<div class="panel-heading"><h3>Suggested practical exercises</h3></div>
+<ol class="good-list">
+<li>Build a Sobel filter in PyTorch and manually verify one output pixel, then compare with <code>torch.nn.functional.conv2d</code>.
+                            </li>
+<li>For <code>Conv2d(16,32,3,stride=2,padding=1)</code> and input
+                                <code>(8,16,65,65)</code>, determine the shape, parameters and MACs for an example.
+                            </li>
+<li>Compare the cost of standard 3×3 convolution and depthwise separable convolution for 64→128 channels.
+                            </li>
+<li>Implement a residual block with a 1×1 projection when <code>stride=2</code> or the number of channels changes.
+                            </li>
+<li>Build a mini U-Net on a synthetic mask dataset; compare
+                                <code>ConvTranspose2d</code> with bilinear upsampling + <code>Conv2d</code>.
+                            </li>
+</ol>
+</div>
+</section>
+<section class="module section-anchor" id="bibliografie">
+<div class="chapter-title">
+<div><span class="section-count">14 / SCIENTIFIC SOURCES AND DOCUMENTATION</span>
+<h2>Foundational papers and recommended reading</h2>
+<p>Foundational papers and technical documentation for further study of convolutional networks.</p></div>
+</div>
+<div class="reference-grid" id="ref-list"></div>
+</section>
+<footer class="footer-note"><strong>Convolutional networks · Interactive course companion</strong><span>Machine Learning · Faculty of Automatic Control and Computers · 2026–2027</span>
+</footer>
+</div>
+</main>
+</div>
+</div>
+<script src="cod_exemple.en.js"></script>
+<script src="app.en.js"></script>
+</body>
+</html>

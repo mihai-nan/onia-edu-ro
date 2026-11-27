@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ro">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light">
-    <meta name="description"
-          content="Rețele neuronale convoluționale: material interactiv asociat cursului cu matematică, animații controlabile, arhitecturi, aplicații și PyTorch pentru anul IV – Învățare Automată, AC, 2026–2027.">
-    <title>Rețele convoluționale · Material interactiv asociat cursului | Învățare Automată · AC</title>
-    <style>:root {
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<meta content="Rețele neuronale convoluționale: material interactiv asociat cursului cu matematică, animații controlabile, arhitecturi, aplicații și PyTorch pentru anul IV – Învățare Automată, AC, 2026–2027." name="description"/>
+<title>Rețele convoluționale · Material interactiv asociat cursului | Învățare Automată · AC</title>
+<style>:root {
         --navy: #0b1d43;
         --ink: #162949;
         --muted: #697992;
@@ -4620,7 +4620,7 @@
         color: #fff !important
     }
     </style>
-    <style id="ma-navigation-material-style">
+<style id="ma-navigation-material-style">
         .ma-material-strip {
             display: flex;
             justify-content: space-between;
@@ -4720,7 +4720,7 @@
             }
         }
     </style>
-    <style id="ia-common-blue-design">/* Identitate vizuală comună – Învățare Automată, 2026–2027.
+<style id="ia-common-blue-design">/* Identitate vizuală comună – Învățare Automată, 2026–2027.
    Toate cele trei materiale utilizează aceleași culori, tipografie și elemente de navigare. */
     :root {
         --ia-ink: #142b49;
@@ -5163,1265 +5163,1217 @@
         }
     }
     </style>
-</head>
+<style>/* Shared bilingual switcher · ML courses */
+.ml-language{display:inline-flex;align-items:center;gap:4px;flex:none;max-width:100%;padding:3px;border:1px solid #bad4f5;background:#fff;border-radius:9px;font:600 12px/1.2 Inter,"Segoe UI",Arial,sans-serif;color:#24518a;vertical-align:middle;white-space:nowrap;box-shadow:0 1px 2px #0b1d4310}.ml-language a{display:inline-flex;min-height:30px;align-items:center;justify-content:center;padding:0 9px;color:#24518a!important;text-decoration:none!important;border-radius:6px;transition:background .15s;box-sizing:border-box}.ml-language a[aria-current=true]{background:#245fb7;color:#fff!important;font-weight:750}.ml-language a:hover:not([aria-current=true]){background:#eaf3ff}.ml-language a:focus-visible{outline:2px solid #f2ba69;outline-offset:2px}.ml-language-label{display:inline-block;font-size:11px;color:#48678c;padding:0 4px 0 6px}.ml-language-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.ml-language-home{display:flex;justify-content:flex-end;align-items:center;margin:0 0 18px}.ma-material-strip{flex-wrap:wrap}.ml-language-home .ml-language{background:#fff;border-color:#7797bd}@media(max-width:560px){.ml-language{font-size:11px}.ml-language a{padding:0 8px;min-height:30px}.ml-language-label{display:none}.ml-language-row{justify-content:flex-start}.ml-language-home{margin-bottom:12px}}@media print{.ml-language,.ml-language-home{display:none!important}}
+</style><script>(function(){"use strict";var key="onia.ml.language.v1",root=document.documentElement,lang=root.lang==="en"?"en":"ro",url=new URL(location.href),request=url.searchParams.get("lang"),saved=null;try{saved=localStorage.getItem(key)}catch(e){}function target(language){var u=new URL(location.href);var p=u.pathname;if(p.endsWith("/"))p+="index.html";p=p.replace(/(?:\.en)?\.html$/i,language==="en"?".en.html":".html");u.pathname=p;u.searchParams.set("lang",language);return u.href}function save(l){try{localStorage.setItem(key,l)}catch(e){}}if(request==="ro"||request==="en"){save(request);if(request!==lang){location.replace(target(request));return;}}else if(lang==="ro"&&saved==="en"){location.replace(target("en"));return;}else if(lang==="en"){save("en");}document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-ml-language]").forEach(function(a){var l=a.dataset.mlLanguage;a.href=target(l);a.addEventListener("click",function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;save(l);e.preventDefault();if(l!==lang){location.href=target(l);}})});});})();</script></head>
 <body class="ia-course-two">
 <div class="app-shell" id="top">
-    <aside class="sidebar" aria-label="Navigarea materialului">
-        <a class="brand" href="#top"><span class="brand-emblem">AC<span class="emblem-dot"></span></span><span><strong>Învățare Automată</strong><small>Material interactiv · 2026–2027</small></span></a>
-        <a class="ma-side-home" href="../index.html">← Pagina principală</a>
-
-        <div class="sidebar-label">REȚELE CONVOLUȚIONALE</div>
-        <nav id="toc">
-            <a href="#introducere" class="nav-link active"><span>01</span> Intuiție și motivație</a>
-            <a href="#convolutie" class="nav-link"><span>02</span> Convoluția pas cu pas</a>
-            <a href="#filtre" class="nav-link"><span>03</span> Filtre și caracteristici</a>
-            <a href="#geometrie" class="nav-link"><span>04</span> Dimensiuni și parametri</a>
-            <a href="#canale" class="nav-link"><span>05</span> Canale și feature maps</a>
-            <a href="#pooling" class="nav-link"><span>06</span> Pooling și downsampling</a>
-            <a href="#receptiv" class="nav-link"><span>07</span> Câmp receptiv</a>
-            <a href="#eficienta" class="nav-link"><span>08</span> Convoluții eficiente</a>
-            <a href="#rezidual" class="nav-link"><span>09</span> Conexiuni reziduale</a>
-            <a href="#decodor" class="nav-link"><span>10</span> Upsampling și U-Net</a>
-            <a href="#arhitecturi" class="nav-link"><span>11</span> Arhitecturi și articole</a>
-            <a href="#aplicatii" class="nav-link"><span>12</span> Aplicații: alegerea CNN</a>
-            <a href="#pytorch" class="nav-link"><span>13</span> Python + PyTorch</a>
-            <a href="#exercitii" class="nav-link"><span>14</span> Exerciții și verificare</a>
-            <a href="#bibliografie" class="nav-link"><span>15</span> Bibliografie</a>
-        </nav>
-        <div class="sidebar-bottom">
-            <div class="progress-label"><span>Progresul lecturii</span><strong id="course-progress">0%</strong></div>
-            <div class="progress-track">
-                <div id="progress-fill"></div>
-            </div>
-            <p>Facultatea de Automatică și Calculatoare<br>Universitatea POLITEHNICA București</p>
-            <button class="quiet-btn" id="print-button" type="button">Tipărește materialul ↗</button>
-        </div>
-    </aside>
-    <div class="work-area">
-        <nav class="ma-course-switcher" aria-label="Navigare între cele trei cursuri de Învățare Automată">
-            <a class="ma-series-home" href="../index.html" title="Înapoi la seria de cursuri">
-                <span class="ma-logo" aria-hidden="true">∑</span>
-                <span class="ma-brand-lines"><strong>ÎNVĂȚARE AUTOMATĂ</strong><small>AC · anul IV · 2026–2027</small></span>
-            </a>
-            <div class="ma-course-tabs">
-                <a class="ma-tab" href="../curs_01_fundamente_optimizare/index.html" data-ma-course="1"><span
-                        class="ma-n">01</span> Activări &amp; optimizare</a>
-                <a class="ma-tab" href="../curs_02_retele_convolutionale/index.html" data-ma-course="2"
-                   aria-current="page"><span class="ma-n">02</span> Rețele convoluționale</a>
-                <a class="ma-tab ma-next" href="../curs_03_aplicatii_computer_vision/index.html"
-                   data-ma-course="3"><span class="ma-n">03</span> Aplicații Computer Vision</a>
-            </div>
-        </nav>
-        <div class="ma-material-strip" role="navigation" aria-label="Navigare la pagina principală"><span
-                class="ma-material-label">Material interactiv asociat cursului · Învățare Automată · 2026–2027</span><a
-                class="ma-material-return" href="../index.html">← Pagina principală</a></div>
-
-        <header class="topbar">
-            <div class="breadcrumb">ÎNVĂȚARE AUTOMATĂ <span>/</span> ANUL IV <span>/</span> CNN</div>
-            <div class="topbar-right"><span class="tag tag-online">Material interactiv asociat cursului</span><span
-                    class="tag">2026–2027</span></div>
-        </header>
-        <main>
-            <section class="hero section-anchor" id="introducere">
-                <div class="hero-copy">
-                    <div class="overline">FUNDAMENTELE DEEP LEARNING / COMPUTER VISION</div>
-                    <h1>Înțelege fiecare<br><span>operație convoluțională</span></h1>
-                    <p>De la produsul scalar al unui filtru și al unei ferestre de pixeli până la ResNet, U-Net și
+<aside aria-label="Navigarea materialului" class="sidebar">
+<a class="brand" href="#top"><span class="brand-emblem">AC<span class="emblem-dot"></span></span><span><strong>Învățare Automată</strong><small>Material interactiv · 2026–2027</small></span></a>
+<a class="ma-side-home" href="../index.html">← Pagina principală</a>
+<div class="sidebar-label">REȚELE CONVOLUȚIONALE</div>
+<nav id="toc">
+<a class="nav-link active" href="#introducere"><span>01</span> Intuiție și motivație</a>
+<a class="nav-link" href="#convolutie"><span>02</span> Convoluția pas cu pas</a>
+<a class="nav-link" href="#filtre"><span>03</span> Filtre și caracteristici</a>
+<a class="nav-link" href="#geometrie"><span>04</span> Dimensiuni și parametri</a>
+<a class="nav-link" href="#canale"><span>05</span> Canale și feature maps</a>
+<a class="nav-link" href="#pooling"><span>06</span> Pooling și downsampling</a>
+<a class="nav-link" href="#receptiv"><span>07</span> Câmp receptiv</a>
+<a class="nav-link" href="#eficienta"><span>08</span> Convoluții eficiente</a>
+<a class="nav-link" href="#rezidual"><span>09</span> Conexiuni reziduale</a>
+<a class="nav-link" href="#decodor"><span>10</span> Upsampling și U-Net</a>
+<a class="nav-link" href="#arhitecturi"><span>11</span> Arhitecturi și articole</a>
+<a class="nav-link" href="#aplicatii"><span>12</span> Aplicații: alegerea CNN</a>
+<a class="nav-link" href="#pytorch"><span>13</span> Python + PyTorch</a>
+<a class="nav-link" href="#exercitii"><span>14</span> Exerciții și verificare</a>
+<a class="nav-link" href="#bibliografie"><span>15</span> Bibliografie</a>
+</nav>
+<div class="sidebar-bottom">
+<div class="progress-label"><span>Progresul lecturii</span><strong id="course-progress">0%</strong></div>
+<div class="progress-track">
+<div id="progress-fill"></div>
+</div>
+<p>Facultatea de Automatică și Calculatoare<br/>Universitatea POLITEHNICA București</p>
+<button class="quiet-btn" id="print-button" type="button">Tipărește materialul ↗</button>
+</div>
+</aside>
+<div class="work-area">
+<nav aria-label="Navigare între cele trei cursuri de Învățare Automată" class="ma-course-switcher">
+<a class="ma-series-home" href="../index.html" title="Înapoi la seria de cursuri">
+<span aria-hidden="true" class="ma-logo">∑</span>
+<span class="ma-brand-lines"><strong>ÎNVĂȚARE AUTOMATĂ</strong><small>AC · anul IV · 2026–2027</small></span>
+</a>
+<div class="ma-course-tabs">
+<a class="ma-tab" data-ma-course="1" href="../curs_01_fundamente_optimizare/index.html"><span class="ma-n">01</span> Activări &amp; optimizare</a>
+<a aria-current="page" class="ma-tab" data-ma-course="2" href="../curs_02_retele_convolutionale/index.html"><span class="ma-n">02</span> Rețele convoluționale</a>
+<a class="ma-tab ma-next" data-ma-course="3" href="../curs_03_aplicatii_computer_vision/index.html"><span class="ma-n">03</span> Aplicații Computer Vision</a>
+</div>
+</nav>
+<div aria-label="Navigare la pagina principală" class="ma-material-strip" role="navigation"><span class="ma-material-label">Material interactiv asociat cursului · Învățare Automată · 2026–2027</span><div class="ml-language-row"><nav aria-label="Limbă / Language" class="ml-language"><span class="ml-language-label">Limbă</span><a aria-current="true" data-ml-language="ro" href="material_interactiv_cnn_autonom.html?lang=ro" hreflang="ro" lang="ro">RO</a><a data-ml-language="en" href="material_interactiv_cnn_autonom.en.html?lang=en" hreflang="en" lang="en">EN</a></nav><a class="ma-material-return" href="../index.html">← Pagina principală</a></div></div>
+<header class="topbar">
+<div class="breadcrumb">ÎNVĂȚARE AUTOMATĂ <span>/</span> ANUL IV <span>/</span> CNN</div>
+<div class="topbar-right"><span class="tag tag-online">Material interactiv asociat cursului</span><span class="tag">2026–2027</span></div>
+</header>
+<main>
+<section class="hero section-anchor" id="introducere">
+<div class="hero-copy">
+<div class="overline">FUNDAMENTELE DEEP LEARNING / COMPUTER VISION</div>
+<h1>Înțelege fiecare<br/><span>operație convoluțională</span></h1>
+<p>De la produsul scalar al unui filtru și al unei ferestre de pixeli până la ResNet, U-Net și
                         MobileNet. Experimentele îți permit să modifici valori reale, să urmărești fiecare pas și să
                         verifici dimensiunile și calculele.</p>
-                    <div class="hero-meta"><span>ANUL IV</span><span>MATEMATICĂ + PYTORCH</span><span>15 MODULE</span>
-                    </div>
-                    <a class="primary-cta" href="#convolutie">Explorează materialul <span>↓</span></a></div>
-                <div class="hero-visual">
-                    <div class="visual-toolbar"><span><i></i> LIVE DEMO · FILTRU 3 × 3</span><span>INPUT → KERNEL → OUTPUT</span>
-                    </div>
-                    <svg id="hero-cnn" viewBox="0 0 780 420" role="img"
-                         aria-label="Animație demonstrativă a deplasării unui filtru peste imagine și a hărții de activare">
-                        <defs>
-                            <linearGradient id="heroBlue" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0" stop-color="#d9edff"/>
-                                <stop offset="1" stop-color="#4a91e4"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="780" height="420" fill="#f4f8ff"/>
-                        <g id="hero-grid"></g>
-                        <g id="hero-kernel"></g>
-                        <g id="hero-result"></g>
-                        <path d="M325 200 L386 200 M374 190 L386 200 L374 210" fill="none" stroke="#527fb8"
-                              stroke-width="3"/>
-                        <text x="30" y="38" fill="#294e7f" font-size="16" font-weight="800">IMAGINE (7 × 7)</text>
-                        <text x="418" y="38" fill="#294e7f" font-size="16" font-weight="800">HARTA DE ACTIVARE</text>
-                        <text id="hero-step" x="390" y="390" fill="#4e709d" font-size="14" text-anchor="middle">Operația
+<div class="hero-meta"><span>ANUL IV</span><span>MATEMATICĂ + PYTORCH</span><span>15 MODULE</span>
+</div>
+<a class="primary-cta" href="#convolutie">Explorează materialul <span>↓</span></a></div>
+<div class="hero-visual">
+<div class="visual-toolbar"><span><i></i> LIVE DEMO · FILTRU 3 × 3</span><span>INPUT → KERNEL → OUTPUT</span>
+</div>
+<svg aria-label="Animație demonstrativă a deplasării unui filtru peste imagine și a hărții de activare" id="hero-cnn" role="img" viewbox="0 0 780 420">
+<defs>
+<lineargradient id="heroBlue" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#d9edff"></stop>
+<stop offset="1" stop-color="#4a91e4"></stop>
+</lineargradient>
+</defs>
+<rect fill="#f4f8ff" height="420" width="780"></rect>
+<g id="hero-grid"></g>
+<g id="hero-kernel"></g>
+<g id="hero-result"></g>
+<path d="M325 200 L386 200 M374 190 L386 200 L374 210" fill="none" stroke="#527fb8" stroke-width="3"></path>
+<text fill="#294e7f" font-size="16" font-weight="800" x="30" y="38">IMAGINE (7 × 7)</text>
+<text fill="#294e7f" font-size="16" font-weight="800" x="418" y="38">HARTA DE ACTIVARE</text>
+<text fill="#4e709d" font-size="14" id="hero-step" text-anchor="middle" x="390" y="390">Operația
                             se actualizează automat
                         </text>
-                    </svg>
-                    <div class="scene-output">
-                        <div><span>ÎNTRARE</span><strong>7 × 7 × 1</strong></div>
-                        <div><span>KERNEL</span><strong>3 × 3 · stride 1</strong></div>
-                        <div><span>IEȘIRE</span><strong>5 × 5 × 1 · valori calculate</strong></div>
-                    </div>
-                </div>
-            </section>
-            <div class="content">
-                <section class="module section-anchor" id="harta">
-                    <div class="chapter-title">
-                        <div>
-                            <div class="section-count">HARTA MODULULUI</div>
-                            <h2>De ce funcționează rețelele convoluționale?</h2>
-                            <p>Prelucrarea imaginilor, operatorul convoluțional, stride, padding, dilation,
+</svg>
+<div class="scene-output">
+<div><span>ÎNTRARE</span><strong>7 × 7 × 1</strong></div>
+<div><span>KERNEL</span><strong>3 × 3 · stride 1</strong></div>
+<div><span>IEȘIRE</span><strong>5 × 5 × 1 · valori calculate</strong></div>
+</div>
+</div>
+</section>
+<div class="content">
+<section class="module section-anchor" id="harta">
+<div class="chapter-title">
+<div>
+<div class="section-count">HARTA MODULULUI</div>
+<h2>De ce funcționează rețelele convoluționale?</h2>
+<p>Prelucrarea imaginilor, operatorul convoluțional, stride, padding, dilation,
                                 Conv1d–Conv3d, pooling și arhitecturile clasice și moderne formează împreună baza
                                 înțelegerii unei rețele convoluționale complete.</p></div>
-                    </div>
-                    <div class="task-grid">
-                        <div class="task-card"><span class="task-number">01 / LOCALITATE</span>
-                            <div class="simple-symbol"><span class="squares-icon">▦</span></div>
-                            <h3>Conexiuni locale</h3>
-                            <p>Fiecare neuron procesează o vecinătate, nu întreaga imagine simultan.</p><code>receptive
+</div>
+<div class="task-grid">
+<div class="task-card"><span class="task-number">01 / LOCALITATE</span>
+<div class="simple-symbol"><span class="squares-icon">▦</span></div>
+<h3>Conexiuni locale</h3>
+<p>Fiecare neuron procesează o vecinătate, nu întreaga imagine simultan.</p><code>receptive
                                 field</code></div>
-                        <div class="task-card"><span class="task-number">02 / PARTAJARE</span>
-                            <div class="simple-symbol"><span class="squares-icon">▤</span></div>
-                            <h3>Parametri reutilizați</h3>
-                            <p>Același filtru este aplicat la toate pozițiile spațiale.</p><code>weight sharing</code>
-                        </div>
-                        <div class="task-card"><span class="task-number">03 / IERARHIE</span>
-                            <div class="simple-symbol"><span class="squares-icon">▥</span></div>
-                            <h3>Caracteristici ierarhice</h3>
-                            <p>Margini → texturi → părți de obiect → reprezentări semantice.</p><code>feature
+<div class="task-card"><span class="task-number">02 / PARTAJARE</span>
+<div class="simple-symbol"><span class="squares-icon">▤</span></div>
+<h3>Parametri reutilizați</h3>
+<p>Același filtru este aplicat la toate pozițiile spațiale.</p><code>weight sharing</code>
+</div>
+<div class="task-card"><span class="task-number">03 / IERARHIE</span>
+<div class="simple-symbol"><span class="squares-icon">▥</span></div>
+<h3>Caracteristici ierarhice</h3>
+<p>Margini → texturi → părți de obiect → reprezentări semantice.</p><code>feature
                                 hierarchy</code></div>
-                        <div class="task-card"><span class="task-number">04 / GEOMETRIE</span>
-                            <div class="simple-symbol"><span class="squares-icon">▧</span></div>
-                            <h3>Structură spațială</h3>
-                            <p>Ieșirile păstrează informații despre localizarea trăsăturilor.</p><code>H × W × C</code>
-                        </div>
-                    </div>
-                    <div class="insight"><strong>Observație esențială</strong><span>În <code>torch.nn.Conv2d</code> se calculează corelația încrucișată (kernelul nu este inversat); în literatura de deep learning, operația este numită convențional „convoluție”. Simulatoarele de mai jos disting explicit cele două convenții.</span>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="convolutie">
-                    <div class="chapter-title">
-                        <div><span class="section-count">01 / EXPERIMENT NUMERIC PRINCIPAL</span>
-                            <h2>Convoluția explicată, pixel cu pixel</h2>
-                            <p>Schimbă imaginea, cele nouă ponderi, stride, padding și dilation. Fiecare modificare
+<div class="task-card"><span class="task-number">04 / GEOMETRIE</span>
+<div class="simple-symbol"><span class="squares-icon">▧</span></div>
+<h3>Structură spațială</h3>
+<p>Ieșirile păstrează informații despre localizarea trăsăturilor.</p><code>H × W × C</code>
+</div>
+</div>
+<div class="insight"><strong>Observație esențială</strong><span>În <code>torch.nn.Conv2d</code> se calculează corelația încrucișată (kernelul nu este inversat); în literatura de deep learning, operația este numită convențional „convoluție”. Simulatoarele de mai jos disting explicit cele două convenții.</span>
+</div>
+</section>
+<section class="module section-anchor" id="convolutie">
+<div class="chapter-title">
+<div><span class="section-count">01 / EXPERIMENT NUMERIC PRINCIPAL</span>
+<h2>Convoluția explicată, pixel cu pixel</h2>
+<p>Schimbă imaginea, cele nouă ponderi, stride, padding și dilation. Fiecare modificare
                                 recalculă automat harta de activare. Urmărește fereastra și contribuțiile din suma
                                 ponderată.</p></div>
-                    </div>
-                    <div class="panel conv-lab">
-                        <div class="lab-head">
-                            <div><h3>Simulator complet · cross-correlation / convoluție</h3>
-                                <p>Apasă pe orice pixel sau coeficient pentru a-l modifica. Pixelii din padding sunt
+</div>
+<div class="panel conv-lab">
+<div class="lab-head">
+<div><h3>Simulator complet · cross-correlation / convoluție</h3>
+<p>Apasă pe orice pixel sau coeficient pentru a-l modifica. Pixelii din padding sunt
                                     zero.</p></div>
-                            <span class="pill">CALCULE REALE, NU ANIMAȚIE PREÎNREGISTRATĂ</span></div>
-                        <div class="control-strip"><label>Model imagine<select id="conv-image">
-                            <option value="edge">Margine verticală</option>
-                            <option value="cross">Cruce</option>
-                            <option value="ramp">Gradient</option>
-                            <option value="checker">Tablă de șah</option>
-                            <option value="custom">Personalizat</option>
-                        </select></label><label>Filtru<select id="conv-filter">
-                            <option value="edge">Sobel vertical</option>
-                            <option value="horiz">Sobel orizontal</option>
-                            <option value="blur">Medie 3×3</option>
-                            <option value="sharpen">Ascuțire</option>
-                            <option value="laplace">Laplacian</option>
-                            <option value="identity">Identitate</option>
-                            <option value="custom">Personalizat</option>
-                        </select></label><label>Convenție<select id="conv-mode">
-                            <option value="corr">Corelație (PyTorch)</option>
-                            <option value="true">Convoluție matematică (flip kernel)</option>
-                        </select></label><label>Valoare la clic<select id="conv-brush">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="4">4</option>
-                            <option value="6">6</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                        </select></label></div>
-                        <div class="control-strip slim"><label>Stride <strong id="conv-stride-val">1</strong><input
-                                id="conv-stride" type="range" min="1" max="3" step="1" value="1"></label><label>Padding
-                            <strong id="conv-padding-val">0</strong><input id="conv-padding" type="range" min="0"
-                                                                           max="2" step="1" value="0"></label><label>Dilation
-                            <strong id="conv-dilation-val">1</strong><input id="conv-dilation" type="range" min="1"
-                                                                            max="2" step="1" value="1"></label><label>Bias
-                            <strong id="conv-bias-val">0</strong><input id="conv-bias" type="range" min="-4" max="4"
-                                                                        step="1" value="0"></label></div>
-                        <div class="three-matrix">
-                            <div class="matrix-box">
-                                <div class="matrix-head"><strong>Intrare <span
-                                        id="conv-in-shape">7 × 7</span></strong><small>inclusiv marginea de
+<span class="pill">CALCULE REALE, NU ANIMAȚIE PREÎNREGISTRATĂ</span></div>
+<div class="control-strip"><label>Model imagine<select id="conv-image">
+<option value="edge">Margine verticală</option>
+<option value="cross">Cruce</option>
+<option value="ramp">Gradient</option>
+<option value="checker">Tablă de șah</option>
+<option value="custom">Personalizat</option>
+</select></label><label>Filtru<select id="conv-filter">
+<option value="edge">Sobel vertical</option>
+<option value="horiz">Sobel orizontal</option>
+<option value="blur">Medie 3×3</option>
+<option value="sharpen">Ascuțire</option>
+<option value="laplace">Laplacian</option>
+<option value="identity">Identitate</option>
+<option value="custom">Personalizat</option>
+</select></label><label>Convenție<select id="conv-mode">
+<option value="corr">Corelație (PyTorch)</option>
+<option value="true">Convoluție matematică (flip kernel)</option>
+</select></label><label>Valoare la clic<select id="conv-brush">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="4">4</option>
+<option value="6">6</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select></label></div>
+<div class="control-strip slim"><label>Stride <strong id="conv-stride-val">1</strong><input id="conv-stride" max="3" min="1" step="1" type="range" value="1"/></label><label>Padding
+                            <strong id="conv-padding-val">0</strong><input id="conv-padding" max="2" min="0" step="1" type="range" value="0"/></label><label>Dilation
+                            <strong id="conv-dilation-val">1</strong><input id="conv-dilation" max="2" min="1" step="1" type="range" value="1"/></label><label>Bias
+                            <strong id="conv-bias-val">0</strong><input id="conv-bias" max="4" min="-4" step="1" type="range" value="0"/></label></div>
+<div class="three-matrix">
+<div class="matrix-box">
+<div class="matrix-head"><strong>Intrare <span id="conv-in-shape">7 × 7</span></strong><small>inclusiv marginea de
                                     padding</small></div>
-                                <div id="conv-input-grid" class="matrix-component"></div>
-                                <div class="legend-inline"><span><i class="legend-swatch"
-                                                                    style="background:#c7e2ff"></i> valori ale imaginii</span><span><i
-                                        class="legend-swatch" style="background:#eef2f7"></i> padding</span></div>
-                            </div>
-                            <div class="matrix-box">
-                                <div class="matrix-head"><strong>Kernel <span>3 × 3</span></strong><small>coeficienți
+<div class="matrix-component" id="conv-input-grid"></div>
+<div class="legend-inline"><span><i class="legend-swatch" style="background:#c7e2ff"></i> valori ale imaginii</span><span><i class="legend-swatch" style="background:#eef2f7"></i> padding</span></div>
+</div>
+<div class="matrix-box">
+<div class="matrix-head"><strong>Kernel <span>3 × 3</span></strong><small>coeficienți
                                     editabili</small></div>
-                                <div id="conv-kernel-grid" class="matrix-component kernel-edit"></div>
-                                <div class="kernel-hint">Clic pe un coeficient pentru a introduce orice valoare numerică
+<div class="matrix-component kernel-edit" id="conv-kernel-grid"></div>
+<div class="kernel-hint">Clic pe un coeficient pentru a introduce orice valoare numerică
                                     între −20 și 20. Coeficienții fracționari sunt acceptați.
                                 </div>
-                                <div id="conv-effective-kernel" class="effective-kernel"></div>
-                            </div>
-                            <div class="matrix-box">
-                                <div class="matrix-head"><strong>Ieșire <span
-                                        id="conv-output-shape">5 × 5</span></strong><small>valori reale, fără activare
+<div class="effective-kernel" id="conv-effective-kernel"></div>
+</div>
+<div class="matrix-box">
+<div class="matrix-head"><strong>Ieșire <span id="conv-output-shape">5 × 5</span></strong><small>valori reale, fără activare
                                     ReLU</small></div>
-                                <div id="conv-output-grid" class="matrix-component"></div>
-                                <div class="matrix-legend">Albastru = pozitiv · portocaliu = negativ · gri = zero</div>
-                            </div>
-                        </div>
-                        <div class="lab-timeline">
-                            <div class="timeline-buttons">
-                                <button class="secondary-btn" id="conv-first">⟲ Inițial</button>
-                                <button class="secondary-btn" id="conv-prev">← Pas precedent</button>
-                                <button class="primary-btn" id="conv-play">▶ Redă</button>
-                                <button class="secondary-btn" id="conv-next">Pas următor →</button>
-                                <button class="secondary-btn" id="conv-last">Ultimul ⇥</button>
-                            </div>
-                            <label class="speed-control">Viteză <input id="conv-speed" type="range" min="150" max="1300"
-                                                                       step="50" value="650">
-                                <output id="conv-speed-val">650 ms</output>
-                            </label>
-                            <div class="timeline-track"><input id="conv-step-range" type="range" min="0" max="24"
-                                                               step="1" value="0"><span
-                                    id="conv-step-label">Pas 1 / 25</span></div>
-                        </div>
-                        <div class="calc-panel">
-                            <div class="calc-eyebrow">CALCULUL COMPLET PENTRU POZIȚIA CURENTĂ</div>
-                            <div id="conv-current-formula" class="math-calc"></div>
-                            <div id="conv-current-explain" class="step-explain"></div>
-                        </div>
-                        <div class="mini-stats">
-                            <div><span>KERNEL EFECTIV</span><strong id="conv-effective">3 × 3</strong></div>
-                            <div><span>DIMENSIUNE IEȘIRE</span><strong id="conv-shape-stat">5 × 5</strong></div>
-                            <div><span>OPERAȚII (MACs) / HARTĂ</span><strong id="conv-macs">225</strong></div>
-                        </div>
-                    </div>
-                    <div class="two-cols support-after">
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Model matematic și convenții</h3></div>
-                            <div class="equation"><span class="eq-num">(1)</span>
-                                <math display="block">
-                                    <msub>
-                                        <mi>Y</mi>
-                                        <mrow>
-                                            <mi>i</mi>
-                                            <mo>,</mo>
-                                            <mi>j</mi>
-                                        </mrow>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mi>b</mi>
-                                    <mo>+</mo>
-                                    <munderover>
-                                        <mo>∑</mo>
-                                        <mrow>
-                                            <mi>u</mi>
-                                            <mo>=</mo>
-                                            <mn>0</mn>
-                                        </mrow>
-                                        <mrow>
-                                            <mi>k</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                    </munderover>
-                                    <munderover>
-                                        <mo>∑</mo>
-                                        <mrow>
-                                            <mi>v</mi>
-                                            <mo>=</mo>
-                                            <mn>0</mn>
-                                        </mrow>
-                                        <mrow>
-                                            <mi>k</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                    </munderover>
-                                    <msub>
-                                        <mi>K</mi>
-                                        <mrow>
-                                            <mi>u</mi>
-                                            <mo>,</mo>
-                                            <mi>v</mi>
-                                        </mrow>
-                                    </msub>
-                                    <msub>
-                                        <mover>
-                                            <mi>X</mi>
-                                            <mo>~</mo>
-                                        </mover>
-                                        <mrow>
-                                            <mi>is</mi>
-                                            <mo>+</mo>
-                                            <mi>ud</mi>
-                                            <mo>,</mo>
-                                            <mi>js</mi>
-                                            <mo>+</mo>
-                                            <mi>vd</mi>
-                                        </mrow>
-                                    </msub>
-                                </math>
-                            </div>
-                            <p>Aici <em>X̃</em> este intrarea completată cu zerouri, <em>s</em> este stride, <em>d</em>
+<div class="matrix-component" id="conv-output-grid"></div>
+<div class="matrix-legend">Albastru = pozitiv · portocaliu = negativ · gri = zero</div>
+</div>
+</div>
+<div class="lab-timeline">
+<div class="timeline-buttons">
+<button class="secondary-btn" id="conv-first">⟲ Inițial</button>
+<button class="secondary-btn" id="conv-prev">← Pas precedent</button>
+<button class="primary-btn" id="conv-play">▶ Redă</button>
+<button class="secondary-btn" id="conv-next">Pas următor →</button>
+<button class="secondary-btn" id="conv-last">Ultimul ⇥</button>
+</div>
+<label class="speed-control">Viteză <input id="conv-speed" max="1300" min="150" step="50" type="range" value="650"/>
+<output id="conv-speed-val">650 ms</output>
+</label>
+<div class="timeline-track"><input id="conv-step-range" max="24" min="0" step="1" type="range" value="0"/><span id="conv-step-label">Pas 1 / 25</span></div>
+</div>
+<div class="calc-panel">
+<div class="calc-eyebrow">CALCULUL COMPLET PENTRU POZIȚIA CURENTĂ</div>
+<div class="math-calc" id="conv-current-formula"></div>
+<div class="step-explain" id="conv-current-explain"></div>
+</div>
+<div class="mini-stats">
+<div><span>KERNEL EFECTIV</span><strong id="conv-effective">3 × 3</strong></div>
+<div><span>DIMENSIUNE IEȘIRE</span><strong id="conv-shape-stat">5 × 5</strong></div>
+<div><span>OPERAȚII (MACs) / HARTĂ</span><strong id="conv-macs">225</strong></div>
+</div>
+</div>
+<div class="two-cols support-after">
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Model matematic și convenții</h3></div>
+<div class="equation"><span class="eq-num">(1)</span>
+<math display="block">
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+</mrow>
+</msub>
+<mo>=</mo>
+<mi>b</mi>
+<mo>+</mo>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>u</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<munderover>
+<mo>∑</mo>
+<mrow>
+<mi>v</mi>
+<mo>=</mo>
+<mn>0</mn>
+</mrow>
+<mrow>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</munderover>
+<msub>
+<mi>K</mi>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</msub>
+<msub>
+<mover>
+<mi>X</mi>
+<mo>~</mo>
+</mover>
+<mrow>
+<mi>is</mi>
+<mo>+</mo>
+<mi>ud</mi>
+<mo>,</mo>
+<mi>js</mi>
+<mo>+</mo>
+<mi>vd</mi>
+</mrow>
+</msub>
+</math>
+</div>
+<p>Aici <em>X̃</em> este intrarea completată cu zerouri, <em>s</em> este stride, <em>d</em>
                                 este dilation, iar <em>b</em> este bias. Relația descrie forma efectuată de
                                 <code>Conv2d</code> pentru un singur canal și un filtru.</p>
-                            <p>Convoluția matematică discretă inversează kernelul pe ambele axe. Pentru filtre simetrice
+<p>Convoluția matematică discretă inversează kernelul pe ambele axe. Pentru filtre simetrice
                                 rezultatul poate rămâne neschimbat; pentru detectoarele direcționale, semnul sau
                                 orientarea se poate modifica.</p></div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Cum interpretezi filtrul?</h3></div>
-                            <div class="concept-rows">
-                                <div><strong>Blur / mediere</strong>
-                                    <p>Reduce variații locale și zgomot de înaltă frecvență; atenuează și detaliile
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Cum interpretezi filtrul?</h3></div>
+<div class="concept-rows">
+<div><strong>Blur / mediere</strong>
+<p>Reduce variații locale și zgomot de înaltă frecvență; atenuează și detaliile
                                         fine. În modelele actuale, filtrele se învață de obicei din date.</p></div>
-                                <div><strong>Sobel / gradient</strong>
-                                    <p>Evidențiază tranziții de intensitate într-o anumită direcție; util pentru
+<div><strong>Sobel / gradient</strong>
+<p>Evidențiază tranziții de intensitate într-o anumită direcție; util pentru
                                         înțelegerea detecției marginilor și a primelor straturi convoluționale.</p>
-                                </div>
-                                <div><strong>Laplacian / sharpen</strong>
-                                    <p>Răspunde la schimbările rapide sau amplifică detaliile; poate crește
+</div>
+<div><strong>Laplacian / sharpen</strong>
+<p>Răspunde la schimbările rapide sau amplifică detaliile; poate crește
                                         sensibilitatea la zgomot.</p></div>
-                                <div><strong>Feature map ≠ imagine RGB</strong>
-                                    <p>Activările pot fi negative, pot depăși intervalul [0, 255] și pot necesita
+<div><strong>Feature map ≠ imagine RGB</strong>
+<p>Activările pot fi negative, pot depăși intervalul [0, 255] și pot necesita
                                         normalizare doar pentru vizualizare.</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="filtre">
-                    <div class="chapter-title">
-                        <div><span class="section-count">02 / FILTRE ȘI EXTRAGEREA TRĂSĂTURILOR</span>
-                            <h2>Ce „vede” fiecare kernel?</h2>
-                            <p>O scenă sintetică este filtrată cu operatori diferiți. Compară intrarea, răspunsul semnat
+</div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="filtre">
+<div class="chapter-title">
+<div><span class="section-count">02 / FILTRE ȘI EXTRAGEREA TRĂSĂTURILOR</span>
+<h2>Ce „vede” fiecare kernel?</h2>
+<p>O scenă sintetică este filtrată cu operatori diferiți. Compară intrarea, răspunsul semnat
                                 și răspunsul după ReLU; valori și scări sunt afișate explicit.</p></div>
-                    </div>
-                    <div class="panel">
-                        <div class="control-strip"><label>Scena<select id="feature-scene">
-                            <option value="geometry">Forme geometrice</option>
-                            <option value="grid">Grilă și contururi</option>
-                            <option value="diagonal">Diagonală</option>
-                            <option value="texture">Textură periodică</option>
-                        </select></label><label>Operator<select id="feature-kernel">
-                            <option value="sobelx">Sobel X</option>
-                            <option value="sobely">Sobel Y</option>
-                            <option value="laplace">Laplacian</option>
-                            <option value="blur">Blur</option>
-                            <option value="sharpen">Sharpen</option>
-                        </select></label><label>Reprezentare<select id="feature-show">
-                            <option value="signed">Răspuns semnat</option>
-                            <option value="relu">După ReLU</option>
-                            <option value="abs">Magnitudine |Y|</option>
-                        </select></label><label>Scală<select id="feature-scale">
-                            <option value="auto">Auto (pentru vizualizare)</option>
-                            <option value="fixed">Fixă (±8)</option>
-                        </select></label></div>
-                        <div class="feature-triptych">
-                            <div><h3>Imagine de intrare</h3>
-                                <canvas id="feature-input" width="288" height="288"></canvas>
-                                <small>Scenă sintetică discretă 24 × 24</small></div>
-                            <div><h3>Răspunsul filtrului</h3>
-                                <canvas id="feature-output" width="288" height="288"></canvas>
-                                <small id="feature-range">Intervalul activărilor: —</small></div>
-                            <div><h3>Reprezentare numerică</h3>
-                                <div id="feature-metrics" class="feature-metrics"></div>
-                                <div id="feature-kernel-preview"></div>
-                                <p class="micro-text">Vizualizările folosesc o transformare de culoare; culorile nu sunt
+</div>
+<div class="panel">
+<div class="control-strip"><label>Scena<select id="feature-scene">
+<option value="geometry">Forme geometrice</option>
+<option value="grid">Grilă și contururi</option>
+<option value="diagonal">Diagonală</option>
+<option value="texture">Textură periodică</option>
+</select></label><label>Operator<select id="feature-kernel">
+<option value="sobelx">Sobel X</option>
+<option value="sobely">Sobel Y</option>
+<option value="laplace">Laplacian</option>
+<option value="blur">Blur</option>
+<option value="sharpen">Sharpen</option>
+</select></label><label>Reprezentare<select id="feature-show">
+<option value="signed">Răspuns semnat</option>
+<option value="relu">După ReLU</option>
+<option value="abs">Magnitudine |Y|</option>
+</select></label><label>Scală<select id="feature-scale">
+<option value="auto">Auto (pentru vizualizare)</option>
+<option value="fixed">Fixă (±8)</option>
+</select></label></div>
+<div class="feature-triptych">
+<div><h3>Imagine de intrare</h3>
+<canvas height="288" id="feature-input" width="288"></canvas>
+<small>Scenă sintetică discretă 24 × 24</small></div>
+<div><h3>Răspunsul filtrului</h3>
+<canvas height="288" id="feature-output" width="288"></canvas>
+<small id="feature-range">Intervalul activărilor: —</small></div>
+<div><h3>Reprezentare numerică</h3>
+<div class="feature-metrics" id="feature-metrics"></div>
+<div id="feature-kernel-preview"></div>
+<p class="micro-text">Vizualizările folosesc o transformare de culoare; culorile nu sunt
                                     clase prezise. Filtrele sunt fixe, definite manual.</p></div>
-                        </div>
-                    </div>
-                    <div class="three-cards">
-                        <div class="concept-card"><span>ÎNCEPUTUL REȚELEI</span><h4>Contururi și contrast</h4>
-                            <p>În straturile timpurii, filtrele învățate pot răspunde la orientări, frecvențe și
+</div>
+</div>
+<div class="three-cards">
+<div class="concept-card"><span>ÎNCEPUTUL REȚELEI</span><h4>Contururi și contrast</h4>
+<p>În straturile timpurii, filtrele învățate pot răspunde la orientări, frecvențe și
                                 texturi. Nu există o corespondență obligatorie un filtru–un concept.</p></div>
-                        <div class="concept-card"><span>STRATURI INTERMEDIARE</span><h4>Compoziția
+<div class="concept-card"><span>STRATURI INTERMEDIARE</span><h4>Compoziția
                             caracteristicilor</h4>
-                            <p>Convoluțiile succesive combină tipare locale într-un câmp receptiv mai mare.</p></div>
-                        <div class="concept-card"><span>STRATURI PROFUNDE</span><h4>Semnificații dependente de
+<p>Convoluțiile succesive combină tipare locale într-un câmp receptiv mai mare.</p></div>
+<div class="concept-card"><span>STRATURI PROFUNDE</span><h4>Semnificații dependente de
                             sarcină</h4>
-                            <p>În clasificare contează dovezile globale; în segmentare trebuie păstrate sau reconstruite
+<p>În clasificare contează dovezile globale; în segmentare trebuie păstrate sau reconstruite
                                 și detaliile spațiale.</p></div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="geometrie">
-                    <div class="chapter-title">
-                        <div><span class="section-count">03 / DIMENSIUNI ȘI COST COMPUTAȚIONAL</span>
-                            <h2>Cât de mare va fi tensorul de ieșire?</h2>
-                            <p>Un calculator pentru orice <code>Conv2d</code> simetric, cu număr de canale și groups
+</div>
+</section>
+<section class="module section-anchor" id="geometrie">
+<div class="chapter-title">
+<div><span class="section-count">03 / DIMENSIUNI ȘI COST COMPUTAȚIONAL</span>
+<h2>Cât de mare va fi tensorul de ieșire?</h2>
+<p>Un calculator pentru orice <code>Conv2d</code> simetric, cu număr de canale și groups
                                 configurabile. Nu mai presupunem implicit că padding păstrează dimensiunile.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="panel-heading"><h3>Configurator Conv2d</h3><span
-                                    class="pill">VALIDARE AUTOMATĂ</span></div>
-                            <div class="number-controls" id="shape-controls"><label>Înălțime H<input type="number"
-                                                                                                     id="sh-h" min="1"
-                                                                                                     max="4096"
-                                                                                                     value="32"></label><label>Lățime
-                                W<input type="number" id="sh-w" min="1" max="4096" value="32"></label><label>Canale de
-                                intrare<input type="number" id="sh-cin" min="1" max="2048" value="3"></label><label>Filtre
-                                / canale ieșire<input type="number" id="sh-cout" min="1" max="2048"
-                                                      value="16"></label><label>Kernel k<input type="number" id="sh-k"
-                                                                                               min="1" max="31"
-                                                                                               value="3"></label><label>Stride
-                                s<input type="number" id="sh-s" min="1" max="16" value="1"></label><label>Padding
-                                p<input type="number" id="sh-p" min="0" max="64" value="1"></label><label>Dilation
-                                d<input type="number" id="sh-d" min="1" max="16" value="1"></label><label>Groups g<input
-                                    type="number" id="sh-g" min="1" max="2048" value="1"></label><label>Bias<select
-                                    id="sh-bias">
-                                <option value="1">Da</option>
-                                <option value="0">Nu</option>
-                            </select></label></div>
-                            <div class="input-row">
-                                <button id="shape-preset-image" class="secondary-btn">Exemplu RGB</button>
-                                <button id="shape-preset-depthwise" class="secondary-btn">Depthwise</button>
-                                <button id="shape-preset-down" class="secondary-btn">Downsampling</button>
-                            </div>
-                            <div id="shape-error" class="form-error" role="status"></div>
-                            <div class="mini-stats">
-                                <div><span>OUTPUT NCHW</span><strong id="sh-out">—</strong></div>
-                                <div><span>PARAMETRI</span><strong id="sh-params">—</strong></div>
-                                <div><span>MACs / IMAGINE</span><strong id="sh-macs">—</strong></div>
-                            </div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Derivarea formulei</h3></div>
-                            <div class="equation"><span class="eq-num">(2)</span>
-                                <math display="block">
-                                    <msub>
-                                        <mi>H</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mo>⌊</mo>
-                                    <mfrac>
-                                        <mrow>
-                                            <mi>H</mi>
-                                            <mo>+</mo>
-                                            <mn>2</mn>
-                                            <mi>p</mi>
-                                            <mo>−</mo>
-                                            <mi>d</mi>
-                                            <mo>(</mo>
-                                            <mi>k</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                            <mo>)</mo>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                        <mi>s</mi>
-                                    </mfrac>
-                                    <mo>⌋</mo>
-                                    <mo>+</mo>
-                                    <mn>1</mn>
-                                </math>
-                            </div>
-                            <p>Formula pentru lățime este identică, înlocuind H cu W. Se aplică aici pentru parametri
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Configurator Conv2d</h3><span class="pill">VALIDARE AUTOMATĂ</span></div>
+<div class="number-controls" id="shape-controls"><label>Înălțime H<input id="sh-h" max="4096" min="1" type="number" value="32"/></label><label>Lățime
+                                W<input id="sh-w" max="4096" min="1" type="number" value="32"/></label><label>Canale de
+                                intrare<input id="sh-cin" max="2048" min="1" type="number" value="3"/></label><label>Filtre
+                                / canale ieșire<input id="sh-cout" max="2048" min="1" type="number" value="16"/></label><label>Kernel k<input id="sh-k" max="31" min="1" type="number" value="3"/></label><label>Stride
+                                s<input id="sh-s" max="16" min="1" type="number" value="1"/></label><label>Padding
+                                p<input id="sh-p" max="64" min="0" type="number" value="1"/></label><label>Dilation
+                                d<input id="sh-d" max="16" min="1" type="number" value="1"/></label><label>Groups g<input id="sh-g" max="2048" min="1" type="number" value="1"/></label><label>Bias<select id="sh-bias">
+<option value="1">Da</option>
+<option value="0">Nu</option>
+</select></label></div>
+<div class="input-row">
+<button class="secondary-btn" id="shape-preset-image">Exemplu RGB</button>
+<button class="secondary-btn" id="shape-preset-depthwise">Depthwise</button>
+<button class="secondary-btn" id="shape-preset-down">Downsampling</button>
+</div>
+<div class="form-error" id="shape-error" role="status"></div>
+<div class="mini-stats">
+<div><span>OUTPUT NCHW</span><strong id="sh-out">—</strong></div>
+<div><span>PARAMETRI</span><strong id="sh-params">—</strong></div>
+<div><span>MACs / IMAGINE</span><strong id="sh-macs">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Derivarea formulei</h3></div>
+<div class="equation"><span class="eq-num">(2)</span>
+<math display="block">
+<msub>
+<mi>H</mi>
+<mtext>out</mtext>
+</msub>
+<mo>=</mo>
+<mo>⌊</mo>
+<mfrac>
+<mrow>
+<mi>H</mi>
+<mo>+</mo>
+<mn>2</mn>
+<mi>p</mi>
+<mo>−</mo>
+<mi>d</mi>
+<mo>(</mo>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+<mi>s</mi>
+</mfrac>
+<mo>⌋</mo>
+<mo>+</mo>
+<mn>1</mn>
+</math>
+</div>
+<p>Formula pentru lățime este identică, înlocuind H cu W. Se aplică aici pentru parametri
                                 egali pe cele două axe și padding simetric.</p>
-                            <div class="equation"><span class="eq-num">(3)</span>
-                                <math display="block">
-                                    <msub>
-                                        <mi>P</mi>
-                                        <mtext>conv</mtext>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <mo>(</mo>
-                                    <mfrac>
-                                        <msub>
-                                            <mi>C</mi>
-                                            <mtext>in</mtext>
-                                        </msub>
-                                        <mi>g</mi>
-                                    </mfrac>
-                                    <msup>
-                                        <mi>k</mi>
-                                        <mn>2</mn>
-                                    </msup>
-                                    <mo>+</mo>
-                                    <mi>δ</mi>
-                                    <mo>)</mo>
-                                </math>
-                            </div>
-                            <p><em>δ=1</em> dacă există bias, altfel 0. Numărul de MACs exclude biasul și alte operații
+<div class="equation"><span class="eq-num">(3)</span>
+<math display="block">
+<msub>
+<mi>P</mi>
+<mtext>conv</mtext>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<mo>(</mo>
+<mfrac>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<mi>g</mi>
+</mfrac>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<mi>δ</mi>
+<mo>)</mo>
+</math>
+</div>
+<p><em>δ=1</em> dacă există bias, altfel 0. Numărul de MACs exclude biasul și alte operații
                                 elementwise; nu reprezintă automat timpul real pe GPU.</p>
-                            <div class="tensor-journey" id="shape-journey">
-                                <div><span>INPUT</span><strong id="sh-journey-in">—</strong></div>
-                                <div class="journey-arrow">→</div>
-                                <div><span>CONV2D</span><strong id="sh-journey-k">—</strong></div>
-                                <div class="journey-arrow">→</div>
-                                <div><span>OUTPUT</span><strong id="sh-journey-out">—</strong></div>
-                            </div>
-                            <div class="note-note"><strong>Exemplu clasic din curs:</strong> o intrare 32×32×3 și șase
+<div class="tensor-journey" id="shape-journey">
+<div><span>INPUT</span><strong id="sh-journey-in">—</strong></div>
+<div class="journey-arrow">→</div>
+<div><span>CONV2D</span><strong id="sh-journey-k">—</strong></div>
+<div class="journey-arrow">→</div>
+<div><span>OUTPUT</span><strong id="sh-journey-out">—</strong></div>
+</div>
+<div class="note-note"><strong>Exemplu clasic din curs:</strong> o intrare 32×32×3 și șase
                                 filtre 5×5×3 fără padding și cu stride=1 produc 28×28×6. Numărul de parametri cu bias
                                 este 6×(3×5×5+1)=456.
                             </div>
-                        </div>
-                    </div>
-                    <div class="three-cards">
-                        <div class="concept-card"><span>CONV1D</span><h4>Semnale și secvențe</h4>
-                            <p>Audio, ECG/EEG, vibrații industriale și serii temporale; intrarea PyTorch are forma
+</div>
+</div>
+<div class="three-cards">
+<div class="concept-card"><span>CONV1D</span><h4>Semnale și secvențe</h4>
+<p>Audio, ECG/EEG, vibrații industriale și serii temporale; intrarea PyTorch are forma
                                 <code>(B, C, L)</code>.</p></div>
-                        <div class="concept-card"><span>CONV2D</span><h4>Imagini și caracteristici spațiale</h4>
-                            <p>Fotografii, radiografii, hărți satelitare și cadre video tratate individual; <code>(B, C,
+<div class="concept-card"><span>CONV2D</span><h4>Imagini și caracteristici spațiale</h4>
+<p>Fotografii, radiografii, hărți satelitare și cadre video tratate individual; <code>(B, C,
                                 H, W)</code>.</p></div>
-                        <div class="concept-card"><span>CONV3D</span><h4>Volume și date spațio-temporale</h4>
-                            <p>CT/MRI 3D sau clipuri video, dacă dimensiunile sunt aranjate corespunzător; <code>(B, C,
+<div class="concept-card"><span>CONV3D</span><h4>Volume și date spațio-temporale</h4>
+<p>CT/MRI 3D sau clipuri video, dacă dimensiunile sunt aranjate corespunzător; <code>(B, C,
                                 D, H, W)</code>.</p></div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="canale">
-                    <div class="chapter-title">
-                        <div><span class="section-count">04 / VOLUMUL 3D AL CARACTERISTICILOR</span>
-                            <h2>Un filtru operează simultan pe toate canalele sale de intrare</h2>
-                            <p>O convoluție RGB nu aplică un kernel independent fiecărui canal și apoi concatenează
+</div>
+</section>
+<section class="module section-anchor" id="canale">
+<div class="chapter-title">
+<div><span class="section-count">04 / VOLUMUL 3D AL CARACTERISTICILOR</span>
+<h2>Un filtru operează simultan pe toate canalele sale de intrare</h2>
+<p>O convoluție RGB nu aplică un kernel independent fiecărui canal și apoi concatenează
                                 rezultatele: un filtru standard are ponderi pe toate cele trei canale și însumează
                                 contribuțiile acestora.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="panel-heading"><h3>Simulator multi-canal · 3 canale, 2 filtre</h3><span
-                                    class="pill">INTERACTIV</span></div>
-                            <div class="form-grid"><label>Filtrul activ <select id="multi-filter">
-                                <option value="0">Filtru 1 – contrast</option>
-                                <option value="1">Filtru 2 – combinare</option>
-                            </select></label><label>Poziția ferestrei <select id="multi-pos">
-                                <option value="0">(0, 0)</option>
-                                <option value="1">(0, 1)</option>
-                                <option value="2">(1, 0)</option>
-                                <option value="3">(1, 1)</option>
-                            </select></label></div>
-                            <div class="channel-visual" id="channel-visual"></div>
-                            <div class="multi-sums" id="multi-sums"></div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>De unde apare dimensiunea C_out?</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <mi>Y</mi>
-                                    <mo>[</mo>
-                                    <mi>o</mi>
-                                    <mo>,</mo>
-                                    <mi>i</mi>
-                                    <mo>,</mo>
-                                    <mi>j</mi>
-                                    <mo>]</mo>
-                                    <mo>=</mo>
-                                    <msub>
-                                        <mi>b</mi>
-                                        <mi>o</mi>
-                                    </msub>
-                                    <mo>+</mo>
-                                    <munder>
-                                        <mo>∑</mo>
-                                        <mi>c</mi>
-                                    </munder>
-                                    <munder>
-                                        <mo>∑</mo>
-                                        <mrow>
-                                            <mi>u</mi>
-                                            <mo>,</mo>
-                                            <mi>v</mi>
-                                        </mrow>
-                                    </munder>
-                                    <mi>W</mi>
-                                    <mo>[</mo>
-                                    <mi>o</mi>
-                                    <mo>,</mo>
-                                    <mi>c</mi>
-                                    <mo>,</mo>
-                                    <mi>u</mi>
-                                    <mo>,</mo>
-                                    <mi>v</mi>
-                                    <mo>]</mo>
-                                    <mi>X</mi>
-                                    <mo>[</mo>
-                                    <mi>c</mi>
-                                    <mo>,</mo>
-                                    <mi>i</mi>
-                                    <mo>+</mo>
-                                    <mi>u</mi>
-                                    <mo>,</mo>
-                                    <mi>j</mi>
-                                    <mo>+</mo>
-                                    <mi>v</mi>
-                                    <mo>]</mo>
-                                </math>
-                            </div>
-                            <p>Fiecare index <em>o</em> desemnează un filtru distinct, întins pe toate cele
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Simulator multi-canal · 3 canale, 2 filtre</h3><span class="pill">INTERACTIV</span></div>
+<div class="form-grid"><label>Filtrul activ <select id="multi-filter">
+<option value="0">Filtru 1 – contrast</option>
+<option value="1">Filtru 2 – combinare</option>
+</select></label><label>Poziția ferestrei <select id="multi-pos">
+<option value="0">(0, 0)</option>
+<option value="1">(0, 1)</option>
+<option value="2">(1, 0)</option>
+<option value="3">(1, 1)</option>
+</select></label></div>
+<div class="channel-visual" id="channel-visual"></div>
+<div class="multi-sums" id="multi-sums"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>De unde apare dimensiunea C_out?</h3></div>
+<div class="equation">
+<math display="block">
+<mi>Y</mi>
+<mo>[</mo>
+<mi>o</mi>
+<mo>,</mo>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>]</mo>
+<mo>=</mo>
+<msub>
+<mi>b</mi>
+<mi>o</mi>
+</msub>
+<mo>+</mo>
+<munder>
+<mo>∑</mo>
+<mi>c</mi>
+</munder>
+<munder>
+<mo>∑</mo>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+</mrow>
+</munder>
+<mi>W</mi>
+<mo>[</mo>
+<mi>o</mi>
+<mo>,</mo>
+<mi>c</mi>
+<mo>,</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>]</mo>
+<mi>X</mi>
+<mo>[</mo>
+<mi>c</mi>
+<mo>,</mo>
+<mi>i</mi>
+<mo>+</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>j</mi>
+<mo>+</mo>
+<mi>v</mi>
+<mo>]</mo>
+</math>
+</div>
+<p>Fiecare index <em>o</em> desemnează un filtru distinct, întins pe toate cele
                                 <em>C_in</em> canale în convoluția standard. <em>C_out</em> filtre produc <em>C_out</em>
                                 hărți de caracteristici.</p>
-                            <div class="shape-facts">
-                                <div><small>Input</small><strong>(1, 3, 3, 3)</strong></div>
-                                <div><small>Weight</small><strong>(2, 3, 2, 2)</strong></div>
-                                <div><small>Output</small><strong>(1, 2, 2, 2)</strong></div>
-                            </div>
-                            <div class="note-note">Expresia din simulator arată contribuția fiecărui canal și suma lor.
+<div class="shape-facts">
+<div><small>Input</small><strong>(1, 3, 3, 3)</strong></div>
+<div><small>Weight</small><strong>(2, 3, 2, 2)</strong></div>
+<div><small>Output</small><strong>(1, 2, 2, 2)</strong></div>
+</div>
+<div class="note-note">Expresia din simulator arată contribuția fiecărui canal și suma lor.
                                 Valorile și ponderile sunt sintetice, însă aritmetica este aceeași cu cea dintr-o rețea
                                 PyTorch.
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="pooling">
-                    <div class="chapter-title">
-                        <div><span class="section-count">05 / REDUCEREA REZOLUȚIEI</span>
-                            <h2>Max Pooling versus Average Pooling</h2>
-                            <p>Compară ce informație păstrează fiecare strategie. O valoare maximă poate evidenția o
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="pooling">
+<div class="chapter-title">
+<div><span class="section-count">05 / REDUCEREA REZOLUȚIEI</span>
+<h2>Max Pooling versus Average Pooling</h2>
+<p>Compară ce informație păstrează fiecare strategie. O valoare maximă poate evidenția o
                                 activare puternică; media integrează răspunsurile din fereastră.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="control-strip"><label>Tip pooling<select id="pool-mode">
-                                <option value="max">Max pooling</option>
-                                <option value="avg">Average pooling</option>
-                            </select></label><label>Exemplu<select id="pool-data">
-                                <option value="spots">Activări izolate</option>
-                                <option value="pattern">Textură graduală</option>
-                                <option value="negative">Activări negative</option>
-                            </select></label><label>Dimensiune fereastră<select id="pool-k">
-                                <option value="2">2 × 2</option>
-                                <option value="3">3 × 3</option>
-                            </select></label><label>Stride<select id="pool-s">
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select></label></div>
-                            <div class="pool-pair">
-                                <div><h3>Intrare 6 × 6</h3>
-                                    <div id="pool-input" class="matrix-component"></div>
-                                </div>
-                                <div><h3>Ieșire <span id="pool-out-shape"></span></h3>
-                                    <div id="pool-output" class="matrix-component"></div>
-                                </div>
-                            </div>
-                            <div class="timeline-buttons">
-                                <button class="secondary-btn" id="pool-prev">← Înapoi</button>
-                                <button class="primary-btn" id="pool-play">▶ Redă</button>
-                                <button class="secondary-btn" id="pool-next">Înainte →</button>
-                            </div>
-                            <div id="pool-calc" class="calc-panel compact"></div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Proprietăți și limite</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>Y</mi>
-                                        <mrow>
-                                            <mi>i</mi>
-                                            <mo>,</mo>
-                                            <mi>j</mi>
-                                        </mrow>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <munder>
-                                        <mi>max</mi>
-                                        <mrow>
-                                            <mi>u</mi>
-                                            <mo>,</mo>
-                                            <mi>v</mi>
-                                            <mo>∈</mo>
-                                            <mi>Ω</mi>
-                                        </mrow>
-                                    </munder>
-                                    <mi>X</mi>
-                                    <mo>[</mo>
-                                    <mi>is</mi>
-                                    <mo>+</mo>
-                                    <mi>u</mi>
-                                    <mo>,</mo>
-                                    <mi>js</mi>
-                                    <mo>+</mo>
-                                    <mi>v</mi>
-                                    <mo>]</mo>
-                                </math>
-                            </div>
-                            <p>Max pooling este o agregare locală <strong>fără ponderi învățabile</strong>. Pentru o
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="control-strip"><label>Tip pooling<select id="pool-mode">
+<option value="max">Max pooling</option>
+<option value="avg">Average pooling</option>
+</select></label><label>Exemplu<select id="pool-data">
+<option value="spots">Activări izolate</option>
+<option value="pattern">Textură graduală</option>
+<option value="negative">Activări negative</option>
+</select></label><label>Dimensiune fereastră<select id="pool-k">
+<option value="2">2 × 2</option>
+<option value="3">3 × 3</option>
+</select></label><label>Stride<select id="pool-s">
+<option value="2">2</option>
+<option value="1">1</option>
+</select></label></div>
+<div class="pool-pair">
+<div><h3>Intrare 6 × 6</h3>
+<div class="matrix-component" id="pool-input"></div>
+</div>
+<div><h3>Ieșire <span id="pool-out-shape"></span></h3>
+<div class="matrix-component" id="pool-output"></div>
+</div>
+</div>
+<div class="timeline-buttons">
+<button class="secondary-btn" id="pool-prev">← Înapoi</button>
+<button class="primary-btn" id="pool-play">▶ Redă</button>
+<button class="secondary-btn" id="pool-next">Înainte →</button>
+</div>
+<div class="calc-panel compact" id="pool-calc"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Proprietăți și limite</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>Y</mi>
+<mrow>
+<mi>i</mi>
+<mo>,</mo>
+<mi>j</mi>
+</mrow>
+</msub>
+<mo>=</mo>
+<munder>
+<mi>max</mi>
+<mrow>
+<mi>u</mi>
+<mo>,</mo>
+<mi>v</mi>
+<mo>∈</mo>
+<mi>Ω</mi>
+</mrow>
+</munder>
+<mi>X</mi>
+<mo>[</mo>
+<mi>is</mi>
+<mo>+</mo>
+<mi>u</mi>
+<mo>,</mo>
+<mi>js</mi>
+<mo>+</mo>
+<mi>v</mi>
+<mo>]</mo>
+</math>
+</div>
+<p>Max pooling este o agregare locală <strong>fără ponderi învățabile</strong>. Pentru o
                                 fereastră fixă de dimensiune k×k, average pooling folosește media aritmetică. Exemplele
                                 presupun fără padding și <code>ceil_mode=False</code>.</p>
-                            <div class="concept-rows">
-                                <div><strong>Când max pooling?</strong>
-                                    <p>Când activarea cea mai puternică este informativă și reducerea rezoluției este
+<div class="concept-rows">
+<div><strong>Când max pooling?</strong>
+<p>Când activarea cea mai puternică este informativă și reducerea rezoluției este
                                         acceptabilă.</p></div>
-                                <div><strong>Când average pooling?</strong>
-                                    <p>Când interesul este agregarea contextului și diminuarea variațiilor locale;
+<div><strong>Când average pooling?</strong>
+<p>Când interesul este agregarea contextului și diminuarea variațiilor locale;
                                         global average pooling comprimă fiecare canal într-o valoare.</p></div>
-                                <div><strong>Alternative</strong>
-                                    <p>Convoluții cu stride 2, adaptive pooling sau mecanisme de downsampling
+<div><strong>Alternative</strong>
+<p>Convoluții cu stride 2, adaptive pooling sau mecanisme de downsampling
                                         specializate. Pooling-ul nu este obligatoriu în orice CNN.</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="receptiv">
-                    <div class="chapter-title">
-                        <div><span class="section-count">06 / ACOPERIRE SPAȚIALĂ</span>
-                            <h2>Înțelege câmpul receptiv teoretic</h2>
-                            <p>Adaugă convoluții în serie. Un neuron dintr-un strat profund poate depinde de regiuni tot
+</div>
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="receptiv">
+<div class="chapter-title">
+<div><span class="section-count">06 / ACOPERIRE SPAȚIALĂ</span>
+<h2>Înțelege câmpul receptiv teoretic</h2>
+<p>Adaugă convoluții în serie. Un neuron dintr-un strat profund poate depinde de regiuni tot
                                 mai mari din intrare, iar stride-ul schimbă „saltul” dintre pozițiile receptive
                                 vecine.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="panel-heading"><h3>Calculator pe trei straturi</h3><span
-                                    class="pill">INTERACTIV</span></div>
-                            <div class="rf-editor" id="rf-editor"></div>
-                            <div class="rf-visual" id="rf-visual"></div>
-                            <div class="mini-stats">
-                                <div><span>CÂMP RECEPTIV</span><strong id="rf-total">—</strong></div>
-                                <div><span>JUMP EFECTIV</span><strong id="rf-jump">—</strong></div>
-                                <div><span>STRATURI</span><strong>3</strong></div>
-                            </div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Recurența câmpului receptiv</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>r</mi>
-                                        <mi>l</mi>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <msub>
-                                        <mi>r</mi>
-                                        <mrow>
-                                            <mi>l</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                    </msub>
-                                    <mo>+</mo>
-                                    <mo>(</mo>
-                                    <msub>
-                                        <mi>k</mi>
-                                        <mi>l</mi>
-                                    </msub>
-                                    <mo>−</mo>
-                                    <mn>1</mn>
-                                    <mo>)</mo>
-                                    <msub>
-                                        <mi>d</mi>
-                                        <mi>l</mi>
-                                    </msub>
-                                    <msub>
-                                        <mi>j</mi>
-                                        <mrow>
-                                            <mi>l</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                    </msub>
-                                </math>
-                            </div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>j</mi>
-                                        <mi>l</mi>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <msub>
-                                        <mi>j</mi>
-                                        <mrow>
-                                            <mi>l</mi>
-                                            <mo>−</mo>
-                                            <mn>1</mn>
-                                        </mrow>
-                                    </msub>
-                                    <msub>
-                                        <mi>s</mi>
-                                        <mi>l</mi>
-                                    </msub>
-                                    <mspace width="1em"/>
-                                    <msub>
-                                        <mi>r</mi>
-                                        <mn>0</mn>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <msub>
-                                        <mi>j</mi>
-                                        <mn>0</mn>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mn>1</mn>
-                                </math>
-                            </div>
-                            <p><em>r</em>: câmp receptiv teoretic; <em>j</em>: distanța dintre centrele a două poziții
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Calculator pe trei straturi</h3><span class="pill">INTERACTIV</span></div>
+<div class="rf-editor" id="rf-editor"></div>
+<div class="rf-visual" id="rf-visual"></div>
+<div class="mini-stats">
+<div><span>CÂMP RECEPTIV</span><strong id="rf-total">—</strong></div>
+<div><span>JUMP EFECTIV</span><strong id="rf-jump">—</strong></div>
+<div><span>STRATURI</span><strong>3</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Recurența câmpului receptiv</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>r</mi>
+<mi>l</mi>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>r</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<mo>+</mo>
+<mo>(</mo>
+<msub>
+<mi>k</mi>
+<mi>l</mi>
+</msub>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<msub>
+<mi>d</mi>
+<mi>l</mi>
+</msub>
+<msub>
+<mi>j</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+</math>
+</div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>j</mi>
+<mi>l</mi>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>j</mi>
+<mrow>
+<mi>l</mi>
+<mo>−</mo>
+<mn>1</mn>
+</mrow>
+</msub>
+<msub>
+<mi>s</mi>
+<mi>l</mi>
+</msub>
+<mspace width="1em"></mspace>
+<msub>
+<mi>r</mi>
+<mn>0</mn>
+</msub>
+<mo>=</mo>
+<msub>
+<mi>j</mi>
+<mn>0</mn>
+</msub>
+<mo>=</mo>
+<mn>1</mn>
+</math>
+</div>
+<p><em>r</em>: câmp receptiv teoretic; <em>j</em>: distanța dintre centrele a două poziții
                                 receptive adiacente, măsurată în pixeli de intrare. Padding-ul mută poziția centrelor,
                                 dar nu modifică dimensiunea câmpului receptiv teoretic.</p>
-                            <p>În practică, <strong>câmpul receptiv efectiv</strong> poate fi mai mic decât suportul
+<p>În practică, <strong>câmpul receptiv efectiv</strong> poate fi mai mic decât suportul
                                 teoretic al arhitecturii.</p>
-                            <div class="note-note"><strong>Utilitate:</strong> pentru segmentare, dilated/atrous
+<div class="note-note"><strong>Utilitate:</strong> pentru segmentare, dilated/atrous
                                 convolution mărește contextul fără a reduce suplimentar rezoluția feature map-urilor;
                                 pentru imagini mari contează echilibrul context–detalii.
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="eficienta">
-                    <div class="chapter-title">
-                        <div><span class="section-count">07 / EFICIENȚĂ ȘI DEPLOYMENT</span>
-                            <h2>Standard, grouped și depthwise separable convolution</h2>
-                            <p>Nu toate convoluțiile au același cost. Modifică numărul canalelor, dimensiunea filtrului
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="eficienta">
+<div class="chapter-title">
+<div><span class="section-count">07 / EFICIENȚĂ ȘI DEPLOYMENT</span>
+<h2>Standard, grouped și depthwise separable convolution</h2>
+<p>Nu toate convoluțiile au același cost. Modifică numărul canalelor, dimensiunea filtrului
                                 și rezoluția pentru a compara numărul aproximativ de MACs și parametri.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="form-grid"><label>Canale intrare <strong id="eff-cin-v">32</strong><input
-                                    type="range" id="eff-cin" min="8" max="128" value="32" step="8"></label><label>Canale
-                                ieșire <strong id="eff-cout-v">64</strong><input type="range" id="eff-cout" min="8"
-                                                                                 max="192" value="64"
-                                                                                 step="8"></label><label>Kernel<select
-                                    id="eff-k">
-                                <option value="3">3 × 3</option>
-                                <option value="5">5 × 5</option>
-                                <option value="7">7 × 7</option>
-                            </select></label><label>Dimensiune feature map<select id="eff-h">
-                                <option value="14">14 × 14</option>
-                                <option value="28" selected>28 × 28</option>
-                                <option value="56">56 × 56</option>
-                                <option value="112">112 × 112</option>
-                            </select></label></div>
-                            <div id="eff-chart" class="eff-chart"></div>
-                            <div class="mini-stats">
-                                <div><span>RAPORT MACs</span><strong id="eff-ratio">—</strong></div>
-                                <div><span>STANDARD PARAMS</span><strong id="eff-standard">—</strong></div>
-                                <div><span>DEPTHWISE + PW</span><strong id="eff-dw">—</strong></div>
-                            </div>
-                            <p class="micro-text">Comparăm convoluția standard cu depthwise k×k + pointwise 1×1, fără
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="form-grid"><label>Canale intrare <strong id="eff-cin-v">32</strong><input id="eff-cin" max="128" min="8" step="8" type="range" value="32"/></label><label>Canale
+                                ieșire <strong id="eff-cout-v">64</strong><input id="eff-cout" max="192" min="8" step="8" type="range" value="64"/></label><label>Kernel<select id="eff-k">
+<option value="3">3 × 3</option>
+<option value="5">5 × 5</option>
+<option value="7">7 × 7</option>
+</select></label><label>Dimensiune feature map<select id="eff-h">
+<option value="14">14 × 14</option>
+<option selected="" value="28">28 × 28</option>
+<option value="56">56 × 56</option>
+<option value="112">112 × 112</option>
+</select></label></div>
+<div class="eff-chart" id="eff-chart"></div>
+<div class="mini-stats">
+<div><span>RAPORT MACs</span><strong id="eff-ratio">—</strong></div>
+<div><span>STANDARD PARAMS</span><strong id="eff-standard">—</strong></div>
+<div><span>DEPTHWISE + PW</span><strong id="eff-dw">—</strong></div>
+</div>
+<p class="micro-text">Comparăm convoluția standard cu depthwise k×k + pointwise 1×1, fără
                                 bias, la aceeași rezoluție de ieșire. MACs nu înseamnă latență măsurată.</p></div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>De ce ajută factorarea?</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>MAC</mi>
-                                        <mtext>standard</mtext>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mi>H</mi>
-                                    <mi>W</mi>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>in</mtext>
-                                    </msub>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <msup>
-                                        <mi>k</mi>
-                                        <mn>2</mn>
-                                    </msup>
-                                </math>
-                            </div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>MAC</mi>
-                                        <mtext>separable</mtext>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mi>H</mi>
-                                    <mi>W</mi>
-                                    <mo>(</mo>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>in</mtext>
-                                    </msub>
-                                    <msup>
-                                        <mi>k</mi>
-                                        <mn>2</mn>
-                                    </msup>
-                                    <mo>+</mo>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>in</mtext>
-                                    </msub>
-                                    <msub>
-                                        <mi>C</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <mo>)</mo>
-                                </math>
-                            </div>
-                            <div class="architecture-schematic">
-                                <div class="arch-stage accent">Standard k×k<br><small>amestec spațial + canale</small>
-                                </div>
-                                <span>versus</span>
-                                <div class="arch-stage">Depthwise k×k<br><small>pe canal</small></div>
-                                <span>→</span>
-                                <div class="arch-stage">Pointwise 1×1<br><small>combină canalele</small></div>
-                            </div>
-                            <div class="note-note"><strong>Unde se folosește?</strong> MobileNet, modele edge/embedded,
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>De ce ajută factorarea?</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>MAC</mi>
+<mtext>standard</mtext>
+</msub>
+<mo>=</mo>
+<mi>H</mi>
+<mi>W</mi>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+</math>
+</div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>MAC</mi>
+<mtext>separable</mtext>
+</msub>
+<mo>=</mo>
+<mi>H</mi>
+<mi>W</mi>
+<mo>(</mo>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msup>
+<mi>k</mi>
+<mn>2</mn>
+</msup>
+<mo>+</mo>
+<msub>
+<mi>C</mi>
+<mtext>in</mtext>
+</msub>
+<msub>
+<mi>C</mi>
+<mtext>out</mtext>
+</msub>
+<mo>)</mo>
+</math>
+</div>
+<div class="architecture-schematic">
+<div class="arch-stage accent">Standard k×k<br/><small>amestec spațial + canale</small>
+</div>
+<span>versus</span>
+<div class="arch-stage">Depthwise k×k<br/><small>pe canal</small></div>
+<span>→</span>
+<div class="arch-stage">Pointwise 1×1<br/><small>combină canalele</small></div>
+</div>
+<div class="note-note"><strong>Unde se folosește?</strong> MobileNet, modele edge/embedded,
                                 clasificare pe dispozitive mobile și detectoare eficiente. Avantajul teoretic trebuie
                                 verificat cu măsurători pe hardware-ul țintă.
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="rezidual">
-                    <div class="chapter-title">
-                        <div><span class="section-count">08 / REȚELE ADÂNCI</span>
-                            <h2>De ce ajută o conexiune reziduală?</h2>
-                            <p>În blocul rezidual nu învățăm direct doar H(x), ci transformarea F(x) adăugată intrării.
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="rezidual">
+<div class="chapter-title">
+<div><span class="section-count">08 / REȚELE ADÂNCI</span>
+<h2>De ce ajută o conexiune reziduală?</h2>
+<p>În blocul rezidual nu învățăm direct doar H(x), ci transformarea F(x) adăugată intrării.
                                 Vezi efectul asupra valorii și derivatei unui exemplu scalar didactic.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="panel-heading"><h3>Experiment scalar controlat</h3><span class="pill">DEMONSTRAȚIE MATEMATICĂ</span>
-                            </div>
-                            <svg id="residual-svg" viewBox="0 0 640 250" role="img"
-                                 aria-label="Bloc rezidual care adună x cu F(x)">
-                                <rect x="17" y="94" width="96" height="60" rx="9" fill="#d8eaff" stroke="#8bb7ea"/>
-                                <text x="65" y="130" fill="#184781" text-anchor="middle" font-size="23"
-                                      font-weight="800">x
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Experiment scalar controlat</h3><span class="pill">DEMONSTRAȚIE MATEMATICĂ</span>
+</div>
+<svg aria-label="Bloc rezidual care adună x cu F(x)" id="residual-svg" role="img" viewbox="0 0 640 250">
+<rect fill="#d8eaff" height="60" rx="9" stroke="#8bb7ea" width="96" x="17" y="94"></rect>
+<text fill="#184781" font-size="23" font-weight="800" text-anchor="middle" x="65" y="130">x
                                 </text>
-                                <path d="M113 124H185M185 124V55H433V100M185 124H234" fill="none" stroke="#4786ce"
-                                      stroke-width="4"/>
-                                <rect x="234" y="99" width="146" height="52" rx="9" fill="#154a9b"/>
-                                <text x="307" y="132" text-anchor="middle" fill="white" font-size="19"
-                                      font-weight="700">F(x)
+<path d="M113 124H185M185 124V55H433V100M185 124H234" fill="none" stroke="#4786ce" stroke-width="4"></path>
+<rect fill="#154a9b" height="52" rx="9" width="146" x="234" y="99"></rect>
+<text fill="white" font-size="19" font-weight="700" text-anchor="middle" x="307" y="132">F(x)
                                 </text>
-                                <path d="M380 124H444" stroke="#4786ce" stroke-width="4"/>
-                                <circle cx="460" cy="123" r="23" fill="white" stroke="#438cc9" stroke-width="3"/>
-                                <path d="M447 123H473M460 110V136" stroke="#438cc9" stroke-width="3"/>
-                                <path d="M483 123H523" stroke="#4786ce" stroke-width="4"/>
-                                <rect x="523" y="94" width="102" height="60" rx="9" fill="#d7e2f0" stroke="#7699c7"/>
-                                <text x="574" y="130" text-anchor="middle" fill="#1c3d68" font-size="20"
-                                      font-weight="800">y
+<path d="M380 124H444" stroke="#4786ce" stroke-width="4"></path>
+<circle cx="460" cy="123" fill="white" r="23" stroke="#438cc9" stroke-width="3"></circle>
+<path d="M447 123H473M460 110V136" stroke="#438cc9" stroke-width="3"></path>
+<path d="M483 123H523" stroke="#4786ce" stroke-width="4"></path>
+<rect fill="#d7e2f0" height="60" rx="9" stroke="#7699c7" width="102" x="523" y="94"></rect>
+<text fill="#1c3d68" font-size="20" font-weight="800" text-anchor="middle" x="574" y="130">y
                                 </text>
-                                <text x="325" y="37" text-anchor="middle" fill="#6180aa" font-size="13"
-                                      font-weight="700">SKIP / IDENTITATE
+<text fill="#6180aa" font-size="13" font-weight="700" text-anchor="middle" x="325" y="37">SKIP / IDENTITATE
                                 </text>
-                                <text x="307" y="183" text-anchor="middle" fill="#6180aa" font-size="13">CALEA
+<text fill="#6180aa" font-size="13" text-anchor="middle" x="307" y="183">CALEA
                                     REZIDUALĂ
                                 </text>
-                            </svg>
-                            <div class="form-grid"><label>Intrare x <strong id="res-x-v">2,0</strong><input type="range"
-                                                                                                            id="res-x"
-                                                                                                            min="-5"
-                                                                                                            max="5"
-                                                                                                            step="0.25"
-                                                                                                            value="2"></label><label>Parametru
-                                a în F(x)=a·x <strong id="res-a-v">−0,8</strong><input type="range" id="res-a"
-                                                                                       min="-1.5" max="1.5" step="0.05"
-                                                                                       value="-0.8"></label></div>
-                            <div class="mini-stats">
-                                <div><span>F(x)</span><strong id="res-f">—</strong></div>
-                                <div><span>x + F(x)</span><strong id="res-y">—</strong></div>
-                                <div><span>d(x+F)/dx</span><strong id="res-grad">—</strong></div>
-                            </div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Identitate + reziduu</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <mi>y</mi>
-                                    <mo>=</mo>
-                                    <mi>F</mi>
-                                    <mo>(</mo>
-                                    <mi>x</mi>
-                                    <mo>;</mo>
-                                    <mi>W</mi>
-                                    <mo>)</mo>
-                                    <mo>+</mo>
-                                    <mi>x</mi>
-                                    <mspace width="1em"/>
-                                    <mfrac>
-                                        <mrow>
-                                            <mi>∂</mi>
-                                            <mi>y</mi>
-                                        </mrow>
-                                        <mrow>
-                                            <mi>∂</mi>
-                                            <mi>x</mi>
-                                        </mrow>
-                                    </mfrac>
-                                    <mo>=</mo>
-                                    <mfrac>
-                                        <mrow>
-                                            <mi>∂</mi>
-                                            <mi>F</mi>
-                                        </mrow>
-                                        <mrow>
-                                            <mi>∂</mi>
-                                            <mi>x</mi>
-                                        </mrow>
-                                    </mfrac>
-                                    <mo>+</mo>
-                                    <mi>I</mi>
-                                </math>
-                            </div>
-                            <p>Termenul identitate oferă o cale directă de propagare a semnalului și a gradientului. Nu
+</svg>
+<div class="form-grid"><label>Intrare x <strong id="res-x-v">2,0</strong><input id="res-x" max="5" min="-5" step="0.25" type="range" value="2"/></label><label>Parametru
+                                a în F(x)=a·x <strong id="res-a-v">−0,8</strong><input id="res-a" max="1.5" min="-1.5" step="0.05" type="range" value="-0.8"/></label></div>
+<div class="mini-stats">
+<div><span>F(x)</span><strong id="res-f">—</strong></div>
+<div><span>x + F(x)</span><strong id="res-y">—</strong></div>
+<div><span>d(x+F)/dx</span><strong id="res-grad">—</strong></div>
+</div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Identitate + reziduu</h3></div>
+<div class="equation">
+<math display="block">
+<mi>y</mi>
+<mo>=</mo>
+<mi>F</mi>
+<mo>(</mo>
+<mi>x</mi>
+<mo>;</mo>
+<mi>W</mi>
+<mo>)</mo>
+<mo>+</mo>
+<mi>x</mi>
+<mspace width="1em"></mspace>
+<mfrac>
+<mrow>
+<mi>∂</mi>
+<mi>y</mi>
+</mrow>
+<mrow>
+<mi>∂</mi>
+<mi>x</mi>
+</mrow>
+</mfrac>
+<mo>=</mo>
+<mfrac>
+<mrow>
+<mi>∂</mi>
+<mi>F</mi>
+</mrow>
+<mrow>
+<mi>∂</mi>
+<mi>x</mi>
+</mrow>
+</mfrac>
+<mo>+</mo>
+<mi>I</mi>
+</math>
+</div>
+<p>Termenul identitate oferă o cale directă de propagare a semnalului și a gradientului. Nu
                                 garantează că gradientul nu se poate anula în orice configurație; în modelele reale
                                 contează și normalizarea, activările și proiectările de dimensiune.</p>
-                            <p><strong>Când e util?</strong> Rețele foarte profunde și backbones pentru clasificare,
+<p><strong>Când e util?</strong> Rețele foarte profunde și backbones pentru clasificare,
                                 detecție sau segmentare (ResNet-18/34/50/101).</p>
-                            <div class="note-note">Exemplul scalar <code>F(x)=a·x</code> explică exact derivata, dar nu
+<div class="note-note">Exemplul scalar <code>F(x)=a·x</code> explică exact derivata, dar nu
                                 reprezintă un ResNet complet și nu simulează o antrenare.
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="decodor">
-                    <div class="chapter-title">
-                        <div><span class="section-count">09 / RECONSTRUCȚIE SPAȚIALĂ</span>
-                            <h2>Convoluția transpusă și conexiunile de tip U-Net</h2>
-                            <p>Pentru segmentare avem nevoie de predicții dense, nu doar de un vector de clase.
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="decodor">
+<div class="chapter-title">
+<div><span class="section-count">09 / RECONSTRUCȚIE SPAȚIALĂ</span>
+<h2>Convoluția transpusă și conexiunile de tip U-Net</h2>
+<p>Pentru segmentare avem nevoie de predicții dense, nu doar de un vector de clase.
                                 Explorează o convoluție transpusă și apoi fluxul encoder–decoder cu skip
                                 connections.</p></div>
-                    </div>
-                    <div class="two-cols">
-                        <div class="panel">
-                            <div class="panel-heading"><h3>Convoluție transpusă · acumulare pas cu pas</h3><span
-                                    class="pill">INTERACTIV</span></div>
-                            <div class="control-strip"><label>Stride<select id="trans-stride">
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select></label><label>Kernel<select id="trans-kernel">
-                                <option value="ones">Toate elementele 1</option>
-                                <option value="checker">Filtru semnat</option>
-                                <option value="avg">Valori 0,25</option>
-                            </select></label><label>Intrare<select id="trans-input">
-                                <option value="diag">Diagonală</option>
-                                <option value="spots">Impuls central</option>
-                            </select></label></div>
-                            <div class="pool-pair trans-pair">
-                                <div><h3>Intrare (3×3)</h3>
-                                    <div id="trans-source" class="matrix-component"></div>
-                                </div>
-                                <div><h3>Ieșire acumulată <span id="trans-output-shape"></span></h3>
-                                    <div id="trans-target" class="matrix-component"></div>
-                                </div>
-                            </div>
-                            <div class="timeline-buttons">
-                                <button class="secondary-btn" id="trans-prev">← Înapoi</button>
-                                <button class="primary-btn" id="trans-play">▶ Redă</button>
-                                <button class="secondary-btn" id="trans-next">Înainte →</button>
-                            </div>
-                            <div class="calc-panel compact" id="trans-note"></div>
-                        </div>
-                        <div class="panel theory-panel">
-                            <div class="panel-heading"><h3>Cum alegem upsampling-ul?</h3></div>
-                            <div class="equation">
-                                <math display="block">
-                                    <msub>
-                                        <mi>H</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <mo>=</mo>
-                                    <mo>(</mo>
-                                    <msub>
-                                        <mi>H</mi>
-                                        <mtext>in</mtext>
-                                    </msub>
-                                    <mo>−</mo>
-                                    <mn>1</mn>
-                                    <mo>)</mo>
-                                    <mi>s</mi>
-                                    <mo>−</mo>
-                                    <mn>2</mn>
-                                    <mi>p</mi>
-                                    <mo>+</mo>
-                                    <mi>d</mi>
-                                    <mo>(</mo>
-                                    <mi>k</mi>
-                                    <mo>−</mo>
-                                    <mn>1</mn>
-                                    <mo>)</mo>
-                                    <mo>+</mo>
-                                    <msub>
-                                        <mi>p</mi>
-                                        <mtext>out</mtext>
-                                    </msub>
-                                    <mo>+</mo>
-                                    <mn>1</mn>
-                                </math>
-                            </div>
-                            <p>Convoluția transpusă este operația liniară asociată transpunerii matricei unei convoluții
+</div>
+<div class="two-cols">
+<div class="panel">
+<div class="panel-heading"><h3>Convoluție transpusă · acumulare pas cu pas</h3><span class="pill">INTERACTIV</span></div>
+<div class="control-strip"><label>Stride<select id="trans-stride">
+<option value="2">2</option>
+<option value="1">1</option>
+</select></label><label>Kernel<select id="trans-kernel">
+<option value="ones">Toate elementele 1</option>
+<option value="checker">Filtru semnat</option>
+<option value="avg">Valori 0,25</option>
+</select></label><label>Intrare<select id="trans-input">
+<option value="diag">Diagonală</option>
+<option value="spots">Impuls central</option>
+</select></label></div>
+<div class="pool-pair trans-pair">
+<div><h3>Intrare (3×3)</h3>
+<div class="matrix-component" id="trans-source"></div>
+</div>
+<div><h3>Ieșire acumulată <span id="trans-output-shape"></span></h3>
+<div class="matrix-component" id="trans-target"></div>
+</div>
+</div>
+<div class="timeline-buttons">
+<button class="secondary-btn" id="trans-prev">← Înapoi</button>
+<button class="primary-btn" id="trans-play">▶ Redă</button>
+<button class="secondary-btn" id="trans-next">Înainte →</button>
+</div>
+<div class="calc-panel compact" id="trans-note"></div>
+</div>
+<div class="panel theory-panel">
+<div class="panel-heading"><h3>Cum alegem upsampling-ul?</h3></div>
+<div class="equation">
+<math display="block">
+<msub>
+<mi>H</mi>
+<mtext>out</mtext>
+</msub>
+<mo>=</mo>
+<mo>(</mo>
+<msub>
+<mi>H</mi>
+<mtext>in</mtext>
+</msub>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mi>s</mi>
+<mo>−</mo>
+<mn>2</mn>
+<mi>p</mi>
+<mo>+</mo>
+<mi>d</mi>
+<mo>(</mo>
+<mi>k</mi>
+<mo>−</mo>
+<mn>1</mn>
+<mo>)</mo>
+<mo>+</mo>
+<msub>
+<mi>p</mi>
+<mtext>out</mtext>
+</msub>
+<mo>+</mo>
+<mn>1</mn>
+</math>
+</div>
+<p>Convoluția transpusă este operația liniară asociată transpunerii matricei unei convoluții
                                 (într-o reprezentare matricială). <strong>Nu este o inversă</strong> care recuperează
                                 automat imaginea inițială.</p>
-                            <p>În simulator: kernel 2×2, padding=0, output_padding=0, dilation=1. Pentru stride=1,
+<p>În simulator: kernel 2×2, padding=0, output_padding=0, dilation=1. Pentru stride=1,
                                 contribuțiile se suprapun și se însumează; pentru stride=2, acoperirea este
                                 diferită.</p>
-                            <div class="concept-rows">
-                                <div><strong>Upsampling + Conv2d</strong>
-                                    <p>Interpolare (nearest/bilinear) urmată de o convoluție; alternativă frecventă când
+<div class="concept-rows">
+<div><strong>Upsampling + Conv2d</strong>
+<p>Interpolare (nearest/bilinear) urmată de o convoluție; alternativă frecventă când
                                         apar artefacte de tip checkerboard.</p></div>
-                                <div><strong>ConvTranspose2d</strong>
-                                    <p>Învață operația de mărire a rezoluției; utilizată în decodoare, segmentare,
+<div><strong>ConvTranspose2d</strong>
+<p>Învață operația de mărire a rezoluției; utilizată în decodoare, segmentare,
                                         generare de imagini.</p></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel unet-panel">
-                        <div class="panel-heading"><h3>U-Net · urmărește traseul informației</h3><span class="pill">ENCODER → BOTTLENECK → DECODER</span>
-                        </div>
-                        <div id="unet-diagram" class="unet-diagram"></div>
-                        <div class="unet-controls"><label>Etapa evidențiată<select id="unet-step">
-                            <option value="0">1. Intrare</option>
-                            <option value="1">2. Encoder</option>
-                            <option value="2">3. Bottleneck</option>
-                            <option value="3">4. Decoder + skip</option>
-                            <option value="4">5. Segmentare</option>
-                        </select></label>
-                            <button class="secondary-btn" id="unet-prev">← Înapoi</button>
-                            <button class="secondary-btn" id="unet-next">Înainte →</button>
-                        </div>
-                        <p id="unet-explain" class="muted"></p></div>
-                </section>
-                <section class="module section-anchor" id="arhitecturi">
-                    <div class="chapter-title">
-                        <div><span class="section-count">10 / EVOLUȚIA ARHITECTURILOR</span>
-                            <h2>De la LeNet la ConvNeXt: ce problemă rezolvă fiecare idee?</h2>
-                            <p>Nu este suficient să memorăm numele arhitecturilor. Pentru fiecare model: inovația,
+</div>
+</div>
+</div>
+<div class="panel unet-panel">
+<div class="panel-heading"><h3>U-Net · urmărește traseul informației</h3><span class="pill">ENCODER → BOTTLENECK → DECODER</span>
+</div>
+<div class="unet-diagram" id="unet-diagram"></div>
+<div class="unet-controls"><label>Etapa evidențiată<select id="unet-step">
+<option value="0">1. Intrare</option>
+<option value="1">2. Encoder</option>
+<option value="2">3. Bottleneck</option>
+<option value="3">4. Decoder + skip</option>
+<option value="4">5. Segmentare</option>
+</select></label>
+<button class="secondary-btn" id="unet-prev">← Înapoi</button>
+<button class="secondary-btn" id="unet-next">Înainte →</button>
+</div>
+<p class="muted" id="unet-explain"></p></div>
+</section>
+<section class="module section-anchor" id="arhitecturi">
+<div class="chapter-title">
+<div><span class="section-count">10 / EVOLUȚIA ARHITECTURILOR</span>
+<h2>De la LeNet la ConvNeXt: ce problemă rezolvă fiecare idee?</h2>
+<p>Nu este suficient să memorăm numele arhitecturilor. Pentru fiecare model: inovația,
                                 compromisul și scenariul practic potrivit. Articolele sunt legate direct de publicațiile
                                 originale.</p></div>
-                    </div>
-                    <div class="architectures" id="architecture-list"></div>
-                    <div class="note-note"><strong>Precizare:</strong> exemplele de utilizare sunt recomandări didactice
+</div>
+<div class="architectures" id="architecture-list"></div>
+<div class="note-note"><strong>Precizare:</strong> exemplele de utilizare sunt recomandări didactice
                         derivate din proprietățile arhitecturilor, nu promisiuni că un model este mereu superior.
                         Comparațiile reale necesită evaluare pe același set de date și protocol.
                     </div>
-                </section>
-                <section class="module section-anchor" id="aplicatii">
-                    <div class="chapter-title">
-                        <div><span class="section-count">11 / DECIZII DE PROIECTARE</span>
-                            <h2>Ce variantă de CNN alegem pentru o aplicație reală?</h2>
-                            <p>Un model se alege pornind de la structura datelor, tipul ieșirii, cerințele de latență și
+</section>
+<section class="module section-anchor" id="aplicatii">
+<div class="chapter-title">
+<div><span class="section-count">11 / DECIZII DE PROIECTARE</span>
+<h2>Ce variantă de CNN alegem pentru o aplicație reală?</h2>
+<p>Un model se alege pornind de la structura datelor, tipul ieșirii, cerințele de latență și
                                 dimensiunea setului de date. Explorează scenarii concrete.</p></div>
-                    </div>
-                    <div class="case-selector" id="case-tabs">
-                        <button type="button" class="case-tab active" data-case="medical">Imagistică medicală</button>
-                        <button type="button" class="case-tab" data-case="mobile">Edge / mobil</button>
-                        <button type="button" class="case-tab" data-case="satellite">Imagini satelitare</button>
-                        <button type="button" class="case-tab" data-case="industrial">Inspecție industrială</button>
-                        <button type="button" class="case-tab" data-case="signal">ECG / vibrații</button>
-                    </div>
-                    <div id="case-details" class="panel case-rich"></div>
-                    <div class="three-cards">
-                        <div class="concept-card"><span>TRANSFER LEARNING</span><h4>Când datele sunt puține</h4>
-                            <p>Pornește de la ponderi pre-antrenate, adaptează capul de clasificare și apoi fine-tunează
+</div>
+<div class="case-selector" id="case-tabs">
+<button class="case-tab active" data-case="medical" type="button">Imagistică medicală</button>
+<button class="case-tab" data-case="mobile" type="button">Edge / mobil</button>
+<button class="case-tab" data-case="satellite" type="button">Imagini satelitare</button>
+<button class="case-tab" data-case="industrial" type="button">Inspecție industrială</button>
+<button class="case-tab" data-case="signal" type="button">ECG / vibrații</button>
+</div>
+<div class="panel case-rich" id="case-details"></div>
+<div class="three-cards">
+<div class="concept-card"><span>TRANSFER LEARNING</span><h4>Când datele sunt puține</h4>
+<p>Pornește de la ponderi pre-antrenate, adaptează capul de clasificare și apoi fine-tunează
                                 controlat. Verifică diferența de domeniu.</p></div>
-                        <div class="concept-card"><span>EVALUARE</span><h4>Metrică potrivită</h4>
-                            <p>Clasificare: macro-F1/AUROC; segmentare: Dice/mIoU; detecție: AP/mAP. Split pe pacient
+<div class="concept-card"><span>EVALUARE</span><h4>Metrică potrivită</h4>
+<p>Clasificare: macro-F1/AUROC; segmentare: Dice/mIoU; detecție: AP/mAP. Split pe pacient
                                 sau pe entitatea relevantă, când este cazul.</p></div>
-                        <div class="concept-card"><span>ROBUSTEȚE</span><h4>Mai mult decât accuracy</h4>
-                            <p>Analizează calibrarea, subgrupuri, schimbări de distribuție, erori pe obiecte rare și
+<div class="concept-card"><span>ROBUSTEȚE</span><h4>Mai mult decât accuracy</h4>
+<p>Analizează calibrarea, subgrupuri, schimbări de distribuție, erori pe obiecte rare și
                                 degradarea în condiții reale.</p></div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="pytorch">
-                    <div class="chapter-title">
-                        <div><span class="section-count">12 / IMPLEMENTARE REPRODUCTIBILĂ</span>
-                            <h2>Rețele convoluționale în Python + PyTorch</h2>
-                            <p>Exemple comentate pentru calcule numerice, tensori și forme, filtre multi-canal, rețele
+</div>
+</section>
+<section class="module section-anchor" id="pytorch">
+<div class="chapter-title">
+<div><span class="section-count">12 / IMPLEMENTARE REPRODUCTIBILĂ</span>
+<h2>Rețele convoluționale în Python + PyTorch</h2>
+<p>Exemple comentate pentru calcule numerice, tensori și forme, filtre multi-canal, rețele
                                 CNN, blocuri reziduale, convoluții depthwise și segmentare.</p></div>
-                    </div>
-                    <div class="panel code-module">
-                        <div class="panel-heading"><h3>Exemple explicate</h3><span class="pill">PYTORCH · EXECUȚIE SEPARATĂ</span>
-                        </div>
-                        <div class="code-tabs" id="cnn-code-tabs"></div>
-                        <div class="code-stage">
-                            <div class="code-header"><span id="cnn-code-file">exemplu.py</span>
-                                <button class="secondary-btn copy-btn" id="cnn-copy">Copiază codul</button>
-                            </div>
-                            <pre class="code-window"><code id="cnn-code"></code></pre>
-                        </div>
-                        <div id="cnn-code-info" class="code-explain"></div>
-                        <div class="code-footer">Exemplele de cod ilustrează pașii de implementare și pot fi adaptate
+</div>
+<div class="panel code-module">
+<div class="panel-heading"><h3>Exemple explicate</h3><span class="pill">PYTORCH · EXECUȚIE SEPARATĂ</span>
+</div>
+<div class="code-tabs" id="cnn-code-tabs"></div>
+<div class="code-stage">
+<div class="code-header"><span id="cnn-code-file">exemplu.py</span>
+<button class="secondary-btn copy-btn" id="cnn-copy">Copiază codul</button>
+</div>
+<pre class="code-window"><code id="cnn-code"></code></pre>
+</div>
+<div class="code-explain" id="cnn-code-info"></div>
+<div class="code-footer">Exemplele de cod ilustrează pașii de implementare și pot fi adaptate
                             direct pentru experimente proprii în Python și PyTorch.
                         </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-heading"><h3>Flux de antrenare corect · clasificare</h3></div>
-                        <div class="training-steps">
-                            <div><span>01</span><strong>Dataset & split</strong><small>train / validation / test, fără
+</div>
+<div class="panel">
+<div class="panel-heading"><h3>Flux de antrenare corect · clasificare</h3></div>
+<div class="training-steps">
+<div><span>01</span><strong>Dataset &amp; split</strong><small>train / validation / test, fără
                                 leakage</small></div>
-                            <div><span>02</span><strong>Preprocesare</strong><small>normalizare compatibilă cu
+<div><span>02</span><strong>Preprocesare</strong><small>normalizare compatibilă cu
                                 backbone-ul</small></div>
-                            <div><span>03</span><strong>Model + loss</strong><small>logits, CrossEntropyLoss, clase
+<div><span>03</span><strong>Model + loss</strong><small>logits, CrossEntropyLoss, clase
                                 corecte</small></div>
-                            <div><span>04</span><strong>Optimizare</strong><small>AdamW / SGD + schedulere</small></div>
-                            <div><span>05</span><strong>Validare</strong><small>eval(), no_grad(), metrici
+<div><span>04</span><strong>Optimizare</strong><small>AdamW / SGD + schedulere</small></div>
+<div><span>05</span><strong>Validare</strong><small>eval(), no_grad(), metrici
                                 relevante</small></div>
-                            <div><span>06</span><strong>Generalizare</strong><small>test independent, ablații,
+<div><span>06</span><strong>Generalizare</strong><small>test independent, ablații,
                                 robustețe</small></div>
-                        </div>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="exercitii">
-                    <div class="chapter-title">
-                        <div><span class="section-count">13 / CONSOLIDARE ȘI AUTOEVALUARE</span>
-                            <h2>Verifică dacă poți explica și calcula</h2>
-                            <p>Întrebări cu justificări, valori concrete și feedback. Include atât interpretări
+</div>
+</div>
+</section>
+<section class="module section-anchor" id="exercitii">
+<div class="chapter-title">
+<div><span class="section-count">13 / CONSOLIDARE ȘI AUTOEVALUARE</span>
+<h2>Verifică dacă poți explica și calcula</h2>
+<p>Întrebări cu justificări, valori concrete și feedback. Include atât interpretări
                                 teoretice, cât și dimensiuni exacte de ieșire.</p></div>
-                    </div>
-                    <div class="panel quiz-panel">
-                        <div class="quiz-top">
-                            <div><span class="section-count">AUTOEVALUARE · 10 ÎNTREBĂRI</span>
-                                <h3 id="cnn-quiz-question">—</h3></div>
-                            <div class="quiz-counter" id="cnn-quiz-counter">1 / 10</div>
-                        </div>
-                        <div class="quiz-answers" id="cnn-quiz-answers"></div>
-                        <div id="cnn-quiz-feedback" class="quiz-feedback" role="status" aria-live="polite"></div>
-                        <div class="quiz-bottom">
-                            <div class="quiz-progress">
-                                <div class="progress-track">
-                                    <div id="cnn-quiz-progress"></div>
-                                </div>
-                                <small id="cnn-quiz-score">Răspunsuri corecte: 0</small></div>
-                            <div>
-                                <button id="cnn-quiz-prev" class="secondary-btn">← Precedenta</button>
-                                <button id="cnn-quiz-next" class="primary-btn">Următoarea →</button>
-                                <button id="cnn-quiz-restart" class="secondary-btn">Reia testul</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel theory-panel" style="margin-top:18px">
-                        <div class="panel-heading"><h3>Propuneri de exerciții practice</h3></div>
-                        <ol class="good-list">
-                            <li>Construiește un filtru Sobel în PyTorch și verifică manual un pixel al ieșirii, apoi
+</div>
+<div class="panel quiz-panel">
+<div class="quiz-top">
+<div><span class="section-count">AUTOEVALUARE · 10 ÎNTREBĂRI</span>
+<h3 id="cnn-quiz-question">—</h3></div>
+<div class="quiz-counter" id="cnn-quiz-counter">1 / 10</div>
+</div>
+<div class="quiz-answers" id="cnn-quiz-answers"></div>
+<div aria-live="polite" class="quiz-feedback" id="cnn-quiz-feedback" role="status"></div>
+<div class="quiz-bottom">
+<div class="quiz-progress">
+<div class="progress-track">
+<div id="cnn-quiz-progress"></div>
+</div>
+<small id="cnn-quiz-score">Răspunsuri corecte: 0</small></div>
+<div>
+<button class="secondary-btn" id="cnn-quiz-prev">← Precedenta</button>
+<button class="primary-btn" id="cnn-quiz-next">Următoarea →</button>
+<button class="secondary-btn" id="cnn-quiz-restart">Reia testul</button>
+</div>
+</div>
+</div>
+<div class="panel theory-panel" style="margin-top:18px">
+<div class="panel-heading"><h3>Propuneri de exerciții practice</h3></div>
+<ol class="good-list">
+<li>Construiește un filtru Sobel în PyTorch și verifică manual un pixel al ieșirii, apoi
                                 compară cu <code>torch.nn.functional.conv2d</code>.
                             </li>
-                            <li>Pentru <code>Conv2d(16,32,3,stride=2,padding=1)</code> și input
+<li>Pentru <code>Conv2d(16,32,3,stride=2,padding=1)</code> și input
                                 <code>(8,16,65,65)</code>, determină shape-ul, parametrii și MACs pentru un exemplu.
                             </li>
-                            <li>Compară costul unei convoluții 3×3 standard și depthwise separable, pentru 64→128
+<li>Compară costul unei convoluții 3×3 standard și depthwise separable, pentru 64→128
                                 canale.
                             </li>
-                            <li>Implementează un bloc rezidual cu proiecție 1×1 când <code>stride=2</code> sau numărul
+<li>Implementează un bloc rezidual cu proiecție 1×1 când <code>stride=2</code> sau numărul
                                 canalelor se schimbă.
                             </li>
-                            <li>Construiește un mini U-Net pe un set sintetic de măști; compară
+<li>Construiește un mini U-Net pe un set sintetic de măști; compară
                                 <code>ConvTranspose2d</code> cu upsampling bilinear + <code>Conv2d</code>.
                             </li>
-                        </ol>
-                    </div>
-                </section>
-                <section class="module section-anchor" id="bibliografie">
-                    <div class="chapter-title">
-                        <div><span class="section-count">14 / SURSE ȘTIINȚIFICE ȘI DOCUMENTAȚIE</span>
-                            <h2>Articole fundamentale și lecturi recomandate</h2>
-                            <p>Articole fundamentale și documentație tehnică relevante pentru aprofundarea rețelelor
+</ol>
+</div>
+</section>
+<section class="module section-anchor" id="bibliografie">
+<div class="chapter-title">
+<div><span class="section-count">14 / SURSE ȘTIINȚIFICE ȘI DOCUMENTAȚIE</span>
+<h2>Articole fundamentale și lecturi recomandate</h2>
+<p>Articole fundamentale și documentație tehnică relevante pentru aprofundarea rețelelor
                                 convoluționale.</p></div>
-                    </div>
-                    <div class="reference-grid" id="ref-list"></div>
-                </section>
-                <footer class="footer-note"><strong>Rețele convoluționale · Material interactiv asociat
+</div>
+<div class="reference-grid" id="ref-list"></div>
+</section>
+<footer class="footer-note"><strong>Rețele convoluționale · Material interactiv asociat
                     cursului</strong><span>Învățare Automată · Facultatea de Automatică și Calculatoare · 2026–2027</span>
-                </footer>
-            </div>
-        </main>
-    </div>
+</footer>
+</div>
+</main>
+</div>
 </div>
 <script>
     const CNN_CODE_EXAMPLES = [
